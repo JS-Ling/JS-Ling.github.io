@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="JavaGUI图形化界面笔记常用窗体Jframe新建Jframe 1234567       JFrame jf&#x3D;new JFrame(&quot;我的第一个界面&quot;);&#x2F;*设置窗体大小和出现的位置*&#x2F;jf.setBounds(500,500,500,700);&#x2F;*设置窗体是否显示*&#x2F;jf.setVisible(true);&#x2F;*设置窗体是否可调节（默认可调）*&#x2F;jf.setResizabl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="白学宫主——GUI">
+<meta property="og:url" content="https://ljs-yym.github.io/2023/02/27/JavaGUI%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="HexoDome">
+<meta property="og:description" content="JavaGUI图形化界面笔记常用窗体Jframe新建Jframe 1234567       JFrame jf&#x3D;new JFrame(&quot;我的第一个界面&quot;);&#x2F;*设置窗体大小和出现的位置*&#x2F;jf.setBounds(500,500,500,700);&#x2F;*设置窗体是否显示*&#x2F;jf.setVisible(true);&#x2F;*设置窗体是否可调节（默认可调）*&#x2F;jf.setResizabl">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ljs-yym.github.io/img/da8883963dce31b228246fe9c419e3c5.gif">
+<meta property="article:published_time" content="2023-02-27T15:17:14.959Z">
+<meta property="article:modified_time" content="2023-02-27T15:28:00.294Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ljs-yym.github.io/img/da8883963dce31b228246fe9c419e3c5.gif">
+
+    <meta name="keywords" content="hexo,node,博客">
+
+
+<title >白学宫主——GUI</title>
+
+<!-- Favicon -->
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+<link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css">
+
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"ljs-yym.github.io","author":"John Doe","root":"/","typed_text":["Web Developer","How are you."],"theme_version":"2.0.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo.png","icon16":"/img/logo.png","icon32":"/img/logo.png","dark_logo":"/img/dark_logo.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"creative_commons":{"license":"by-nc-sa","language":"deed.zh"},"search":{"enable":true,"type":"local","path":"search.xml","field":"post","content":true,"format":"html"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-02-27 23:28:00"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.2" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+     
+
+    
+
+    
+ 
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" class=" trm-light-icon" src="/img/logo.png"> <img alt="logo" class=" trm-dark-icon" src="/img/dark_logo.png">
+    
+    
+        <div class="trm-logo-text">
+            Async<span>Theme</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    长生风月的博客
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    日志
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友情链接
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/picture/" target="">
+                    图片
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+    
+    <div id="trm-search-btn" class="trm-search-btn">
+        <i class="iconfont fas fa-search"></i>
+    </div>
+     
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            白学宫主——GUI
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/R-C.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        长生风月
+    </h5>
+    
+        <div class="trm-label">
+            
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="tencent://message/?uin=3232008148&Site=&Menu=yes" title="QQ" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="/null" title="WeChat" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-weixin"></i>
+        </a>
+    
+        <a href="/null" title="twitter" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-twitter"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                河北省保定市
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                21
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                星座:
+            </div>
+            <div class="trm-label trm-label-light">
+                处女座
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                21
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:3232008148@qq.com" class="trm-btn">
+            Contact Me
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#JavaGUI图形化界面笔记"  data-scroll-to="#JavaGUI图形化界面笔记"><span class="toc-number">1.</span> <span class="toc-text">JavaGUI图形化界面笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#常用窗体"  data-scroll-to="#常用窗体"><span class="toc-number">1.1.</span> <span class="toc-text">常用窗体</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Jframe"  data-scroll-to="#Jframe"><span class="toc-number">1.1.1.</span> <span class="toc-text">Jframe</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Jdialog（弹窗）"  data-scroll-to="#Jdialog（弹窗）"><span class="toc-number">1.1.2.</span> <span class="toc-text">Jdialog（弹窗）</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#常用的面板"  data-scroll-to="#常用的面板"><span class="toc-number">1.2.</span> <span class="toc-text">常用的面板</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Jpanel"  data-scroll-to="#Jpanel"><span class="toc-number">1.2.1.</span> <span class="toc-text">Jpanel</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#JscrollPane（滚动面板）"  data-scroll-to="#JscrollPane（滚动面板）"><span class="toc-number">1.2.2.</span> <span class="toc-text">JscrollPane（滚动面板）</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#常用组件"  data-scroll-to="#常用组件"><span class="toc-number">1.3.</span> <span class="toc-text">常用组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#标签组件"  data-scroll-to="#标签组件"><span class="toc-number">1.3.1.</span> <span class="toc-text">标签组件</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#按钮组件"  data-scroll-to="#按钮组件"><span class="toc-number">1.3.2.</span> <span class="toc-text">按钮组件</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#单选多选按钮"  data-scroll-to="#单选多选按钮"><span class="toc-number">1.3.3.</span> <span class="toc-text">单选多选按钮</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#下拉列表"  data-scroll-to="#下拉列表"><span class="toc-number">1.3.4.</span> <span class="toc-text">下拉列表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#菜单栏"  data-scroll-to="#菜单栏"><span class="toc-number">1.3.5.</span> <span class="toc-text">菜单栏</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#文本"  data-scroll-to="#文本"><span class="toc-number">1.3.6.</span> <span class="toc-text">文本</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#密码框"  data-scroll-to="#密码框"><span class="toc-number">1.3.7.</span> <span class="toc-text">密码框</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#文本域"  data-scroll-to="#文本域"><span class="toc-number">1.3.8.</span> <span class="toc-text">文本域</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#常用布局"  data-scroll-to="#常用布局"><span class="toc-number">1.4.</span> <span class="toc-text">常用布局</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#流式布局"  data-scroll-to="#流式布局"><span class="toc-number">1.4.1.</span> <span class="toc-text">流式布局</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#网格式布局"  data-scroll-to="#网格式布局"><span class="toc-number">1.4.2.</span> <span class="toc-text">网格式布局</span></a></li></ol></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            02/27
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            23:17
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            John Doe
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="JavaGUI图形化界面笔记"><a href="#JavaGUI图形化界面笔记" class="headerlink" title="JavaGUI图形化界面笔记"></a>JavaGUI图形化界面笔记</h1><h2 id="常用窗体"><a href="#常用窗体" class="headerlink" title="常用窗体"></a>常用窗体</h2><h3 id="Jframe"><a href="#Jframe" class="headerlink" title="Jframe"></a>Jframe</h3><p>新建Jframe</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">       JFrame jf=<span class="keyword">new</span> <span class="title class_">JFrame</span>(<span class="string">&quot;我的第一个界面&quot;</span>);</span><br><span class="line"><span class="comment">/*设置窗体大小和出现的位置*/</span></span><br><span class="line">jf.setBounds(<span class="number">500</span>,<span class="number">500</span>,<span class="number">500</span>,<span class="number">700</span>);</span><br><span class="line"><span class="comment">/*设置窗体是否显示*/</span></span><br><span class="line">jf.setVisible(<span class="literal">true</span>);</span><br><span class="line"><span class="comment">/*设置窗体是否可调节（默认可调）*/</span></span><br><span class="line">jf.setResizable(<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>   设定窗口关闭方式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*隐藏当前窗口，并释放窗体占用的所有资源*/</span></span><br><span class="line">jf.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);</span><br><span class="line"><span class="comment">/*隐藏当前窗口*/</span></span><br><span class="line">jf.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);</span><br><span class="line"><span class="comment">/*结束窗口所在的应用程序*/</span></span><br><span class="line">jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line"><span class="comment">/*点击后什么都不做*/</span></span><br><span class="line">jf.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);</span><br></pre></td></tr></table></figure>
+
+<p>设置背景颜色</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jf.getContentPane().setBackground(Color.decode(<span class="string">&quot;#dddddd&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="Jdialog（弹窗）"><a href="#Jdialog（弹窗）" class="headerlink" title="Jdialog（弹窗）"></a>Jdialog（弹窗）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JDialog jd=<span class="keyword">new</span> <span class="title class_">JDialog</span>(jf ,<span class="string">&quot;弹窗&quot;</span>);</span><br><span class="line">jd.setBounds(<span class="number">500</span>,<span class="number">500</span>,<span class="number">300</span>,<span class="number">400</span>);</span><br><span class="line">jd.setVisible(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="常用的面板"><a href="#常用的面板" class="headerlink" title="常用的面板"></a>常用的面板</h2><p>面板也是一种swing容器，他可以作为容器容纳其他组件，但是他也必须放在一个容器内</p>
+<h3 id="Jpanel"><a href="#Jpanel" class="headerlink" title="Jpanel"></a>Jpanel</h3><p>Jpanel是最基础的面板，继承自java.awt.Container类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">JPanel jp=<span class="keyword">new</span> <span class="title class_">JPanel</span>(<span class="keyword">new</span> <span class="title class_">FlowLayout</span>());</span><br><span class="line">JButton jb=<span class="keyword">new</span> <span class="title class_">JButton</span>(<span class="string">&quot;登录&quot;</span>);</span><br><span class="line">JButton jb2=<span class="keyword">new</span> <span class="title class_">JButton</span>(<span class="string">&quot;注册&quot;</span>);</span><br><span class="line">jp.add(jb);</span><br><span class="line">jp.add(jb2);</span><br><span class="line">jf.add(jp);</span><br></pre></td></tr></table></figure>
+
+<h3 id="JscrollPane（滚动面板）"><a href="#JscrollPane（滚动面板）" class="headerlink" title="JscrollPane（滚动面板）"></a>JscrollPane（滚动面板）</h3><p>定义实例：JScrollPane jsp=new JScrollPane(某个继承自JPanel类的实例 pane);<br> 设置初始大小：jsp.setPreferredSize(new Dimension(200,200));</p>
+<p>设置滚动条显示和隐藏</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JScrollPane waiceng1=<span class="keyword">new</span> <span class="title class_">JScrollPane</span>(waiceng,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);</span><br></pre></td></tr></table></figure>
+
+<h2 id="常用组件"><a href="#常用组件" class="headerlink" title="常用组件"></a>常用组件</h2><h3 id="标签组件"><a href="#标签组件" class="headerlink" title="标签组件"></a>标签组件</h3><p>类：JLabel</p>
+<p>作用：显示文本或者提示信息</p>
+<p>构造方法：</p>
+<p>new JLabel（）；</p>
+<p>new JLabel（Icon icon）；       设置图标</p>
+<p>new Jlabel（Icon icon，SwingConstants.CENTER） 设置图标+水平对齐方式</p>
+<p>new Jlabel（String str，SwingConstants.CENTER）    设置文字+水平对齐方式</p>
+<p>new Jlabel（String str，Icon icon，SwingConstants.CENTER）</p>
+<p>设置文字图标+水平对齐方式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jf.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);</span><br><span class="line">JLabel jl=<span class="keyword">new</span> <span class="title class_">JLabel</span>(<span class="string">&quot;我是提示文字&quot;</span>,SwingConstants.);</span><br><span class="line">jf.add(jl);</span><br></pre></td></tr></table></figure>
+
+<h3 id="按钮组件"><a href="#按钮组件" class="headerlink" title="按钮组件"></a>按钮组件</h3><p>类：JButton</p>
+<p>构造方法：</p>
+<p>new JButton（）；</p>
+<p>new JButton(Icon icon);  指定图标</p>
+<p>new JButton(String txt);  指定文字</p>
+<p>new JButton(Icon icon,String txt);    指定文字和图标</p>
+<p>其他方法：</p>
+<p>setEnabled(boolean n)  按钮是否可用</p>
+<p>setBorderPainted(boolean n)    按钮是否带边框</p>
+<p>setToolTipText(String st)     鼠标上移提示文字</p>
+<h3 id="单选多选按钮"><a href="#单选多选按钮" class="headerlink" title="单选多选按钮"></a>单选多选按钮</h3><p>单选</p>
+<p>new JRadioButton（）；</p>
+<p>new JRadioButton（Icon icon）；    设置图标</p>
+<p>new JRadioButton（Icon icon，boolean b）  设置图标+是否选中</p>
+<p>new JRadioButton（String str，boolean b）      设置文字+是否选中</p>
+<p>new JRadioButton（String str，Icon icon，boolean b）</p>
+<p>设置文字图标+是否选中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JRadioButton jr=<span class="keyword">new</span> <span class="title class_">JRadioButton</span>(<span class="string">&quot;男&quot;</span>);</span><br><span class="line">JRadioButton jr2=<span class="keyword">new</span> <span class="title class_">JRadioButton</span>(<span class="string">&quot;女&quot;</span>);</span><br><span class="line">ButtonGroup bg=<span class="keyword">new</span> <span class="title class_">ButtonGroup</span>();</span><br><span class="line">bg.add(jr);</span><br><span class="line">bg.add(jr2);</span><br><span class="line">jf.add(jr);</span><br><span class="line">jf.add(jr2);</span><br></pre></td></tr></table></figure>
+
+<p>复选</p>
+<p>new JCheckBox（）；</p>
+<p>new JCheckBox (Icon icon,boolean b);    指定图标+是否被选中</p>
+<p>new JCheckBox (String txt,boolean b);    指定文字+是否被选中</p>
+<h3 id="下拉列表"><a href="#下拉列表" class="headerlink" title="下拉列表"></a>下拉列表</h3><p>构造方法</p>
+<p>new JComboBox（）；</p>
+<p>方法：</p>
+<p>addItem：添加下拉内容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">JComboBox jcb=<span class="keyword">new</span> <span class="title class_">JComboBox</span>();</span><br><span class="line">jcb.addItem(<span class="string">&quot;请选择省份&quot;</span>);</span><br><span class="line">jcb.addItem(<span class="string">&quot;河北&quot;</span>);</span><br><span class="line">jcb.addItem(<span class="string">&quot;河南&quot;</span>);</span><br><span class="line">jf.add(jcb);</span><br></pre></td></tr></table></figure>
+
+<h3 id="菜单栏"><a href="#菜单栏" class="headerlink" title="菜单栏"></a>菜单栏</h3><p>一级菜单：</p>
+<p>创建菜单条 JMenuBar</p>
+<p>创建菜单JMenu</p>
+<p>创建菜单项JMenuItem</p>
+<p>总结：菜单项依附菜单、菜单依附菜单条</p>
+<p>创建菜单栏</p>
+<p>创建菜单</p>
+<p>创建菜单项</p>
+<p>菜单添加一个菜单项</p>
+<p>菜单项添加菜单</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">JMenuBar bar=<span class="keyword">new</span> <span class="title class_">JMenuBar</span>();</span><br><span class="line">JMenu menu=<span class="keyword">new</span> <span class="title class_">JMenu</span>(<span class="string">&quot;菜单1&quot;</span>);</span><br><span class="line">JMenuItem item1=<span class="keyword">new</span> <span class="title class_">JMenuItem</span>(<span class="string">&quot;二级菜单1&quot;</span>);</span><br><span class="line">JMenuItem item2=<span class="keyword">new</span> <span class="title class_">JMenuItem</span>(<span class="string">&quot;二级菜单2&quot;</span>);</span><br><span class="line">JMenuItem item3=<span class="keyword">new</span> <span class="title class_">JMenuItem</span>(<span class="string">&quot;二级菜单3&quot;</span>);</span><br><span class="line">menu.add(item1);</span><br><span class="line">menu.add(item2);</span><br><span class="line">menu.add(item3);</span><br><span class="line">bar.add(menu);</span><br><span class="line">jf.add(bar);</span><br></pre></td></tr></table></figure>
+
+<h3 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h3><p>类：JTextField</p>
+<p>构造函数</p>
+<p>new JTextField（）；</p>
+<p>new JTextField（String text）；       设置默认文字</p>
+<p>new JTextField（int fiel） 设置文本框长度</p>
+<p>new JTextField（String str，int b）      默认文字+文本框长度</p>
+<h3 id="密码框"><a href="#密码框" class="headerlink" title="密码框"></a>密码框</h3><p>类：JPasswordField</p>
+<p>构造函数</p>
+<p>new JPasswordField（）；</p>
+<p>new JPasswordField（String text）；     设置默认文字</p>
+<p>new JPasswordField（int fiel）   设置密码框长度</p>
+<p>new JPasswordField（String str，int b）     默认文字+密码框长度</p>
+<h3 id="文本域"><a href="#文本域" class="headerlink" title="文本域"></a>文本域</h3><p>类：JTextArea</p>
+<p>构造函数</p>
+<p>new JTextArea（）；</p>
+<p>new JTextArea（String text）；       设置默认文字</p>
+<p>new JTextArea（int fiel，int fiel）     设置文本框长度和宽度</p>
+<p>方法：</p>
+<p>setLineWrap（）；   设置文本框是否换行</p>
+<h2 id="常用布局"><a href="#常用布局" class="headerlink" title="常用布局"></a>常用布局</h2><h3 id="流式布局"><a href="#流式布局" class="headerlink" title="流式布局"></a>流式布局</h3><p>构造方法：</p>
+<p>FlowLayout（int aligment）;    设置对齐方式（默认居中）</p>
+<p>FlowLayout（int aligment，int horizGap，int vertGap）;      设置对齐方式+上下偏移</p>
+<p>通过setLayout设置布局方式</p>
+<p>例如：jf.setLayout（new FlowLayout（FlowLayout.LEFT））</p>
+<h3 id="网格式布局"><a href="#网格式布局" class="headerlink" title="网格式布局"></a>网格式布局</h3><p>构造方法：</p>
+<p>GridLayout（int row，int col）;      指定行数和列数</p>
+<p>GridLayout（int row，int col，int horizGap，int vertGap）;       设置行数列数+上下偏移</p>
+
+</article>
+    
+    <div class="trm-reward">
+        
+            <span class="trm-reward-btn trm-glow" onclick='var qr = document.getElementById("qr"); qr.style.display = (qr.style.display === "none") ? "block" : "none";'>
+                <i class="iconfont fas fa-hand-holding-usd"></i>
+            </span>
+        
+        <p class="trm-reward-comment">There you go. Give me two coins.φ(>ω<*)</p>
+        <div id="qr" style="display:none;">
+            
+        </div>
+    </div>
+
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>Post author: </strong>
+        John Doe
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>Post link: </strong>
+        <a id="original-link" href="https://ljs-yym.github.io/2023/02/27/JavaGUI%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2%E7%AC%94%E8%AE%B0/" title="白学宫主——GUI">https://ljs-yym.github.io/2023/02/27/JavaGUI%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2%E7%AC%94%E8%AE%B0/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>Copyright Notice: </strong>
+        All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> unless otherwise stated.
+    </li>
+</ul>
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/02/27/Java%20SE/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/JavaSE%E7%AC%94%E8%AE%B0/12057acd17dc282ab8eae8a8cadd39f4.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/Java/">
+                    Java
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/02/27/Java%20SE/" class="trm-anima-link">
+                    Java从入门到转行
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/02/27</li>
+                <li>22:26</li>
+                
+                    <li>16.5k</li>
+                
+                
+                    <li>64</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+        <div class="trm-footer-item">
+            <a rel="noopener" href="https://beian.miit.gov.cn/" target="_blank"></a>
+        </div>
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2023- 2023</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">长生风月</span>
+        </div>
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v5.4.2
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                Theme - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.0.2
+            </span>
+        </div>
+      
+
+    
+        <div class="trm-footer-item">
+            The blog has been lovely to run <span id="since" class="trm-accent-color"></span> day
+        </div>
+     
+
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("02/27/2023 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="Read Mode" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="Toggle between single-column and double-column" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="Back To Top">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+<div class="trm-search-popup">
+    <div class="trm-search-header">
+        <span class="trm-search-popup-btn-close">
+            <i class="iconfont fas fa-times"></i>
+        </span>
+    </div>
+    <div class="form trm-search-form">
+        <input class="trm-search-input" type="text" placeholder="Searching...">
+    </div>
+    <div class="trm-search-result-container">
+
+    </div>
+</div>
+
+  <!-- Plugin -->
+
+
+
+
+    
+<script src="https://unpkg.com/swup@2.0.19/dist/swup.min.js"></script>
+
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.2"></script>
+    
+
+    
+        
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=2.0.2"></script>
+    
+
+    <!-- 数学公式 -->
+    
+        
+<script src="https://unpkg.com/katex@latest/dist/katex.min.js" data-swup-reload-script></script>
+
+        
+            
+<script src="https://unpkg.com/katex@latest/dist/contrib/copy-tex.min.js" data-swup-reload-script></script>
+
+        
+        
+<script src="https://unpkg.com/katex@latest/dist/contrib/auto-render.min.js" data-swup-reload-script></script>
+
+        <script data-swup-reload-script>
+              window.renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true },
+                ],
+                ...{},
+            })
+        </script>
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <script>
+        "serviceWorker" in navigator ?
+        navigator.serviceWorker.register('/sw.js').then(function () {
+            navigator.serviceWorker.controller ? 
+             console.log("Assets cached by the controlling service worker.") :
+             console.log("Please reload this page to allow the service worker to handle network operations.")
+        }).catch(function (e) {
+            console.log("ERROR: " + e)
+        }) : console.log("Service workers are not supported in the current browser.")
+    </script>
+
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.0.2"></script>
+
+</body>
+
+</html>
