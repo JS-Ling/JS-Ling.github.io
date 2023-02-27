@@ -1649,6 +1649,88 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux从入门到彻底放弃</title>
+    <url>/2023/02/27/Linux%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="Linux指令"><a href="#Linux指令" class="headerlink" title="Linux指令"></a>Linux指令</h1><h2 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h2><h3 id="认识linux目录结构"><a href="#认识linux目录结构" class="headerlink" title="认识linux目录结构"></a>认识linux目录结构</h3><p>/:根目录标志</p>
+<p><img src="/img/Linux%E6%8C%87%E4%BB%A4/image-20221230163149165.png" alt="image-20221230163149165" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="/img/Linux%E6%8C%87%E4%BB%A4/image-20221230163757788.png" alt="image-20221230163757788" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="列出文件列表"><a href="#列出文件列表" class="headerlink" title="列出文件列表"></a>列出文件列表</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">查看当前目录下的所有文件夹</span><br><span class="line">ls</span><br><span class="line"></span><br><span class="line">查看当前目录下扥所有文件（包括隐藏文件）</span><br><span class="line">ls -a</span><br><span class="line">//以点开头的蓝色文件就是隐藏文件</span><br><span class="line"></span><br><span class="line">查看所有目录下非隐藏文件及其详细信息</span><br><span class="line">ll</span><br></pre></td></tr></table></figure>
+
+<h3 id="进入文件目录"><a href="#进入文件目录" class="headerlink" title="进入文件目录"></a>进入文件目录</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">进入指定目录</span><br><span class="line">cd 文件名</span><br><span class="line"></span><br><span class="line">返回上一级目录</span><br><span class="line">cd ..</span><br><span class="line"></span><br><span class="line">返回用户目录</span><br><span class="line">cd ~</span><br><span class="line"></span><br><span class="line">返回上一行的目录</span><br><span class="line">cd -</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建和删除目录"><a href="#创建和删除目录" class="headerlink" title="创建和删除目录"></a>创建和删除目录</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">创建一个文件夹</span><br><span class="line">mkdir 文件夹名称</span><br><span class="line"></span><br><span class="line">创建一个空文件</span><br><span class="line">touch a.txt</span><br><span class="line"></span><br><span class="line">删除一个空文件夹</span><br><span class="line">redir 文件夹名称</span><br><span class="line"></span><br><span class="line">直接创建多级文件夹</span><br><span class="line">mkdir -p 父文件夹名/子文件夹</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">查看文件所有内容</span><br><span class="line">cat 文件名</span><br><span class="line">more 文件名	只显示一屏按回车显示一行 按空格显示一屏 按q退出</span><br><span class="line"></span><br><span class="line">查看文件最后10行的内容</span><br><span class="line">tail -10 文件名</span><br><span class="line">动态查看</span><br><span class="line">tail -f 文件名</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除、复制和剪切"><a href="#删除、复制和剪切" class="headerlink" title="删除、复制和剪切"></a>删除、复制和剪切</h3><h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在指定文件夹下将file1复制为file2</span><br><span class="line">cp file1 aaa/file2</span><br><span class="line"></span><br><span class="line">将file1复制到上一级文件夹</span><br><span class="line">cp file1 ../</span><br></pre></td></tr></table></figure>
+
+<h4 id="剪切"><a href="#剪切" class="headerlink" title="剪切"></a>剪切</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将file1剪切到指定文件夹</span><br><span class="line">mv file1 aaa/</span><br><span class="line"></span><br><span class="line">将file1剪切到上一级文件夹</span><br><span class="line">cp file1 ../</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在询问后删除文件</span><br><span class="line">rm bb</span><br><span class="line"></span><br><span class="line">删除目录</span><br><span class="line">rm -r bb</span><br><span class="line"></span><br><span class="line">不询问删除</span><br><span class="line">rm -rf bb</span><br><span class="line"></span><br><span class="line">删除所有东西</span><br><span class="line">rm -rf /*		//慎用</span><br></pre></td></tr></table></figure>
+
+<h3 id="打包或解压"><a href="#打包或解压" class="headerlink" title="打包或解压"></a>打包或解压</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">压缩成a.tar</span><br><span class="line">tar -cvf a.tar 文件夹名/</span><br><span class="line">	-c:创建一个新的tar文件</span><br><span class="line">	-v:显示运行的过程信息</span><br><span class="line">	-f:指定文件名</span><br><span class="line">	-z:调用gzip压缩命令进行压缩</span><br><span class="line">	-t:查看压缩文件的内容</span><br><span class="line">	-x:解开tar文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="查找文件、查找内容"><a href="#查找文件、查找内容" class="headerlink" title="查找文件、查找内容"></a>查找文件、查找内容</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">按文件名称查找</span><br><span class="line">find / -name 文件名</span><br><span class="line"></span><br><span class="line">不太清楚名字的查找方法</span><br><span class="line">find / -name cont*.log</span><br><span class="line"></span><br><span class="line">在aaa文件中查找字符串Address</span><br><span class="line">grep Address 文件路径 --color</span><br></pre></td></tr></table></figure>
+
+<h2 id="Vi和Vim编辑器"><a href="#Vi和Vim编辑器" class="headerlink" title="Vi和Vim编辑器"></a>Vi和Vim编辑器</h2><p>在linux下一般使用vi编辑器来编辑文件。vi即可以查看文件也可以编辑文件。</p>
+<p>三种模式：命令行、插入、底行模式。</p>
+<p>切换到命令行模式：按Esc键</p>
+<p>切换到插入模式：按i、o、a键</p>
+<p>​    i 在当前位置前插入</p>
+<p>​    I 在当前行首插入</p>
+<p>​    a 在当前位置后插入</p>
+<p>​    A 在当前行尾插入</p>
+<p>​    o 在当前行之后插入一行</p>
+<p>​    O 在当前行之前插入一行</p>
+<p>切换到底行模式：按冒号</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">打开文件： vim file</span><br><span class="line"></span><br><span class="line">退出：esc-&gt;:q</span><br><span class="line"></span><br><span class="line">修改文件：输入i进入插入模式</span><br><span class="line"></span><br><span class="line">保存并退出：esc-&gt;:wq</span><br><span class="line"></span><br><span class="line">不保存退出</span><br></pre></td></tr></table></figure>
+
+<h2 id="重定向输出"><a href="#重定向输出" class="headerlink" title="重定向输出"></a>重定向输出</h2><p>重定向就是将本文件中的内容复制到别的文件中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将aaa.txt中的文字复制到bbb.txt中</span><br><span class="line">cat aaa.txt &gt; bbb.txt</span><br><span class="line"></span><br><span class="line">将aaa.txt中的文字追加到bbb.txt中</span><br><span class="line">cat aaa.txt &gt;&gt; bbb.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>管道是linux命令中重要的一个概念，其作用是<strong>将一个命令的输出用作另一个命令的输入</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ls --help | more 分页查询帮助信息</span><br><span class="line">ps -ef | grep java 查询名称中包含java的进程</span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux权限命令"><a href="#Linux权限命令" class="headerlink" title="Linux权限命令"></a>Linux权限命令</h2><h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><p>—    ———    ———    ———</p>
+<p><strong>第一个“—”表示文件的类型</strong></p>
+<p>​    -：表示文件</p>
+<p>​    d：表示文件夹</p>
+<p>​    l：表示快捷方式</p>
+<p><strong>第二个表示当前文件或文件夹的权限</strong></p>
+<p>​    r：可读</p>
+<p>​    w：可写</p>
+<p>​    x：可运行</p>
+<p><strong>第三个表示当前组内其他用户具有该文件的权限</strong></p>
+<p><strong>第四个表示其他组的用户具有该文件的权限</strong></p>
+<h3 id="文件权限管理"><a href="#文件权限管理" class="headerlink" title="文件权限管理"></a>文件权限管理</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod u=rwx,g=rx,o=rx a.txt</span><br><span class="line">u代表当前用户 g代表当前组的其他用户 o代表其他组的用户</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">也可以用数字的形式</span><br><span class="line">可读是4 可写是2 可运行是1</span><br><span class="line">最高权限就变成了chmod 777</span><br></pre></td></tr></table></figure>
+
+<h2 id="linux上常见的网络操作"><a href="#linux上常见的网络操作" class="headerlink" title="linux上常见的网络操作"></a>linux上常见的网络操作</h2><h3 id="主机名配置"><a href="#主机名配置" class="headerlink" title="主机名配置"></a>主机名配置</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hostname 查看主机名</span><br><span class="line">hostname XXX修改主机名 重启后失效</span><br><span class="line">如果要是永久生效，可以修改/erc/sysconfig/netword文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="IP地址配置"><a href="#IP地址配置" class="headerlink" title="IP地址配置"></a>IP地址配置</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ifconfig查看（修改）ip地址	重启后无效</span><br><span class="line">ifconfig etho 192.168.12.22</span><br><span class="line"></span><br><span class="line">如果想要永久生效</span><br><span class="line">修改/etc/sysconfig/network-scripts/ifcfg-eth0文件</span><br><span class="line">DEVICE=eth0 网卡名称</span><br><span class="line">BOOTPROTO=static #获取ip的方式(static/dhcp/bootp/none)</span><br><span class="line">HWADDR-00:0c:29:B5:B2:69 .MAC地址</span><br><span class="line">工PADDR-12-168-177.129 #IP地址</span><br><span class="line">NETMASK-255.255.255.0 #子网掩码</span><br><span class="line">NETWORK=192.168.177.0 网络地址</span><br><span class="line">BROADCAST=192.168.0.255 广播地址</span><br><span class="line">NBOOT=yes	系统启动时是否设置此网络接口</span><br></pre></td></tr></table></figure>
+
+<h3 id="linux域名映射"><a href="#linux域名映射" class="headerlink" title="linux域名映射"></a>linux域名映射</h3><p>可以通过更改linux下的/etc/hosts</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">修改域名映射</span><br><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<h3 id="网络服务管理"><a href="#网络服务管理" class="headerlink" title="网络服务管理"></a>网络服务管理</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service network status查看指定服务的状态</span><br><span class="line">service network stop停止指定服务</span><br><span class="line">service network start启动指定服务</span><br><span class="line">service network restart 重启指定服务</span><br><span class="line">service --status-al1查看系统中所有后台服务</span><br><span class="line">netstat -nltp查看系统中网络进程的端口监听情况</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">防火墙设置</span><br><span class="line">防火墙根据配置文件/etc/sysconfig/iptables来控制本机的“出”、“入网络访问行为</span><br><span class="line">oservice iptables status 查看防火墙状态</span><br><span class="line">service iptables stop关闭防火墙</span><br><span class="line">service iptables start启动防火墙</span><br><span class="line">chkconfig iptables off禁止防火墙自启</span><br></pre></td></tr></table></figure>
+
+<h2 id="linux上的软件安装"><a href="#linux上的软件安装" class="headerlink" title="linux上的软件安装"></a>linux上的软件安装</h2><ul>
+<li><p>linux上软件安装有以下几种常用的方式介绍</p>
+<ol>
+<li><p>二进制发布包</p>
+<p>软件已经针对具体平台编译打包发布只要解压修改配置即可</p>
+</li>
+</ol>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>系统</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>白学宫主——GUI</title>
     <url>/2023/02/27/JavaGUI%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="JavaGUI图形化界面笔记"><a href="#JavaGUI图形化界面笔记" class="headerlink" title="JavaGUI图形化界面笔记"></a>JavaGUI图形化界面笔记</h1><h2 id="常用窗体"><a href="#常用窗体" class="headerlink" title="常用窗体"></a>常用窗体</h2><h3 id="Jframe"><a href="#Jframe" class="headerlink" title="Jframe"></a>Jframe</h3><p>新建Jframe</p>
@@ -1752,88 +1834,6 @@
 ]]></content>
       <categories>
         <category>java</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux从入门到彻底放弃</title>
-    <url>/2023/02/27/Linux%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="Linux指令"><a href="#Linux指令" class="headerlink" title="Linux指令"></a>Linux指令</h1><h2 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h2><h3 id="认识linux目录结构"><a href="#认识linux目录结构" class="headerlink" title="认识linux目录结构"></a>认识linux目录结构</h3><p>/:根目录标志</p>
-<p><img src="/img/Linux%E6%8C%87%E4%BB%A4/image-20221230163149165.png" alt="image-20221230163149165" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
-<p><img src="/img/Linux%E6%8C%87%E4%BB%A4/image-20221230163757788.png" alt="image-20221230163757788" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
-<h3 id="列出文件列表"><a href="#列出文件列表" class="headerlink" title="列出文件列表"></a>列出文件列表</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">查看当前目录下的所有文件夹</span><br><span class="line">ls</span><br><span class="line"></span><br><span class="line">查看当前目录下扥所有文件（包括隐藏文件）</span><br><span class="line">ls -a</span><br><span class="line">//以点开头的蓝色文件就是隐藏文件</span><br><span class="line"></span><br><span class="line">查看所有目录下非隐藏文件及其详细信息</span><br><span class="line">ll</span><br></pre></td></tr></table></figure>
-
-<h3 id="进入文件目录"><a href="#进入文件目录" class="headerlink" title="进入文件目录"></a>进入文件目录</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">进入指定目录</span><br><span class="line">cd 文件名</span><br><span class="line"></span><br><span class="line">返回上一级目录</span><br><span class="line">cd ..</span><br><span class="line"></span><br><span class="line">返回用户目录</span><br><span class="line">cd ~</span><br><span class="line"></span><br><span class="line">返回上一行的目录</span><br><span class="line">cd -</span><br></pre></td></tr></table></figure>
-
-<h3 id="创建和删除目录"><a href="#创建和删除目录" class="headerlink" title="创建和删除目录"></a>创建和删除目录</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">创建一个文件夹</span><br><span class="line">mkdir 文件夹名称</span><br><span class="line"></span><br><span class="line">创建一个空文件</span><br><span class="line">touch a.txt</span><br><span class="line"></span><br><span class="line">删除一个空文件夹</span><br><span class="line">redir 文件夹名称</span><br><span class="line"></span><br><span class="line">直接创建多级文件夹</span><br><span class="line">mkdir -p 父文件夹名/子文件夹</span><br></pre></td></tr></table></figure>
-
-<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">查看文件所有内容</span><br><span class="line">cat 文件名</span><br><span class="line">more 文件名	只显示一屏按回车显示一行 按空格显示一屏 按q退出</span><br><span class="line"></span><br><span class="line">查看文件最后10行的内容</span><br><span class="line">tail -10 文件名</span><br><span class="line">动态查看</span><br><span class="line">tail -f 文件名</span><br></pre></td></tr></table></figure>
-
-<h3 id="删除、复制和剪切"><a href="#删除、复制和剪切" class="headerlink" title="删除、复制和剪切"></a>删除、复制和剪切</h3><h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在指定文件夹下将file1复制为file2</span><br><span class="line">cp file1 aaa/file2</span><br><span class="line"></span><br><span class="line">将file1复制到上一级文件夹</span><br><span class="line">cp file1 ../</span><br></pre></td></tr></table></figure>
-
-<h4 id="剪切"><a href="#剪切" class="headerlink" title="剪切"></a>剪切</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将file1剪切到指定文件夹</span><br><span class="line">mv file1 aaa/</span><br><span class="line"></span><br><span class="line">将file1剪切到上一级文件夹</span><br><span class="line">cp file1 ../</span><br></pre></td></tr></table></figure>
-
-<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在询问后删除文件</span><br><span class="line">rm bb</span><br><span class="line"></span><br><span class="line">删除目录</span><br><span class="line">rm -r bb</span><br><span class="line"></span><br><span class="line">不询问删除</span><br><span class="line">rm -rf bb</span><br><span class="line"></span><br><span class="line">删除所有东西</span><br><span class="line">rm -rf /*		//慎用</span><br></pre></td></tr></table></figure>
-
-<h3 id="打包或解压"><a href="#打包或解压" class="headerlink" title="打包或解压"></a>打包或解压</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">压缩成a.tar</span><br><span class="line">tar -cvf a.tar 文件夹名/</span><br><span class="line">	-c:创建一个新的tar文件</span><br><span class="line">	-v:显示运行的过程信息</span><br><span class="line">	-f:指定文件名</span><br><span class="line">	-z:调用gzip压缩命令进行压缩</span><br><span class="line">	-t:查看压缩文件的内容</span><br><span class="line">	-x:解开tar文件</span><br></pre></td></tr></table></figure>
-
-<h3 id="查找文件、查找内容"><a href="#查找文件、查找内容" class="headerlink" title="查找文件、查找内容"></a>查找文件、查找内容</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">按文件名称查找</span><br><span class="line">find / -name 文件名</span><br><span class="line"></span><br><span class="line">不太清楚名字的查找方法</span><br><span class="line">find / -name cont*.log</span><br><span class="line"></span><br><span class="line">在aaa文件中查找字符串Address</span><br><span class="line">grep Address 文件路径 --color</span><br></pre></td></tr></table></figure>
-
-<h2 id="Vi和Vim编辑器"><a href="#Vi和Vim编辑器" class="headerlink" title="Vi和Vim编辑器"></a>Vi和Vim编辑器</h2><p>在linux下一般使用vi编辑器来编辑文件。vi即可以查看文件也可以编辑文件。</p>
-<p>三种模式：命令行、插入、底行模式。</p>
-<p>切换到命令行模式：按Esc键</p>
-<p>切换到插入模式：按i、o、a键</p>
-<p>​    i 在当前位置前插入</p>
-<p>​    I 在当前行首插入</p>
-<p>​    a 在当前位置后插入</p>
-<p>​    A 在当前行尾插入</p>
-<p>​    o 在当前行之后插入一行</p>
-<p>​    O 在当前行之前插入一行</p>
-<p>切换到底行模式：按冒号</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">打开文件： vim file</span><br><span class="line"></span><br><span class="line">退出：esc-&gt;:q</span><br><span class="line"></span><br><span class="line">修改文件：输入i进入插入模式</span><br><span class="line"></span><br><span class="line">保存并退出：esc-&gt;:wq</span><br><span class="line"></span><br><span class="line">不保存退出</span><br></pre></td></tr></table></figure>
-
-<h2 id="重定向输出"><a href="#重定向输出" class="headerlink" title="重定向输出"></a>重定向输出</h2><p>重定向就是将本文件中的内容复制到别的文件中</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将aaa.txt中的文字复制到bbb.txt中</span><br><span class="line">cat aaa.txt &gt; bbb.txt</span><br><span class="line"></span><br><span class="line">将aaa.txt中的文字追加到bbb.txt中</span><br><span class="line">cat aaa.txt &gt;&gt; bbb.txt</span><br></pre></td></tr></table></figure>
-
-<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>管道是linux命令中重要的一个概念，其作用是<strong>将一个命令的输出用作另一个命令的输入</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ls --help | more 分页查询帮助信息</span><br><span class="line">ps -ef | grep java 查询名称中包含java的进程</span><br></pre></td></tr></table></figure>
-
-<h2 id="Linux权限命令"><a href="#Linux权限命令" class="headerlink" title="Linux权限命令"></a>Linux权限命令</h2><h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><p>—    ———    ———    ———</p>
-<p><strong>第一个“—”表示文件的类型</strong></p>
-<p>​    -：表示文件</p>
-<p>​    d：表示文件夹</p>
-<p>​    l：表示快捷方式</p>
-<p><strong>第二个表示当前文件或文件夹的权限</strong></p>
-<p>​    r：可读</p>
-<p>​    w：可写</p>
-<p>​    x：可运行</p>
-<p><strong>第三个表示当前组内其他用户具有该文件的权限</strong></p>
-<p><strong>第四个表示其他组的用户具有该文件的权限</strong></p>
-<h3 id="文件权限管理"><a href="#文件权限管理" class="headerlink" title="文件权限管理"></a>文件权限管理</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod u=rwx,g=rx,o=rx a.txt</span><br><span class="line">u代表当前用户 g代表当前组的其他用户 o代表其他组的用户</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">也可以用数字的形式</span><br><span class="line">可读是4 可写是2 可运行是1</span><br><span class="line">最高权限就变成了chmod 777</span><br></pre></td></tr></table></figure>
-
-<h2 id="linux上常见的网络操作"><a href="#linux上常见的网络操作" class="headerlink" title="linux上常见的网络操作"></a>linux上常见的网络操作</h2><h3 id="主机名配置"><a href="#主机名配置" class="headerlink" title="主机名配置"></a>主机名配置</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hostname 查看主机名</span><br><span class="line">hostname XXX修改主机名 重启后失效</span><br><span class="line">如果要是永久生效，可以修改/erc/sysconfig/netword文件</span><br></pre></td></tr></table></figure>
-
-<h3 id="IP地址配置"><a href="#IP地址配置" class="headerlink" title="IP地址配置"></a>IP地址配置</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ifconfig查看（修改）ip地址	重启后无效</span><br><span class="line">ifconfig etho 192.168.12.22</span><br><span class="line"></span><br><span class="line">如果想要永久生效</span><br><span class="line">修改/etc/sysconfig/network-scripts/ifcfg-eth0文件</span><br><span class="line">DEVICE=eth0 网卡名称</span><br><span class="line">BOOTPROTO=static #获取ip的方式(static/dhcp/bootp/none)</span><br><span class="line">HWADDR-00:0c:29:B5:B2:69 .MAC地址</span><br><span class="line">工PADDR-12-168-177.129 #IP地址</span><br><span class="line">NETMASK-255.255.255.0 #子网掩码</span><br><span class="line">NETWORK=192.168.177.0 网络地址</span><br><span class="line">BROADCAST=192.168.0.255 广播地址</span><br><span class="line">NBOOT=yes	系统启动时是否设置此网络接口</span><br></pre></td></tr></table></figure>
-
-<h3 id="linux域名映射"><a href="#linux域名映射" class="headerlink" title="linux域名映射"></a>linux域名映射</h3><p>可以通过更改linux下的/etc/hosts</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">修改域名映射</span><br><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
-
-<h3 id="网络服务管理"><a href="#网络服务管理" class="headerlink" title="网络服务管理"></a>网络服务管理</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service network status查看指定服务的状态</span><br><span class="line">service network stop停止指定服务</span><br><span class="line">service network start启动指定服务</span><br><span class="line">service network restart 重启指定服务</span><br><span class="line">service --status-al1查看系统中所有后台服务</span><br><span class="line">netstat -nltp查看系统中网络进程的端口监听情况</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">防火墙设置</span><br><span class="line">防火墙根据配置文件/etc/sysconfig/iptables来控制本机的“出”、“入网络访问行为</span><br><span class="line">oservice iptables status 查看防火墙状态</span><br><span class="line">service iptables stop关闭防火墙</span><br><span class="line">service iptables start启动防火墙</span><br><span class="line">chkconfig iptables off禁止防火墙自启</span><br></pre></td></tr></table></figure>
-
-<h2 id="linux上的软件安装"><a href="#linux上的软件安装" class="headerlink" title="linux上的软件安装"></a>linux上的软件安装</h2><ul>
-<li><p>linux上软件安装有以下几种常用的方式介绍</p>
-<ol>
-<li><p>二进制发布包</p>
-<p>软件已经针对具体平台编译打包发布只要解压修改配置即可</p>
-</li>
-</ol>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>系统</category>
       </categories>
       <tags>
         <tag>技术</tag>
