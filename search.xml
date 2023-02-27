@@ -1,6 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>白学宫主——GUI</title>
+    <url>/2023/02/27/JavaGUI%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="JavaGUI图形化界面笔记"><a href="#JavaGUI图形化界面笔记" class="headerlink" title="JavaGUI图形化界面笔记"></a>JavaGUI图形化界面笔记</h1><h2 id="常用窗体"><a href="#常用窗体" class="headerlink" title="常用窗体"></a>常用窗体</h2><h3 id="Jframe"><a href="#Jframe" class="headerlink" title="Jframe"></a>Jframe</h3><p>新建Jframe</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">       JFrame jf=<span class="keyword">new</span> <span class="title class_">JFrame</span>(<span class="string">&quot;我的第一个界面&quot;</span>);</span><br><span class="line"><span class="comment">/*设置窗体大小和出现的位置*/</span></span><br><span class="line">jf.setBounds(<span class="number">500</span>,<span class="number">500</span>,<span class="number">500</span>,<span class="number">700</span>);</span><br><span class="line"><span class="comment">/*设置窗体是否显示*/</span></span><br><span class="line">jf.setVisible(<span class="literal">true</span>);</span><br><span class="line"><span class="comment">/*设置窗体是否可调节（默认可调）*/</span></span><br><span class="line">jf.setResizable(<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>   设定窗口关闭方式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*隐藏当前窗口，并释放窗体占用的所有资源*/</span></span><br><span class="line">jf.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);</span><br><span class="line"><span class="comment">/*隐藏当前窗口*/</span></span><br><span class="line">jf.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);</span><br><span class="line"><span class="comment">/*结束窗口所在的应用程序*/</span></span><br><span class="line">jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line"><span class="comment">/*点击后什么都不做*/</span></span><br><span class="line">jf.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);</span><br></pre></td></tr></table></figure>
+
+<p>设置背景颜色</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">jf.getContentPane().setBackground(Color.decode(<span class="string">&quot;#dddddd&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="Jdialog（弹窗）"><a href="#Jdialog（弹窗）" class="headerlink" title="Jdialog（弹窗）"></a>Jdialog（弹窗）</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JDialog jd=<span class="keyword">new</span> <span class="title class_">JDialog</span>(jf ,<span class="string">&quot;弹窗&quot;</span>);</span><br><span class="line">jd.setBounds(<span class="number">500</span>,<span class="number">500</span>,<span class="number">300</span>,<span class="number">400</span>);</span><br><span class="line">jd.setVisible(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="常用的面板"><a href="#常用的面板" class="headerlink" title="常用的面板"></a>常用的面板</h2><p>面板也是一种swing容器，他可以作为容器容纳其他组件，但是他也必须放在一个容器内</p>
+<h3 id="Jpanel"><a href="#Jpanel" class="headerlink" title="Jpanel"></a>Jpanel</h3><p>Jpanel是最基础的面板，继承自java.awt.Container类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JPanel jp=<span class="keyword">new</span> <span class="title class_">JPanel</span>(<span class="keyword">new</span> <span class="title class_">FlowLayout</span>());</span><br><span class="line">JButton jb=<span class="keyword">new</span> <span class="title class_">JButton</span>(<span class="string">&quot;登录&quot;</span>);</span><br><span class="line">JButton jb2=<span class="keyword">new</span> <span class="title class_">JButton</span>(<span class="string">&quot;注册&quot;</span>);</span><br><span class="line">jp.add(jb);</span><br><span class="line">jp.add(jb2);</span><br><span class="line">jf.add(jp);</span><br></pre></td></tr></table></figure>
+
+<h3 id="JscrollPane（滚动面板）"><a href="#JscrollPane（滚动面板）" class="headerlink" title="JscrollPane（滚动面板）"></a>JscrollPane（滚动面板）</h3><p>定义实例：JScrollPane jsp=new JScrollPane(某个继承自JPanel类的实例 pane);<br> 设置初始大小：jsp.setPreferredSize(new Dimension(200,200));</p>
+<p>设置滚动条显示和隐藏</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JScrollPane waiceng1=<span class="keyword">new</span> <span class="title class_">JScrollPane</span>(waiceng,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);</span><br></pre></td></tr></table></figure>
+
+<h2 id="常用组件"><a href="#常用组件" class="headerlink" title="常用组件"></a>常用组件</h2><h3 id="标签组件"><a href="#标签组件" class="headerlink" title="标签组件"></a>标签组件</h3><p>类：JLabel</p>
+<p>作用：显示文本或者提示信息</p>
+<p>构造方法：</p>
+<p>new JLabel（）；</p>
+<p>new JLabel（Icon icon）；       设置图标</p>
+<p>new Jlabel（Icon icon，SwingConstants.CENTER） 设置图标+水平对齐方式</p>
+<p>new Jlabel（String str，SwingConstants.CENTER）    设置文字+水平对齐方式</p>
+<p>new Jlabel（String str，Icon icon，SwingConstants.CENTER）</p>
+<p>设置文字图标+水平对齐方式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">jf.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);</span><br><span class="line">JLabel jl=<span class="keyword">new</span> <span class="title class_">JLabel</span>(<span class="string">&quot;我是提示文字&quot;</span>,SwingConstants.);</span><br><span class="line">jf.add(jl);</span><br></pre></td></tr></table></figure>
+
+<h3 id="按钮组件"><a href="#按钮组件" class="headerlink" title="按钮组件"></a>按钮组件</h3><p>类：JButton</p>
+<p>构造方法：</p>
+<p>new JButton（）；</p>
+<p>new JButton(Icon icon);  指定图标</p>
+<p>new JButton(String txt);  指定文字</p>
+<p>new JButton(Icon icon,String txt);    指定文字和图标</p>
+<p>其他方法：</p>
+<p>setEnabled(boolean n)  按钮是否可用</p>
+<p>setBorderPainted(boolean n)    按钮是否带边框</p>
+<p>setToolTipText(String st)     鼠标上移提示文字</p>
+<h3 id="单选多选按钮"><a href="#单选多选按钮" class="headerlink" title="单选多选按钮"></a>单选多选按钮</h3><p>单选</p>
+<p>new JRadioButton（）；</p>
+<p>new JRadioButton（Icon icon）；    设置图标</p>
+<p>new JRadioButton（Icon icon，boolean b）  设置图标+是否选中</p>
+<p>new JRadioButton（String str，boolean b）      设置文字+是否选中</p>
+<p>new JRadioButton（String str，Icon icon，boolean b）</p>
+<p>设置文字图标+是否选中</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JRadioButton jr=<span class="keyword">new</span> <span class="title class_">JRadioButton</span>(<span class="string">&quot;男&quot;</span>);</span><br><span class="line">JRadioButton jr2=<span class="keyword">new</span> <span class="title class_">JRadioButton</span>(<span class="string">&quot;女&quot;</span>);</span><br><span class="line">ButtonGroup bg=<span class="keyword">new</span> <span class="title class_">ButtonGroup</span>();</span><br><span class="line">bg.add(jr);</span><br><span class="line">bg.add(jr2);</span><br><span class="line">jf.add(jr);</span><br><span class="line">jf.add(jr2);</span><br></pre></td></tr></table></figure>
+
+<p>复选</p>
+<p>new JCheckBox（）；</p>
+<p>new JCheckBox (Icon icon,boolean b);    指定图标+是否被选中</p>
+<p>new JCheckBox (String txt,boolean b);    指定文字+是否被选中</p>
+<h3 id="下拉列表"><a href="#下拉列表" class="headerlink" title="下拉列表"></a>下拉列表</h3><p>构造方法</p>
+<p>new JComboBox（）；</p>
+<p>方法：</p>
+<p>addItem：添加下拉内容</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JComboBox jcb=<span class="keyword">new</span> <span class="title class_">JComboBox</span>();</span><br><span class="line">jcb.addItem(<span class="string">&quot;请选择省份&quot;</span>);</span><br><span class="line">jcb.addItem(<span class="string">&quot;河北&quot;</span>);</span><br><span class="line">jcb.addItem(<span class="string">&quot;河南&quot;</span>);</span><br><span class="line">jf.add(jcb);</span><br></pre></td></tr></table></figure>
+
+<h3 id="菜单栏"><a href="#菜单栏" class="headerlink" title="菜单栏"></a>菜单栏</h3><p>一级菜单：</p>
+<p>创建菜单条 JMenuBar</p>
+<p>创建菜单JMenu</p>
+<p>创建菜单项JMenuItem</p>
+<p>总结：菜单项依附菜单、菜单依附菜单条</p>
+<p>创建菜单栏</p>
+<p>创建菜单</p>
+<p>创建菜单项</p>
+<p>菜单添加一个菜单项</p>
+<p>菜单项添加菜单</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JMenuBar bar=<span class="keyword">new</span> <span class="title class_">JMenuBar</span>();</span><br><span class="line">JMenu menu=<span class="keyword">new</span> <span class="title class_">JMenu</span>(<span class="string">&quot;菜单1&quot;</span>);</span><br><span class="line">JMenuItem item1=<span class="keyword">new</span> <span class="title class_">JMenuItem</span>(<span class="string">&quot;二级菜单1&quot;</span>);</span><br><span class="line">JMenuItem item2=<span class="keyword">new</span> <span class="title class_">JMenuItem</span>(<span class="string">&quot;二级菜单2&quot;</span>);</span><br><span class="line">JMenuItem item3=<span class="keyword">new</span> <span class="title class_">JMenuItem</span>(<span class="string">&quot;二级菜单3&quot;</span>);</span><br><span class="line">menu.add(item1);</span><br><span class="line">menu.add(item2);</span><br><span class="line">menu.add(item3);</span><br><span class="line">bar.add(menu);</span><br><span class="line">jf.add(bar);</span><br></pre></td></tr></table></figure>
+
+<h3 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h3><p>类：JTextField</p>
+<p>构造函数</p>
+<p>new JTextField（）；</p>
+<p>new JTextField（String text）；       设置默认文字</p>
+<p>new JTextField（int fiel） 设置文本框长度</p>
+<p>new JTextField（String str，int b）      默认文字+文本框长度</p>
+<h3 id="密码框"><a href="#密码框" class="headerlink" title="密码框"></a>密码框</h3><p>类：JPasswordField</p>
+<p>构造函数</p>
+<p>new JPasswordField（）；</p>
+<p>new JPasswordField（String text）；     设置默认文字</p>
+<p>new JPasswordField（int fiel）   设置密码框长度</p>
+<p>new JPasswordField（String str，int b）     默认文字+密码框长度</p>
+<h3 id="文本域"><a href="#文本域" class="headerlink" title="文本域"></a>文本域</h3><p>类：JTextArea</p>
+<p>构造函数</p>
+<p>new JTextArea（）；</p>
+<p>new JTextArea（String text）；       设置默认文字</p>
+<p>new JTextArea（int fiel，int fiel）     设置文本框长度和宽度</p>
+<p>方法：</p>
+<p>setLineWrap（）；   设置文本框是否换行</p>
+<h2 id="常用布局"><a href="#常用布局" class="headerlink" title="常用布局"></a>常用布局</h2><h3 id="流式布局"><a href="#流式布局" class="headerlink" title="流式布局"></a>流式布局</h3><p>构造方法：</p>
+<p>FlowLayout（int aligment）;    设置对齐方式（默认居中）</p>
+<p>FlowLayout（int aligment，int horizGap，int vertGap）;      设置对齐方式+上下偏移</p>
+<p>通过setLayout设置布局方式</p>
+<p>例如：jf.setLayout（new FlowLayout（FlowLayout.LEFT））</p>
+<h3 id="网格式布局"><a href="#网格式布局" class="headerlink" title="网格式布局"></a>网格式布局</h3><p>构造方法：</p>
+<p>GridLayout（int row，int col）;      指定行数和列数</p>
+<p>GridLayout（int row，int col，int horizGap，int vertGap）;       设置行数列数+上下偏移</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux从入门到彻底放弃</title>
+    <url>/2023/02/27/Linux%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="Linux指令"><a href="#Linux指令" class="headerlink" title="Linux指令"></a>Linux指令</h1><h2 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h2><h3 id="认识linux目录结构"><a href="#认识linux目录结构" class="headerlink" title="认识linux目录结构"></a>认识linux目录结构</h3><p>/:根目录标志</p>
+<p><img src="/img/Linux%E6%8C%87%E4%BB%A4/image-20221230163149165.png" alt="image-20221230163149165" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="/img/Linux%E6%8C%87%E4%BB%A4/image-20221230163757788.png" alt="image-20221230163757788" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="列出文件列表"><a href="#列出文件列表" class="headerlink" title="列出文件列表"></a>列出文件列表</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">查看当前目录下的所有文件夹</span><br><span class="line">ls</span><br><span class="line"></span><br><span class="line">查看当前目录下扥所有文件（包括隐藏文件）</span><br><span class="line">ls -a</span><br><span class="line">//以点开头的蓝色文件就是隐藏文件</span><br><span class="line"></span><br><span class="line">查看所有目录下非隐藏文件及其详细信息</span><br><span class="line">ll</span><br></pre></td></tr></table></figure>
+
+<h3 id="进入文件目录"><a href="#进入文件目录" class="headerlink" title="进入文件目录"></a>进入文件目录</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">进入指定目录</span><br><span class="line">cd 文件名</span><br><span class="line"></span><br><span class="line">返回上一级目录</span><br><span class="line">cd ..</span><br><span class="line"></span><br><span class="line">返回用户目录</span><br><span class="line">cd ~</span><br><span class="line"></span><br><span class="line">返回上一行的目录</span><br><span class="line">cd -</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建和删除目录"><a href="#创建和删除目录" class="headerlink" title="创建和删除目录"></a>创建和删除目录</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">创建一个文件夹</span><br><span class="line">mkdir 文件夹名称</span><br><span class="line"></span><br><span class="line">创建一个空文件</span><br><span class="line">touch a.txt</span><br><span class="line"></span><br><span class="line">删除一个空文件夹</span><br><span class="line">redir 文件夹名称</span><br><span class="line"></span><br><span class="line">直接创建多级文件夹</span><br><span class="line">mkdir -p 父文件夹名/子文件夹</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">查看文件所有内容</span><br><span class="line">cat 文件名</span><br><span class="line">more 文件名	只显示一屏按回车显示一行 按空格显示一屏 按q退出</span><br><span class="line"></span><br><span class="line">查看文件最后10行的内容</span><br><span class="line">tail -10 文件名</span><br><span class="line">动态查看</span><br><span class="line">tail -f 文件名</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除、复制和剪切"><a href="#删除、复制和剪切" class="headerlink" title="删除、复制和剪切"></a>删除、复制和剪切</h3><h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在指定文件夹下将file1复制为file2</span><br><span class="line">cp file1 aaa/file2</span><br><span class="line"></span><br><span class="line">将file1复制到上一级文件夹</span><br><span class="line">cp file1 ../</span><br></pre></td></tr></table></figure>
+
+<h4 id="剪切"><a href="#剪切" class="headerlink" title="剪切"></a>剪切</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将file1剪切到指定文件夹</span><br><span class="line">mv file1 aaa/</span><br><span class="line"></span><br><span class="line">将file1剪切到上一级文件夹</span><br><span class="line">cp file1 ../</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在询问后删除文件</span><br><span class="line">rm bb</span><br><span class="line"></span><br><span class="line">删除目录</span><br><span class="line">rm -r bb</span><br><span class="line"></span><br><span class="line">不询问删除</span><br><span class="line">rm -rf bb</span><br><span class="line"></span><br><span class="line">删除所有东西</span><br><span class="line">rm -rf /*		//慎用</span><br></pre></td></tr></table></figure>
+
+<h3 id="打包或解压"><a href="#打包或解压" class="headerlink" title="打包或解压"></a>打包或解压</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">压缩成a.tar</span><br><span class="line">tar -cvf a.tar 文件夹名/</span><br><span class="line">	-c:创建一个新的tar文件</span><br><span class="line">	-v:显示运行的过程信息</span><br><span class="line">	-f:指定文件名</span><br><span class="line">	-z:调用gzip压缩命令进行压缩</span><br><span class="line">	-t:查看压缩文件的内容</span><br><span class="line">	-x:解开tar文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="查找文件、查找内容"><a href="#查找文件、查找内容" class="headerlink" title="查找文件、查找内容"></a>查找文件、查找内容</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">按文件名称查找</span><br><span class="line">find / -name 文件名</span><br><span class="line"></span><br><span class="line">不太清楚名字的查找方法</span><br><span class="line">find / -name cont*.log</span><br><span class="line"></span><br><span class="line">在aaa文件中查找字符串Address</span><br><span class="line">grep Address 文件路径 --color</span><br></pre></td></tr></table></figure>
+
+<h2 id="Vi和Vim编辑器"><a href="#Vi和Vim编辑器" class="headerlink" title="Vi和Vim编辑器"></a>Vi和Vim编辑器</h2><p>在linux下一般使用vi编辑器来编辑文件。vi即可以查看文件也可以编辑文件。</p>
+<p>三种模式：命令行、插入、底行模式。</p>
+<p>切换到命令行模式：按Esc键</p>
+<p>切换到插入模式：按i、o、a键</p>
+<p>​    i 在当前位置前插入</p>
+<p>​    I 在当前行首插入</p>
+<p>​    a 在当前位置后插入</p>
+<p>​    A 在当前行尾插入</p>
+<p>​    o 在当前行之后插入一行</p>
+<p>​    O 在当前行之前插入一行</p>
+<p>切换到底行模式：按冒号</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">打开文件： vim file</span><br><span class="line"></span><br><span class="line">退出：esc-&gt;:q</span><br><span class="line"></span><br><span class="line">修改文件：输入i进入插入模式</span><br><span class="line"></span><br><span class="line">保存并退出：esc-&gt;:wq</span><br><span class="line"></span><br><span class="line">不保存退出</span><br></pre></td></tr></table></figure>
+
+<h2 id="重定向输出"><a href="#重定向输出" class="headerlink" title="重定向输出"></a>重定向输出</h2><p>重定向就是将本文件中的内容复制到别的文件中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将aaa.txt中的文字复制到bbb.txt中</span><br><span class="line">cat aaa.txt &gt; bbb.txt</span><br><span class="line"></span><br><span class="line">将aaa.txt中的文字追加到bbb.txt中</span><br><span class="line">cat aaa.txt &gt;&gt; bbb.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>管道是linux命令中重要的一个概念，其作用是<strong>将一个命令的输出用作另一个命令的输入</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ls --help | more 分页查询帮助信息</span><br><span class="line">ps -ef | grep java 查询名称中包含java的进程</span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux权限命令"><a href="#Linux权限命令" class="headerlink" title="Linux权限命令"></a>Linux权限命令</h2><h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><p>—    ———    ———    ———</p>
+<p><strong>第一个“—”表示文件的类型</strong></p>
+<p>​    -：表示文件</p>
+<p>​    d：表示文件夹</p>
+<p>​    l：表示快捷方式</p>
+<p><strong>第二个表示当前文件或文件夹的权限</strong></p>
+<p>​    r：可读</p>
+<p>​    w：可写</p>
+<p>​    x：可运行</p>
+<p><strong>第三个表示当前组内其他用户具有该文件的权限</strong></p>
+<p><strong>第四个表示其他组的用户具有该文件的权限</strong></p>
+<h3 id="文件权限管理"><a href="#文件权限管理" class="headerlink" title="文件权限管理"></a>文件权限管理</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod u=rwx,g=rx,o=rx a.txt</span><br><span class="line">u代表当前用户 g代表当前组的其他用户 o代表其他组的用户</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">也可以用数字的形式</span><br><span class="line">可读是4 可写是2 可运行是1</span><br><span class="line">最高权限就变成了chmod 777</span><br></pre></td></tr></table></figure>
+
+<h2 id="linux上常见的网络操作"><a href="#linux上常见的网络操作" class="headerlink" title="linux上常见的网络操作"></a>linux上常见的网络操作</h2><h3 id="主机名配置"><a href="#主机名配置" class="headerlink" title="主机名配置"></a>主机名配置</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hostname 查看主机名</span><br><span class="line">hostname XXX修改主机名 重启后失效</span><br><span class="line">如果要是永久生效，可以修改/erc/sysconfig/netword文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="IP地址配置"><a href="#IP地址配置" class="headerlink" title="IP地址配置"></a>IP地址配置</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ifconfig查看（修改）ip地址	重启后无效</span><br><span class="line">ifconfig etho 192.168.12.22</span><br><span class="line"></span><br><span class="line">如果想要永久生效</span><br><span class="line">修改/etc/sysconfig/network-scripts/ifcfg-eth0文件</span><br><span class="line">DEVICE=eth0 网卡名称</span><br><span class="line">BOOTPROTO=static #获取ip的方式(static/dhcp/bootp/none)</span><br><span class="line">HWADDR-00:0c:29:B5:B2:69 .MAC地址</span><br><span class="line">工PADDR-12-168-177.129 #IP地址</span><br><span class="line">NETMASK-255.255.255.0 #子网掩码</span><br><span class="line">NETWORK=192.168.177.0 网络地址</span><br><span class="line">BROADCAST=192.168.0.255 广播地址</span><br><span class="line">NBOOT=yes	系统启动时是否设置此网络接口</span><br></pre></td></tr></table></figure>
+
+<h3 id="linux域名映射"><a href="#linux域名映射" class="headerlink" title="linux域名映射"></a>linux域名映射</h3><p>可以通过更改linux下的/etc/hosts</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">修改域名映射</span><br><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<h3 id="网络服务管理"><a href="#网络服务管理" class="headerlink" title="网络服务管理"></a>网络服务管理</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service network status查看指定服务的状态</span><br><span class="line">service network stop停止指定服务</span><br><span class="line">service network start启动指定服务</span><br><span class="line">service network restart 重启指定服务</span><br><span class="line">service --status-al1查看系统中所有后台服务</span><br><span class="line">netstat -nltp查看系统中网络进程的端口监听情况</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">防火墙设置</span><br><span class="line">防火墙根据配置文件/etc/sysconfig/iptables来控制本机的“出”、“入网络访问行为</span><br><span class="line">oservice iptables status 查看防火墙状态</span><br><span class="line">service iptables stop关闭防火墙</span><br><span class="line">service iptables start启动防火墙</span><br><span class="line">chkconfig iptables off禁止防火墙自启</span><br></pre></td></tr></table></figure>
+
+<h2 id="linux上的软件安装"><a href="#linux上的软件安装" class="headerlink" title="linux上的软件安装"></a>linux上的软件安装</h2><ul>
+<li><p>linux上软件安装有以下几种常用的方式介绍</p>
+<ol>
+<li><p>二进制发布包</p>
+<p>软件已经针对具体平台编译打包发布只要解压修改配置即可</p>
+</li>
+</ol>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>系统</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java从入门到转行</title>
     <url>/2023/02/27/Java%20SE/</url>
     <content><![CDATA[<p><img src="/img/JavaSE%E7%AC%94%E8%AE%B0/image002.jpg" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
@@ -1649,197 +1840,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux从入门到彻底放弃</title>
-    <url>/2023/02/27/Linux%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="Linux指令"><a href="#Linux指令" class="headerlink" title="Linux指令"></a>Linux指令</h1><h2 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h2><h3 id="认识linux目录结构"><a href="#认识linux目录结构" class="headerlink" title="认识linux目录结构"></a>认识linux目录结构</h3><p>/:根目录标志</p>
-<p><img src="/img/Linux%E6%8C%87%E4%BB%A4/image-20221230163149165.png" alt="image-20221230163149165" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
-<p><img src="/img/Linux%E6%8C%87%E4%BB%A4/image-20221230163757788.png" alt="image-20221230163757788" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
-<h3 id="列出文件列表"><a href="#列出文件列表" class="headerlink" title="列出文件列表"></a>列出文件列表</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">查看当前目录下的所有文件夹</span><br><span class="line">ls</span><br><span class="line"></span><br><span class="line">查看当前目录下扥所有文件（包括隐藏文件）</span><br><span class="line">ls -a</span><br><span class="line">//以点开头的蓝色文件就是隐藏文件</span><br><span class="line"></span><br><span class="line">查看所有目录下非隐藏文件及其详细信息</span><br><span class="line">ll</span><br></pre></td></tr></table></figure>
-
-<h3 id="进入文件目录"><a href="#进入文件目录" class="headerlink" title="进入文件目录"></a>进入文件目录</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">进入指定目录</span><br><span class="line">cd 文件名</span><br><span class="line"></span><br><span class="line">返回上一级目录</span><br><span class="line">cd ..</span><br><span class="line"></span><br><span class="line">返回用户目录</span><br><span class="line">cd ~</span><br><span class="line"></span><br><span class="line">返回上一行的目录</span><br><span class="line">cd -</span><br></pre></td></tr></table></figure>
-
-<h3 id="创建和删除目录"><a href="#创建和删除目录" class="headerlink" title="创建和删除目录"></a>创建和删除目录</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">创建一个文件夹</span><br><span class="line">mkdir 文件夹名称</span><br><span class="line"></span><br><span class="line">创建一个空文件</span><br><span class="line">touch a.txt</span><br><span class="line"></span><br><span class="line">删除一个空文件夹</span><br><span class="line">redir 文件夹名称</span><br><span class="line"></span><br><span class="line">直接创建多级文件夹</span><br><span class="line">mkdir -p 父文件夹名/子文件夹</span><br></pre></td></tr></table></figure>
-
-<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">查看文件所有内容</span><br><span class="line">cat 文件名</span><br><span class="line">more 文件名	只显示一屏按回车显示一行 按空格显示一屏 按q退出</span><br><span class="line"></span><br><span class="line">查看文件最后10行的内容</span><br><span class="line">tail -10 文件名</span><br><span class="line">动态查看</span><br><span class="line">tail -f 文件名</span><br></pre></td></tr></table></figure>
-
-<h3 id="删除、复制和剪切"><a href="#删除、复制和剪切" class="headerlink" title="删除、复制和剪切"></a>删除、复制和剪切</h3><h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在指定文件夹下将file1复制为file2</span><br><span class="line">cp file1 aaa/file2</span><br><span class="line"></span><br><span class="line">将file1复制到上一级文件夹</span><br><span class="line">cp file1 ../</span><br></pre></td></tr></table></figure>
-
-<h4 id="剪切"><a href="#剪切" class="headerlink" title="剪切"></a>剪切</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将file1剪切到指定文件夹</span><br><span class="line">mv file1 aaa/</span><br><span class="line"></span><br><span class="line">将file1剪切到上一级文件夹</span><br><span class="line">cp file1 ../</span><br></pre></td></tr></table></figure>
-
-<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在询问后删除文件</span><br><span class="line">rm bb</span><br><span class="line"></span><br><span class="line">删除目录</span><br><span class="line">rm -r bb</span><br><span class="line"></span><br><span class="line">不询问删除</span><br><span class="line">rm -rf bb</span><br><span class="line"></span><br><span class="line">删除所有东西</span><br><span class="line">rm -rf /*		//慎用</span><br></pre></td></tr></table></figure>
-
-<h3 id="打包或解压"><a href="#打包或解压" class="headerlink" title="打包或解压"></a>打包或解压</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">压缩成a.tar</span><br><span class="line">tar -cvf a.tar 文件夹名/</span><br><span class="line">	-c:创建一个新的tar文件</span><br><span class="line">	-v:显示运行的过程信息</span><br><span class="line">	-f:指定文件名</span><br><span class="line">	-z:调用gzip压缩命令进行压缩</span><br><span class="line">	-t:查看压缩文件的内容</span><br><span class="line">	-x:解开tar文件</span><br></pre></td></tr></table></figure>
-
-<h3 id="查找文件、查找内容"><a href="#查找文件、查找内容" class="headerlink" title="查找文件、查找内容"></a>查找文件、查找内容</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">按文件名称查找</span><br><span class="line">find / -name 文件名</span><br><span class="line"></span><br><span class="line">不太清楚名字的查找方法</span><br><span class="line">find / -name cont*.log</span><br><span class="line"></span><br><span class="line">在aaa文件中查找字符串Address</span><br><span class="line">grep Address 文件路径 --color</span><br></pre></td></tr></table></figure>
-
-<h2 id="Vi和Vim编辑器"><a href="#Vi和Vim编辑器" class="headerlink" title="Vi和Vim编辑器"></a>Vi和Vim编辑器</h2><p>在linux下一般使用vi编辑器来编辑文件。vi即可以查看文件也可以编辑文件。</p>
-<p>三种模式：命令行、插入、底行模式。</p>
-<p>切换到命令行模式：按Esc键</p>
-<p>切换到插入模式：按i、o、a键</p>
-<p>​    i 在当前位置前插入</p>
-<p>​    I 在当前行首插入</p>
-<p>​    a 在当前位置后插入</p>
-<p>​    A 在当前行尾插入</p>
-<p>​    o 在当前行之后插入一行</p>
-<p>​    O 在当前行之前插入一行</p>
-<p>切换到底行模式：按冒号</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">打开文件： vim file</span><br><span class="line"></span><br><span class="line">退出：esc-&gt;:q</span><br><span class="line"></span><br><span class="line">修改文件：输入i进入插入模式</span><br><span class="line"></span><br><span class="line">保存并退出：esc-&gt;:wq</span><br><span class="line"></span><br><span class="line">不保存退出</span><br></pre></td></tr></table></figure>
-
-<h2 id="重定向输出"><a href="#重定向输出" class="headerlink" title="重定向输出"></a>重定向输出</h2><p>重定向就是将本文件中的内容复制到别的文件中</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将aaa.txt中的文字复制到bbb.txt中</span><br><span class="line">cat aaa.txt &gt; bbb.txt</span><br><span class="line"></span><br><span class="line">将aaa.txt中的文字追加到bbb.txt中</span><br><span class="line">cat aaa.txt &gt;&gt; bbb.txt</span><br></pre></td></tr></table></figure>
-
-<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>管道是linux命令中重要的一个概念，其作用是<strong>将一个命令的输出用作另一个命令的输入</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ls --help | more 分页查询帮助信息</span><br><span class="line">ps -ef | grep java 查询名称中包含java的进程</span><br></pre></td></tr></table></figure>
-
-<h2 id="Linux权限命令"><a href="#Linux权限命令" class="headerlink" title="Linux权限命令"></a>Linux权限命令</h2><h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><p>—    ———    ———    ———</p>
-<p><strong>第一个“—”表示文件的类型</strong></p>
-<p>​    -：表示文件</p>
-<p>​    d：表示文件夹</p>
-<p>​    l：表示快捷方式</p>
-<p><strong>第二个表示当前文件或文件夹的权限</strong></p>
-<p>​    r：可读</p>
-<p>​    w：可写</p>
-<p>​    x：可运行</p>
-<p><strong>第三个表示当前组内其他用户具有该文件的权限</strong></p>
-<p><strong>第四个表示其他组的用户具有该文件的权限</strong></p>
-<h3 id="文件权限管理"><a href="#文件权限管理" class="headerlink" title="文件权限管理"></a>文件权限管理</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod u=rwx,g=rx,o=rx a.txt</span><br><span class="line">u代表当前用户 g代表当前组的其他用户 o代表其他组的用户</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">也可以用数字的形式</span><br><span class="line">可读是4 可写是2 可运行是1</span><br><span class="line">最高权限就变成了chmod 777</span><br></pre></td></tr></table></figure>
-
-<h2 id="linux上常见的网络操作"><a href="#linux上常见的网络操作" class="headerlink" title="linux上常见的网络操作"></a>linux上常见的网络操作</h2><h3 id="主机名配置"><a href="#主机名配置" class="headerlink" title="主机名配置"></a>主机名配置</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hostname 查看主机名</span><br><span class="line">hostname XXX修改主机名 重启后失效</span><br><span class="line">如果要是永久生效，可以修改/erc/sysconfig/netword文件</span><br></pre></td></tr></table></figure>
-
-<h3 id="IP地址配置"><a href="#IP地址配置" class="headerlink" title="IP地址配置"></a>IP地址配置</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ifconfig查看（修改）ip地址	重启后无效</span><br><span class="line">ifconfig etho 192.168.12.22</span><br><span class="line"></span><br><span class="line">如果想要永久生效</span><br><span class="line">修改/etc/sysconfig/network-scripts/ifcfg-eth0文件</span><br><span class="line">DEVICE=eth0 网卡名称</span><br><span class="line">BOOTPROTO=static #获取ip的方式(static/dhcp/bootp/none)</span><br><span class="line">HWADDR-00:0c:29:B5:B2:69 .MAC地址</span><br><span class="line">工PADDR-12-168-177.129 #IP地址</span><br><span class="line">NETMASK-255.255.255.0 #子网掩码</span><br><span class="line">NETWORK=192.168.177.0 网络地址</span><br><span class="line">BROADCAST=192.168.0.255 广播地址</span><br><span class="line">NBOOT=yes	系统启动时是否设置此网络接口</span><br></pre></td></tr></table></figure>
-
-<h3 id="linux域名映射"><a href="#linux域名映射" class="headerlink" title="linux域名映射"></a>linux域名映射</h3><p>可以通过更改linux下的/etc/hosts</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">修改域名映射</span><br><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
-
-<h3 id="网络服务管理"><a href="#网络服务管理" class="headerlink" title="网络服务管理"></a>网络服务管理</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service network status查看指定服务的状态</span><br><span class="line">service network stop停止指定服务</span><br><span class="line">service network start启动指定服务</span><br><span class="line">service network restart 重启指定服务</span><br><span class="line">service --status-al1查看系统中所有后台服务</span><br><span class="line">netstat -nltp查看系统中网络进程的端口监听情况</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">防火墙设置</span><br><span class="line">防火墙根据配置文件/etc/sysconfig/iptables来控制本机的“出”、“入网络访问行为</span><br><span class="line">oservice iptables status 查看防火墙状态</span><br><span class="line">service iptables stop关闭防火墙</span><br><span class="line">service iptables start启动防火墙</span><br><span class="line">chkconfig iptables off禁止防火墙自启</span><br></pre></td></tr></table></figure>
-
-<h2 id="linux上的软件安装"><a href="#linux上的软件安装" class="headerlink" title="linux上的软件安装"></a>linux上的软件安装</h2><ul>
-<li><p>linux上软件安装有以下几种常用的方式介绍</p>
-<ol>
-<li><p>二进制发布包</p>
-<p>软件已经针对具体平台编译打包发布只要解压修改配置即可</p>
-</li>
-</ol>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>系统</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>白学宫主——GUI</title>
-    <url>/2023/02/27/JavaGUI%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="JavaGUI图形化界面笔记"><a href="#JavaGUI图形化界面笔记" class="headerlink" title="JavaGUI图形化界面笔记"></a>JavaGUI图形化界面笔记</h1><h2 id="常用窗体"><a href="#常用窗体" class="headerlink" title="常用窗体"></a>常用窗体</h2><h3 id="Jframe"><a href="#Jframe" class="headerlink" title="Jframe"></a>Jframe</h3><p>新建Jframe</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">       JFrame jf=<span class="keyword">new</span> <span class="title class_">JFrame</span>(<span class="string">&quot;我的第一个界面&quot;</span>);</span><br><span class="line"><span class="comment">/*设置窗体大小和出现的位置*/</span></span><br><span class="line">jf.setBounds(<span class="number">500</span>,<span class="number">500</span>,<span class="number">500</span>,<span class="number">700</span>);</span><br><span class="line"><span class="comment">/*设置窗体是否显示*/</span></span><br><span class="line">jf.setVisible(<span class="literal">true</span>);</span><br><span class="line"><span class="comment">/*设置窗体是否可调节（默认可调）*/</span></span><br><span class="line">jf.setResizable(<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
-
-<p>   设定窗口关闭方式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*隐藏当前窗口，并释放窗体占用的所有资源*/</span></span><br><span class="line">jf.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);</span><br><span class="line"><span class="comment">/*隐藏当前窗口*/</span></span><br><span class="line">jf.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);</span><br><span class="line"><span class="comment">/*结束窗口所在的应用程序*/</span></span><br><span class="line">jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line"><span class="comment">/*点击后什么都不做*/</span></span><br><span class="line">jf.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);</span><br></pre></td></tr></table></figure>
-
-<p>设置背景颜色</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">jf.getContentPane().setBackground(Color.decode(<span class="string">&quot;#dddddd&quot;</span>));</span><br></pre></td></tr></table></figure>
-
-<h3 id="Jdialog（弹窗）"><a href="#Jdialog（弹窗）" class="headerlink" title="Jdialog（弹窗）"></a>Jdialog（弹窗）</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JDialog jd=<span class="keyword">new</span> <span class="title class_">JDialog</span>(jf ,<span class="string">&quot;弹窗&quot;</span>);</span><br><span class="line">jd.setBounds(<span class="number">500</span>,<span class="number">500</span>,<span class="number">300</span>,<span class="number">400</span>);</span><br><span class="line">jd.setVisible(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="常用的面板"><a href="#常用的面板" class="headerlink" title="常用的面板"></a>常用的面板</h2><p>面板也是一种swing容器，他可以作为容器容纳其他组件，但是他也必须放在一个容器内</p>
-<h3 id="Jpanel"><a href="#Jpanel" class="headerlink" title="Jpanel"></a>Jpanel</h3><p>Jpanel是最基础的面板，继承自java.awt.Container类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JPanel jp=<span class="keyword">new</span> <span class="title class_">JPanel</span>(<span class="keyword">new</span> <span class="title class_">FlowLayout</span>());</span><br><span class="line">JButton jb=<span class="keyword">new</span> <span class="title class_">JButton</span>(<span class="string">&quot;登录&quot;</span>);</span><br><span class="line">JButton jb2=<span class="keyword">new</span> <span class="title class_">JButton</span>(<span class="string">&quot;注册&quot;</span>);</span><br><span class="line">jp.add(jb);</span><br><span class="line">jp.add(jb2);</span><br><span class="line">jf.add(jp);</span><br></pre></td></tr></table></figure>
-
-<h3 id="JscrollPane（滚动面板）"><a href="#JscrollPane（滚动面板）" class="headerlink" title="JscrollPane（滚动面板）"></a>JscrollPane（滚动面板）</h3><p>定义实例：JScrollPane jsp=new JScrollPane(某个继承自JPanel类的实例 pane);<br> 设置初始大小：jsp.setPreferredSize(new Dimension(200,200));</p>
-<p>设置滚动条显示和隐藏</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JScrollPane waiceng1=<span class="keyword">new</span> <span class="title class_">JScrollPane</span>(waiceng,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);</span><br></pre></td></tr></table></figure>
-
-<h2 id="常用组件"><a href="#常用组件" class="headerlink" title="常用组件"></a>常用组件</h2><h3 id="标签组件"><a href="#标签组件" class="headerlink" title="标签组件"></a>标签组件</h3><p>类：JLabel</p>
-<p>作用：显示文本或者提示信息</p>
-<p>构造方法：</p>
-<p>new JLabel（）；</p>
-<p>new JLabel（Icon icon）；       设置图标</p>
-<p>new Jlabel（Icon icon，SwingConstants.CENTER） 设置图标+水平对齐方式</p>
-<p>new Jlabel（String str，SwingConstants.CENTER）    设置文字+水平对齐方式</p>
-<p>new Jlabel（String str，Icon icon，SwingConstants.CENTER）</p>
-<p>设置文字图标+水平对齐方式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">jf.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);</span><br><span class="line">JLabel jl=<span class="keyword">new</span> <span class="title class_">JLabel</span>(<span class="string">&quot;我是提示文字&quot;</span>,SwingConstants.);</span><br><span class="line">jf.add(jl);</span><br></pre></td></tr></table></figure>
-
-<h3 id="按钮组件"><a href="#按钮组件" class="headerlink" title="按钮组件"></a>按钮组件</h3><p>类：JButton</p>
-<p>构造方法：</p>
-<p>new JButton（）；</p>
-<p>new JButton(Icon icon);  指定图标</p>
-<p>new JButton(String txt);  指定文字</p>
-<p>new JButton(Icon icon,String txt);    指定文字和图标</p>
-<p>其他方法：</p>
-<p>setEnabled(boolean n)  按钮是否可用</p>
-<p>setBorderPainted(boolean n)    按钮是否带边框</p>
-<p>setToolTipText(String st)     鼠标上移提示文字</p>
-<h3 id="单选多选按钮"><a href="#单选多选按钮" class="headerlink" title="单选多选按钮"></a>单选多选按钮</h3><p>单选</p>
-<p>new JRadioButton（）；</p>
-<p>new JRadioButton（Icon icon）；    设置图标</p>
-<p>new JRadioButton（Icon icon，boolean b）  设置图标+是否选中</p>
-<p>new JRadioButton（String str，boolean b）      设置文字+是否选中</p>
-<p>new JRadioButton（String str，Icon icon，boolean b）</p>
-<p>设置文字图标+是否选中</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JRadioButton jr=<span class="keyword">new</span> <span class="title class_">JRadioButton</span>(<span class="string">&quot;男&quot;</span>);</span><br><span class="line">JRadioButton jr2=<span class="keyword">new</span> <span class="title class_">JRadioButton</span>(<span class="string">&quot;女&quot;</span>);</span><br><span class="line">ButtonGroup bg=<span class="keyword">new</span> <span class="title class_">ButtonGroup</span>();</span><br><span class="line">bg.add(jr);</span><br><span class="line">bg.add(jr2);</span><br><span class="line">jf.add(jr);</span><br><span class="line">jf.add(jr2);</span><br></pre></td></tr></table></figure>
-
-<p>复选</p>
-<p>new JCheckBox（）；</p>
-<p>new JCheckBox (Icon icon,boolean b);    指定图标+是否被选中</p>
-<p>new JCheckBox (String txt,boolean b);    指定文字+是否被选中</p>
-<h3 id="下拉列表"><a href="#下拉列表" class="headerlink" title="下拉列表"></a>下拉列表</h3><p>构造方法</p>
-<p>new JComboBox（）；</p>
-<p>方法：</p>
-<p>addItem：添加下拉内容</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JComboBox jcb=<span class="keyword">new</span> <span class="title class_">JComboBox</span>();</span><br><span class="line">jcb.addItem(<span class="string">&quot;请选择省份&quot;</span>);</span><br><span class="line">jcb.addItem(<span class="string">&quot;河北&quot;</span>);</span><br><span class="line">jcb.addItem(<span class="string">&quot;河南&quot;</span>);</span><br><span class="line">jf.add(jcb);</span><br></pre></td></tr></table></figure>
-
-<h3 id="菜单栏"><a href="#菜单栏" class="headerlink" title="菜单栏"></a>菜单栏</h3><p>一级菜单：</p>
-<p>创建菜单条 JMenuBar</p>
-<p>创建菜单JMenu</p>
-<p>创建菜单项JMenuItem</p>
-<p>总结：菜单项依附菜单、菜单依附菜单条</p>
-<p>创建菜单栏</p>
-<p>创建菜单</p>
-<p>创建菜单项</p>
-<p>菜单添加一个菜单项</p>
-<p>菜单项添加菜单</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JMenuBar bar=<span class="keyword">new</span> <span class="title class_">JMenuBar</span>();</span><br><span class="line">JMenu menu=<span class="keyword">new</span> <span class="title class_">JMenu</span>(<span class="string">&quot;菜单1&quot;</span>);</span><br><span class="line">JMenuItem item1=<span class="keyword">new</span> <span class="title class_">JMenuItem</span>(<span class="string">&quot;二级菜单1&quot;</span>);</span><br><span class="line">JMenuItem item2=<span class="keyword">new</span> <span class="title class_">JMenuItem</span>(<span class="string">&quot;二级菜单2&quot;</span>);</span><br><span class="line">JMenuItem item3=<span class="keyword">new</span> <span class="title class_">JMenuItem</span>(<span class="string">&quot;二级菜单3&quot;</span>);</span><br><span class="line">menu.add(item1);</span><br><span class="line">menu.add(item2);</span><br><span class="line">menu.add(item3);</span><br><span class="line">bar.add(menu);</span><br><span class="line">jf.add(bar);</span><br></pre></td></tr></table></figure>
-
-<h3 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h3><p>类：JTextField</p>
-<p>构造函数</p>
-<p>new JTextField（）；</p>
-<p>new JTextField（String text）；       设置默认文字</p>
-<p>new JTextField（int fiel） 设置文本框长度</p>
-<p>new JTextField（String str，int b）      默认文字+文本框长度</p>
-<h3 id="密码框"><a href="#密码框" class="headerlink" title="密码框"></a>密码框</h3><p>类：JPasswordField</p>
-<p>构造函数</p>
-<p>new JPasswordField（）；</p>
-<p>new JPasswordField（String text）；     设置默认文字</p>
-<p>new JPasswordField（int fiel）   设置密码框长度</p>
-<p>new JPasswordField（String str，int b）     默认文字+密码框长度</p>
-<h3 id="文本域"><a href="#文本域" class="headerlink" title="文本域"></a>文本域</h3><p>类：JTextArea</p>
-<p>构造函数</p>
-<p>new JTextArea（）；</p>
-<p>new JTextArea（String text）；       设置默认文字</p>
-<p>new JTextArea（int fiel，int fiel）     设置文本框长度和宽度</p>
-<p>方法：</p>
-<p>setLineWrap（）；   设置文本框是否换行</p>
-<h2 id="常用布局"><a href="#常用布局" class="headerlink" title="常用布局"></a>常用布局</h2><h3 id="流式布局"><a href="#流式布局" class="headerlink" title="流式布局"></a>流式布局</h3><p>构造方法：</p>
-<p>FlowLayout（int aligment）;    设置对齐方式（默认居中）</p>
-<p>FlowLayout（int aligment，int horizGap，int vertGap）;      设置对齐方式+上下偏移</p>
-<p>通过setLayout设置布局方式</p>
-<p>例如：jf.setLayout（new FlowLayout（FlowLayout.LEFT））</p>
-<h3 id="网格式布局"><a href="#网格式布局" class="headerlink" title="网格式布局"></a>网格式布局</h3><p>构造方法：</p>
-<p>GridLayout（int row，int col）;      指定行数和列数</p>
-<p>GridLayout（int row，int col，int horizGap，int vertGap）;       设置行数列数+上下偏移</p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MySql从入门到删库跑路</title>
     <url>/2023/02/27/MySQL%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="MySQL笔记"><a href="#MySQL笔记" class="headerlink" title="MySQL笔记"></a>MySQL笔记</h1><h2 id="数据库的概念"><a href="#数据库的概念" class="headerlink" title="数据库的概念"></a>数据库的概念</h2><h3 id="什么是数据库"><a href="#什么是数据库" class="headerlink" title="什么是数据库"></a>什么是数据库</h3><p>​    数据库是用于存储和管理数据的仓库</p>
@@ -2278,98 +2278,6 @@
       </tags>
   </entry>
   <entry>
-    <title>设计模式之 “一人设计九人慌”</title>
-    <url>/2023/02/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%88%86%E7%B1%BB/</url>
-    <content><![CDATA[<h1 id="设计模式的分类"><a href="#设计模式的分类" class="headerlink" title="设计模式的分类"></a>设计模式的分类</h1><h2 id="根据目的分类"><a href="#根据目的分类" class="headerlink" title="根据目的分类"></a>根据目的分类</h2><h3 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h3><p>​        用于描述”怎样创建对象“，他的主要特点是将对象的创建与使用分离</p>
-<p>​        单例、原型、工厂方法、抽象工厂、建造者等物种创建型模式</p>
-<h3 id="结构型模式"><a href="#结构型模式" class="headerlink" title="结构型模式"></a>结构型模式</h3><p>​        用于描述如何将类或对象按某种布局组成更大的结构</p>
-<p>​        代理、适配器、桥接、装饰、外观、享元、组合等7种构造型模式</p>
-<h3 id="行为型模式"><a href="#行为型模式" class="headerlink" title="行为型模式"></a>行为型模式</h3><p>​        用于描述类或对象之间怎样相互协作共同完成单个对象无法单独完成的任务，以及怎样分配职责</p>
-<p>​        模板方法、策略、命令、职责链、状态、观察者、中介者、迭代器、访问者、备忘录、解释器等11种</p>
-<h2 id="根据作用分类"><a href="#根据作用分类" class="headerlink" title="根据作用分类"></a>根据作用分类</h2><p><strong>（1）类模式：</strong></p>
-<p>​          用于处理类与子类之间的继承关系，这些关系是静态的。</p>
-<p>​          GoF中的工厂方法、（类）适配器、模板方法、解释器属于该模式</p>
-<p><strong>（2）对象模式：</strong></p>
-<p>​           用于处理对象之间的组合或聚合关系，具动态性。除了上述四种模式，都是对象                                                                     </p>
-<h1 id="UML类图表示法"><a href="#UML类图表示法" class="headerlink" title="UML类图表示法"></a>UML类图表示法</h1><h2 id="类的表示方式"><a href="#类的表示方式" class="headerlink" title="类的表示方式"></a>类的表示方式</h2><p>​        在UML类图中，类使用包含类名、属性（field）和方法（method）且带有分割线的矩形表示，比如下面表示一个Employee类，它包含name、age和address这三个属性以及word方法</p>
-<table>
-<thead>
-<tr>
-<th>Employee</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-name：String   -age：int   -address：String</td>
-</tr>
-<tr>
-<td>+work（）：void</td>
-</tr>
-</tbody></table>
-<p>​        属性/方法名称前加的加号和减号表示这个属性/方法的可见性，UML图中表示可见性的符号有三种：</p>
-<p>​        +：表示public</p>
-<p>​        -：表示private</p>
-<p>​        #：表示protected</p>
-<h2 id="类与类之间的关系"><a href="#类与类之间的关系" class="headerlink" title="类与类之间的关系"></a>类与类之间的关系</h2><h3 id="关联关系"><a href="#关联关系" class="headerlink" title="关联关系"></a>关联关系</h3><h4 id="单向关联和双向关联"><a href="#单向关联和双向关联" class="headerlink" title="单向关联和双向关联"></a>单向关联和双向关联</h4><p>例如，一个学生选修一门特定的课程是学生类Student和课程类Course之间的一个关联，而一个教师教授一门课程是师资类Faculty和课程类Course之间的一个关联</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Course[] courses;</span><br><span class="line"></span><br><span class="line">          </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addCourse</span><span class="params">(Course s)</span> &#123;</span><br><span class="line">        </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Course</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Strudent[] students;</span><br><span class="line">    <span class="keyword">private</span> Faculty faculty;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addStudent</span><span class="params">(Student s)</span> &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setFaculty</span><span class="params">(Faculty faculty)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.faculty = faculty;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Faculty</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Course[] courses;</span><br><span class="line">           </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addCourse</span><span class="params">(Course s)</span> &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h4><p>聚合是强关联关系，是整体和部分的关系</p>
-<p>例如，一个公司有很多员工就是公司类Company和员工类Employee之间的一种聚合关系。被聚合对象和聚合对象有着各自的生命周期，即如果公司倒闭并不影响员工的存在</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Company</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Employee&gt; employees;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Employee</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;   </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h4><p>组合表示类之间的整体与部分之间的关系，但它是一种更为强烈的聚合关系</p>
-<p>整体对象可以控制部分对象的生命周期，一旦整体对象不存在，部分对象也将不复存在。部分对象不能脱离整体对象而单独存在，就像头和嘴的关系</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">head</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Mouth mouth=<span class="keyword">new</span> <span class="title class_">Mouth</span>();  </span><br><span class="line">       </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Mouth</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><p>在代码中，某个类的方法通过局部变量，方法的参数或者对静态方法的调用来访问另一类中的某些方法来完成一些职责</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Driver</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">driver</span><span class="params">(Car car)</span> &#123;</span><br><span class="line">        car.move();</span><br><span class="line">    &#125;	<span class="comment">//当调用driver方法时，必定会使用形参car类对象</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Car</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">move</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>在继承的关系中，“子类就是一个父类”。也就是说，子类可以被当做父类看待</p>
-<p>​       定义父类的格式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> class 父类名称&#123;</span><br><span class="line"></span><br><span class="line">  …</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
-
-<p>​       定义子类的格式</p>
-<p>​           </p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> class 子类名称 extends 父类名称&#123;</span><br><span class="line"></span><br><span class="line">              …</span><br><span class="line"></span><br><span class="line">           &#125;</span><br></pre></td></tr></table></figure>
-
-<p>​       <strong>注：子类在引用时可以找到父类中的方法和变量，但是父类就只能调用自己的</strong></p>
-<p>​       <strong>super****详解：</strong></p>
-<p>​           <strong>1. super<strong><strong>是Java</strong></strong>的关键字，他是直接父类对象的引用</strong></p>
-<p>​           *<em>2.<strong><strong>就像this</strong></strong>不能出现在static</em><em><strong>修饰的方法中一样，super</strong></em><em>也不能出现在static</em>*<strong>修饰的方法中</strong></p>
-<p>​           **3.***<em>如果子类定义里父类同名的属性，也会发生子类属性覆盖父类属性的情形。子类的方法直接访问该属性，都会访问到覆盖属性，无法访问父类被覆盖的属性—<strong><strong>通过super</strong></strong>访问父类被覆盖的属性</em>*</p>
-<p>​           *<em>4.<strong><strong>如果没有在子类中写super</strong></strong>，系统将会自动调用</em>*</p>
-<p>​           *<em>5.<strong><strong>一般把super</strong></strong>写到方法的最前面</em>*</p>
-<p>​       <strong>在继承中，当父类有构造方法时，子类一定会调用父类的构造方法</strong></p>
-<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>​    \1)    不能直接new抽象类对象，必须用一个子类来继承抽象父类</p>
-<p>​    \2)    子类必须覆盖重写抽象父类的所有的抽象方法</p>
-<p>​    重写和覆盖的实现：子类去掉抽象方法的abstract关键字，然后补上方法的大括号</p>
-<p>​    \3)    创建子类对象进行使用</p>
-<p>​    \4)    在抽象类中，不一定包含抽象对象，但是有抽象方法的类必须是抽象类</p>
-<h1 id="软件设计原则"><a href="#软件设计原则" class="headerlink" title="软件设计原则"></a>软件设计原则</h1><p>在软件开发中，为了提高软件系统的可维护性和可复用性，增加软件的可扩展性和灵活性，程序员要尽量根据六条原则来开发程序，从而提高软件开发效率、节约软件开发和维护成本</p>
-<h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h2><p>​    <strong>对扩展开放，对修改关闭。</strong>在程序需要进行扩展的时候，不能去修改原有的代码。实现一个热插拔的效果，简而言之，是为了是程序的扩展性好，易于维护和升级</p>
-<p>想要达到这样的效果，我们需要使用接口和抽象类。</p>
-<p>因为抽象类灵活性好，适应性广，只要抽象的合理，可以基本保证软件架构的稳定。而软件中容易变的细节可以从抽象派生来的实现类来进行扩展，当软件需要根据需求重新派生一个实现类来扩展就可以了</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">AbstractSkin</span> &#123;</span><br><span class="line"><span class="comment">//    输入法样式</span></span><br><span class="line">    <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Default</span> <span class="keyword">extends</span> <span class="title class_">AbstractSkin</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">display</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这是默认皮肤&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> <span class="keyword">extends</span> <span class="title class_">AbstractSkin</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">display</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这是用户自定义皮肤&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SougouInput</span> &#123;</span><br><span class="line"><span class="comment">//    创建抽象类对象</span></span><br><span class="line">    <span class="keyword">public</span> AbstractSkin skin;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSkin</span><span class="params">(AbstractSkin skin)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.skin = skin;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">skien</span><span class="params">(AbstractSkin skin)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.skin=skin;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">()</span>&#123;</span><br><span class="line">        skin.display();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">run</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"><span class="comment">//        1.创建搜狗输入法</span></span><br><span class="line">        SougouInput sgi=<span class="keyword">new</span> <span class="title class_">SougouInput</span>();</span><br><span class="line"><span class="comment">//        2.创建皮肤对象</span></span><br><span class="line">        Default def=<span class="keyword">new</span> <span class="title class_">Default</span>();</span><br><span class="line"><span class="comment">//        3.将皮肤传入输入法</span></span><br><span class="line">        sgi.setSkin(def);</span><br><span class="line"><span class="comment">//        4.展示皮肤</span></span><br><span class="line">        sgi.display();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="里氏原则"><a href="#里氏原则" class="headerlink" title="里氏原则"></a>里氏原则</h2><p>子类可以扩展父类的功能，但不能改变父类原有的功能。即子类继承父类时，除添加新增功能外尽量不要重写父类方法</p>
-<p>例子：正方形不是长方形</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">changfangxing</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> length;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> width;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getLength</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setLength</span><span class="params">(<span class="type">double</span> length)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.length = length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getWidth</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> width;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWidth</span><span class="params">(<span class="type">double</span> width)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.width = width;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">zhengfangxing</span> <span class="keyword">extends</span> <span class="title class_">changfangxing</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setLength</span><span class="params">(<span class="type">double</span> length)</span>&#123;</span><br><span class="line">        <span class="built_in">super</span>.setLength(length);</span><br><span class="line">        <span class="built_in">super</span>.setWidth(length);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWidth</span><span class="params">(<span class="type">double</span> width)</span>&#123;</span><br><span class="line">        <span class="built_in">super</span>.setWidth(width);</span><br><span class="line">        <span class="built_in">super</span>.setLength(width);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RectangleDome</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        changfangxing cfx=<span class="keyword">new</span> <span class="title class_">changfangxing</span>();</span><br><span class="line">        cfx.setWidth(<span class="number">10</span>);</span><br><span class="line">        cfx.setLength(<span class="number">20</span>);</span><br><span class="line"><span class="comment">//        通过resize方法进行扩展</span></span><br><span class="line">        resize(cfx);</span><br><span class="line">        print(cfx);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;=============&quot;</span>);</span><br><span class="line"></span><br><span class="line">        zhengfangxing zfx=<span class="keyword">new</span> <span class="title class_">zhengfangxing</span>();</span><br><span class="line">        zfx.setLength(<span class="number">10</span>);</span><br><span class="line">        resize(zfx);		<span class="comment">//会报错</span></span><br><span class="line">        print(zfx);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">resize</span><span class="params">(changfangxing changfangxing)</span>&#123;			<span class="comment">//可以通过多态让正方形方法使用</span></span><br><span class="line">        <span class="keyword">while</span> (changfangxing.getWidth()&lt;=changfangxing.getLength())&#123;</span><br><span class="line">            changfangxing.setWidth(changfangxing.getLength()+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">(changfangxing changfangxing)</span>&#123;</span><br><span class="line">        System.out.println(changfangxing.getLength());</span><br><span class="line">        System.out.println(changfangxing.getWidth());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>更新后：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Quadrilateral</span> &#123;</span><br><span class="line">    <span class="comment">//获取长</span></span><br><span class="line">    <span class="type">double</span> <span class="title function_">getlength</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">//获取宽</span></span><br><span class="line">    <span class="type">double</span> <span class="title function_">getwidth</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">zhengfangxing</span> <span class="keyword">implements</span> <span class="title class_">Quadrilateral</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> side;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getSide</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> side;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSide</span><span class="params">(<span class="type">double</span> side)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.side = side;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getlength</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getwidth</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">changfangxing</span> <span class="keyword">implements</span> <span class="title class_">Quadrilateral</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> width;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWidth</span><span class="params">(<span class="type">double</span> width)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.width = width;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setLength</span><span class="params">(<span class="type">double</span> length)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.length = length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getlength</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getwidth</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> width;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RectangleDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        changfangxing changfangxing=<span class="keyword">new</span> <span class="title class_">changfangxing</span>();</span><br><span class="line">        changfangxing.setLength(<span class="number">20</span>);</span><br><span class="line">        changfangxing.setWidth(<span class="number">10</span>);</span><br><span class="line">        resize(changfangxing);</span><br><span class="line">        print(changfangxing);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//    扩宽方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">resize</span><span class="params">(changfangxing changfangxing)</span>&#123;			<span class="comment">//因为没有继承关系所有正方形无法使用完美解决卡死问题</span></span><br><span class="line">        <span class="keyword">while</span> (changfangxing.getwidth()&lt;=changfangxing.getlength())&#123;</span><br><span class="line">            changfangxing.setWidth(changfangxing.getwidth()+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">(Quadrilateral quadrilateral)</span>&#123;</span><br><span class="line">        System.out.println(quadrilateral.getlength());</span><br><span class="line">        System.out.println(quadrilateral.getwidth());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="倒转依赖原则"><a href="#倒转依赖原则" class="headerlink" title="倒转依赖原则"></a>倒转依赖原则</h2><p>​    要对抽象进行编程不要对实现进行编程，这样就降低了客户与实现模块间的耦合。</p>
-<p>​    例如：组装一台主机，要求有CPU、内存条、硬盘。而CPU有英特尔、AMD等，硬盘可以有希捷、西数，内存条可以选择金士顿和海盗船</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">XijieDisk</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">(String data)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;使用希捷硬盘存储数据为&quot;</span>+data);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">get</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;使用希捷硬盘取数据&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;数据&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InterCPU</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;使用因特尔处理器&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">KingSton</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;使用金士顿内存条&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Computer</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> XijieDisk xijie;</span><br><span class="line">    <span class="keyword">private</span> InterCPU inter;</span><br><span class="line">    <span class="keyword">private</span> KingSton kingSton;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> XijieDisk <span class="title function_">getXijie</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> xijie;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setXijie</span><span class="params">(XijieDisk xijie)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.xijie = xijie;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> InterCPU <span class="title function_">getInter</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> inter;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setInter</span><span class="params">(InterCPU inter)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.inter = inter;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> KingSton <span class="title function_">getKingSton</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> kingSton;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setKingSton</span><span class="params">(KingSton kingSton)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.kingSton = kingSton;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;运行计算机&quot;</span>);</span><br><span class="line">        String data=xijie.get();</span><br><span class="line">        System.out.println(<span class="string">&quot;从硬盘上获取的数据是&quot;</span>+data);</span><br><span class="line">        inter.run();</span><br><span class="line">        kingSton.save();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">run</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        XijieDisk xijie=<span class="keyword">new</span> <span class="title class_">XijieDisk</span>();</span><br><span class="line">        InterCPU inter=<span class="keyword">new</span> <span class="title class_">InterCPU</span>();</span><br><span class="line">        KingSton kingSton=<span class="keyword">new</span> <span class="title class_">KingSton</span>();</span><br><span class="line"></span><br><span class="line">        Computer c=<span class="keyword">new</span> <span class="title class_">Computer</span>();</span><br><span class="line">        c.setInter(inter);</span><br><span class="line">        c.setXijie(xijie);</span><br><span class="line">        c.setKingSton(kingSton);</span><br><span class="line">        c.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue框架</title>
     <url>/2023/02/27/Vue%E6%A1%86%E6%9E%B6/</url>
     <content><![CDATA[<h1 id="Vue框架"><a href="#Vue框架" class="headerlink" title="Vue框架"></a>Vue框架</h1><h2 id="Vue基础"><a href="#Vue基础" class="headerlink" title="Vue基础"></a>Vue基础</h2><h3 id="Vue简介"><a href="#Vue简介" class="headerlink" title="Vue简介"></a>Vue简介</h3><p>​                是一款用于构建用户界面的<strong>渐进式框架</strong></p>
@@ -2675,6 +2583,98 @@
 ]]></content>
       <categories>
         <category>前端</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设计模式之 “一人设计九人慌”</title>
+    <url>/2023/02/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%88%86%E7%B1%BB/</url>
+    <content><![CDATA[<h1 id="设计模式的分类"><a href="#设计模式的分类" class="headerlink" title="设计模式的分类"></a>设计模式的分类</h1><h2 id="根据目的分类"><a href="#根据目的分类" class="headerlink" title="根据目的分类"></a>根据目的分类</h2><h3 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h3><p>​        用于描述”怎样创建对象“，他的主要特点是将对象的创建与使用分离</p>
+<p>​        单例、原型、工厂方法、抽象工厂、建造者等物种创建型模式</p>
+<h3 id="结构型模式"><a href="#结构型模式" class="headerlink" title="结构型模式"></a>结构型模式</h3><p>​        用于描述如何将类或对象按某种布局组成更大的结构</p>
+<p>​        代理、适配器、桥接、装饰、外观、享元、组合等7种构造型模式</p>
+<h3 id="行为型模式"><a href="#行为型模式" class="headerlink" title="行为型模式"></a>行为型模式</h3><p>​        用于描述类或对象之间怎样相互协作共同完成单个对象无法单独完成的任务，以及怎样分配职责</p>
+<p>​        模板方法、策略、命令、职责链、状态、观察者、中介者、迭代器、访问者、备忘录、解释器等11种</p>
+<h2 id="根据作用分类"><a href="#根据作用分类" class="headerlink" title="根据作用分类"></a>根据作用分类</h2><p><strong>（1）类模式：</strong></p>
+<p>​          用于处理类与子类之间的继承关系，这些关系是静态的。</p>
+<p>​          GoF中的工厂方法、（类）适配器、模板方法、解释器属于该模式</p>
+<p><strong>（2）对象模式：</strong></p>
+<p>​           用于处理对象之间的组合或聚合关系，具动态性。除了上述四种模式，都是对象                                                                     </p>
+<h1 id="UML类图表示法"><a href="#UML类图表示法" class="headerlink" title="UML类图表示法"></a>UML类图表示法</h1><h2 id="类的表示方式"><a href="#类的表示方式" class="headerlink" title="类的表示方式"></a>类的表示方式</h2><p>​        在UML类图中，类使用包含类名、属性（field）和方法（method）且带有分割线的矩形表示，比如下面表示一个Employee类，它包含name、age和address这三个属性以及word方法</p>
+<table>
+<thead>
+<tr>
+<th>Employee</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-name：String   -age：int   -address：String</td>
+</tr>
+<tr>
+<td>+work（）：void</td>
+</tr>
+</tbody></table>
+<p>​        属性/方法名称前加的加号和减号表示这个属性/方法的可见性，UML图中表示可见性的符号有三种：</p>
+<p>​        +：表示public</p>
+<p>​        -：表示private</p>
+<p>​        #：表示protected</p>
+<h2 id="类与类之间的关系"><a href="#类与类之间的关系" class="headerlink" title="类与类之间的关系"></a>类与类之间的关系</h2><h3 id="关联关系"><a href="#关联关系" class="headerlink" title="关联关系"></a>关联关系</h3><h4 id="单向关联和双向关联"><a href="#单向关联和双向关联" class="headerlink" title="单向关联和双向关联"></a>单向关联和双向关联</h4><p>例如，一个学生选修一门特定的课程是学生类Student和课程类Course之间的一个关联，而一个教师教授一门课程是师资类Faculty和课程类Course之间的一个关联</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Course[] courses;</span><br><span class="line"></span><br><span class="line">          </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addCourse</span><span class="params">(Course s)</span> &#123;</span><br><span class="line">        </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Course</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Strudent[] students;</span><br><span class="line">    <span class="keyword">private</span> Faculty faculty;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addStudent</span><span class="params">(Student s)</span> &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setFaculty</span><span class="params">(Faculty faculty)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.faculty = faculty;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Faculty</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Course[] courses;</span><br><span class="line">           </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addCourse</span><span class="params">(Course s)</span> &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h4><p>聚合是强关联关系，是整体和部分的关系</p>
+<p>例如，一个公司有很多员工就是公司类Company和员工类Employee之间的一种聚合关系。被聚合对象和聚合对象有着各自的生命周期，即如果公司倒闭并不影响员工的存在</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Company</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Employee&gt; employees;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Employee</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;   </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h4><p>组合表示类之间的整体与部分之间的关系，但它是一种更为强烈的聚合关系</p>
+<p>整体对象可以控制部分对象的生命周期，一旦整体对象不存在，部分对象也将不复存在。部分对象不能脱离整体对象而单独存在，就像头和嘴的关系</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">head</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Mouth mouth=<span class="keyword">new</span> <span class="title class_">Mouth</span>();  </span><br><span class="line">       </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Mouth</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><p>在代码中，某个类的方法通过局部变量，方法的参数或者对静态方法的调用来访问另一类中的某些方法来完成一些职责</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Driver</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">driver</span><span class="params">(Car car)</span> &#123;</span><br><span class="line">        car.move();</span><br><span class="line">    &#125;	<span class="comment">//当调用driver方法时，必定会使用形参car类对象</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Car</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">move</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>在继承的关系中，“子类就是一个父类”。也就是说，子类可以被当做父类看待</p>
+<p>​       定义父类的格式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> class 父类名称&#123;</span><br><span class="line"></span><br><span class="line">  …</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<p>​       定义子类的格式</p>
+<p>​           </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> class 子类名称 extends 父类名称&#123;</span><br><span class="line"></span><br><span class="line">              …</span><br><span class="line"></span><br><span class="line">           &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​       <strong>注：子类在引用时可以找到父类中的方法和变量，但是父类就只能调用自己的</strong></p>
+<p>​       <strong>super****详解：</strong></p>
+<p>​           <strong>1. super<strong><strong>是Java</strong></strong>的关键字，他是直接父类对象的引用</strong></p>
+<p>​           *<em>2.<strong><strong>就像this</strong></strong>不能出现在static</em><em><strong>修饰的方法中一样，super</strong></em><em>也不能出现在static</em>*<strong>修饰的方法中</strong></p>
+<p>​           **3.***<em>如果子类定义里父类同名的属性，也会发生子类属性覆盖父类属性的情形。子类的方法直接访问该属性，都会访问到覆盖属性，无法访问父类被覆盖的属性—<strong><strong>通过super</strong></strong>访问父类被覆盖的属性</em>*</p>
+<p>​           *<em>4.<strong><strong>如果没有在子类中写super</strong></strong>，系统将会自动调用</em>*</p>
+<p>​           *<em>5.<strong><strong>一般把super</strong></strong>写到方法的最前面</em>*</p>
+<p>​       <strong>在继承中，当父类有构造方法时，子类一定会调用父类的构造方法</strong></p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>​    \1)    不能直接new抽象类对象，必须用一个子类来继承抽象父类</p>
+<p>​    \2)    子类必须覆盖重写抽象父类的所有的抽象方法</p>
+<p>​    重写和覆盖的实现：子类去掉抽象方法的abstract关键字，然后补上方法的大括号</p>
+<p>​    \3)    创建子类对象进行使用</p>
+<p>​    \4)    在抽象类中，不一定包含抽象对象，但是有抽象方法的类必须是抽象类</p>
+<h1 id="软件设计原则"><a href="#软件设计原则" class="headerlink" title="软件设计原则"></a>软件设计原则</h1><p>在软件开发中，为了提高软件系统的可维护性和可复用性，增加软件的可扩展性和灵活性，程序员要尽量根据六条原则来开发程序，从而提高软件开发效率、节约软件开发和维护成本</p>
+<h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h2><p>​    <strong>对扩展开放，对修改关闭。</strong>在程序需要进行扩展的时候，不能去修改原有的代码。实现一个热插拔的效果，简而言之，是为了是程序的扩展性好，易于维护和升级</p>
+<p>想要达到这样的效果，我们需要使用接口和抽象类。</p>
+<p>因为抽象类灵活性好，适应性广，只要抽象的合理，可以基本保证软件架构的稳定。而软件中容易变的细节可以从抽象派生来的实现类来进行扩展，当软件需要根据需求重新派生一个实现类来扩展就可以了</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">AbstractSkin</span> &#123;</span><br><span class="line"><span class="comment">//    输入法样式</span></span><br><span class="line">    <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Default</span> <span class="keyword">extends</span> <span class="title class_">AbstractSkin</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">display</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这是默认皮肤&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> <span class="keyword">extends</span> <span class="title class_">AbstractSkin</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">display</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这是用户自定义皮肤&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SougouInput</span> &#123;</span><br><span class="line"><span class="comment">//    创建抽象类对象</span></span><br><span class="line">    <span class="keyword">public</span> AbstractSkin skin;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSkin</span><span class="params">(AbstractSkin skin)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.skin = skin;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">skien</span><span class="params">(AbstractSkin skin)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.skin=skin;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">()</span>&#123;</span><br><span class="line">        skin.display();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">run</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"><span class="comment">//        1.创建搜狗输入法</span></span><br><span class="line">        SougouInput sgi=<span class="keyword">new</span> <span class="title class_">SougouInput</span>();</span><br><span class="line"><span class="comment">//        2.创建皮肤对象</span></span><br><span class="line">        Default def=<span class="keyword">new</span> <span class="title class_">Default</span>();</span><br><span class="line"><span class="comment">//        3.将皮肤传入输入法</span></span><br><span class="line">        sgi.setSkin(def);</span><br><span class="line"><span class="comment">//        4.展示皮肤</span></span><br><span class="line">        sgi.display();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="里氏原则"><a href="#里氏原则" class="headerlink" title="里氏原则"></a>里氏原则</h2><p>子类可以扩展父类的功能，但不能改变父类原有的功能。即子类继承父类时，除添加新增功能外尽量不要重写父类方法</p>
+<p>例子：正方形不是长方形</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">changfangxing</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> length;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> width;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getLength</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setLength</span><span class="params">(<span class="type">double</span> length)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.length = length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getWidth</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> width;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWidth</span><span class="params">(<span class="type">double</span> width)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.width = width;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">zhengfangxing</span> <span class="keyword">extends</span> <span class="title class_">changfangxing</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setLength</span><span class="params">(<span class="type">double</span> length)</span>&#123;</span><br><span class="line">        <span class="built_in">super</span>.setLength(length);</span><br><span class="line">        <span class="built_in">super</span>.setWidth(length);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWidth</span><span class="params">(<span class="type">double</span> width)</span>&#123;</span><br><span class="line">        <span class="built_in">super</span>.setWidth(width);</span><br><span class="line">        <span class="built_in">super</span>.setLength(width);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RectangleDome</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        changfangxing cfx=<span class="keyword">new</span> <span class="title class_">changfangxing</span>();</span><br><span class="line">        cfx.setWidth(<span class="number">10</span>);</span><br><span class="line">        cfx.setLength(<span class="number">20</span>);</span><br><span class="line"><span class="comment">//        通过resize方法进行扩展</span></span><br><span class="line">        resize(cfx);</span><br><span class="line">        print(cfx);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;=============&quot;</span>);</span><br><span class="line"></span><br><span class="line">        zhengfangxing zfx=<span class="keyword">new</span> <span class="title class_">zhengfangxing</span>();</span><br><span class="line">        zfx.setLength(<span class="number">10</span>);</span><br><span class="line">        resize(zfx);		<span class="comment">//会报错</span></span><br><span class="line">        print(zfx);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">resize</span><span class="params">(changfangxing changfangxing)</span>&#123;			<span class="comment">//可以通过多态让正方形方法使用</span></span><br><span class="line">        <span class="keyword">while</span> (changfangxing.getWidth()&lt;=changfangxing.getLength())&#123;</span><br><span class="line">            changfangxing.setWidth(changfangxing.getLength()+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">(changfangxing changfangxing)</span>&#123;</span><br><span class="line">        System.out.println(changfangxing.getLength());</span><br><span class="line">        System.out.println(changfangxing.getWidth());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>更新后：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Quadrilateral</span> &#123;</span><br><span class="line">    <span class="comment">//获取长</span></span><br><span class="line">    <span class="type">double</span> <span class="title function_">getlength</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">//获取宽</span></span><br><span class="line">    <span class="type">double</span> <span class="title function_">getwidth</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">zhengfangxing</span> <span class="keyword">implements</span> <span class="title class_">Quadrilateral</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> side;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getSide</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> side;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSide</span><span class="params">(<span class="type">double</span> side)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.side = side;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getlength</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getwidth</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">changfangxing</span> <span class="keyword">implements</span> <span class="title class_">Quadrilateral</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> width;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWidth</span><span class="params">(<span class="type">double</span> width)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.width = width;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setLength</span><span class="params">(<span class="type">double</span> length)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.length = length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getlength</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getwidth</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> width;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RectangleDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        changfangxing changfangxing=<span class="keyword">new</span> <span class="title class_">changfangxing</span>();</span><br><span class="line">        changfangxing.setLength(<span class="number">20</span>);</span><br><span class="line">        changfangxing.setWidth(<span class="number">10</span>);</span><br><span class="line">        resize(changfangxing);</span><br><span class="line">        print(changfangxing);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//    扩宽方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">resize</span><span class="params">(changfangxing changfangxing)</span>&#123;			<span class="comment">//因为没有继承关系所有正方形无法使用完美解决卡死问题</span></span><br><span class="line">        <span class="keyword">while</span> (changfangxing.getwidth()&lt;=changfangxing.getlength())&#123;</span><br><span class="line">            changfangxing.setWidth(changfangxing.getwidth()+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">(Quadrilateral quadrilateral)</span>&#123;</span><br><span class="line">        System.out.println(quadrilateral.getlength());</span><br><span class="line">        System.out.println(quadrilateral.getwidth());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="倒转依赖原则"><a href="#倒转依赖原则" class="headerlink" title="倒转依赖原则"></a>倒转依赖原则</h2><p>​    要对抽象进行编程不要对实现进行编程，这样就降低了客户与实现模块间的耦合。</p>
+<p>​    例如：组装一台主机，要求有CPU、内存条、硬盘。而CPU有英特尔、AMD等，硬盘可以有希捷、西数，内存条可以选择金士顿和海盗船</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">XijieDisk</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">(String data)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;使用希捷硬盘存储数据为&quot;</span>+data);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">get</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;使用希捷硬盘取数据&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;数据&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InterCPU</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;使用因特尔处理器&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">KingSton</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;使用金士顿内存条&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Computer</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> XijieDisk xijie;</span><br><span class="line">    <span class="keyword">private</span> InterCPU inter;</span><br><span class="line">    <span class="keyword">private</span> KingSton kingSton;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> XijieDisk <span class="title function_">getXijie</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> xijie;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setXijie</span><span class="params">(XijieDisk xijie)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.xijie = xijie;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> InterCPU <span class="title function_">getInter</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> inter;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setInter</span><span class="params">(InterCPU inter)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.inter = inter;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> KingSton <span class="title function_">getKingSton</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> kingSton;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setKingSton</span><span class="params">(KingSton kingSton)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.kingSton = kingSton;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;运行计算机&quot;</span>);</span><br><span class="line">        String data=xijie.get();</span><br><span class="line">        System.out.println(<span class="string">&quot;从硬盘上获取的数据是&quot;</span>+data);</span><br><span class="line">        inter.run();</span><br><span class="line">        kingSton.save();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">run</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        XijieDisk xijie=<span class="keyword">new</span> <span class="title class_">XijieDisk</span>();</span><br><span class="line">        InterCPU inter=<span class="keyword">new</span> <span class="title class_">InterCPU</span>();</span><br><span class="line">        KingSton kingSton=<span class="keyword">new</span> <span class="title class_">KingSton</span>();</span><br><span class="line"></span><br><span class="line">        Computer c=<span class="keyword">new</span> <span class="title class_">Computer</span>();</span><br><span class="line">        c.setInter(inter);</span><br><span class="line">        c.setXijie(xijie);</span><br><span class="line">        c.setKingSton(kingSton);</span><br><span class="line">        c.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>设计模式</category>
       </categories>
       <tags>
         <tag>技术</tag>
