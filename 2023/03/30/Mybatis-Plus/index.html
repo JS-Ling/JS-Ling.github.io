@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="Mybatis-PlusMybatis-Plus介绍mybatis-plus是一个Mybatis的增强工具，在Mybatis的基础上只做增强不做改变，为简化开发提高效率而生。 官网：https:&#x2F;&#x2F;baomidou.com&#x2F; 基础增删改查 mybatis-plus作为一个简化mybatis开发的增强工具，他到底增强到哪了？ 首先我们之前在dao层中需要书写大量的sql语句来执行增删改查操作。但是用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis-Plus">
+<meta property="og:url" content="https://ljs-yym.github.io/2023/03/30/Mybatis-Plus/index.html">
+<meta property="og:site_name" content="RogevnBlog">
+<meta property="og:description" content="Mybatis-PlusMybatis-Plus介绍mybatis-plus是一个Mybatis的增强工具，在Mybatis的基础上只做增强不做改变，为简化开发提高效率而生。 官网：https:&#x2F;&#x2F;baomidou.com&#x2F; 基础增删改查 mybatis-plus作为一个简化mybatis开发的增强工具，他到底增强到哪了？ 首先我们之前在dao层中需要书写大量的sql语句来执行增删改查操作。但是用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ljs-yym.github.io/img/cover/mybatisplus.png">
+<meta property="article:published_time" content="2023-03-30T15:20:32.684Z">
+<meta property="article:modified_time" content="2023-06-12T11:38:00.815Z">
+<meta property="article:author" content="Rogers">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ljs-yym.github.io/img/cover/mybatisplus.png">
+
+    <meta name="keywords" content="hexo,node,博客">
+
+
+<title >Mybatis-Plus</title>
+
+<!-- Favicon -->
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+<link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css">
+
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"ljs-yym.github.io","author":"Rogers","root":"/","typed_text":["Web Developer","Backend Programmer","Full Stack Developer！"],"theme_version":"2.0.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo.png","icon16":"/img/logo.png","icon32":"/img/logo.png","dark_logo":"/img/dark_logo.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"creative_commons":{"license":"by-nc-sa","language":"deed.zh"},"search":{"enable":true,"type":"local","path":"search.xml","field":"post","content":true,"format":"html"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-06-12 19:38:00"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.2" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+     
+
+    
+
+    
+ 
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" class=" trm-light-icon" src="/img/logo.png"> <img alt="logo" class=" trm-dark-icon" src="/img/dark_logo.png">
+    
+    
+        <div class="trm-logo-text">
+            Rogevn<span>Blog</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    长生风月的博客
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    日志
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友情链接
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/picture/" target="">
+                    好东西
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/picture/" target="">
+                            图片
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/technology/" target="">
+                            黑科技
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+    
+    <div id="trm-search-btn" class="trm-search-btn">
+        <i class="iconfont fas fa-search"></i>
+    </div>
+     
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            Mybatis-Plus
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/R-C.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        长生风月
+    </h5>
+    
+        <div class="trm-label">
+            I&#39;m a
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="tencent://message/?uin=3232008148&Site=&Menu=yes" title="QQ" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="/null" title="WeChat" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-weixin"></i>
+        </a>
+    
+        <a href="/null" title="twitter" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-twitter"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                河北省保定市
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                21
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                星座:
+            </div>
+            <div class="trm-label trm-label-light">
+                处女座
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                爱好:
+            </div>
+            <div class="trm-label trm-label-light">
+                足球、音乐、魔方、代码
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:3232008148@qq.com" class="trm-btn">
+            Contact Me
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#Mybatis-Plus"  data-scroll-to="#Mybatis-Plus"><span class="toc-number">1.</span> <span class="toc-text">Mybatis-Plus</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Mybatis-Plus介绍"  data-scroll-to="#Mybatis-Plus介绍"><span class="toc-number">1.1.</span> <span class="toc-text">Mybatis-Plus介绍</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#基础增删改查"  data-scroll-to="#基础增删改查"><span class="toc-number">1.2.</span> <span class="toc-text">基础增删改查</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#分页功能实现"  data-scroll-to="#分页功能实现"><span class="toc-number">1.3.</span> <span class="toc-text">分页功能实现</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#按条件查询"  data-scroll-to="#按条件查询"><span class="toc-number">1.4.</span> <span class="toc-text">按条件查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#解决用户设置数据为空的问题"  data-scroll-to="#解决用户设置数据为空的问题"><span class="toc-number">1.4.1.</span> <span class="toc-text">解决用户设置数据为空的问题</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#DQL编程控制"  data-scroll-to="#DQL编程控制"><span class="toc-number">1.4.2.</span> <span class="toc-text">DQL编程控制</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#登录注册验证"  data-scroll-to="#登录注册验证"><span class="toc-number">1.4.3.</span> <span class="toc-text">登录注册验证</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#模糊查询"  data-scroll-to="#模糊查询"><span class="toc-number">1.4.4.</span> <span class="toc-text">模糊查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#映射匹配兼容"  data-scroll-to="#映射匹配兼容"><span class="toc-number">1.5.</span> <span class="toc-text">映射匹配兼容</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#ID生成策略控制"  data-scroll-to="#ID生成策略控制"><span class="toc-number">1.6.</span> <span class="toc-text">ID生成策略控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#为所有pojo设置id生成策略"  data-scroll-to="#为所有pojo设置id生成策略"><span class="toc-number">1.6.1.</span> <span class="toc-text">为所有pojo设置id生成策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#公共字段自动填充"  data-scroll-to="#公共字段自动填充"><span class="toc-number">1.7.</span> <span class="toc-text">公共字段自动填充</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#多数据操作"  data-scroll-to="#多数据操作"><span class="toc-number">1.8.</span> <span class="toc-text">多数据操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#删除多个"  data-scroll-to="#删除多个"><span class="toc-number">1.8.1.</span> <span class="toc-text">删除多个</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#查询多个"  data-scroll-to="#查询多个"><span class="toc-number">1.8.2.</span> <span class="toc-text">查询多个</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#逻辑删除"  data-scroll-to="#逻辑删除"><span class="toc-number">1.9.</span> <span class="toc-text">逻辑删除</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#乐观锁"  data-scroll-to="#乐观锁"><span class="toc-number">1.10.</span> <span class="toc-text">乐观锁</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#乐观锁和悲观锁"  data-scroll-to="#乐观锁和悲观锁"><span class="toc-number">1.11.</span> <span class="toc-text">乐观锁和悲观锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#乐观锁的概念："  data-scroll-to="#乐观锁的概念："><span class="toc-number">1.11.1.</span> <span class="toc-text">乐观锁的概念：</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#悲观锁的概念："  data-scroll-to="#悲观锁的概念："><span class="toc-number">1.11.2.</span> <span class="toc-text">悲观锁的概念：</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#快速代码生成器"  data-scroll-to="#快速代码生成器"><span class="toc-number">1.12.</span> <span class="toc-text">快速代码生成器</span></a></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            03/30
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            23:20
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Rogers
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="Mybatis-Plus"><a href="#Mybatis-Plus" class="headerlink" title="Mybatis-Plus"></a>Mybatis-Plus</h1><h2 id="Mybatis-Plus介绍"><a href="#Mybatis-Plus介绍" class="headerlink" title="Mybatis-Plus介绍"></a>Mybatis-Plus介绍</h2><p>mybatis-plus是一个Mybatis的增强工具，在Mybatis的基础上只做增强不做改变，为简化开发提高效率而生。</p>
+<p>官网：<a target="_blank" rel="noopener" href="https://baomidou.com/">https://baomidou.com/</a></p>
+<h2 id="基础增删改查"><a href="#基础增删改查" class="headerlink" title="基础增删改查"></a>基础增删改查</h2><blockquote>
+<p>mybatis-plus作为一个简化mybatis开发的增强工具，他到底增强到哪了？</p>
+<p>首先我们之前在dao层中需要书写大量的sql语句来执行增删改查操作。但是用mybatis-plus就完全不必我们只需要继承一个*BaseMapper&lt;？&gt;*接口其中问号是pojo类对象</p>
+</blockquote>
+<p>现在我们的dao层可以这样写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserDao</span> <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;User&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>pojo类User</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> String tel;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试类：增删改查操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Mybatisplus01QuickstartApplicationTests</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDao userDao;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">testSave</span><span class="params">()</span>&#123;</span><br><span class="line">        User user=<span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">        user.setName(<span class="string">&quot;黑马程序员&quot;</span>);</span><br><span class="line">        user.setPassword(<span class="string">&quot;510609&quot;</span>);</span><br><span class="line">        user.setAge(<span class="number">12</span>);</span><br><span class="line">        user.setTel(<span class="string">&quot;4651651&quot;</span>);</span><br><span class="line">        userDao.insert(user);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">testDelete</span><span class="params">()</span>&#123;</span><br><span class="line">        userDao.deleteById(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">testUpdate</span><span class="params">()</span>&#123;</span><br><span class="line">        User user=<span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">        user.setId(<span class="number">2</span>);</span><br><span class="line">        user.setName(<span class="string">&quot;蔡徐坤&quot;</span>);</span><br><span class="line">        user.setPassword(<span class="string">&quot;5495151&quot;</span>);</span><br><span class="line">        user.setAge(<span class="number">23</span>);</span><br><span class="line">        user.setTel(<span class="string">&quot;165165165&quot;</span>);</span><br><span class="line">        userDao.updateById(user);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">testById</span><span class="params">()</span>&#123;</span><br><span class="line">        User user=userDao.selectById(<span class="string">&quot;2&quot;</span>);</span><br><span class="line">        System.out.println(user);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">testGetAll</span><span class="params">()</span> &#123;</span><br><span class="line">        List&lt;User&gt; users=userDao.selectList(<span class="literal">null</span>);</span><br><span class="line">        System.out.println(users);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/Mybatis-plus/image-20230326153619922.png" alt="image-20230326153619922" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h2 id="分页功能实现"><a href="#分页功能实现" class="headerlink" title="分页功能实现"></a>分页功能实现</h2><ol>
+<li><p>设置分页拦截器作为Spring管理的bean</p>
+<p>MybatisPlusConfig</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MybatisPlusConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> MybatisPlusInterceptor <span class="title function_">mybatisPlusInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">        MybatisPlusInterceptor mybatisPlusInterceptor=<span class="keyword">new</span> <span class="title class_">MybatisPlusInterceptor</span>();</span><br><span class="line">        mybatisPlusInterceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">PaginationInnerInterceptor</span>());</span><br><span class="line">        <span class="keyword">return</span> mybatisPlusInterceptor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试类中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">testGetByPage</span><span class="params">()</span>&#123;</span><br><span class="line">    IPage page=<span class="keyword">new</span> <span class="title class_">Page</span>(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">    userDao.selectPage(page,<span class="literal">null</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;当前页码值：&quot;</span>+page.getCurrent());</span><br><span class="line">    System.out.println(<span class="string">&quot;每页显示数：&quot;</span>+page.getSize());</span><br><span class="line">    System.out.println(<span class="string">&quot;一共多少页：&quot;</span>+page.getPages());</span><br><span class="line">    System.out.println(<span class="string">&quot;一共多少条数据：&quot;</span>+page.getTotal());</span><br><span class="line">    System.out.println(<span class="string">&quot;数据：&quot;</span>+page.getRecords());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="按条件查询"><a href="#按条件查询" class="headerlink" title="按条件查询"></a>按条件查询</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明接口LambdaQueryWrapper</span></span><br><span class="line">LambdaQueryWrapper&lt;User&gt; lqw=<span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;User&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">//采用流式编程设置条件</span></span><br><span class="line"><span class="comment">//查询年龄大于23或者小于20的</span></span><br><span class="line">lqw.gt(User::getAge,<span class="number">23</span>).or().lt(User::getAge,<span class="number">20</span>);</span><br><span class="line">List&lt;User&gt; userlist=userDao.selectList(lqw);</span><br><span class="line"></span><br><span class="line"><span class="comment">//查询年龄在23到20中间的</span></span><br><span class="line">lqw.between(User::getAge,<span class="number">20</span>,<span class="number">23</span>);</span><br><span class="line">List&lt;User&gt; userlist=userDao.selectList(lqw);</span><br><span class="line">System.out.println(userlist);</span><br></pre></td></tr></table></figure>
+
+<h3 id="解决用户设置数据为空的问题"><a href="#解决用户设置数据为空的问题" class="headerlink" title="解决用户设置数据为空的问题"></a>解决用户设置数据为空的问题</h3><p>问题概述：在用户选择时，有可能选择多少多少以下的或者多少多少以上的，则条件查询中的另外一个查询条件就不需要</p>
+<p>要想实现就要先创建一个模型类user2用来规定最低数量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User2</span> <span class="keyword">extends</span> <span class="title class_">User</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer age2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在测试类中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">User2 user2=<span class="keyword">new</span> <span class="title class_">User2</span>();</span><br><span class="line">user2.setAge(<span class="number">32</span>);</span><br><span class="line">user2.setAge2(<span class="number">22</span>);</span><br><span class="line"></span><br><span class="line">LambdaQueryWrapper&lt;User&gt; lqw=<span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;User&gt;();</span><br><span class="line"><span class="comment">//第一个参数是判断是否执行</span></span><br><span class="line">lqw.lt(<span class="literal">null</span> != user2.getAge2(), User::getAge,<span class="number">23</span>).gt(User::getAge,<span class="number">20</span>);</span><br><span class="line">List&lt;User&gt; userlist=userDao.selectList(lqw);</span><br><span class="line">System.out.println(userlist);</span><br></pre></td></tr></table></figure>
+
+<h3 id="DQL编程控制"><a href="#DQL编程控制" class="headerlink" title="DQL编程控制"></a>DQL编程控制</h3><h4 id="查询结果中包含pojo类中的属性"><a href="#查询结果中包含pojo类中的属性" class="headerlink" title="查询结果中包含pojo类中的属性"></a>查询结果中包含pojo类中的属性</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LambdaQueryWrapper&lt;User&gt; lqw=<span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;User&gt;();</span><br><span class="line">lqw.select(User::getId,User::getName,User::getAge);</span><br><span class="line">List&lt;Map&lt;String,Object&gt;&gt; userlist=userDao.selectMaps(lqw);</span><br><span class="line">System.out.println(userlist);</span><br></pre></td></tr></table></figure>
+
+<p>查询结果：</p>
+<p>[{name=蔡徐坤, id=0, age=12}, {name=陈立农, id=1, age=20}, {name=范丞丞, id=2, age=23}, {name=黄明昊, id=3, age=22}, {name=林彦俊, id=4, age=22}, {name=朱正廷, id=5, age=25}, {name=王子异, id=6, age=21}, {name=王琳凯, id=7, age=22}, {name=尤长靖, id=8, age=23}]</p>
+<h4 id="查询结果中包含pojo未定义的属性"><a href="#查询结果中包含pojo未定义的属性" class="headerlink" title="查询结果中包含pojo未定义的属性"></a>查询结果中包含pojo未定义的属性</h4><p>示例：相同的值分组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QueryWrapper&lt;User&gt; lqw=<span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;User&gt;();</span><br><span class="line">lqw.select(<span class="string">&quot;count(*) as count,age&quot;</span>);</span><br><span class="line">lqw.groupBy(<span class="string">&quot;age&quot;</span>);</span><br><span class="line">List&lt;Map&lt;String,Object&gt;&gt; userlist=userDao.selectMaps(lqw);</span><br><span class="line">System.out.println(userlist);</span><br></pre></td></tr></table></figure>
+
+<p>查询结果：</p>
+<p>[{count=1, age=12}, {count=1, age=20}, {count=1, age=21}, {count=3, age=22}, {count=2, age=23}, {count=1, age=25}]</p>
+<h3 id="登录注册验证"><a href="#登录注册验证" class="headerlink" title="登录注册验证"></a>登录注册验证</h3><p>示例：查询名字是陈立农密码123的用户</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LambdaQueryWrapper&lt;User&gt; lqw=<span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;User&gt;();</span><br><span class="line">lqw.eq(User::getName,<span class="string">&quot;陈立农&quot;</span>).eq(User::getPassword,<span class="string">&quot;123&quot;</span>);</span><br><span class="line">User loginUser=userDao.selectOne(lqw);</span><br><span class="line">System.out.println(loginUser);</span><br></pre></td></tr></table></figure>
+
+<h3 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LambdaQueryWrapper&lt;User&gt; lqw = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;User&gt;();</span><br><span class="line">lqw.likeLeft(User::getName,<span class="string">&quot;蔡徐坤&quot;</span>);</span><br><span class="line"><span class="comment">//.likeRight是查以什么为结尾的</span></span><br><span class="line">List&lt;User&gt; userList = userDao.selectList(lqw);</span><br><span class="line">System.out.println(userList);</span><br></pre></td></tr></table></figure>
+
+<h2 id="映射匹配兼容"><a href="#映射匹配兼容" class="headerlink" title="映射匹配兼容"></a>映射匹配兼容</h2><p>如果数据库表名和pojo类名称不一样怎么办？如果pojo类中的数据名和数据库中的数据名不一致怎么办？如果pojo类中存在表中没有的元素怎么办？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解决表名不一致</span></span><br><span class="line"><span class="meta">@TableName(&quot;tbl_user&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="comment">//解决字段名不一致</span></span><br><span class="line">    <span class="meta">@TableField(value = &quot;pwd&quot;,select = false)</span></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> String tel;</span><br><span class="line">    <span class="comment">//解决有多余的属性</span></span><br><span class="line">    <span class="meta">@TableField(exist = false)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> online;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ID生成策略控制"><a href="#ID生成策略控制" class="headerlink" title="ID生成策略控制"></a>ID生成策略控制</h2><p>主要用来设置id自动递增的值</p>
+<ul>
+<li>AUTO(0)：使用数据库自己的自增策略控制id生成</li>
+<li>NONE（1）：不设置id生成策略</li>
+<li>INPUT（2）：用户手动输入id</li>
+<li>ASSIGN_ID（3）：雪花算法生成id（可兼容数值型和字符串型）</li>
+</ul>
+<p>具体用法：</p>
+<ol>
+<li>自动生成</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TableId(type = IdType.AUTO)</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span> id;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>用户自定义</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TableId(type = IdType.INPUT)</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span> id;</span><br></pre></td></tr></table></figure>
+
+<p>同时也必须带上.setId()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User user=<span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">user.setId(<span class="number">16</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>利用雪花算法自动生成id</p>
+<p>雪花算法：自动生成的一种64位的二进制，第一位代表正负数，后面的41位是时间戳，精确到毫秒。再往后十位是机器码，最后的这些则是12位的序列号</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TableId(type = IdType.ASSIGN_ID)</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span> id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为所有pojo设置id生成策略"><a href="#为所有pojo设置id生成策略" class="headerlink" title="为所有pojo设置id生成策略"></a>为所有pojo设置id生成策略</h3><p>在yaml文件中写入：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">input</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="公共字段自动填充"><a href="#公共字段自动填充" class="headerlink" title="公共字段自动填充"></a>公共字段自动填充</h2><p>在表中有些字段属于公共字段，也就是很多表中都有的字段。这些字段会在不同的功能模块中进行不同的改写，能不能对于这些字段在某个地方进行统一的处理来简化开发呢？</p>
+<p>答案就是MybatisPlus提供的公共字段自动填充功能</p>
+<p>实现步骤：</p>
+<ol>
+<li><p>在指定的字段上添加@TableFileld注解，指定自动填充的策略</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//插入时填写字段</span></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT)</span></span><br><span class="line"><span class="keyword">private</span> LocalDateTime createTime;</span><br><span class="line">   </span><br><span class="line"><span class="comment">/*插入和更新时填写字段*/</span></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT_UPDATE)</span></span><br><span class="line"><span class="keyword">private</span> LocalDateTime updateTime;</span><br><span class="line">   </span><br><span class="line"><span class="comment">//插入时填写字段</span></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT)</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">long</span> createUser;</span><br><span class="line">   </span><br><span class="line"><span class="comment">/*插入和更新时填写字段*/</span></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT_UPDATE)</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">long</span> updateUser;</span><br></pre></td></tr></table></figure></li>
+<li><p>按照框架要求编写元数据对象处理器，在此类中统一为公共字段赋值，此类需要实现MetaObjectHandler接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">自定义源数据对象处理器</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyMetaObjecthandler</span> <span class="keyword">implements</span> <span class="title class_">MetaObjectHandler</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">insertFill</span><span class="params">(MetaObject metaObject)</span> &#123;</span><br><span class="line">        metaObject.setValue(<span class="string">&quot;createTime&quot;</span>, LocalDateTime.now());</span><br><span class="line">        metaObject.setValue(<span class="string">&quot;updateTime&quot;</span>,LocalDateTime.now());</span><br><span class="line">        metaObject.setValue(<span class="string">&quot;createUser&quot;</span>,BaseContext.getCurrentId());</span><br><span class="line">        metaObject.setValue(<span class="string">&quot;updateUser&quot;</span>,BaseContext.getCurrentId());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateFill</span><span class="params">(MetaObject metaObject)</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就能自动进行字段的赋值</p>
+</li>
+</ol>
+<h2 id="多数据操作"><a href="#多数据操作" class="headerlink" title="多数据操作"></a>多数据操作</h2><h3 id="删除多个"><a href="#删除多个" class="headerlink" title="删除多个"></a>删除多个</h3><p>使用.deleteBatchIds通过id删除过个数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">testDelete</span><span class="params">()</span>&#123;</span><br><span class="line">    List&lt;Integer&gt; list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    list.add(<span class="number">10</span>);</span><br><span class="line">    list.add(<span class="number">11</span>);</span><br><span class="line">    list.add(<span class="number">12</span>);</span><br><span class="line">    userDao.deleteBatchIds(list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询多个"><a href="#查询多个" class="headerlink" title="查询多个"></a>查询多个</h3><p>使用.selectBatchIds通过id删除过个数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">testById</span><span class="params">()</span>&#123;</span><br><span class="line">    List&lt;Integer&gt; list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    list.add(<span class="number">1</span>);</span><br><span class="line">    list.add(<span class="number">3</span>);</span><br><span class="line">    list.add(<span class="number">5</span>);</span><br><span class="line">    List&lt;User&gt; list2=userDao.selectBatchIds(list);</span><br><span class="line">    System.out.println(list2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="逻辑删除"><a href="#逻辑删除" class="headerlink" title="逻辑删除"></a>逻辑删除</h2><p>所谓逻辑删除就是并不删除数据，而是增加一个字段通过0和1来区分这条数据该不该被查出来</p>
+<p>pojo类中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一个指默认值，第二个是确定为什么值时表示删除</span></span><br><span class="line">    <span class="meta">@TableLogic(value = &quot;0&quot;,delval = &quot;1&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> deleted;</span><br></pre></td></tr></table></figure>
+
+<p>现在在执行删除也就不会真正删除而是会给他附上逻辑删除值</p>
+<p>等到查询的时候也同样不会查到</p>
+<h2 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h2><p>乐观锁主要解决的就是类似于秒杀一样的场景，可以解决低于2000人同时访问。主要做的就是将</p>
+<ol>
+<li><p>sql库中添加字段</p>
+<p>version int类型</p>
+</li>
+<li><p>实体类中添加对应字段，并设定当前字段为逻辑删除标记字段</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Version</span></span><br><span class="line"><span class="keyword">private</span> Integer version;</span><br></pre></td></tr></table></figure></li>
+<li><p>配置乐观锁拦截器实现锁机制对应的动态sql语句拼装</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MybatisPlusConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> MybatisPlusInterceptor <span class="title function_">mybatisPlusInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">        MybatisPlusInterceptor mybatisPlusInterceptor=<span class="keyword">new</span> <span class="title class_">MybatisPlusInterceptor</span>();</span><br><span class="line">        mybatisPlusInterceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">PaginationInnerInterceptor</span>());</span><br><span class="line">        <span class="comment">//添加乐观锁</span></span><br><span class="line">        mybatisPlusInterceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">OptimisticLockerInnerInterceptor</span>());</span><br><span class="line">        <span class="keyword">return</span> mybatisPlusInterceptor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用乐观锁机制在修改前必须先获取到对应数据的verion方可正常进行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">testUpdate</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//先查询数据，获取到version数据</span></span><br><span class="line">	User user=userDao.selectById(<span class="number">1</span>);</span><br><span class="line">    <span class="comment">//执行数据修改操作</span></span><br><span class="line">	user.setName(<span class="string">&quot;Tom and Jerry&quot;</span>)</span><br><span class="line">    userDao.updateById(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="乐观锁和悲观锁"><a href="#乐观锁和悲观锁" class="headerlink" title="乐观锁和悲观锁"></a>乐观锁和悲观锁</h2><h3 id="乐观锁的概念："><a href="#乐观锁的概念：" class="headerlink" title="乐观锁的概念："></a>乐观锁的概念：</h3><p>乐观锁：指的是在操作数据的时候非常乐观，乐观地认为别人不会同时修改数据，因此乐观锁默认是不会上锁的，只有在执行更新的时候才会去判断在此期间别人是否修改了数据，如果别人修改了数据则放弃操作，否则执行操作。</p>
+<p>冲突比较少的时候, 使用乐观锁(没有悲观锁那样耗时的开销) 由于乐观锁的不上锁特性，所以在性能方面要比悲观锁好，比较适合用在DB的读大于写的业务场景。</p>
+<h3 id="悲观锁的概念："><a href="#悲观锁的概念：" class="headerlink" title="悲观锁的概念："></a>悲观锁的概念：</h3><p>悲观锁：指的是在操作数据的时候比较悲观，悲观地认为别人一定会同时修改数据，因此悲观锁在操作数据时是直接把数据上锁，直到操作完成之后才会释放锁，在上锁期间其他人不能操作数据。</p>
+<p>冲突比较多的时候, 使用悲观锁(没有乐观锁那么多次的尝试)对于每一次数据修改都要上锁，如果在DB读取需要比较大的情况下有线程在执行数据修改操作会导致读操作全部被挂载起来，等修改线程释放了锁才能读到数据，体验极差。所以比较适合用在DB写大于读的情况。</p>
+<p>读取频繁使用乐观锁，写入频繁使用悲观锁。</p>
+<h2 id="快速代码生成器"><a href="#快速代码生成器" class="headerlink" title="快速代码生成器"></a>快速代码生成器</h2><ol>
+<li><p>导入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-generator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.velocity<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>velocity-engine-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>调用及配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.获取代码生成器的对象</span></span><br><span class="line">        <span class="type">AutoGenerator</span> <span class="variable">autoGenerator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AutoGenerator</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置数据库相关配置</span></span><br><span class="line">        <span class="type">DataSourceConfig</span> <span class="variable">dataSource</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DataSourceConfig</span>();</span><br><span class="line">        dataSource.setDriverName(<span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>);</span><br><span class="line">        dataSource.setUrl(<span class="string">&quot;jdbc:mysql://localhost:3306/mybatisplus_db?serverTimezone=UTC&quot;</span>);</span><br><span class="line">        dataSource.setUsername(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">        dataSource.setPassword(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">        autoGenerator.setDataSource(dataSource);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置全局配置</span></span><br><span class="line">        <span class="type">GlobalConfig</span> <span class="variable">globalConfig</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GlobalConfig</span>();</span><br><span class="line">        globalConfig.setOutputDir(System.getProperty(<span class="string">&quot;user.dir&quot;</span>)+<span class="string">&quot;/mybatisplus_04_generator/src/main/java&quot;</span>);    <span class="comment">//设置代码生成位置</span></span><br><span class="line">        globalConfig.setOpen(<span class="literal">false</span>);    <span class="comment">//设置生成完毕后是否打开生成代码所在的目录</span></span><br><span class="line">        globalConfig.setAuthor(<span class="string">&quot;黑马程序员&quot;</span>);    <span class="comment">//设置作者</span></span><br><span class="line">        globalConfig.setFileOverride(<span class="literal">true</span>);     <span class="comment">//设置是否覆盖原始生成的文件</span></span><br><span class="line">        globalConfig.setMapperName(<span class="string">&quot;%sDao&quot;</span>);    <span class="comment">//设置数据层接口名，%s为占位符，指代模块名称</span></span><br><span class="line">        globalConfig.setIdType(IdType.ASSIGN_ID);   <span class="comment">//设置Id生成策略</span></span><br><span class="line">        autoGenerator.setGlobalConfig(globalConfig);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置包名相关配置</span></span><br><span class="line">        <span class="type">PackageConfig</span> <span class="variable">packageInfo</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PackageConfig</span>();</span><br><span class="line">        packageInfo.setParent(<span class="string">&quot;com.aaa&quot;</span>);   <span class="comment">//设置生成的包名，与代码所在位置不冲突，二者叠加组成完整路径</span></span><br><span class="line">        packageInfo.setEntity(<span class="string">&quot;domain&quot;</span>);    <span class="comment">//设置实体类包名</span></span><br><span class="line">        packageInfo.setMapper(<span class="string">&quot;dao&quot;</span>);   <span class="comment">//设置数据层包名</span></span><br><span class="line">        autoGenerator.setPackageInfo(packageInfo);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//策略设置</span></span><br><span class="line">        <span class="type">StrategyConfig</span> <span class="variable">strategyConfig</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StrategyConfig</span>();</span><br><span class="line">        strategyConfig.setInclude(<span class="string">&quot;tbl_user&quot;</span>);  <span class="comment">//设置当前参与生成的表名，参数为可变参数</span></span><br><span class="line">        strategyConfig.setTablePrefix(<span class="string">&quot;tbl_&quot;</span>);  <span class="comment">//设置数据库表的前缀名称，模块名 = 数据库表名 - 前缀名  例如： User = tbl_user - tbl_</span></span><br><span class="line">        strategyConfig.setRestControllerStyle(<span class="literal">true</span>);    <span class="comment">//设置是否启用Rest风格</span></span><br><span class="line">        strategyConfig.setVersionFieldName(<span class="string">&quot;version&quot;</span>);  <span class="comment">//设置乐观锁字段名</span></span><br><span class="line">        strategyConfig.setLogicDeleteFieldName(<span class="string">&quot;deleted&quot;</span>);  <span class="comment">//设置逻辑删除字段名</span></span><br><span class="line">        strategyConfig.setEntityLombokModel(<span class="literal">true</span>);  <span class="comment">//设置是否启用lombok</span></span><br><span class="line">        autoGenerator.setStrategy(strategyConfig);</span><br><span class="line">        <span class="comment">//2.执行生成操作</span></span><br><span class="line">        autoGenerator.execute();</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>Post author: </strong>
+        Rogers
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>Post link: </strong>
+        <a id="original-link" href="https://ljs-yym.github.io/2023/03/30/Mybatis-Plus/" title="Mybatis-Plus">https://ljs-yym.github.io/2023/03/30/Mybatis-Plus/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>Copyright Notice: </strong>
+        All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> unless otherwise stated.
+    </li>
+</ul>
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/06/12/HTML%E7%AC%94%E8%AE%B0/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/cover/browser.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%89%8D%E7%AB%AF/">
+                    前端
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/06/12/HTML%E7%AC%94%E8%AE%B0/" class="trm-anima-link">
+                    HTML精讲
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/06/12</li>
+                <li>10:28</li>
+                
+                    <li>3.1k</li>
+                
+                
+                    <li>13</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/03/21/SpringMVC/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/cover/SpringMVC.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/Java/">
+                    Java
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/03/21/SpringMVC/" class="trm-anima-link">
+                    SpringMVC
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/03/21</li>
+                <li>17:11</li>
+                
+                    <li>4.3k</li>
+                
+                
+                    <li>20</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2023- 2023</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">长生风月</span>
+        </div>
+    
+
+      
+
+    
+        <div class="trm-footer-item">
+            The blog has been lovely to run <span id="since" class="trm-accent-color"></span> day
+        </div>
+     
+
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("02/27/2023 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="Read Mode" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="Toggle between single-column and double-column" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="Back To Top">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+<div class="trm-search-popup">
+    <div class="trm-search-header">
+        <span class="trm-search-popup-btn-close">
+            <i class="iconfont fas fa-times"></i>
+        </span>
+    </div>
+    <div class="form trm-search-form">
+        <input class="trm-search-input" type="text" placeholder="Searching...">
+    </div>
+    <div class="trm-search-result-container">
+
+    </div>
+</div>
+
+  <!-- Plugin -->
+
+
+
+
+    
+<script src="https://unpkg.com/swup@2.0.19/dist/swup.min.js"></script>
+
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.2"></script>
+    
+
+    
+        
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=2.0.2"></script>
+    
+
+    <!-- 数学公式 -->
+    
+        
+<script src="https://unpkg.com/katex@latest/dist/katex.min.js" data-swup-reload-script></script>
+
+        
+            
+<script src="https://unpkg.com/katex@latest/dist/contrib/copy-tex.min.js" data-swup-reload-script></script>
+
+        
+        
+<script src="https://unpkg.com/katex@latest/dist/contrib/auto-render.min.js" data-swup-reload-script></script>
+
+        <script data-swup-reload-script>
+              window.renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true },
+                ],
+                ...{},
+            })
+        </script>
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <script>
+        "serviceWorker" in navigator ?
+        navigator.serviceWorker.register('/sw.js').then(function () {
+            navigator.serviceWorker.controller ? 
+             console.log("Assets cached by the controlling service worker.") :
+             console.log("Please reload this page to allow the service worker to handle network operations.")
+        }).catch(function (e) {
+            console.log("ERROR: " + e)
+        }) : console.log("Service workers are not supported in the current browser.")
+    </script>
+
+    <!-- baidu push -->
+    
+    <script data-swup-reload-script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+
+
+<script id="async-script" src="/js/main.js?v=2.0.2"></script>
+
+</body>
+
+</html>

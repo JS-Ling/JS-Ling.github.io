@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="AJAX部分JavaScript ajax什么是ajaxajax&#x3D;异步js和XML ajax是一种用于创建快速动态网页的技术 通过与后台和服务器的少量数据交换，来使网页实行异步更新。 这意味着可以在不重新加载网页的情况下，进行对网页的某部分修改 ajax的优点  无需刷新页面即可与服务器端交换数据   允许通过用户对页面的操作来改变页面内容   没有浏览历史，不能后退   反爬虫   什么是HTT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax通信技术">
+<meta property="og:url" content="https://ljs-yym.github.io/2023/06/12/Ajax%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="RogevnBlog">
+<meta property="og:description" content="AJAX部分JavaScript ajax什么是ajaxajax&#x3D;异步js和XML ajax是一种用于创建快速动态网页的技术 通过与后台和服务器的少量数据交换，来使网页实行异步更新。 这意味着可以在不重新加载网页的情况下，进行对网页的某部分修改 ajax的优点  无需刷新页面即可与服务器端交换数据   允许通过用户对页面的操作来改变页面内容   没有浏览历史，不能后退   反爬虫   什么是HTT">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ljs-yym.github.io/img/cover/ajax.jpg">
+<meta property="article:published_time" content="2023-06-12T09:00:10.143Z">
+<meta property="article:modified_time" content="2023-06-12T08:59:22.779Z">
+<meta property="article:author" content="Rogers">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ljs-yym.github.io/img/cover/ajax.jpg">
+
+    <meta name="keywords" content="hexo,node,博客">
+
+
+<title >Ajax通信技术</title>
+
+<!-- Favicon -->
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+<link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css">
+
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"ljs-yym.github.io","author":"Rogers","root":"/","typed_text":["Web Developer","Backend Programmer","Full Stack Developer！"],"theme_version":"2.0.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo.png","icon16":"/img/logo.png","icon32":"/img/logo.png","dark_logo":"/img/dark_logo.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"creative_commons":{"license":"by-nc-sa","language":"deed.zh"},"search":{"enable":true,"type":"local","path":"search.xml","field":"post","content":true,"format":"html"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-06-12 16:59:22"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.2" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+     
+
+    
+
+    
+ 
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" class=" trm-light-icon" src="/img/logo.png"> <img alt="logo" class=" trm-dark-icon" src="/img/dark_logo.png">
+    
+    
+        <div class="trm-logo-text">
+            Rogevn<span>Blog</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    长生风月的博客
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    日志
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友情链接
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/picture/" target="">
+                    好东西
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/picture/" target="">
+                            图片
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/technology/" target="">
+                            黑科技
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+    
+    <div id="trm-search-btn" class="trm-search-btn">
+        <i class="iconfont fas fa-search"></i>
+    </div>
+     
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            Ajax通信技术
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/R-C.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        长生风月
+    </h5>
+    
+        <div class="trm-label">
+            I&#39;m a
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="tencent://message/?uin=3232008148&Site=&Menu=yes" title="QQ" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="/null" title="WeChat" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-weixin"></i>
+        </a>
+    
+        <a href="/null" title="twitter" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-twitter"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                河北省保定市
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                21
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                星座:
+            </div>
+            <div class="trm-label trm-label-light">
+                处女座
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                爱好:
+            </div>
+            <div class="trm-label trm-label-light">
+                足球、音乐、魔方、代码
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:3232008148@qq.com" class="trm-btn">
+            Contact Me
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#AJAX部分"  data-scroll-to="#AJAX部分"><span class="toc-number">1.</span> <span class="toc-text">AJAX部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#JavaScript-ajax"  data-scroll-to="#JavaScript-ajax"><span class="toc-number">1.1.</span> <span class="toc-text">JavaScript ajax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#什么是ajax"  data-scroll-to="#什么是ajax"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是ajax</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#ajax的优点"  data-scroll-to="#ajax的优点"><span class="toc-number">1.1.2.</span> <span class="toc-text">ajax的优点</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#什么是HTTP协议"  data-scroll-to="#什么是HTTP协议"><span class="toc-number">1.1.3.</span> <span class="toc-text">什么是HTTP协议</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#浏览器中查看请求响应"  data-scroll-to="#浏览器中查看请求响应"><span class="toc-number">1.1.4.</span> <span class="toc-text">浏览器中查看请求响应</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#node-js和Express"  data-scroll-to="#node-js和Express"><span class="toc-number">1.1.5.</span> <span class="toc-text">node.js和Express</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#创建XMLHttpRequest对象"  data-scroll-to="#创建XMLHttpRequest对象"><span class="toc-number">1.1.6.</span> <span class="toc-text">创建XMLHttpRequest对象</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#判断是否支持XMLHttpRequest：window-XMLHttpRequest"  data-scroll-to="#判断是否支持XMLHttpRequest：window-XMLHttpRequest"><span class="toc-number">1.1.7.</span> <span class="toc-text">判断是否支持XMLHttpRequest：window.XMLHttpRequest</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#向服务器发送请求"  data-scroll-to="#向服务器发送请求"><span class="toc-number">1.1.8.</span> <span class="toc-text">向服务器发送请求</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#get和post详解"  data-scroll-to="#get和post详解"><span class="toc-number">1.1.9.</span> <span class="toc-text">get和post详解</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#服务器响应json数据"  data-scroll-to="#服务器响应json数据"><span class="toc-number">1.1.10.</span> <span class="toc-text">服务器响应json数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#jQuery-ajax"  data-scroll-to="#jQuery-ajax"><span class="toc-number">1.2.</span> <span class="toc-text">jQuery ajax</span></a></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            06/12
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            17:00
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Rogers
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="AJAX部分"><a href="#AJAX部分" class="headerlink" title="AJAX部分"></a>AJAX部分</h1><h2 id="JavaScript-ajax"><a href="#JavaScript-ajax" class="headerlink" title="JavaScript ajax"></a>JavaScript ajax</h2><h3 id="什么是ajax"><a href="#什么是ajax" class="headerlink" title="什么是ajax"></a>什么是ajax</h3><p>ajax=异步js和XML</p>
+<p>ajax是一种用于创建快速动态网页的技术</p>
+<p>通过与后台和服务器的少量数据交换，来使网页实行异步更新。</p>
+<p>这意味着可以在不重新加载网页的情况下，进行对网页的某部分修改</p>
+<h3 id="ajax的优点"><a href="#ajax的优点" class="headerlink" title="ajax的优点"></a>ajax的优点</h3><ol>
+<li><p> 无需刷新页面即可与服务器端交换数据</p>
+</li>
+<li><p> 允许通过用户对页面的操作来改变页面内容</p>
+</li>
+<li><p> 没有浏览历史，不能后退</p>
+</li>
+<li><p> 反爬虫</p>
+</li>
+</ol>
+<h3 id="什么是HTTP协议"><a href="#什么是HTTP协议" class="headerlink" title="什么是HTTP协议"></a>什么是HTTP协议</h3><p>HTTP（Hyper Text Transport protocol）协议【超文本传输协议】</p>
+<p>协议规定了浏览器和万维网服务器之间互相通信的规则约定</p>
+<p><strong>请求报文</strong></p>
+<p>重点是格式与参数</p>
+<p>请求行 传输方式 URL路径 HTTP协议版本</p>
+<p>请求头 Host：atguigu.com 这些都是格式，具体内容不限</p>
+<p>​    Cookie： name=guigu</p>
+<p>​    Content-type： application/x-www-form-urlencoded</p>
+<p>​    User-Agent: chrome 83</p>
+<p>空行</p>
+<p>请求体（如果是get请求这是空的，如果是post那么可以写东西）</p>
+<p>例如：username=zhangsan&amp;password=123456</p>
+<p><strong>响应报文</strong></p>
+<p>响应行 HTTP版本 响应状态码 响应状态字符串</p>
+<p>​                            404（找不到）</p>
+<p>​                            403（无法访问）</p>
+<p>​                            401（未授权）</p>
+<p>​                            500（内部错误）</p>
+<p>​                            200（OK）</p>
+<p>响应头（对响应体的一些描述）</p>
+<p>​    Context-Type：text/html;charset=utf-8</p>
+<p>​    Content-length:2048</p>
+<p>​    Content-encoding:gzip</p>
+<p>空行</p>
+<p>响应体（返回报文的主要内容）</p>
+<p>​    例如：<html></p>
+<p>​        <head></head></p>
+<p>​        <body></p>
+<p>​            <a>name</a></p>
+<p>​        </body></p>
+<p>​    </html></p>
+<p>js在接到响应体后会进行提取和渲染最终返回到html界面上</p>
+<h3 id="浏览器中查看请求响应"><a href="#浏览器中查看请求响应" class="headerlink" title="浏览器中查看请求响应"></a>浏览器中查看请求响应</h3><p><img src="/img/Web%E5%89%8D%E7%AB%AF/image014.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="node-js和Express"><a href="#node-js和Express" class="headerlink" title="node.js和Express"></a>node.js和Express</h3><ol>
+<li> 下载与安装</li>
+</ol>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://nodejs.cn/">Node.js 中文网 (nodejs.cn)</a></p>
+</blockquote>
+<ol start="2">
+<li>配置运行Express</li>
+</ol>
+<p><img src="/img/Web%E5%89%8D%E7%AB%AF/image015.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>运行文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>  <span class="comment">// 1.引入express  </span></span><br><span class="line"></span><br><span class="line"><span class="number">2.</span>  <span class="keyword">const</span> &#123; response &#125; = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);  </span><br><span class="line"></span><br><span class="line"><span class="number">3.</span>  <span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)  </span><br><span class="line"></span><br><span class="line"><span class="number">4.</span>  </span><br><span class="line"></span><br><span class="line"><span class="number">5.</span>  <span class="comment">// 2.创建应用对象  </span></span><br><span class="line"></span><br><span class="line"><span class="number">6.</span>  <span class="keyword">const</span> app=<span class="title function_">express</span>();  </span><br><span class="line"></span><br><span class="line"><span class="number">7.</span>  </span><br><span class="line"></span><br><span class="line"><span class="number">8.</span>  <span class="comment">// 3.创建路由规则  </span></span><br><span class="line"></span><br><span class="line"><span class="number">9.</span>  <span class="comment">// require是对请求报文的封装  </span></span><br><span class="line"></span><br><span class="line"><span class="number">10.</span>  <span class="comment">// response是对响应报文的封装  </span></span><br><span class="line"></span><br><span class="line"><span class="number">11.</span>  app.<span class="title function_">get</span>(<span class="string">&#x27;/server&#x27;</span>,<span class="function">(<span class="params">request,response</span>)=&gt;</span>&#123;  </span><br><span class="line"></span><br><span class="line"><span class="number">12.</span>  <span class="comment">// 设置响应头，设置允许跨域  </span></span><br><span class="line"></span><br><span class="line"><span class="number">13.</span>  response.<span class="title function_">setHeader</span>(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>,<span class="string">&#x27;\*&#x27;</span>)  </span><br><span class="line"></span><br><span class="line"><span class="number">14.</span>  <span class="comment">// 设置响应体  </span></span><br><span class="line"></span><br><span class="line"><span class="number">15.</span>  response.<span class="title function_">send</span>(<span class="string">&#x27;Hello Express&#x27;</span>)  </span><br><span class="line"></span><br><span class="line"><span class="number">16.</span>  </span><br><span class="line"></span><br><span class="line"><span class="number">17.</span>  &#125;);  </span><br><span class="line"></span><br><span class="line"><span class="number">18.</span>  </span><br><span class="line"></span><br><span class="line"><span class="number">19.</span>  <span class="comment">// 4.监听端口启动服务  </span></span><br><span class="line"></span><br><span class="line"><span class="number">20.</span>  app.<span class="title function_">listen</span>(<span class="number">8000</span>, <span class="function">()=&gt;</span>&#123;  </span><br><span class="line"></span><br><span class="line"><span class="number">21.</span>  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;服务已经启动，8000端口监听中...&quot;</span>)  </span><br><span class="line"></span><br><span class="line"><span class="number">22.</span>  &#125;)  </span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="创建XMLHttpRequest对象"><a href="#创建XMLHttpRequest对象" class="headerlink" title="创建XMLHttpRequest对象"></a>创建XMLHttpRequest对象</h3><p>简介：现在基本上市面流行的所有浏览器均内建XMLHttpRequest对象</p>
+<p>创建XMLHttpRequest对象的语法</p>
+<blockquote>
+<p>aaa=<strong>new</strong> XMLHttpRequest()  </p>
+</blockquote>
+<p>老版本的IE5和IE6使用ActiveX对象</p>
+<p>xmlhttp=new ActiveXObject(“Microsoft.XMLHTTP”);</p>
+<h3 id="判断是否支持XMLHttpRequest：window-XMLHttpRequest"><a href="#判断是否支持XMLHttpRequest：window-XMLHttpRequest" class="headerlink" title="判断是否支持XMLHttpRequest：window.XMLHttpRequest"></a>判断是否支持XMLHttpRequest：window.XMLHttpRequest</h3><h3 id="向服务器发送请求"><a href="#向服务器发送请求" class="headerlink" title="向服务器发送请求"></a>向服务器发送请求</h3><blockquote>
+<p>aaa.open(“发送方法”,”服务器上的位置”,”同步或者异步”)  //规定请求的类型</p>
+<p>get或者post url地址 true表示异步，false表示同步</p>
+<p>aaa.send() //将请求发送到服务器</p>
+</blockquote>
+<h3 id="get和post详解"><a href="#get和post详解" class="headerlink" title="get和post详解"></a>get和post详解</h3><p>get：速度快</p>
+<p>post：需要更新服务器上的文件或是数据库</p>
+<p>没有数据量限制</p>
+<p>发送包含未知字符的用户数据，post比get更加可靠</p>
+<p>get案例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.<span class="title function_">open</span>(<span class="string">&quot;GET&quot;</span>,<span class="string">&quot;/try/ajax/demo_get.php&quot;</span>,<span class="literal">true</span>);   </span><br><span class="line"></span><br><span class="line">xmlhttp.<span class="title function_">send</span>();  </span><br></pre></td></tr></table></figure>
+
+<p>这样写的话有可能会返回、缓存的内容</p>
+<p>为了避免这种情况：我们可以在URL后面添加一个唯一的ID</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.<span class="title function_">open</span>(<span class="string">&quot;GET&quot;</span>,<span class="string">&quot;/try/ajax/demo_get.php?t=&quot;</span> + <span class="title class_">Math</span>.<span class="title function_">random</span>(),**<span class="literal">true</span>**);  </span><br><span class="line"></span><br><span class="line">xmlhttp.<span class="title function_">send</span>();  </span><br></pre></td></tr></table></figure>
+
+<p>post案例：</p>
+<ol>
+<li>```js<br>xmlhttp.open(“POST”,”/try/ajax/demo_post.php”,<strong>true</strong>);  xmlhttp.send();  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如果需要像 HTML 表单那样 POST 数据，请使用 setRequestHeader() 来添加 HTTP 头。然后在 send() 方法中规定您希望发送的数据：</span><br><span class="line"></span><br><span class="line">1.  xmlhttp.open(&quot;POST&quot;,&quot;/try/ajax/demo\_post2.php&quot;,**true**);  </span><br><span class="line"></span><br><span class="line">2.  xmlhttp.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);  </span><br><span class="line"></span><br><span class="line">3.  xmlhttp.send(&quot;fname=Henry&amp;lname=Ford&quot;);  </span><br><span class="line"></span><br><span class="line">setRequestHeader()用来向请求添加HTTP头</span><br><span class="line"></span><br><span class="line">### js操作连接服务器结构模板</span><br><span class="line"></span><br><span class="line">```js</span><br><span class="line">if(window.XMLHttpRequest)&#123;              /* 判断浏览器支持情况 */  </span><br><span class="line"></span><br><span class="line">	const XHR=new XMLHttpRequest()      /* 一般创建对象 */  </span><br><span class="line"></span><br><span class="line">    XHR.open(&quot;GET&quot;,&quot;http://127.0.0.1:8000/json-server&quot;)     /* 声明传输方式和地址 */  </span><br><span class="line"></span><br><span class="line">    XHR.send(&#x27;a=100&amp;b=200&amp;c=300&#x27;)        /* 发送或者携带内容发送 */  </span><br><span class="line">	</span><br><span class="line">    /* onreadystatechange方法每当readyState改变一次就执行一次 */</span><br><span class="line">    XHR.onreadystatechange=function()&#123;   </span><br><span class="line">        </span><br><span class="line">		/* readyState返回XMLHTTP请求的当前状态   status返回状态码 */  </span><br><span class="line">        if(XHR.readyState==&quot;4&quot;&amp;&amp;XHR.status==&quot;200&quot;)&#123; </span><br><span class="line"></span><br><span class="line">            console.log(XHR.response)   /* 打印响应的内容 */  </span><br><span class="line"></span><br><span class="line">            XHR.setRequestHeader(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded&quot;)  </span><br><span class="line"></span><br><span class="line">            XHR.setRequestHeader(&quot;name&quot;,&quot;MouseUpShow&quot;)   /* 设置响应头信息 */  </span><br><span class="line"></span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;else&#123;  </span><br><span class="line">    const XHR=new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)    /* IE5、IE6创建对象 */  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="服务器响应json数据"><a href="#服务器响应json数据" class="headerlink" title="服务器响应json数据"></a>服务器响应json数据</h3><p>服务器添加json数据：</p>
+<ol>
+<li><p> app.all(‘/json-server’,(request,response)=&gt;{  </p>
+</li>
+<li><p> // 设置响应头，设置允许跨域  </p>
+</li>
+<li><p> response.setHeader(‘Access-Control-Allow-Origin’,’*‘)  </p>
+</li>
+<li><p> response.setHeader(“Access-Control-Allow-Headers”,”*“)  </p>
+</li>
+<li><p> // 设置响应体  </p>
+</li>
+<li><p> <strong>const</strong> data={    //一个json语句  </p>
+</li>
+<li><p> name:’Ajax Json’  </p>
+</li>
+<li><p> }  </p>
+</li>
+<li><p> // 对对象进行字符串转化  </p>
+</li>
+<li><p> var str=JSON.stringify(data)  </p>
+</li>
+<li><p> // 设置响应体  </p>
+</li>
+<li><p> response.send(str)  </p>
+</li>
+<li></li>
+<li><p> });  </p>
+</li>
+</ol>
+<p>html文件：</p>
+<ol>
+<li><p> XHR.responseType=”json”   /*自动转换json语句*/</p>
+</li>
+<li><p> test.innerHTML=XHR.response.name;  </p>
+</li>
+</ol>
+<blockquote>
+<p>window.performance.navigation.type得到一个数字</p>
+<p>0：是由地址栏输入、表单验证、超链接、脚本操作等方法进入</p>
+<p>1：刷新得到的网页</p>
+<p>2：通过前进后退得到的</p>
+<p>255：任何其他来源</p>
+</blockquote>
+<h2 id="jQuery-ajax"><a href="#jQuery-ajax" class="headerlink" title="jQuery ajax"></a>jQuery ajax</h2><p>jquery调用ajax方法：</p>
+<p>格式：$.ajax({})</p>
+<p>参数：</p>
+<p>​    type：请求方式GET/POST</p>
+<p>​    url：请求地址url</p>
+<p>​    async：是否异步，默认为true表示异步</p>
+<p>​    data：发送到服务器的数据</p>
+<p>​    dataType：与其服务器返回的数据类型</p>
+<p>​    contentType：设置请求头</p>
+<p>​    success：请求成功时调用此函数</p>
+<p>​    error：请求失败时调用此函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$.<span class="title function_">ajax</span>(&#123;</span><br><span class="line"></span><br><span class="line">	<span class="attr">type</span>: <span class="string">&quot;get&quot;</span> <span class="comment">//传输方式</span></span><br><span class="line"></span><br><span class="line">	<span class="attr">url</span>:<span class="string">&quot;showuser&quot;</span>, <span class="comment">//地址</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">async</span> :<span class="literal">true</span>, <span class="comment">//是否异步</span></span><br><span class="line"></span><br><span class="line">	<span class="attr">dataType</span>:<span class="string">&quot;txt&quot;</span>, <span class="comment">//预期返回的文本类型</span></span><br><span class="line"></span><br><span class="line">	<span class="attr">data</span>:&#123;&#125;, <span class="comment">//一同发送的数据  </span></span><br><span class="line">		<span class="attr">success</span>:<span class="keyword">function</span> (<span class="params">data,status,xhr</span>)&#123; </span><br><span class="line">    		<span class="comment">//成功后回调函数</span></span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="attr">error</span>:<span class="keyword">function</span> (<span class="params"></span>) &#123; <span class="comment">//失败后回调函数  </span></span><br><span class="line">			<span class="title function_">alert</span>(<span class="string">&quot;shibai&quot;</span>)  </span><br><span class="line">		&#125;  </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>jquery调用get方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$.<span class="title function_">get</span>(</span><br><span class="line">	<span class="string">&quot;showuser&quot;</span>, <span class="comment">//url地址  </span></span><br><span class="line">	&#123;<span class="attr">name</span>:”张三”,<span class="attr">age</span>:”<span class="number">18</span>”&#125;, <span class="comment">//跟随发送的数据  </span></span><br><span class="line">	<span class="keyword">function</span> (<span class="params">data,status,xhr</span>)&#123; &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//data：返回得到的数据</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//status:请求的状态</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//xhr包含XMLHttpRequest  </span></span><br><span class="line">	&#125;  </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>jquery调用post方法同上，即使用post方法进行传递</p>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>Post author: </strong>
+        Rogers
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>Post link: </strong>
+        <a id="original-link" href="https://ljs-yym.github.io/2023/06/12/Ajax%E7%AC%94%E8%AE%B0/" title="Ajax通信技术">https://ljs-yym.github.io/2023/06/12/Ajax%E7%AC%94%E8%AE%B0/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>Copyright Notice: </strong>
+        All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> unless otherwise stated.
+    </li>
+</ul>
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/06/12/CSS%E6%A0%B7%E5%BC%8F%E7%AC%94%E8%AE%B0/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/cover/css.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%89%8D%E7%AB%AF/">
+                    前端
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/06/12/CSS%E6%A0%B7%E5%BC%8F%E7%AC%94%E8%AE%B0/" class="trm-anima-link">
+                    CSS样式表笔记
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/06/12</li>
+                <li>17:13</li>
+                
+                    <li>2.3k</li>
+                
+                
+                    <li>9</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/06/12/JQuery&Bootstrap/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/cover/jquery.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%89%8D%E7%AB%AF/">
+                    前端
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/06/12/JQuery&Bootstrap/" class="trm-anima-link">
+                    jQuery实战指南
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/06/12</li>
+                <li>12:09</li>
+                
+                    <li>1.8k</li>
+                
+                
+                    <li>7</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2023- 2023</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">长生风月</span>
+        </div>
+    
+
+      
+
+    
+        <div class="trm-footer-item">
+            The blog has been lovely to run <span id="since" class="trm-accent-color"></span> day
+        </div>
+     
+
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("02/27/2023 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="Read Mode" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="Toggle between single-column and double-column" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="Back To Top">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+<div class="trm-search-popup">
+    <div class="trm-search-header">
+        <span class="trm-search-popup-btn-close">
+            <i class="iconfont fas fa-times"></i>
+        </span>
+    </div>
+    <div class="form trm-search-form">
+        <input class="trm-search-input" type="text" placeholder="Searching...">
+    </div>
+    <div class="trm-search-result-container">
+
+    </div>
+</div>
+
+  <!-- Plugin -->
+
+
+
+
+    
+<script src="https://unpkg.com/swup@2.0.19/dist/swup.min.js"></script>
+
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.2"></script>
+    
+
+    
+        
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=2.0.2"></script>
+    
+
+    <!-- 数学公式 -->
+    
+        
+<script src="https://unpkg.com/katex@latest/dist/katex.min.js" data-swup-reload-script></script>
+
+        
+            
+<script src="https://unpkg.com/katex@latest/dist/contrib/copy-tex.min.js" data-swup-reload-script></script>
+
+        
+        
+<script src="https://unpkg.com/katex@latest/dist/contrib/auto-render.min.js" data-swup-reload-script></script>
+
+        <script data-swup-reload-script>
+              window.renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true },
+                ],
+                ...{},
+            })
+        </script>
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <script>
+        "serviceWorker" in navigator ?
+        navigator.serviceWorker.register('/sw.js').then(function () {
+            navigator.serviceWorker.controller ? 
+             console.log("Assets cached by the controlling service worker.") :
+             console.log("Please reload this page to allow the service worker to handle network operations.")
+        }).catch(function (e) {
+            console.log("ERROR: " + e)
+        }) : console.log("Service workers are not supported in the current browser.")
+    </script>
+
+    <!-- baidu push -->
+    
+    <script data-swup-reload-script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+
+
+<script id="async-script" src="/js/main.js?v=2.0.2"></script>
+
+</body>
+
+</html>

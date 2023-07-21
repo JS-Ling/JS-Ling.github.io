@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="Redis数据库什么是Redis？Redis是一种基于内存的key-value结构数据库 他会将我们的数据存放在内存中，这就有利于提高获取数据的速度。同时因为它是存放在内存中，所以当服务器断电时里面的数据也会不复存在 Redis简介 Redis是一个开源的内存中的数据结构存储系统，他可以用作：数据库、缓存和消息中间件  官网：https:&#x2F;&#x2F;redis.io  Redis是用C语言开发的一个开源的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis缓存数据库">
+<meta property="og:url" content="https://ljs-yym.github.io/2023/06/12/Redis%E7%BC%93%E5%AD%98/index.html">
+<meta property="og:site_name" content="RogevnBlog">
+<meta property="og:description" content="Redis数据库什么是Redis？Redis是一种基于内存的key-value结构数据库 他会将我们的数据存放在内存中，这就有利于提高获取数据的速度。同时因为它是存放在内存中，所以当服务器断电时里面的数据也会不复存在 Redis简介 Redis是一个开源的内存中的数据结构存储系统，他可以用作：数据库、缓存和消息中间件  官网：https:&#x2F;&#x2F;redis.io  Redis是用C语言开发的一个开源的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ljs-yym.github.io/img/cover/redis.jpg">
+<meta property="article:published_time" content="2023-06-12T12:17:27.769Z">
+<meta property="article:modified_time" content="2023-06-12T11:53:24.258Z">
+<meta property="article:author" content="Rogers">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ljs-yym.github.io/img/cover/redis.jpg">
+
+    <meta name="keywords" content="hexo,node,博客">
+
+
+<title >Redis缓存数据库</title>
+
+<!-- Favicon -->
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+<link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css">
+
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"ljs-yym.github.io","author":"Rogers","root":"/","typed_text":["Web Developer","Backend Programmer","Full Stack Developer！"],"theme_version":"2.0.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo.png","icon16":"/img/logo.png","icon32":"/img/logo.png","dark_logo":"/img/dark_logo.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"creative_commons":{"license":"by-nc-sa","language":"deed.zh"},"search":{"enable":true,"type":"local","path":"search.xml","field":"post","content":true,"format":"html"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-06-12 19:53:24"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.2" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+     
+
+    
+
+    
+ 
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" class=" trm-light-icon" src="/img/logo.png"> <img alt="logo" class=" trm-dark-icon" src="/img/dark_logo.png">
+    
+    
+        <div class="trm-logo-text">
+            Rogevn<span>Blog</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    长生风月的博客
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    日志
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友情链接
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/picture/" target="">
+                    好东西
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/picture/" target="">
+                            图片
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/technology/" target="">
+                            黑科技
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+    
+    <div id="trm-search-btn" class="trm-search-btn">
+        <i class="iconfont fas fa-search"></i>
+    </div>
+     
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            Redis缓存数据库
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/R-C.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        长生风月
+    </h5>
+    
+        <div class="trm-label">
+            I&#39;m a
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="tencent://message/?uin=3232008148&Site=&Menu=yes" title="QQ" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="/null" title="WeChat" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-weixin"></i>
+        </a>
+    
+        <a href="/null" title="twitter" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-twitter"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                河北省保定市
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                21
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                星座:
+            </div>
+            <div class="trm-label trm-label-light">
+                处女座
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                爱好:
+            </div>
+            <div class="trm-label trm-label-light">
+                足球、音乐、魔方、代码
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:3232008148@qq.com" class="trm-btn">
+            Contact Me
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#Redis数据库"  data-scroll-to="#Redis数据库"><span class="toc-number">1.</span> <span class="toc-text">Redis数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#什么是Redis？"  data-scroll-to="#什么是Redis？"><span class="toc-number">1.1.</span> <span class="toc-text">什么是Redis？</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Redis简介"  data-scroll-to="#Redis简介"><span class="toc-number">1.2.</span> <span class="toc-text">Redis简介</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Redis下载与安装"  data-scroll-to="#Redis下载与安装"><span class="toc-number">1.3.</span> <span class="toc-text">Redis下载与安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#windows系统"  data-scroll-to="#windows系统"><span class="toc-number">1.3.1.</span> <span class="toc-text">windows系统</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#linux系统"  data-scroll-to="#linux系统"><span class="toc-number">1.3.2.</span> <span class="toc-text">linux系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Redis启动"  data-scroll-to="#Redis启动"><span class="toc-number">1.4.</span> <span class="toc-text">Redis启动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#linux启动"  data-scroll-to="#linux启动"><span class="toc-number">1.4.1.</span> <span class="toc-text">linux启动</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#windows启动"  data-scroll-to="#windows启动"><span class="toc-number">1.4.2.</span> <span class="toc-text">windows启动</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Redis设置密码"  data-scroll-to="#Redis设置密码"><span class="toc-number">1.5.</span> <span class="toc-text">Redis设置密码</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#设置允许远程连接"  data-scroll-to="#设置允许远程连接"><span class="toc-number">1.6.</span> <span class="toc-text">设置允许远程连接</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Redis数据类型"  data-scroll-to="#Redis数据类型"><span class="toc-number">1.7.</span> <span class="toc-text">Redis数据类型</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Redis常用命令"  data-scroll-to="#Redis常用命令"><span class="toc-number">1.8.</span> <span class="toc-text">Redis常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#字符串String操作命令"  data-scroll-to="#字符串String操作命令"><span class="toc-number">1.8.1.</span> <span class="toc-text">字符串String操作命令</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#哈希hash操作命令"  data-scroll-to="#哈希hash操作命令"><span class="toc-number">1.8.2.</span> <span class="toc-text">哈希hash操作命令</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#列表list操作命令"  data-scroll-to="#列表list操作命令"><span class="toc-number">1.8.3.</span> <span class="toc-text">列表list操作命令</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#无序集合set操作命令"  data-scroll-to="#无序集合set操作命令"><span class="toc-number">1.8.4.</span> <span class="toc-text">无序集合set操作命令</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#有序集合sorted-set操作命令"  data-scroll-to="#有序集合sorted-set操作命令"><span class="toc-number">1.8.5.</span> <span class="toc-text">有序集合sorted set操作命令</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#通用命令"  data-scroll-to="#通用命令"><span class="toc-number">1.8.6.</span> <span class="toc-text">通用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Java操作radis"  data-scroll-to="#Java操作radis"><span class="toc-number">1.9.</span> <span class="toc-text">Java操作radis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Java设置radis的spring类型"  data-scroll-to="#Java设置radis的spring类型"><span class="toc-number">1.9.1.</span> <span class="toc-text">Java设置radis的spring类型</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Java设置radis的list类型"  data-scroll-to="#Java设置radis的list类型"><span class="toc-number">1.9.2.</span> <span class="toc-text">Java设置radis的list类型</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Java设置radis的hash类型"  data-scroll-to="#Java设置radis的hash类型"><span class="toc-number">1.9.3.</span> <span class="toc-text">Java设置radis的hash类型</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Java设置radis的Set类型"  data-scroll-to="#Java设置radis的Set类型"><span class="toc-number">1.9.4.</span> <span class="toc-text">Java设置radis的Set类型</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Java设置radis的sorted-set类型"  data-scroll-to="#Java设置radis的sorted-set类型"><span class="toc-number">1.9.5.</span> <span class="toc-text">Java设置radis的sorted set类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#使用Spring-Sache"  data-scroll-to="#使用Spring-Sache"><span class="toc-number">1.10.</span> <span class="toc-text">使用Spring Sache</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Spring-Cache简介"  data-scroll-to="#Spring-Cache简介"><span class="toc-number">1.10.1.</span> <span class="toc-text">Spring Cache简介</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Spring-Cache常用注解"  data-scroll-to="#Spring-Cache常用注解"><span class="toc-number">1.10.2.</span> <span class="toc-text">Spring Cache常用注解</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Redis主从复制"  data-scroll-to="#Redis主从复制"><span class="toc-number">1.11.</span> <span class="toc-text">Redis主从复制</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#redis哨兵机制"  data-scroll-to="#redis哨兵机制"><span class="toc-number">1.12.</span> <span class="toc-text">redis哨兵机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#哨兵配置"  data-scroll-to="#哨兵配置"><span class="toc-number">1.12.1.</span> <span class="toc-text">哨兵配置</span></a></li></ol></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            06/12
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            20:17
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Rogers
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="Redis数据库"><a href="#Redis数据库" class="headerlink" title="Redis数据库"></a>Redis数据库</h1><h2 id="什么是Redis？"><a href="#什么是Redis？" class="headerlink" title="什么是Redis？"></a>什么是Redis？</h2><p>Redis是一种基于<strong>内存</strong>的key-value结构数据库</p>
+<p>他会将我们的数据存放在内存中，这就有利于<strong>提高获取数据的速度</strong>。同时因为它是存放在内存中，所以当服务器断电时里面的数据也会不复存在</p>
+<h2 id="Redis简介"><a href="#Redis简介" class="headerlink" title="Redis简介"></a>Redis简介</h2><ul>
+<li><p>Redis是一个开源的内存中的数据结构存储系统，他可以用作：数据库、缓存和消息中间件</p>
+</li>
+<li><p>官网：<a target="_blank" rel="noopener" href="https://redis.io/">https://redis.io</a></p>
+</li>
+<li><p>Redis是用C语言开发的一个开源的高性能键值对（key-value</p>
+</li>
+</ul>
+<p>数据库，官方提供的数据是可以达到100000+的QPS（每秒内查询次数）。它存储的value类型比较丰富，也被称为结构化的nosql数据库</p>
+<ul>
+<li>Nosql，泛指非关系型数据库</li>
+</ul>
+<h2 id="Redis下载与安装"><a href="#Redis下载与安装" class="headerlink" title="Redis下载与安装"></a>Redis下载与安装</h2><h3 id="windows系统"><a href="#windows系统" class="headerlink" title="windows系统"></a>windows系统</h3><p>将下载好的.zip格式压缩包，直接解压就可以直接使用</p>
+<p><img src="/img/Redis/image-20230412110246114.png" alt="image-20230412110246114" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="linux系统"><a href="#linux系统" class="headerlink" title="linux系统"></a>linux系统</h3><ol>
+<li>将Redis安装包上传到linux</li>
+<li>解压安装包，命令：tar -zxvf redis-4.0.0.tar.gz -C /usr/local</li>
+<li>安装redis的依赖环境gcc，命令：yum install gcc-c++</li>
+<li>进入/usr/local/redis-4.0.0,进行编译，命令：make</li>
+<li>进入redis的src目录，进行安装，命令：make install</li>
+</ol>
+<h2 id="Redis启动"><a href="#Redis启动" class="headerlink" title="Redis启动"></a>Redis启动</h2><h3 id="linux启动"><a href="#linux启动" class="headerlink" title="linux启动"></a>linux启动</h3><p>redis-4.0.0 -&gt; src文件夹下执行：./redis-server</p>
+<p>设置后台运行：</p>
+<ol>
+<li><p>redis-4.0.0下运行vim redis.conf</p>
+</li>
+<li><p>输入dae将检索到的no改为yes</p>
+</li>
+<li><p>保存退出</p>
+</li>
+<li><p>运行./redis-server ./redis.conf</p>
+</li>
+</ol>
+<p>使用命令</p>
+<p>src下./redis-cli</p>
+<h3 id="windows启动"><a href="#windows启动" class="headerlink" title="windows启动"></a>windows启动</h3><p>运行redis-server.exe</p>
+<h2 id="Redis设置密码"><a href="#Redis设置密码" class="headerlink" title="Redis设置密码"></a>Redis设置密码</h2><ol>
+<li>在radis.conf中检索password，将注释解掉，并把第二个单词改成需要的密码</li>
+<li>保存，重启服务</li>
+<li>输入src/redis-cli回车</li>
+<li>输入auth 你的密码</li>
+</ol>
+<h2 id="设置允许远程连接"><a href="#设置允许远程连接" class="headerlink" title="设置允许远程连接"></a>设置允许远程连接</h2><ol>
+<li>在radis.conf中检索bind</li>
+<li>将bind 127.0.0.1注释掉</li>
+<li>重启服务</li>
+<li>在windows中的radis路径中使用powershell运行命令：</li>
+</ol>
+<p> .\redis-cli.exe -h 192.168.136.131 -p 6379 -a 510609</p>
+<h2 id="Redis数据类型"><a href="#Redis数据类型" class="headerlink" title="Redis数据类型"></a>Redis数据类型</h2><p>Redis存储的是key-value结构的数据，其中key是字符串类型，value有五种常用的数据类型</p>
+<ul>
+<li>字符串string类型：string普通字符串，常用</li>
+<li>哈希表hash类型：hash适合存储对象</li>
+<li>列表list类型：list按照插入顺序排列，允许存在重复的元素</li>
+<li>无序集合set类型：set无序集合，没有重复的元素</li>
+<li>有序集合sorted set类型：有序集合，没有重复元素</li>
+</ul>
+<h2 id="Redis常用命令"><a href="#Redis常用命令" class="headerlink" title="Redis常用命令"></a>Redis常用命令</h2><h3 id="字符串String操作命令"><a href="#字符串String操作命令" class="headerlink" title="字符串String操作命令"></a>字符串String操作命令</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置key和对应的value</span></span><br><span class="line"><span class="built_in">set</span> key value</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取key对应的value值</span></span><br><span class="line">get key</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置key存在的秒数</span></span><br><span class="line">setex key seconds value</span><br><span class="line"></span><br><span class="line"><span class="comment">#只有在key不存在时设置key的值</span></span><br><span class="line">setnx key value</span><br></pre></td></tr></table></figure>
+
+<h3 id="哈希hash操作命令"><a href="#哈希hash操作命令" class="headerlink" title="哈希hash操作命令"></a>哈希hash操作命令</h3><p>Redis hash是一个string类型的field和calue的映射表，hash特别适合用于存储对象，常用的命令</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用 HSET 添加一个字段和值到哈希表中：</span></span><br><span class="line">HSET myhash field1 <span class="string">&quot;Hello&quot;</span></span><br><span class="line"><span class="comment">#这将在名为 myhash 的哈希表中添加一个字段 field1 并将其值设置为 &quot;Hello&quot;。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用 HGET 获取哈希表中指定字段的值：</span></span><br><span class="line">HGET myhash field1</span><br><span class="line"><span class="comment">#这将返回名为 myhash 的哈希表中 field1 字段的值。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用 HMSET 添加多个字段和值到哈希表中：</span></span><br><span class="line">HMSET myhash field1 <span class="string">&quot;Hello&quot;</span> field2 <span class="string">&quot;World&quot;</span></span><br><span class="line"><span class="comment">#这将在名为 myhash 的哈希表中添加两个字段 field1 和 field2 并将它们的值设置为 &quot;Hello&quot; 和 &quot;World&quot;。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用 HLEN 获取哈希表中字段的数量：</span></span><br><span class="line">HLEN myhash</span><br><span class="line"><span class="comment">#这将返回名为 myhash 的哈希表中字段的数量。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用 HEXISTS 检查哈希表中是否存在指定的字段：</span></span><br><span class="line">HEXISTS myhash field1</span><br><span class="line"><span class="comment">#这将返回一个布尔值，表示名为 myhash 的哈希表中是否存在 field1 字段。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用 HDEL 删除哈希表中的一个或多个字段：</span></span><br><span class="line">HDEL myhash field1 field2</span><br><span class="line"><span class="comment">#这将从名为 myhash 的哈希表中删除 field1 和 field2 两个字段。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用 HKEYS 获取名为 myhash 的哈希表中的所有字段名：</span></span><br><span class="line">HKEYS myhash</span><br><span class="line"><span class="comment">#这将返回一个数组，包含名为 myhash 的哈希表中的所有字段名。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用 HVALS 获取名为 myhash 的哈希表中的所有字段值：</span></span><br><span class="line">HVALS myhash</span><br><span class="line"><span class="comment">#这将返回一个数组，包含名为 myhash 的哈希表中的所有字段值。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="列表list操作命令"><a href="#列表list操作命令" class="headerlink" title="列表list操作命令"></a>列表list操作命令</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将一个或多个值插入到列表头部，返回列表的长度</span></span><br><span class="line">LPUSH mylist <span class="string">&quot;hello&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#移除并返回移除的头部元素</span></span><br><span class="line">LPOP mylist</span><br><span class="line"></span><br><span class="line"><span class="comment">#移除并返回移除的尾部元素</span></span><br><span class="line">RPOP mylist</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取列表指定范围内的所有元素（返回一个数组）</span></span><br><span class="line">LRANGE mylist <span class="number">0</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查询指定列表所有的数据</span></span><br><span class="line">LRANGE mylist <span class="number">0</span> <span class="literal">-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#获取列表指定索引位置的元素，返回指定位置的元素</span></span><br><span class="line">LINDEX mylist <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#获取列表的长度</span></span><br><span class="line">LLEN mylist</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改指定索引位置的数据</span></span><br><span class="line">LSET mylist <span class="number">1</span> orange</span><br></pre></td></tr></table></figure>
+
+<h3 id="无序集合set操作命令"><a href="#无序集合set操作命令" class="headerlink" title="无序集合set操作命令"></a>无序集合set操作命令</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#向集合添加一个或多个成员</span></span><br><span class="line">SADD myset apple</span><br><span class="line">SADD myset orange banana</span><br><span class="line"></span><br><span class="line"><span class="comment">#从集合中删除一个或多个成员</span></span><br><span class="line">SREM myset orange</span><br><span class="line"></span><br><span class="line"><span class="comment">#返回集合中所有的成员</span></span><br><span class="line">SMEMBERS myset</span><br><span class="line"></span><br><span class="line"><span class="comment">#返回集合的基数（集合中元素的数量）</span></span><br><span class="line">SCARD myset</span><br><span class="line"></span><br><span class="line"><span class="comment">#判断一个元素是否是集合的成员</span></span><br><span class="line">SISMEMBER myset apple</span><br><span class="line"></span><br><span class="line"><span class="comment">#返回所有给定集合的并集</span></span><br><span class="line">SUNION set1 set2</span><br><span class="line"></span><br><span class="line"><span class="comment">#返回所有给定集合的差集</span></span><br><span class="line">SDIFF set1 set2</span><br><span class="line"></span><br><span class="line"><span class="comment">#返回所有给定集合的交集</span></span><br><span class="line">SINTER set1 set2</span><br></pre></td></tr></table></figure>
+
+<h3 id="有序集合sorted-set操作命令"><a href="#有序集合sorted-set操作命令" class="headerlink" title="有序集合sorted set操作命令"></a>有序集合sorted set操作命令</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#向有序集合中添加成员</span></span><br><span class="line">ZADD myset <span class="number">20</span> <span class="string">&quot;Bob&quot;</span> <span class="number">30</span> <span class="string">&quot;Charlie&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#获取成员的分数</span></span><br><span class="line">ZSCORE myset <span class="string">&quot;Alice&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#移除成员</span></span><br><span class="line">ZREM myset <span class="string">&quot;Bob&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#增加成员的分数</span></span><br><span class="line">ZINCRBY myset <span class="number">5</span> <span class="string">&quot;Charlie&quot;</span></span><br><span class="line"><span class="comment">#35</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#获取成员的排名</span></span><br><span class="line"><span class="comment">#从大到小</span></span><br><span class="line">ZRANK myset <span class="string">&quot;Alice&quot;</span></span><br><span class="line"><span class="comment">#从小到大</span></span><br><span class="line">ZREVRANK myset <span class="string">&quot;Charlie&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#获取指定范围内的成员列表</span></span><br><span class="line">&gt; ZRANGEBYSCORE myset <span class="number">10</span> <span class="number">30</span> WITHSCORES LIMIT <span class="number">0</span> <span class="number">2</span></span><br><span class="line"><span class="number">1</span>) <span class="string">&quot;Alice&quot;</span></span><br><span class="line"><span class="number">2</span>) <span class="string">&quot;10&quot;</span></span><br><span class="line"><span class="number">3</span>) <span class="string">&quot;Charlie&quot;</span></span><br><span class="line"><span class="number">4</span>) <span class="string">&quot;30&quot;</span></span><br><span class="line"><span class="comment">#通过执行ZRANGEBYSCORE指令获取了myset有序集合中分数在10到30之间（包括10和30）的两个成员。由于指定了WITHSCORES选项，因此返回结果中包含每个成员的分数值。同时，由于指定了LIMIT选项，因此结果集合数量被限制为2个，并且偏移量为0。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通用命令"><a href="#通用命令" class="headerlink" title="通用命令"></a>通用命令</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">KEYs pattern</span><br><span class="line"><span class="comment">#查找所有符合给定模式( pattern)的 key</span></span><br><span class="line"></span><br><span class="line">EXISTs key</span><br><span class="line"><span class="comment">#检查给定key是否存在</span></span><br><span class="line"></span><br><span class="line">rYPE key</span><br><span class="line"><span class="comment">#返回key所储存的值的类型</span></span><br><span class="line"></span><br><span class="line">TTL key</span><br><span class="line"><span class="comment">#返回给定key 的剩余生存时间(TTL, time to live)，以秒为单位</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">DEL</span> key</span><br><span class="line"><span class="comment">#该命令用于在 key存在是删除key</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Java操作radis"><a href="#Java操作radis" class="headerlink" title="Java操作radis"></a>Java操作radis</h2><h3 id="Java设置radis的spring类型"><a href="#Java设置radis的spring类型" class="headerlink" title="Java设置radis的spring类型"></a>Java设置radis的spring类型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*添加键值对*/</span></span><br><span class="line">redisTemplate.opsForValue().set(<span class="string">&quot;city&quot;</span>,<span class="string">&quot;beijing&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*获取数据*/</span></span><br><span class="line"><span class="type">String</span> <span class="variable">value</span> <span class="operator">=</span> (String) redisTemplate.opsForValue().get(<span class="string">&quot;city&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*添加键值对并设置过期时间101秒*/</span></span><br><span class="line">redisTemplate.opsForValue().set(<span class="string">&quot;city&quot;</span>,<span class="string">&quot;beijing&quot;</span>,<span class="number">101</span>, TimeUnit.SECONDS);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*设置如果则不执行，如果没有就加上*/</span></span><br><span class="line"><span class="type">Boolean</span> <span class="variable">aBoolean</span> <span class="operator">=</span> redisTemplate.opsForValue().setIfAbsent(<span class="string">&quot;city&quot;</span>, <span class="string">&quot;nanjing&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Java设置radis的list类型"><a href="#Java设置radis的list类型" class="headerlink" title="Java设置radis的list类型"></a>Java设置radis的list类型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ListOperations</span> <span class="variable">listOperations</span> <span class="operator">=</span> redisTemplate.opsForList();</span><br><span class="line"></span><br><span class="line"><span class="comment">/*向list中存入多个值*/</span></span><br><span class="line">listOperations.leftPushAll(<span class="string">&quot;mylist&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;c&quot;</span>,<span class="string">&quot;d&quot;</span>);</span><br><span class="line">        </span><br><span class="line"><span class="comment">/*取值*/</span></span><br><span class="line">List&lt;String&gt; mylist = listOperations.range(<span class="string">&quot;mylist&quot;</span>, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line"><span class="keyword">for</span> (String value : mylist) &#123;</span><br><span class="line">        System.out.println(value);</span><br><span class="line">&#125;   <span class="comment">/*输出dcba*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*获得列表长度llen*/</span></span><br><span class="line">Long size=listOperations.size(<span class="string">&quot;mylist&quot;</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">lsize</span> <span class="operator">=</span> size.intValue();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; lsize; i++) &#123;</span><br><span class="line">        <span class="comment">/*出队列*/</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">element</span> <span class="operator">=</span> listOperations.rightPop(<span class="string">&quot;mylist&quot;</span>);</span><br><span class="line">        System.out.println((String)element);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Java设置radis的hash类型"><a href="#Java设置radis的hash类型" class="headerlink" title="Java设置radis的hash类型"></a>Java设置radis的hash类型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">HashOperations hashOperations=redisTemplate.opsForHash();</span><br><span class="line"></span><br><span class="line"><span class="comment">/*存值*/</span></span><br><span class="line">hashOperations.put(<span class="string">&quot;002&quot;</span>,<span class="string">&quot;name&quot;</span>,<span class="string">&quot;xiaoming&quot;</span>);</span><br><span class="line">hashOperations.put(<span class="string">&quot;002&quot;</span>,<span class="string">&quot;age&quot;</span>,<span class="string">&quot;20&quot;</span>);</span><br><span class="line">hashOperations.put(<span class="string">&quot;002&quot;</span>,<span class="string">&quot;address&quot;</span>,<span class="string">&quot;bj&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*取值*/</span></span><br><span class="line">String age=(String) hashOperations.get(<span class="string">&quot;002&quot;</span>,<span class="string">&quot;age&quot;</span>);</span><br><span class="line">System.out.println(age);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*获得hash结构中所有字段*/</span></span><br><span class="line">set keys=hashOperations.keys(<span class="string">&quot;002&quot;</span>);</span><br><span class="line"><span class="keyword">for</span> (Object key : keys) &#123;</span><br><span class="line">    System.out.println(key);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*获得hash结构中所有字段*/</span></span><br><span class="line">List values=hashOperations.values(<span class="string">&quot;002&quot;</span>);</span><br><span class="line"><span class="keyword">for</span> (Object value : values) &#123;</span><br><span class="line">    System.out.println(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Java设置radis的Set类型"><a href="#Java设置radis的Set类型" class="headerlink" title="Java设置radis的Set类型"></a>Java设置radis的Set类型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">SetOperations setOperations= redisTemplate.opsForSet();</span><br><span class="line"></span><br><span class="line"><span class="comment">/*存值*/</span></span><br><span class="line">setOperations.add(<span class="string">&quot;myset&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;c&quot;</span>,<span class="string">&quot;a&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*取值*/</span></span><br><span class="line">Set&lt;String&gt; myset=setOperations.members(<span class="string">&quot;myset&quot;</span>);</span><br><span class="line"><span class="keyword">for</span> (String o:myset)&#123;</span><br><span class="line">    System.out.println(o);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*删除成员*/</span></span><br><span class="line">setOperations.remove(<span class="string">&quot;myset&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;a&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Java设置radis的sorted-set类型"><a href="#Java设置radis的sorted-set类型" class="headerlink" title="Java设置radis的sorted set类型"></a>Java设置radis的sorted set类型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">ZSetOperations zSetOperations=redisTemplate.opsForZSet();</span><br><span class="line"></span><br><span class="line"><span class="comment">/*存值*/</span></span><br><span class="line">zSetOperations.add(<span class="string">&quot;myzset&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="number">10.0</span>);</span><br><span class="line">zSetOperations.add(<span class="string">&quot;myzset&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="number">20.0</span>);</span><br><span class="line">zSetOperations.add(<span class="string">&quot;myzset&quot;</span>,<span class="string">&quot;c&quot;</span>,<span class="number">30.0</span>);</span><br><span class="line">zSetOperations.add(<span class="string">&quot;myzset&quot;</span>,<span class="string">&quot;d&quot;</span>,<span class="number">40.0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*取值*/</span></span><br><span class="line">Set&lt;String&gt; myzset= zSetOperations.range(<span class="string">&quot;myzset&quot;</span>,<span class="number">0</span>,-<span class="number">1</span>);</span><br><span class="line"><span class="keyword">for</span>(String s:myzset)&#123;</span><br><span class="line">    System.out.println(s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*修改分数,添加20*/</span></span><br><span class="line">zSetOperations.incrementScore(<span class="string">&quot;myzset&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="number">20.0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*删除*/</span></span><br><span class="line">zSetOperations.remove(<span class="string">&quot;myzset&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用Spring-Sache"><a href="#使用Spring-Sache" class="headerlink" title="使用Spring Sache"></a>使用Spring Sache</h2><h3 id="Spring-Cache简介"><a href="#Spring-Cache简介" class="headerlink" title="Spring Cache简介"></a>Spring Cache简介</h3><p>Spring Cache是一个框架，实现了基于注解的缓存功能，只需要简单地加一个注解，就能实现缓存功能。</p>
+<p>Spring Cache提供了一层抽象，底层可以切换不同的cache实现。具体就是通过CacheManager接口来统一不同的缓存技术。</p>
+<p>针对不同的缓存技术需要实现不同的CacheManager</p>
+<table>
+<thead>
+<tr>
+<th>CacheManager</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EhCacheCacheManager</td>
+<td>使用EhCache作为缓存技术</td>
+</tr>
+<tr>
+<td>GuavaCacheManager</td>
+<td>使用Google的GuavaCache作为缓存技术</td>
+</tr>
+<tr>
+<td>RedisCacheManager</td>
+<td>使用Redis作为缓存技术</td>
+</tr>
+</tbody></table>
+<h3 id="Spring-Cache常用注解"><a href="#Spring-Cache常用注解" class="headerlink" title="Spring Cache常用注解"></a>Spring Cache常用注解</h3><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@EnableCaching</td>
+<td>开启缓存注解功能</td>
+</tr>
+<tr>
+<td>@Cacheable</td>
+<td>在方法执行前spring先查看缓存中是否有数据，如果有数据，则直接返回缓存数据;若没有数据，调用方法并将方法返回值放到缓存中</td>
+</tr>
+<tr>
+<td>@CachePut</td>
+<td>将方法的返回值放到缓存中</td>
+</tr>
+<tr>
+<td>@CacheEvict</td>
+<td>将一条或多条数据从缓存中删除</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Cacheable:查询指定缓存，在执行时先查看缓存中是否有数据。如果有，优先加载内存。如果没有再去mysql中查找</span></span><br><span class="line"><span class="comment"> * value：缓存的名称，每个缓存名称下面可以有多个key</span></span><br><span class="line"><span class="comment"> * key：缓存的key</span></span><br><span class="line"><span class="comment"> * condition：满足条件时才会缓存数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Cacheable(value = &quot;userCache&quot;, key = &quot;#id&quot;,condition = &quot;#id != null&quot;)</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> User <span class="title function_">getById</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span>&#123;</span><br><span class="line">    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> userService.getById(id);</span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Redis主从复制"><a href="#Redis主从复制" class="headerlink" title="Redis主从复制"></a>Redis主从复制</h2><p>首先本机设为从库，服务器作为主库</p>
+<hr/>
+
+<p>修改服务器（主库）</p>
+<p>打开 Redis 主服务器 redis.windows.conf 配置文件，找到 bind 和 port 配置项，确保 Redis 绑定的 IP 地址和端口号正确：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bind 127.0.0.1 		# 这里改成服务器的 IP 地址或者绑定的外网地址</span><br><span class="line">port 6379 			# 这里保持默认的 Redis 端口号</span><br><span class="line">requirepass 510609	# 设置主库密码</span><br></pre></td></tr></table></figure>
+
+<p>主库src中运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis-server ../redis.conf						#运行服务</span><br><span class="line">redis-cli -h 192.168.136.131 -p 6379 -a 510609	#设置当前主库ip、端口和密码</span><br><span class="line">info replication								#查看角色和状态</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+
+<p>修改本机（从库）</p>
+<p>打开redis.conf配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">slaveof 192.168.56.110 6379		#配置所属主服务器的ip和端口号</span><br><span class="line">masterauth 510609				#配置所属主服务的密码</span><br></pre></td></tr></table></figure>
+
+<p>从库中启动redis-server.exe和redis-cli.exe，并运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">slaveof 192.168.136.131 6379	#设置所属主库ip和端口号</span><br><span class="line">config set masterauth 510609	#填写主库密码</span><br><span class="line">info replication				#查看角色和状态</span><br></pre></td></tr></table></figure>
+
+<h2 id="redis哨兵机制"><a href="#redis哨兵机制" class="headerlink" title="redis哨兵机制"></a>redis哨兵机制</h2><blockquote>
+<p>主从复制带来的问题</p>
+<p>当主服务宕机时，redis不能自动切换从服务为主服务，只能通过人工手动的形式，中间会出现服务断档</p>
+</blockquote>
+<p>从而引入哨兵模式概念：</p>
+<p>哨兵模式是一种特殊的模式，首先Redis提供了哨兵的命令，哨兵是一个独立的进程，作为进程，它会独立运行。其原理是哨兵通过发送命令，等待Redis服务器响应，从而监控运行的多个Redis实例。</p>
+<p><strong>用文字描述一下故障切换（failover）的过程。假设主服务器宕机，哨兵1先检测到这个结果，系统并不会马上进行failover过程，仅仅是哨兵1主观的认为主服务器不可用，这个现象成为主观下线。当后面的哨兵也检测到主服务器不可用，并且数量达到一定值时，那么哨兵之间就会进行一次投票，投票的结果由一个哨兵发起，进行failover操作。切换成功后，就会通过发布订阅模式，让各个哨兵把自己监控的从服务器实现切换主机，这个过程称为客观下线。这样对于客户端而言，一切都是透明的。</strong></p>
+<h3 id="哨兵配置"><a href="#哨兵配置" class="headerlink" title="哨兵配置"></a>哨兵配置</h3><ol>
+<li><p>在readis文件夹下找到sentinel.conf文件</p>
+</li>
+<li><p>修改对应配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#禁止保护配置</span><br><span class="line">protected-mode no</span><br><span class="line"></span><br><span class="line">#监控配置</span><br><span class="line">#setinel monitor:代表监控;</span><br><span class="line">#mymaster:代表主机名，可以自定义;</span><br><span class="line">#192.168.56.110∶主服务ip地址;</span><br><span class="line">#6379∶主服务端口号;</span><br><span class="line">#2:需要几个哨兵意见统一</span><br><span class="line">sentinel monitor mymaster 192.168.56.110 6379 2 </span><br><span class="line"></span><br><span class="line">#配置后台启动</span><br><span class="line">daemonize yes</span><br></pre></td></tr></table></figure></li>
+<li><p>启动哨兵</p>
+<p>Sentinel ./sentinel.conf</p>
+</li>
+</ol>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>Post author: </strong>
+        Rogers
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>Post link: </strong>
+        <a id="original-link" href="https://ljs-yym.github.io/2023/06/12/Redis%E7%BC%93%E5%AD%98/" title="Redis缓存数据库">https://ljs-yym.github.io/2023/06/12/Redis%E7%BC%93%E5%AD%98/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>Copyright Notice: </strong>
+        All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> unless otherwise stated.
+    </li>
+</ul>
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/06/12/Nginx/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/cover/nginx.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/Java/">
+                    Java
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/06/12/Nginx/" class="trm-anima-link">
+                    Nginx服务器
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/06/12</li>
+                <li>20:17</li>
+                
+                    <li>974</li>
+                
+                
+                    <li>3</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2023- 2023</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">长生风月</span>
+        </div>
+    
+
+      
+
+    
+        <div class="trm-footer-item">
+            The blog has been lovely to run <span id="since" class="trm-accent-color"></span> day
+        </div>
+     
+
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("02/27/2023 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="Read Mode" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="Toggle between single-column and double-column" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="Back To Top">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+<div class="trm-search-popup">
+    <div class="trm-search-header">
+        <span class="trm-search-popup-btn-close">
+            <i class="iconfont fas fa-times"></i>
+        </span>
+    </div>
+    <div class="form trm-search-form">
+        <input class="trm-search-input" type="text" placeholder="Searching...">
+    </div>
+    <div class="trm-search-result-container">
+
+    </div>
+</div>
+
+  <!-- Plugin -->
+
+
+
+
+    
+<script src="https://unpkg.com/swup@2.0.19/dist/swup.min.js"></script>
+
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.2"></script>
+    
+
+    
+        
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=2.0.2"></script>
+    
+
+    <!-- 数学公式 -->
+    
+        
+<script src="https://unpkg.com/katex@latest/dist/katex.min.js" data-swup-reload-script></script>
+
+        
+            
+<script src="https://unpkg.com/katex@latest/dist/contrib/copy-tex.min.js" data-swup-reload-script></script>
+
+        
+        
+<script src="https://unpkg.com/katex@latest/dist/contrib/auto-render.min.js" data-swup-reload-script></script>
+
+        <script data-swup-reload-script>
+              window.renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true },
+                ],
+                ...{},
+            })
+        </script>
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <script>
+        "serviceWorker" in navigator ?
+        navigator.serviceWorker.register('/sw.js').then(function () {
+            navigator.serviceWorker.controller ? 
+             console.log("Assets cached by the controlling service worker.") :
+             console.log("Please reload this page to allow the service worker to handle network operations.")
+        }).catch(function (e) {
+            console.log("ERROR: " + e)
+        }) : console.log("Service workers are not supported in the current browser.")
+    </script>
+
+    <!-- baidu push -->
+    
+    <script data-swup-reload-script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+
+
+<script id="async-script" src="/js/main.js?v=2.0.2"></script>
+
+</body>
+
+</html>

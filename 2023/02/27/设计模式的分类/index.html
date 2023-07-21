@@ -11,16 +11,16 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式之 “一人设计九人慌”">
 <meta property="og:url" content="https://ljs-yym.github.io/2023/02/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%88%86%E7%B1%BB/index.html">
-<meta property="og:site_name" content="HexoDome">
+<meta property="og:site_name" content="RogevnBlog">
 <meta property="og:description" content="设计模式的分类根据目的分类创建型模式​        用于描述”怎样创建对象“，他的主要特点是将对象的创建与使用分离 ​        单例、原型、工厂方法、抽象工厂、建造者等物种创建型模式 结构型模式​        用于描述如何将类或对象按某种布局组成更大的结构 ​        代理、适配器、桥接、装饰、外观、享元、组合等7种构造型模式 行为型模式​        用于描述类或对象之间怎样相">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ljs-yym.github.io/img/6af89bc8gw1f8nziomc1oj209706w74n.jpg">
+<meta property="og:image" content="https://ljs-yym.github.io/img/cover/pattern.jpg">
 <meta property="article:published_time" content="2023-02-27T03:52:14.220Z">
-<meta property="article:modified_time" content="2023-02-27T10:25:03.248Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:modified_time" content="2023-03-09T00:19:47.815Z">
+<meta property="article:author" content="Rogers">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ljs-yym.github.io/img/6af89bc8gw1f8nziomc1oj209706w74n.jpg">
+<meta name="twitter:image" content="https://ljs-yym.github.io/img/cover/pattern.jpg">
 
     <meta name="keywords" content="hexo,node,博客">
 
@@ -68,8 +68,8 @@
 
 
 <!-- Variable -->
-<script>window.ASYNC_CONFIG = {"hostname":"ljs-yym.github.io","author":"John Doe","root":"/","typed_text":["Web Developer","Backend Programmer","Full Stack Developer！"],"theme_version":"2.0.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo.png","icon16":"/img/logo.png","icon32":"/img/logo.png","dark_logo":"/img/dark_logo.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"creative_commons":{"license":"by-nc-sa","language":"deed.zh"},"search":{"enable":true,"type":"local","path":"search.xml","field":"post","content":true,"format":"html"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-02-27 18:25:03"};</script>
+<script>window.ASYNC_CONFIG = {"hostname":"ljs-yym.github.io","author":"Rogers","root":"/","typed_text":["Web Developer","Backend Programmer","Full Stack Developer！"],"theme_version":"2.0.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo.png","icon16":"/img/logo.png","icon32":"/img/logo.png","dark_logo":"/img/dark_logo.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"creative_commons":{"license":"by-nc-sa","language":"deed.zh"},"search":{"enable":true,"type":"local","path":"search.xml","field":"post","content":true,"format":"html"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-03-09 08:19:47"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.2" id="trm-switch-style">
@@ -191,7 +191,7 @@
             </li>
             
             <li class="menu-item-has-children ">
-                <a  href="/null" target="">
+                <a  href="/picture/" target="">
                     好东西
                 </a>
                 
@@ -458,7 +458,7 @@
     <div class="col-sm-4">
         <div id="post-author" class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-user trm-icon"></i><br>
-            John Doe
+            Rogers
         </div>
     </div>
 </div>
@@ -553,7 +553,7 @@
 <ul class="trm-post-copyright">
     <li class="trm-post-copyright-author">
         <strong>Post author: </strong>
-        John Doe
+        Rogers
     </li>
     <li class="trm-post-copyright-link">
         <strong>Post link: </strong>
@@ -580,7 +580,7 @@
         <a href="/2023/02/27/MySQL%E7%AC%94%E8%AE%B0/" class="trm-cover-frame trm-anima-link">
             
             
-                <img alt="cover" class="no-fancybox" src="/img/da8883963dce31b228246fe9c419e3c5.gif">
+                <img alt="cover" class="no-fancybox" src="/img/cover/data.jpg">
             
         </a>
         
@@ -592,7 +592,7 @@
             </div>
             <h5>
                 <a href="/2023/02/27/MySQL%E7%AC%94%E8%AE%B0/" class="trm-anima-link">
-                    MySql从入门到删库跑路
+                    MySql从入门到跑路
                 </a>
             </h5>
             <div class="trm-divider trm-mb-20 trm-mt-20"></div>
@@ -600,10 +600,10 @@
                 <li>23/02/27</li>
                 <li>11:52</li>
                 
-                    <li>4.6k</li>
+                    <li>3.4k</li>
                 
                 
-                    <li>18</li>
+                    <li>13</li>
                 
             </ul>
         </div>

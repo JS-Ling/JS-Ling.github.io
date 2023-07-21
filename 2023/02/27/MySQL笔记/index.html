@@ -9,23 +9,23 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
 <meta name="description" content="MySQL笔记数据库的概念什么是数据库​    数据库是用于存储和管理数据的仓库 ​    每个数据库都有一个或多个不同的API用于创建、访问，管理，搜索和复制所保存的数据 数据库的特点 数据以表格的形式出现 每行为各种记录名称 每列为记录名称所对应的数据域 许多的行和列组成一张表单 若干的表单组成数据库（database）  数据库的行称为记录、列称为字段数据库操作修改结束符​    delim">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySql从入门到删库跑路">
+<meta property="og:title" content="MySql从入门到跑路">
 <meta property="og:url" content="https://ljs-yym.github.io/2023/02/27/MySQL%E7%AC%94%E8%AE%B0/index.html">
-<meta property="og:site_name" content="HexoDome">
+<meta property="og:site_name" content="RogevnBlog">
 <meta property="og:description" content="MySQL笔记数据库的概念什么是数据库​    数据库是用于存储和管理数据的仓库 ​    每个数据库都有一个或多个不同的API用于创建、访问，管理，搜索和复制所保存的数据 数据库的特点 数据以表格的形式出现 每行为各种记录名称 每列为记录名称所对应的数据域 许多的行和列组成一张表单 若干的表单组成数据库（database）  数据库的行称为记录、列称为字段数据库操作修改结束符​    delim">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ljs-yym.github.io/img/da8883963dce31b228246fe9c419e3c5.gif">
+<meta property="og:image" content="https://ljs-yym.github.io/img/cover/data.jpg">
 <meta property="article:published_time" content="2023-02-27T03:52:14.222Z">
-<meta property="article:modified_time" content="2023-02-27T14:46:54.642Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:modified_time" content="2023-06-12T09:27:10.714Z">
+<meta property="article:author" content="Rogers">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ljs-yym.github.io/img/da8883963dce31b228246fe9c419e3c5.gif">
+<meta name="twitter:image" content="https://ljs-yym.github.io/img/cover/data.jpg">
 
     <meta name="keywords" content="hexo,node,博客">
 
 
-<title >MySql从入门到删库跑路</title>
+<title >MySql从入门到跑路</title>
 
 <!-- Favicon -->
 
@@ -68,8 +68,8 @@
 
 
 <!-- Variable -->
-<script>window.ASYNC_CONFIG = {"hostname":"ljs-yym.github.io","author":"John Doe","root":"/","typed_text":["Web Developer","Backend Programmer","Full Stack Developer！"],"theme_version":"2.0.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo.png","icon16":"/img/logo.png","icon32":"/img/logo.png","dark_logo":"/img/dark_logo.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"creative_commons":{"license":"by-nc-sa","language":"deed.zh"},"search":{"enable":true,"type":"local","path":"search.xml","field":"post","content":true,"format":"html"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-02-27 22:46:54"};</script>
+<script>window.ASYNC_CONFIG = {"hostname":"ljs-yym.github.io","author":"Rogers","root":"/","typed_text":["Web Developer","Backend Programmer","Full Stack Developer！"],"theme_version":"2.0.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo.png","icon16":"/img/logo.png","icon32":"/img/logo.png","dark_logo":"/img/dark_logo.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"creative_commons":{"license":"by-nc-sa","language":"deed.zh"},"search":{"enable":true,"type":"local","path":"search.xml","field":"post","content":true,"format":"html"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-06-12 17:27:10"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.2" id="trm-switch-style">
@@ -191,7 +191,7 @@
             </li>
             
             <li class="menu-item-has-children ">
-                <a  href="/null" target="">
+                <a  href="/picture/" target="">
                     好东西
                 </a>
                 
@@ -277,7 +277,7 @@
                             NEWS LETTER
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            MySql从入门到删库跑路
+                            MySql从入门到跑路
                         </h1>
 
                         
@@ -428,7 +428,7 @@
             </div>
             <div name="tabs-toc" class="trm-tabs-item active">
                 <div class="post-toc">
-    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#MySQL笔记"  data-scroll-to="#MySQL笔记"><span class="toc-number">1.</span> <span class="toc-text">MySQL笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#数据库的概念"  data-scroll-to="#数据库的概念"><span class="toc-number">1.1.</span> <span class="toc-text">数据库的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#什么是数据库"  data-scroll-to="#什么是数据库"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是数据库</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#数据库的特点"  data-scroll-to="#数据库的特点"><span class="toc-number">1.1.2.</span> <span class="toc-text">数据库的特点</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#数据库的行称为记录、列称为字段"  data-scroll-to="#数据库的行称为记录、列称为字段"><span class="toc-number">1.1.3.</span> <span class="toc-text">数据库的行称为记录、列称为字段</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#数据库操作"  data-scroll-to="#数据库操作"><span class="toc-number">1.2.</span> <span class="toc-text">数据库操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#修改结束符"  data-scroll-to="#修改结束符"><span class="toc-number">1.2.1.</span> <span class="toc-text">修改结束符</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#退出MySQL"  data-scroll-to="#退出MySQL"><span class="toc-number">1.2.2.</span> <span class="toc-text">退出MySQL</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#MySQL服务器信息"  data-scroll-to="#MySQL服务器信息"><span class="toc-number">1.2.3.</span> <span class="toc-text">MySQL服务器信息</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#创建数据库，使用指定参数"  data-scroll-to="#创建数据库，使用指定参数"><span class="toc-number">1.2.4.</span> <span class="toc-text">创建数据库，使用指定参数</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#创建数据库将字符集设置为gb2312"  data-scroll-to="#创建数据库将字符集设置为gb2312"><span class="toc-number">1.2.5.</span> <span class="toc-text">创建数据库将字符集设置为gb2312</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#排序规则"  data-scroll-to="#排序规则"><span class="toc-number">1.2.6.</span> <span class="toc-text">排序规则</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#创建数据库，将字符集设置为utf8数据库排序规则设置为：utf8-unicode-ci"  data-scroll-to="#创建数据库，将字符集设置为utf8数据库排序规则设置为：utf8-unicode-ci"><span class="toc-number">1.2.7.</span> <span class="toc-text">创建数据库，将字符集设置为utf8数据库排序规则设置为：utf8_unicode_ci</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#查看数据库"  data-scroll-to="#查看数据库"><span class="toc-number">1.2.8.</span> <span class="toc-text">查看数据库</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#使用数据库"  data-scroll-to="#使用数据库"><span class="toc-number">1.2.9.</span> <span class="toc-text">使用数据库</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#修改数据库编码"  data-scroll-to="#修改数据库编码"><span class="toc-number">1.2.10.</span> <span class="toc-text">修改数据库编码</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#删除数据库"  data-scroll-to="#删除数据库"><span class="toc-number">1.2.11.</span> <span class="toc-text">删除数据库</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#数据类型"  data-scroll-to="#数据类型"><span class="toc-number">1.3.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#int"  data-scroll-to="#int"><span class="toc-number">1.3.1.</span> <span class="toc-text">int</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#float"  data-scroll-to="#float"><span class="toc-number">1.3.2.</span> <span class="toc-text">float</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#字符串"  data-scroll-to="#字符串"><span class="toc-number">1.3.3.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#blob和ext类型（非二进制字符串）"  data-scroll-to="#blob和ext类型（非二进制字符串）"><span class="toc-number">1.3.4.</span> <span class="toc-text">blob和ext类型（非二进制字符串）</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#时间日期类型"  data-scroll-to="#时间日期类型"><span class="toc-number">1.3.5.</span> <span class="toc-text">时间日期类型</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Data"  data-scroll-to="#Data"><span class="toc-number">1.3.6.</span> <span class="toc-text">Data</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#数据表"  data-scroll-to="#数据表"><span class="toc-number">1.4.</span> <span class="toc-text">数据表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#查看数据库中的数据表"  data-scroll-to="#查看数据库中的数据表"><span class="toc-number">1.4.1.</span> <span class="toc-text">查看数据库中的数据表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#使用数据表"  data-scroll-to="#使用数据表"><span class="toc-number">1.4.2.</span> <span class="toc-text">使用数据表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#创建数据表"  data-scroll-to="#创建数据表"><span class="toc-number">1.4.3.</span> <span class="toc-text">创建数据表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#重命名数据表"  data-scroll-to="#重命名数据表"><span class="toc-number">1.4.4.</span> <span class="toc-text">重命名数据表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#修改表的字符集"  data-scroll-to="#修改表的字符集"><span class="toc-number">1.4.5.</span> <span class="toc-text">修改表的字符集</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#添加列"  data-scroll-to="#添加列"><span class="toc-number">1.4.6.</span> <span class="toc-text">添加列</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#修改列名称，类型"  data-scroll-to="#修改列名称，类型"><span class="toc-number">1.4.7.</span> <span class="toc-text">修改列名称，类型</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#修改某一个数据"  data-scroll-to="#修改某一个数据"><span class="toc-number">1.4.8.</span> <span class="toc-text">修改某一个数据</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#复制表"  data-scroll-to="#复制表"><span class="toc-number">1.4.9.</span> <span class="toc-text">复制表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#删除表"  data-scroll-to="#删除表"><span class="toc-number">1.4.10.</span> <span class="toc-text">删除表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#查找数据表"  data-scroll-to="#查找数据表"><span class="toc-number">1.4.11.</span> <span class="toc-text">查找数据表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#临时表"  data-scroll-to="#临时表"><span class="toc-number">1.4.12.</span> <span class="toc-text">临时表</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#字段名操作"  data-scroll-to="#字段名操作"><span class="toc-number">1.5.</span> <span class="toc-text">字段名操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#删除字段"  data-scroll-to="#删除字段"><span class="toc-number">1.5.1.</span> <span class="toc-text">删除字段</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#在数据表中使用默认值"  data-scroll-to="#在数据表中使用默认值"><span class="toc-number">1.5.2.</span> <span class="toc-text">在数据表中使用默认值</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#录入新信息"  data-scroll-to="#录入新信息"><span class="toc-number">1.5.3.</span> <span class="toc-text">录入新信息</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#在数据表中使用默认值-1"  data-scroll-to="#在数据表中使用默认值-1"><span class="toc-number">1.5.4.</span> <span class="toc-text">在数据表中使用默认值</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#约束"  data-scroll-to="#约束"><span class="toc-number">1.6.</span> <span class="toc-text">约束</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#约束分类"  data-scroll-to="#约束分类"><span class="toc-number">1.6.1.</span> <span class="toc-text">约束分类</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#插入约束"  data-scroll-to="#插入约束"><span class="toc-number">1.6.2.</span> <span class="toc-text">插入约束</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#组合主键"  data-scroll-to="#组合主键"><span class="toc-number">1.6.3.</span> <span class="toc-text">组合主键</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Enum-枚举"  data-scroll-to="#Enum-枚举"><span class="toc-number">1.6.4.</span> <span class="toc-text">Enum() 枚举</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#外键约束"  data-scroll-to="#外键约束"><span class="toc-number">1.6.5.</span> <span class="toc-text">**外键约束 **</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#删除约束"  data-scroll-to="#删除约束"><span class="toc-number">1.6.6.</span> <span class="toc-text">删除约束</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#自动增长列"  data-scroll-to="#自动增长列"><span class="toc-number">1.6.7.</span> <span class="toc-text">自动增长列</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#老表导入新表"  data-scroll-to="#老表导入新表"><span class="toc-number">1.7.</span> <span class="toc-text">老表导入新表</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#MySQL笔记"  data-scroll-to="#MySQL笔记"><span class="toc-number">1.</span> <span class="toc-text">MySQL笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#数据库的概念"  data-scroll-to="#数据库的概念"><span class="toc-number">1.1.</span> <span class="toc-text">数据库的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#什么是数据库"  data-scroll-to="#什么是数据库"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是数据库</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#数据库的特点"  data-scroll-to="#数据库的特点"><span class="toc-number">1.1.2.</span> <span class="toc-text">数据库的特点</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#数据库的行称为记录、列称为字段"  data-scroll-to="#数据库的行称为记录、列称为字段"><span class="toc-number">1.1.3.</span> <span class="toc-text">数据库的行称为记录、列称为字段</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#数据库操作"  data-scroll-to="#数据库操作"><span class="toc-number">1.2.</span> <span class="toc-text">数据库操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#修改结束符"  data-scroll-to="#修改结束符"><span class="toc-number">1.2.1.</span> <span class="toc-text">修改结束符</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#退出MySQL"  data-scroll-to="#退出MySQL"><span class="toc-number">1.2.2.</span> <span class="toc-text">退出MySQL</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#MySQL服务器信息"  data-scroll-to="#MySQL服务器信息"><span class="toc-number">1.2.3.</span> <span class="toc-text">MySQL服务器信息</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#创建数据库，使用指定参数"  data-scroll-to="#创建数据库，使用指定参数"><span class="toc-number">1.2.4.</span> <span class="toc-text">创建数据库，使用指定参数</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#创建数据库将字符集设置为gb2312"  data-scroll-to="#创建数据库将字符集设置为gb2312"><span class="toc-number">1.2.5.</span> <span class="toc-text">创建数据库将字符集设置为gb2312</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#排序规则"  data-scroll-to="#排序规则"><span class="toc-number">1.2.6.</span> <span class="toc-text">排序规则</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#创建数据库，将字符集设置为utf8数据库排序规则设置为：utf8-unicode-ci"  data-scroll-to="#创建数据库，将字符集设置为utf8数据库排序规则设置为：utf8-unicode-ci"><span class="toc-number">1.2.7.</span> <span class="toc-text">创建数据库，将字符集设置为utf8数据库排序规则设置为：utf8_unicode_ci</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#查看数据库"  data-scroll-to="#查看数据库"><span class="toc-number">1.2.8.</span> <span class="toc-text">查看数据库</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#使用数据库"  data-scroll-to="#使用数据库"><span class="toc-number">1.2.9.</span> <span class="toc-text">使用数据库</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#修改数据库编码"  data-scroll-to="#修改数据库编码"><span class="toc-number">1.2.10.</span> <span class="toc-text">修改数据库编码</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#删除数据库"  data-scroll-to="#删除数据库"><span class="toc-number">1.2.11.</span> <span class="toc-text">删除数据库</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#数据类型"  data-scroll-to="#数据类型"><span class="toc-number">1.3.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#int"  data-scroll-to="#int"><span class="toc-number">1.3.1.</span> <span class="toc-text">int</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#float"  data-scroll-to="#float"><span class="toc-number">1.3.2.</span> <span class="toc-text">float</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#字符串"  data-scroll-to="#字符串"><span class="toc-number">1.3.3.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#blob和ext类型（非二进制字符串）"  data-scroll-to="#blob和ext类型（非二进制字符串）"><span class="toc-number">1.3.4.</span> <span class="toc-text">blob和ext类型（非二进制字符串）</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#时间日期类型"  data-scroll-to="#时间日期类型"><span class="toc-number">1.3.5.</span> <span class="toc-text">时间日期类型</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Data"  data-scroll-to="#Data"><span class="toc-number">1.3.6.</span> <span class="toc-text">Data</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#数据表"  data-scroll-to="#数据表"><span class="toc-number">1.4.</span> <span class="toc-text">数据表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#查看数据库中的数据表"  data-scroll-to="#查看数据库中的数据表"><span class="toc-number">1.4.1.</span> <span class="toc-text">查看数据库中的数据表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#使用数据表"  data-scroll-to="#使用数据表"><span class="toc-number">1.4.2.</span> <span class="toc-text">使用数据表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#创建数据表"  data-scroll-to="#创建数据表"><span class="toc-number">1.4.3.</span> <span class="toc-text">创建数据表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#重命名数据表"  data-scroll-to="#重命名数据表"><span class="toc-number">1.4.4.</span> <span class="toc-text">重命名数据表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#修改表的字符集"  data-scroll-to="#修改表的字符集"><span class="toc-number">1.4.5.</span> <span class="toc-text">修改表的字符集</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#添加列"  data-scroll-to="#添加列"><span class="toc-number">1.4.6.</span> <span class="toc-text">添加列</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#修改列名称，类型"  data-scroll-to="#修改列名称，类型"><span class="toc-number">1.4.7.</span> <span class="toc-text">修改列名称，类型</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#修改某一个数据"  data-scroll-to="#修改某一个数据"><span class="toc-number">1.4.8.</span> <span class="toc-text">修改某一个数据</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#复制表"  data-scroll-to="#复制表"><span class="toc-number">1.4.9.</span> <span class="toc-text">复制表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#删除表"  data-scroll-to="#删除表"><span class="toc-number">1.4.10.</span> <span class="toc-text">删除表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#查找数据表"  data-scroll-to="#查找数据表"><span class="toc-number">1.4.11.</span> <span class="toc-text">查找数据表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#临时表"  data-scroll-to="#临时表"><span class="toc-number">1.4.12.</span> <span class="toc-text">临时表</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#字段名操作"  data-scroll-to="#字段名操作"><span class="toc-number">1.5.</span> <span class="toc-text">字段名操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#删除字段"  data-scroll-to="#删除字段"><span class="toc-number">1.5.1.</span> <span class="toc-text">删除字段</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#在数据表中使用默认值"  data-scroll-to="#在数据表中使用默认值"><span class="toc-number">1.5.2.</span> <span class="toc-text">在数据表中使用默认值</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#录入新信息"  data-scroll-to="#录入新信息"><span class="toc-number">1.5.3.</span> <span class="toc-text">录入新信息</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#在数据表中使用默认值-1"  data-scroll-to="#在数据表中使用默认值-1"><span class="toc-number">1.5.4.</span> <span class="toc-text">在数据表中使用默认值</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#约束"  data-scroll-to="#约束"><span class="toc-number">1.6.</span> <span class="toc-text">约束</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#约束分类"  data-scroll-to="#约束分类"><span class="toc-number">1.6.1.</span> <span class="toc-text">约束分类</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#插入约束"  data-scroll-to="#插入约束"><span class="toc-number">1.6.2.</span> <span class="toc-text">插入约束</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#组合主键"  data-scroll-to="#组合主键"><span class="toc-number">1.6.3.</span> <span class="toc-text">组合主键</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Enum-枚举"  data-scroll-to="#Enum-枚举"><span class="toc-number">1.6.4.</span> <span class="toc-text">Enum() 枚举</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#外键约束"  data-scroll-to="#外键约束"><span class="toc-number">1.6.5.</span> <span class="toc-text">**外键约束 **</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#删除约束"  data-scroll-to="#删除约束"><span class="toc-number">1.6.6.</span> <span class="toc-text">删除约束</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#自动增长列"  data-scroll-to="#自动增长列"><span class="toc-number">1.6.7.</span> <span class="toc-text">自动增长列</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Mysql主从复制"  data-scroll-to="#Mysql主从复制"><span class="toc-number">1.7.</span> <span class="toc-text">Mysql主从复制</span></a></li></ol></li></ol>
 </div>
             </div>
         </div>
@@ -458,7 +458,7 @@
     <div class="col-sm-4">
         <div id="post-author" class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-user trm-icon"></i><br>
-            John Doe
+            Rogers
         </div>
     </div>
 </div>
@@ -639,258 +639,58 @@
 <ol>
 <li>删除表中的外键</li>
 </ol>
-<p><strong>Alter table</strong> <strong>表名</strong> <strong>drop foreign key</strong> <strong>外键约束的名称</strong></p>
-<p><strong>Create table t2(id char(10) primary key); t2****：父表</strong></p>
-<p><strong>Create table t3(id char(10),constraint fk_id foreign key(id) references t2(id));</strong></p>
-<p><strong>Alter table t3 drop foreign key fk_id;</strong></p>
-<h3 id="自动增长列"><a href="#自动增长列" class="headerlink" title="自动增长列"></a><strong>自动增长列</strong></h3><p><strong>Auto_increment</strong> </p>
+<p>Alter table表名drop foreign key<strong>外键约束的名称</strong></p>
+<p>Create table t2(id char(10) primary key); t2：父表**</p>
+<p>Create table t3(id char(10),constraint fk_id foreign key(id) references t2(id));**</p>
+<p>Alter table t3 drop foreign key fk_id;</p>
+<h3 id="自动增长列"><a href="#自动增长列" class="headerlink" title="自动增长列"></a>自动增长列</h3><p><strong>Auto_increment</strong> </p>
 <p><strong>注意：</strong></p>
-<p><strong>定义为****auto_increment</strong> *<em>属性的字段，必须是</em><em><strong>整型</strong></em>*，必须是主键或者唯一键</p>
-<p><strong>Auto_increment</strong> *<em>的初始值可以在表后面的属性中使用”</em><em>*<em>auto_increment=<strong><strong>初始值</strong></strong>”</em>*</em><em>来自行定义，否则默认值为</em><em><strong>1</strong></em><em>开始。</em>*</p>
-<p><strong>创建产品信息表</strong></p>
-<p><strong>包含：产品编号、产品名称，要求将产品编号设置自动增长列属性。</strong></p>
+<p>定义为auto_increment属性的字段，必须是整型****，必须是主键或者唯一键</p>
+<p>Auto_increment 的初始值可以在表后面的属性中使用”auto_increment=初始值来自行定义，否则默认值为1开始</p>
+<p>创建产品信息表</p>
+<p>包含：产品编号、产品名称，要求将产品编号设置自动增长列属性。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table product(</span><br><span class="line">    id int auto_increment unique,</span><br><span class="line">    Name varchar(10)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
-<h2 id="老表导入新表"><a href="#老表导入新表" class="headerlink" title="老表导入新表"></a>老表导入新表</h2><p><strong>从已有的表中查询数据并插入新表中</strong></p>
-<p>​    <strong>insert into</strong> <strong>目标表****select*from</strong> <strong>来源表</strong>**;</p>
-<p><strong>1）****将一个表中指定字段的值导入新表中</strong></p>
-<p>​    <strong>Insert into</strong> <strong>目标表</strong>**(<strong><strong>字段</strong></strong>1,<strong><strong>字段</strong></strong>2) select (<strong><strong>字段</strong></strong>1,<strong><strong>字段</strong></strong>2)from** <strong>来源表</strong><strong>;</strong></p>
-<p><strong>将<strong><strong>student</strong></strong>中学号和姓名字段导入到<strong><strong>s1</strong></strong>表中。</strong></p>
-<p>​    <strong>Insert into s1(<strong><strong>学号</strong></strong>,<strong><strong>姓名</strong></strong>) select(<strong><strong>学号</strong></strong>,<strong><strong>姓名</strong></strong>)from student;</strong></p>
-<p><strong>Update</strong> <strong>注意：修改的是表中数据，而不是字段</strong></p>
-<p><strong>语法格式：</strong></p>
-<p><strong>Update</strong> <strong>表名</strong> <strong>set</strong> *<em>字段名</em><em>*<em>1=<strong><strong>值</strong></strong>1</em>*</em><em>，字段</em>**<em>2=<strong><strong>值</strong></strong>2 ,….where</em>* <strong>条件；</strong></p>
-<p><strong>Set****字句：设置</strong> </p>
-<p><strong>1.</strong> <strong>将<strong><strong>student</strong></strong>表中所有的学生的班级修改为软件设计<strong><strong>1</strong></strong>班。</strong></p>
-<p><strong>Update student set classid=”<strong><strong>软件设计</strong></strong>1<strong><strong>班</strong></strong>”**</strong>;**</p>
-<p><strong>2</strong> <strong>将****bookstore</strong> <strong>数据库中<strong><strong>book</strong></strong>表中所有书籍数量都增加****10.</strong></p>
-<p><strong>Use bookstore;</strong></p>
-<p><strong>Update book set</strong> <strong>数量</strong><strong>=<strong><strong>数量</strong></strong>+10;</strong></p>
-<p><strong>3<strong><strong>将</strong></strong>bookstore</strong> <strong>数据库中<strong><strong>book</strong></strong>表中所有书籍数量都增加****10,</strong></p>
-<p><strong>将<strong><strong>number</strong></strong>表中姓名为张三的员工的联系电话修改为“<strong><strong>1994535525</strong></strong>”，密码修改为“<strong><strong>11111</strong></strong>”**</strong>.**</p>
-<p><strong>Use bookstore;</strong></p>
-<p><strong>Update book set</strong> <strong>数量</strong><strong>=<strong><strong>数量</strong></strong>+10;</strong></p>
-<p><strong>Update number set</strong> <strong>联系电话</strong><strong>=”1994535525”,<strong><strong>密码</strong></strong>=”11111” where</strong> <strong>姓名</strong><strong>=”<strong><strong>张三</strong></strong>”;</strong></p>
-<p><strong>引号：字符串</strong></p>
-<p><strong>不加引号：****int float</strong> </p>
-<p><strong>将****course</strong> <strong>表中课程编号为<strong><strong>10104</strong></strong>的课程名称修改为微机基础，课程性质修改为限选课。</strong></p>
-<p><strong>2</strong> <strong>多表数据修改</strong></p>
-<p><strong>Update</strong> <strong>表名列表</strong> <strong>set</strong> *<em>字段名</em><em>*<em>1=<strong><strong>值</strong></strong>1</em>*</em><em>，字段</em>**<em>2=<strong><strong>值</strong></strong>2 ,….where</em>* <strong>条件；</strong></p>
-<p> <strong>表名列表：包含多个表的联合，各个表用逗号隔开</strong></p>
-<p><strong>订单号为<strong><strong>16</strong></strong>的客户因某些原因退回<strong><strong>4</strong></strong>本图书，请在<strong><strong>sell</strong></strong>表中修改订购册数，同时书返回后，<strong><strong>book</strong></strong>表中该图书的数量增加****4.</strong></p>
-<p><strong>Update sell set</strong> <strong>册数</strong><strong>=<strong><strong>册数</strong></strong>-4 where bookid=”16”;</strong></p>
-<p><strong>Update book set</strong> <strong>数量</strong><strong>=<strong><strong>数量</strong></strong>+4 where bookid=”16”;</strong></p>
-<p><strong>Update sell,book</strong> </p>
-<p><strong>Set sell.<strong><strong>册数</strong></strong>=<strong><strong>册数</strong></strong>-4<strong><strong>，</strong></strong>book.<strong><strong>数量</strong></strong>=<strong><strong>数量</strong></strong>+4</strong></p>
-<p> **Where sell.<strong><strong>图书编号</strong></strong>=book.**<strong>图书编号</strong> <strong>and sell.<strong><strong>订单号</strong></strong>=”16”;</strong></p>
-<p><strong>表名</strong>**.**<strong>字段名</strong> <strong>代表是：某个表中某字段</strong> </p>
-<p><strong>SELL</strong></p>
-<table>
-<thead>
-<tr>
-<th><strong>订单号</strong></th>
-<th><strong>册数</strong></th>
-<th><strong>图书编号</strong></th>
-<th><strong>图书名称</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>16</strong></td>
-<td><strong>100-4</strong></td>
-<td><strong>101</strong></td>
-<td><strong>Mysql</strong></td>
-</tr>
-<tr>
-<td><strong>15</strong></td>
-<td><strong>500</strong></td>
-<td><strong>102</strong></td>
-<td><strong>数学</strong></td>
-</tr>
-</tbody></table>
-<p><strong>Book</strong></p>
-<table>
-<thead>
-<tr>
-<th><strong>图书编号</strong></th>
-<th><strong>数量</strong></th>
-<th><strong>图书名称</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>101</strong></td>
-<td><strong>2000+4</strong></td>
-<td><strong>Mysql</strong></td>
-</tr>
-<tr>
-<td><strong>102</strong></td>
-<td><strong>1000</strong></td>
-<td><strong>数学</strong></td>
-</tr>
-</tbody></table>
-<p><strong>任务<strong><strong>3</strong></strong>：按条件删除表中错误或失效的数据</strong></p>
-<p><strong>Delete</strong> <strong>、****truncate</strong> </p>
-<p><strong>1）<strong><strong>使用</strong></strong>delete****语句删除表中的所有数据</strong></p>
-<p><strong>Delete from</strong> <strong>表名；</strong></p>
-<p><strong>2）****删除部分行的记录（数据）</strong></p>
-<p><strong>Delete from</strong> <strong>表名</strong> <strong>where</strong> <strong>条件；</strong> <strong>&gt; &lt; =</strong></p>
-<p><strong>1</strong> <strong>删除<strong><strong>student</strong></strong>中学号是<strong><strong>10501</strong></strong>的学生信息。</strong></p>
-<p><strong>Delete from student where</strong> <strong>学号</strong><strong>=”10501”;</strong></p>
-<p><strong>2</strong> <strong>将****score</strong> <strong>中平时成绩低于<strong><strong>60</strong></strong>分的学生信息删除。</strong></p>
-<p><strong>delete from score where partscore&lt;60;</strong></p>
-<p><strong>truncate</strong> <strong>快速删除表中数据</strong></p>
-<p><strong>语法：****truncate table</strong> <strong>表名；</strong></p>
-<p><strong>没有删除部分数据的功能</strong></p>
-<p> <strong>区别：</strong></p>
-<p>**Delete:**<strong>删除部分数据或者所有数据</strong> <strong>执行速度比较慢，删除后在日志中可以找回</strong></p>
-<p><strong>Truncate<strong><strong>：删除表中所有数据，功能不可以使用</strong></strong>where****字句，执行速度快，不能找回</strong></p>
-<p><strong>项目****5</strong> <strong>实现对学生信息的****简单查询</strong></p>
-<p><strong>子任务一：查询数据库中部分字段的信息</strong></p>
-<p><strong>Select*from</strong> <strong>表</strong>**–**<strong>查询表中所有字段的值</strong></p>
-<p>*****<strong>：所有的列</strong></p>
-<p><strong>查看<strong><strong>student</strong></strong>表中所有数据。</strong></p>
-<p><strong>查询部分字段的值</strong> <strong>select</strong> <strong>字段名</strong> <strong>from</strong> <strong>表名</strong></p>
-<p><strong>查询****student</strong> <strong>表中学生姓名的名单</strong></p>
-<p><strong>Select</strong> <strong>姓名</strong> <strong>from student;</strong></p>
-<p><strong>查询课程表（<strong><strong>course</strong></strong>）中所有的课程编号**</strong>(courseid)<strong><strong>和课程名</strong></strong>(coursename)**<strong>。</strong></p>
-<p><strong>Select courseid,coursename from course;</strong></p>
-<p><strong>Select</strong> <strong>计算功能</strong></p>
-<p><strong>200*450</strong> </p>
-<p><strong>Select 200*450;</strong></p>
-<p><strong>Select”<strong><strong>鑫行你好帅</strong></strong>”;</strong></p>
-<p>**Select now();**<strong>显示当前的时间</strong></p>
-<p><strong>成绩表</strong></p>
-<table>
-<thead>
-<tr>
-<th><strong>Id</strong></th>
-<th><strong>Name</strong></th>
-<th><strong>mysql</strong></th>
-<th><strong>c****语言</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>101</strong></td>
-<td><strong>召开</strong></td>
-<td><strong>90</strong></td>
-<td><strong>80</strong></td>
-</tr>
-<tr>
-<td><strong>102</strong></td>
-<td><strong>陪严</strong></td>
-<td><strong>87</strong></td>
-<td><strong>78</strong></td>
-</tr>
-<tr>
-<td><strong>103</strong></td>
-<td><strong>新河</strong></td>
-<td><strong>91</strong></td>
-<td><strong>89</strong></td>
-</tr>
-</tbody></table>
-<p><strong>查询每一位同学的总成绩</strong></p>
-<p><strong>Select name as</strong> <strong>姓名</strong><strong>,mysql+c as****总成绩</strong> <strong>from score;</strong></p>
-<p><strong>为所有的学生的<strong><strong>c</strong></strong>语言加上<strong><strong>10</strong></strong>分显示出来。</strong></p>
-<p><strong>Select*,c**<strong>语言</strong></strong>+10 as** <strong>新<strong><strong>c</strong></strong>语言</strong> <strong>from score;</strong></p>
-<p><strong>As</strong> <strong>：省略掉</strong></p>
-<p><strong>Select</strong> <strong>字段名</strong> <strong>as</strong> <strong>列名</strong> </p>
-<p><strong>任务<strong><strong>2</strong></strong>：根据指定的条件来进行查询</strong></p>
-<p><strong>1****：消除结果集中的重复行</strong></p>
-<p><strong>Student</strong> </p>
-<table>
-<thead>
-<tr>
-<th><strong>Id</strong></th>
-<th><strong>姓名</strong></th>
-<th><strong>生源地</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>01</strong></td>
-<td><strong>鑫行</strong></td>
-<td><strong>保定</strong></td>
-</tr>
-<tr>
-<td><strong>02</strong></td>
-<td><strong>佳豪</strong></td>
-<td><strong>张家口</strong></td>
-</tr>
-<tr>
-<td><strong>03</strong></td>
-<td><strong>丽芳</strong></td>
-<td><strong>保定</strong></td>
-</tr>
-</tbody></table>
-<p>**Distinct:**<strong>有区别</strong> </p>
-<p><strong>Select distinct</strong> <strong>字段</strong> <strong>from</strong> <strong>表名；</strong></p>
-<p><strong>在<strong><strong>student</strong></strong>表中查询学生的生源地有哪些，去掉结果中重复行。</strong></p>
-<p><strong>Select distinct</strong> <strong>生源地</strong> <strong>from student****；</strong></p>
-<p><strong>在<strong><strong>stu</strong></strong>表中，查询学生的生源地和民族有哪些，去掉结果中的重复行。</strong></p>
-<p><strong>Select distinct</strong> <strong>生源地</strong>**,<strong><strong>民族</strong> <strong>from stu</strong></strong>；**</p>
-<p><strong>子任务****2</strong> <strong>实现有条件的筛选</strong></p>
-<p> <strong>运算符</strong></p>
-<table>
-<thead>
-<tr>
-<th><strong>运算符</strong></th>
-<th><strong>名称</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>=</strong></td>
-<td><strong>等于</strong></td>
-<td><strong>检索项等于给定值</strong></td>
-</tr>
-<tr>
-<td><strong>&lt;&gt;  !=</strong></td>
-<td><strong>不等于</strong></td>
-<td><strong>不等于</strong></td>
-</tr>
-<tr>
-<td><strong>&lt; &lt;= &gt;   &gt;=</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>Between</strong></td>
-<td><strong>在两者之间</strong></td>
-<td><strong>检索项在给定的两个数值之间，包括二个端点值。</strong></td>
-</tr>
-<tr>
-<td><strong>Is null</strong></td>
-<td></td>
-<td><strong>检查空值</strong></td>
-</tr>
-</tbody></table>
-<p><strong>查询<strong><strong>student</strong></strong>表中生源地不是石家庄的同学的信息。</strong></p>
-<p><strong>Select *from student where</strong> <strong>生源地</strong><strong>!=”<strong><strong>石家庄</strong></strong>”;</strong></p>
-<p>​               <strong>&lt;&gt;</strong></p>
-<p><strong>Where</strong> <strong>子句：</strong> <strong>查询符合条件的行，而不是所有的行</strong> </p>
-<p><strong>Select</strong> <strong>字段名</strong> <strong>from</strong> <strong>表名</strong> <strong>where</strong> <strong>筛选条件。</strong></p>
-<p><strong>Between</strong> <strong>表达****1 and</strong> <strong>表达****2</strong> </p>
-<p><strong>表示的值在表达<strong><strong>1</strong></strong>和表达式<strong><strong>2</strong></strong>之间，包含表达式<strong><strong>1</strong></strong>和表达式****2</strong> </p>
-<p><strong>查询所有期末成绩（<strong><strong>examscore</strong></strong>）在<strong><strong>80-90</strong></strong>之间的学生的成绩。****Score</strong></p>
-<p><strong>Select*from score where examscore between 80 and 90;</strong></p>
-<p><strong>Select*from score where examscore&gt;=80 and examscore&lt;=90;</strong></p>
-<p> <strong>Not between</strong> <strong>表达****1 and</strong> <strong>表达****2</strong> <strong>：不包含表达<strong><strong>1</strong></strong>和表达****2</strong></p>
-<p><strong>查询所有期末成绩（<strong><strong>examscore</strong></strong>）在<strong><strong>90</strong></strong>以上或者<strong><strong>70</strong></strong>分以下之间的学生的成绩。</strong></p>
-<p><strong>Select*from score where examscore not between 70 and 90;</strong></p>
-<p><strong>select*from score where examscore&gt;90 or examscore&lt;70;</strong></p>
-<p><strong>查询课程表（<strong><strong>course</strong></strong>）中备注（<strong><strong>remark</strong></strong>）为空的课程信息。</strong></p>
-<p><strong>Select*from course where remark is null;</strong></p>
-<p><strong>查询课程表中备注不为空的课程信息。</strong></p>
-<p><strong>Select*from course where remark is not null;</strong></p>
-<p><strong>操作符：多条件的查询</strong></p>
-<p><strong>Where****子句搭配使用：</strong></p>
-<p><strong>And:</strong> <strong>两个或者多个条件同时满足，</strong></p>
-<p>**Or:**<strong>满足多个条件中的任何一个就表示检索成功</strong></p>
-<p>**In:**<strong>满足多个条件中的一个。</strong></p>
-<p><strong>Like**<strong>：搭配</strong></strong>%<strong><strong>通配符和</strong></strong>_**<strong>通配符来实现模糊匹配。</strong></p>
-<p><strong>And:</strong></p>
-<p><strong>查询软件<strong><strong>1</strong></strong>班男生的信息。</strong></p>
-<p><strong>Select*from student where</strong> <strong>班级</strong><strong>=”<strong><strong>软件一班</strong></strong>” and</strong> <strong>性别</strong><strong>=”<strong><strong>男</strong></strong>”****；</strong></p>
-<p><strong>查询生源地为石家庄且为汉族的男生。</strong></p>
-<p><strong>Select*from student where s**<strong>性别</strong></strong>=”<strong><strong>男</strong></strong>”and<strong><strong>生源地</strong></strong>=”<strong><strong>石家庄</strong></strong>” and** <strong>民族</strong><strong>=”<strong><strong>汉</strong></strong>”****；</strong></p>
+<h2 id="Mysql主从复制"><a href="#Mysql主从复制" class="headerlink" title="Mysql主从复制"></a>Mysql主从复制</h2><blockquote>
+<p>主从复制是一种常见的数据库架构方法，它允许在多个服务器之间同步数据。在主从复制架构中，有一个主服务器和一个或多个从服务器。主服务器负责处理所有写操作，而从服务器则对主服务器进行复制，并处理所有读操作。</p>
+</blockquote>
+<p> 具体实现步骤：</p>
+<ol>
+<li><p>设置一个mysql为主库</p>
+<p>windows中：在C盘的ProgramData文件夹中找到mysql——my.ini</p>
+<p>在my.ini中的[mysqld]中添加：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">log-bin</span>=mysql-bin	<span class="comment">#启用二进制日志</span></span><br><span class="line"><span class="attr">binlog-format</span>=ROW</span><br><span class="line"><span class="attr">server-id</span>=<span class="number">100</span>	<span class="comment">#设置专属id名</span></span><br></pre></td></tr></table></figure></li>
+<li><p>重启服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure></li>
+<li><p>登录mysql数据库，执行下面mysql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT REPLICATION SLAVE ON *.* to &#x27;xiaoming&#x27;@&#x27;%&#x27; identified by &#x27;Root@123456&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>注:上面SQL的作用是创建一个用户xiaoming，密码为Root@123456，并且给xiaoming用户授予</p>
+<p>REPLICATION SLAVE权限</p>
+</li>
+<li><p>执行代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show master status;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/mysql/image-20230523153034661.png" alt="image-20230523153034661" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+<li><p>设置一个或多个从库</p>
+<p>linux中：var/log/my.cnf添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server-id=102</span><br></pre></td></tr></table></figure>
+
+<p>进入mysql运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">change master to master_host=&#x27;主机ip&#x27; ,master_user=&#x27;xiaoming&#x27; ,master_password=&#x27;Root@123456&#x27;,master_log_file=&#x27;mysql-bin.000005&#x27; ,master_log_pos=441;</span><br></pre></td></tr></table></figure>
+
+<p>master_log_file对应上面的File    master_log_pos对应上面的Position</p>
+</li>
+<li><p>开启io线程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">starts slave;</span><br></pre></td></tr></table></figure></li>
+<li><p>查看连接情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show slave status\G;</span><br></pre></td></tr></table></figure>
+
+<p>出现这个即为成功：</p>
+<p><img src="/img/mysql/image-20230523153614911.png" alt="image-20230523153614911" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+</ol>
 
 </article>
     
@@ -899,11 +699,11 @@
 <ul class="trm-post-copyright">
     <li class="trm-post-copyright-author">
         <strong>Post author: </strong>
-        John Doe
+        Rogers
     </li>
     <li class="trm-post-copyright-link">
         <strong>Post link: </strong>
-        <a id="original-link" href="https://ljs-yym.github.io/2023/02/27/MySQL%E7%AC%94%E8%AE%B0/" title="MySql从入门到删库跑路">https://ljs-yym.github.io/2023/02/27/MySQL%E7%AC%94%E8%AE%B0/</a>
+        <a id="original-link" href="https://ljs-yym.github.io/2023/02/27/MySQL%E7%AC%94%E8%AE%B0/" title="MySql从入门到跑路">https://ljs-yym.github.io/2023/02/27/MySQL%E7%AC%94%E8%AE%B0/</a>
     </li>
     <li class="trm-post-copyright-license">
         <strong>Copyright Notice: </strong>
@@ -926,7 +726,7 @@
         <a href="/2023/02/27/Linux%E6%8C%87%E4%BB%A4/" class="trm-cover-frame trm-anima-link">
             
             
-                <img alt="cover" class="no-fancybox" src="/img/Linux%E6%8C%87%E4%BB%A4/b6c940babf24a9f913db7300c20ca127.jpeg">
+                <img alt="cover" class="no-fancybox" src="/img/cover/Linux.png">
             
         </a>
         
@@ -938,7 +738,7 @@
             </div>
             <h5>
                 <a href="/2023/02/27/Linux%E6%8C%87%E4%BB%A4/" class="trm-anima-link">
-                    Linux从入门到彻底放弃
+                    Linux指令
                 </a>
             </h5>
             <div class="trm-divider trm-mb-20 trm-mt-20"></div>
@@ -946,10 +746,10 @@
                 <li>23/02/27</li>
                 <li>14:52</li>
                 
-                    <li>1.3k</li>
+                    <li>2.5k</li>
                 
                 
-                    <li>5</li>
+                    <li>10</li>
                 
             </ul>
         </div>
@@ -962,7 +762,7 @@
         <a href="/2023/02/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%88%86%E7%B1%BB/" class="trm-cover-frame trm-anima-link">
             
             
-                <img alt="cover" class="no-fancybox" src="/img/6af89bc8gw1f8nziomc1oj209706w74n.jpg">
+                <img alt="cover" class="no-fancybox" src="/img/cover/pattern.jpg">
             
         </a>
         

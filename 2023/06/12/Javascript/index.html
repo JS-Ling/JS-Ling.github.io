@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="JavaScript笔记js简介JavaScript是什么 JavaScript是一种基于对象和事件驱动的、并具有安全性能的脚本语言（脚本就是一段程序用来完成某项特殊功能）  js的特点  向HTML页面中添加交互行为   脚本语言、语法和java类似   解释性语言边解释边执行   一般用来编写客户端脚本   独立于平台   为什么要学习js  美化网页   缓解服务器端压力   基本结构123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js编程指南">
+<meta property="og:url" content="https://ljs-yym.github.io/2023/06/12/Javascript/index.html">
+<meta property="og:site_name" content="RogevnBlog">
+<meta property="og:description" content="JavaScript笔记js简介JavaScript是什么 JavaScript是一种基于对象和事件驱动的、并具有安全性能的脚本语言（脚本就是一段程序用来完成某项特殊功能）  js的特点  向HTML页面中添加交互行为   脚本语言、语法和java类似   解释性语言边解释边执行   一般用来编写客户端脚本   独立于平台   为什么要学习js  美化网页   缓解服务器端压力   基本结构123">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ljs-yym.github.io/img/cover/js.jpg">
+<meta property="article:published_time" content="2023-06-12T09:33:10.878Z">
+<meta property="article:modified_time" content="2023-06-12T14:49:56.320Z">
+<meta property="article:author" content="Rogers">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ljs-yym.github.io/img/cover/js.jpg">
+
+    <meta name="keywords" content="hexo,node,博客">
+
+
+<title >js编程指南</title>
+
+<!-- Favicon -->
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+<link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css">
+
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"ljs-yym.github.io","author":"Rogers","root":"/","typed_text":["Web Developer","Backend Programmer","Full Stack Developer！"],"theme_version":"2.0.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo.png","icon16":"/img/logo.png","icon32":"/img/logo.png","dark_logo":"/img/dark_logo.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"creative_commons":{"license":"by-nc-sa","language":"deed.zh"},"search":{"enable":true,"type":"local","path":"search.xml","field":"post","content":true,"format":"html"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-06-12 22:49:56"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.2" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+     
+
+    
+
+    
+ 
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" class=" trm-light-icon" src="/img/logo.png"> <img alt="logo" class=" trm-dark-icon" src="/img/dark_logo.png">
+    
+    
+        <div class="trm-logo-text">
+            Rogevn<span>Blog</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    长生风月的博客
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    日志
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友情链接
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/picture/" target="">
+                    好东西
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/picture/" target="">
+                            图片
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/technology/" target="">
+                            黑科技
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+    
+    <div id="trm-search-btn" class="trm-search-btn">
+        <i class="iconfont fas fa-search"></i>
+    </div>
+     
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            js编程指南
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/R-C.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        长生风月
+    </h5>
+    
+        <div class="trm-label">
+            I&#39;m a
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="tencent://message/?uin=3232008148&Site=&Menu=yes" title="QQ" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="/null" title="WeChat" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-weixin"></i>
+        </a>
+    
+        <a href="/null" title="twitter" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-twitter"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                河北省保定市
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                21
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                星座:
+            </div>
+            <div class="trm-label trm-label-light">
+                处女座
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                爱好:
+            </div>
+            <div class="trm-label trm-label-light">
+                足球、音乐、魔方、代码
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:3232008148@qq.com" class="trm-btn">
+            Contact Me
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#JavaScript笔记"  data-scroll-to="#JavaScript笔记"><span class="toc-number">1.</span> <span class="toc-text">JavaScript笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#js简介"  data-scroll-to="#js简介"><span class="toc-number">1.1.</span> <span class="toc-text">js简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#JavaScript是什么"  data-scroll-to="#JavaScript是什么"><span class="toc-number">1.1.1.</span> <span class="toc-text">JavaScript是什么</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#js的特点"  data-scroll-to="#js的特点"><span class="toc-number">1.1.2.</span> <span class="toc-text">js的特点</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#为什么要学习js"  data-scroll-to="#为什么要学习js"><span class="toc-number">1.1.3.</span> <span class="toc-text">为什么要学习js</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#基本结构"  data-scroll-to="#基本结构"><span class="toc-number">1.1.4.</span> <span class="toc-text">基本结构</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#引入js的方法"  data-scroll-to="#引入js的方法"><span class="toc-number">1.1.5.</span> <span class="toc-text">引入js的方法</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#核心语法"  data-scroll-to="#核心语法"><span class="toc-number">1.1.6.</span> <span class="toc-text">核心语法</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#选择结构"  data-scroll-to="#选择结构"><span class="toc-number">1.1.7.</span> <span class="toc-text">选择结构</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#循环结构"  data-scroll-to="#循环结构"><span class="toc-number">1.1.8.</span> <span class="toc-text">循环结构</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#函数"  data-scroll-to="#函数"><span class="toc-number">1.1.9.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#内置对象"  data-scroll-to="#内置对象"><span class="toc-number">1.1.10.</span> <span class="toc-text">内置对象</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#BOM"  data-scroll-to="#BOM"><span class="toc-number">1.1.11.</span> <span class="toc-text">BOM</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#DOM"  data-scroll-to="#DOM"><span class="toc-number">1.1.12.</span> <span class="toc-text">DOM</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#RegExp对象（正则表达式）"  data-scroll-to="#RegExp对象（正则表达式）"><span class="toc-number">1.1.13.</span> <span class="toc-text">RegExp对象（正则表达式）</span></a></li></ol></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            06/12
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            17:33
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Rogers
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="JavaScript笔记"><a href="#JavaScript笔记" class="headerlink" title="JavaScript笔记"></a>JavaScript笔记</h1><h2 id="js简介"><a href="#js简介" class="headerlink" title="js简介"></a>js简介</h2><h3 id="JavaScript是什么"><a href="#JavaScript是什么" class="headerlink" title="JavaScript是什么"></a>JavaScript是什么</h3><blockquote>
+<p>JavaScript是一种基于对象和事件驱动的、并具有安全性能的脚本语言（脚本就是一段程序用来完成某项特殊功能）</p>
+</blockquote>
+<h3 id="js的特点"><a href="#js的特点" class="headerlink" title="js的特点"></a>js的特点</h3><ol>
+<li><p> 向HTML页面中添加交互行为</p>
+</li>
+<li><p> 脚本语言、语法和java类似</p>
+</li>
+<li><p> 解释性语言边解释边执行</p>
+</li>
+<li><p> 一般用来编写客户端脚本</p>
+</li>
+<li><p> 独立于平台</p>
+</li>
+</ol>
+<h3 id="为什么要学习js"><a href="#为什么要学习js" class="headerlink" title="为什么要学习js"></a>为什么要学习js</h3><ol>
+<li><p> 美化网页</p>
+</li>
+<li><p> 缓解服务器端压力</p>
+</li>
+</ol>
+<h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="引入js的方法"><a href="#引入js的方法" class="headerlink" title="引入js的方法"></a>引入js的方法</h3><ol>
+<li><p>使用&lt;script&gt;标签（可以加在HTML文件的任意地方）</p>
+</li>
+<li><p>外部js文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;index.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>直接在HTML标签中</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">onclick</span>=<span class="string">&quot;javascript:alert(&#x27;Hello world&#x27;)&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="核心语法"><a href="#核心语法" class="headerlink" title="核心语法"></a>核心语法</h3><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><ol>
+<li> 先声明变量再赋值</li>
+</ol>
+<p>​        例如：var width； </p>
+<p>​        var用于声明变量的关键字</p>
+<p>​        width=5； </p>
+<p>​        width是变量名</p>
+<ol start="2">
+<li>同时声明和赋值变量</li>
+</ol>
+<p>var catname-“ ”；</p>
+<p>var x，y，z=10；</p>
+<ol start="3">
+<li>不声明直接赋值（不推荐）</li>
+</ol>
+<p>width=5；</p>
+<h4 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h4><ol>
+<li><p> 有数字字母下划线和$组成，不能有空格</p>
+</li>
+<li><p> 首字母不能是数字</p>
+</li>
+<li><p> 不能用js关键字与保留字</p>
+</li>
+<li><p> 区分大小写</p>
+</li>
+<li><p> 最大长度为255</p>
+</li>
+</ol>
+<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><p>typeof（）：用于检测变量的返回值（特殊的运算符）</p>
+<p>注：undefined和null和NaN的区别：尽管两个值相等但它们的含义不同，undefined未对该变量赋值 null表示赋了一个空值 NaN是一种number数据类型</p>
+<h4 id="String对象"><a href="#String对象" class="headerlink" title="String对象"></a>String对象</h4><p>字符串对象.length 返回字符串的长度</p>
+<p>.CharAt(2) 返回字符串指定位置的字符</p>
+<p>.substring(3,5) 返回截取的字符串</p>
+<p>.slice(3,5) 返回截取的字符串</p>
+<p>（第一位指从哪开始截取，第二位指截到哪一位）</p>
+<p>.substr(2,3) 返回截取的字符串</p>
+<p>（第一位指从第几位开始截取，第二位指从那一位基础上向后截取几个字符）</p>
+<p>.indexof(str,3) 查找某个字符在字符串中首次出现的位置</p>
+<p>.split(“ “) 将字符串分割成为数组，将空格作为分隔符</p>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><blockquote>
+<p>数组：存储一组数据的基可以是任意数据类型</p>
+<p>创建的三种方式</p>
+<p>//定义并赋值</p>
+<p>var 数组名=new Array(“1”,”2”,”3”)；</p>
+<p>//先定义后赋值,长度由最大的决定</p>
+<p>var 数组名=new Array(2);</p>
+<p>a[0]=”1”;</p>
+<p>a[1]=”2”;</p>
+<p>//不定义直接赋值</p>
+<p>var 数组名=[“1”,”2”,”3”];</p>
+<p>数组的方法：</p>
+<p>push属性：向数组末尾添加元素并且返回新的数组长度</p>
+<p>join() 使数组元素以()里的符号进行连接</p>
+<p>sort 对数组排序</p>
+<p>function paixv（a,b）{</p>
+<p>return a-b;</p>
+<p>}</p>
+<p>document.write(attr.sort(paixv))</p>
+<p>pop() 删除数组末尾的元素（返回的是删除的元素）</p>
+<p>unshift() 在数组前面添加元素（返回的是数组元素总数）</p>
+<p>shift() 在数组前面删除元素（返回被删除的元素）</p>
+<p>splice（2,2）从数组指定位置向后删除元素</p>
+<p>splice有三个参数：第一个参数是删除的起始位置</p>
+<p>第二个参数是删除的数量</p>
+<p>第三个参数是在原位置添加的元素（可以是多个用逗号隔开）</p>
+</blockquote>
+<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>运算符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>算术运算符</td>
+<td>+、-、*、/、%、++、–</td>
+</tr>
+<tr>
+<td>赋值运算符</td>
+<td>=,+=，-=，*=，/=，%=</td>
+</tr>
+<tr>
+<td>比较运算符</td>
+<td>&gt;、&lt;、&gt;=、&lt;=、==、=、!=、!==</td>
+</tr>
+<tr>
+<td>逻辑运算符</td>
+<td>&amp;&amp;，||，！</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>优先级：！&gt;算术运算符&gt;比较运算符&gt;赋值运算符&gt;&amp;&amp;&gt;||</p>
+</blockquote>
+<h3 id="选择结构"><a href="#选择结构" class="headerlink" title="选择结构"></a>选择结构</h3><h4 id="if判断语句"><a href="#if判断语句" class="headerlink" title="if判断语句"></a>if判断语句</h4><blockquote>
+<p>var i=0;</p>
+<p>    if(i&lt;=10){</p>
+<p>        true返回值</p>
+<p>    }else{</p>
+<p>        false返回值</p>
+<p>}</p>
+<p>三元运算符：2+3 ？ true：false；</p>
+</blockquote>
+<h4 id="switch判断"><a href="#switch判断" class="headerlink" title="switch判断"></a>switch判断</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">switch(i=1)&#123;</span><br><span class="line"></span><br><span class="line">        case i=0:</span><br><span class="line"></span><br><span class="line">            alert(&quot;0&quot;)</span><br><span class="line"></span><br><span class="line">            break;</span><br><span class="line"></span><br><span class="line">        case i=1:</span><br><span class="line"></span><br><span class="line">            alert(&quot;1&quot;)</span><br><span class="line"></span><br><span class="line">            break;</span><br><span class="line"></span><br><span class="line">        case i=2:</span><br><span class="line"></span><br><span class="line">            alert(&quot;2&quot;)</span><br><span class="line"></span><br><span class="line">            break;</span><br><span class="line"></span><br><span class="line">        default:</span><br><span class="line"></span><br><span class="line">            alert(&quot;num&quot;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h3><h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">write</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(i&lt;<span class="number">10</span>)&#123;</span><br><span class="line">   <span class="variable language_">document</span>.<span class="title function_">write</span>(i)</span><br><span class="line">   i++</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="do-while循环"><a href="#do-while循环" class="headerlink" title="do while循环"></a>do while循环</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">   <span class="variable language_">document</span>.<span class="title function_">write</span>(i)</span><br><span class="line">&#125;<span class="keyword">while</span>(i&gt;<span class="number">1</span>) <span class="comment">//至少执行一次</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="系统函数"><a href="#系统函数" class="headerlink" title="系统函数"></a>系统函数</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseInt</span>(“字符串”) 将字符串转换为整形数字，只取整数值</span><br><span class="line"><span class="built_in">parseFloat</span>(“字符串”)将字符串转化为小数</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果是字符串就返回NaN</span></span><br><span class="line"><span class="built_in">isNaN</span>（） 用来检测是否为数字，返回boolean类型（是返回flase）</span><br><span class="line"></span><br><span class="line"><span class="built_in">eval</span>() 将参数的字符串转化成js代码运行</span><br><span class="line"></span><br><span class="line"><span class="title function_">alert</span>(“提示文字”) 普通弹窗</span><br><span class="line">点击确定返回<span class="literal">false</span></span><br><span class="line"></span><br><span class="line">confirm（“提示文字”） 确定弹窗</span><br><span class="line">点击确定返回<span class="literal">true</span>，点击取消返回<span class="literal">false</span></span><br><span class="line"></span><br><span class="line">prompt（“提示文字”） 文本框弹窗</span><br><span class="line">点击确定将文本框文字返回</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> 函数名（参数<span class="number">1</span>，参数<span class="number">2</span>，…）&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//执行方法</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h3><h4 id="Date对象"><a href="#Date对象" class="headerlink" title="Date对象"></a>Date对象</h4><p>  var date=new Date() //创建日期对象</p>
+<p>    date.getFullYear()  //获取当前年份</p>
+<p>    date.getMonth()+1   //获取当前月份</p>
+<p>    date.getDay()      //获取当前星期数字0~6</p>
+<p>    date.getDate()     //获取当前天</p>
+<p>    date.getHours()     //获取当前小时</p>
+<p>    date.getMinutes()   //获取当前分钟数</p>
+<p>    date.getSeconds()   //获取当前秒数</p>
+<p>    date.getTime()      //返回从1970年至今的秒数</p>
+<h4 id="Math对象"><a href="#Math对象" class="headerlink" title="Math对象"></a>Math对象</h4><p>Math.PI         //获取圆周率</p>
+<p>    Math.ceil()     //对数字进项上舍入</p>
+<p>    Math.floor()    //对数字进项下舍入</p>
+<p>    Math.round()    //对数字进行四舍五入</p>
+<p>Math.random()   //返回0~1之间的随机数</p>
+<h4 id="String对象-1"><a href="#String对象-1" class="headerlink" title="String对象"></a>String对象</h4><p>var str=”asdfghjkl”;</p>
+<p>    str.length           //返回字符串的长度</p>
+<p>    str.charAt(2)        //返回指定位置的字符</p>
+<p>    str.substring(3,5)   //返回截取的字符（从第三到第五位）</p>
+<p>    str.substr(2,3)     //返回截取的字符串（第一位指从第几位开始截取，第二位指从那一位基础上向后截取几个字符）</p>
+<p>    str.slice(3,5)      //返回截取的字符串（第一位指从哪开始截取，第二位指截到哪一位）</p>
+<p>   </p>
+<p>    indexof(str,f)      //查找某个字符在字符串中首次出现的位置</p>
+<p>   </p>
+<p>    str.split(“ “)      //将字符串分割成为数组，将空格作为分隔符</p>
+<h4 id="Array对象"><a href="#Array对象" class="headerlink" title="Array对象"></a>Array对象</h4><p>    var arr=new Array()</p>
+<p>    arr.push        //向数组末尾添加元素并且返回新的数组长度</p>
+<p>    arr.join()      //使数组元素以()里的符号进行连接</p>
+<p>    // sort     对数组排序</p>
+<p>    //  function paixv（a,b）{</p>
+<p>    //      return a-b;</p>
+<p>    // }</p>
+<p>    // document.write(attr.sort(paixv))</p>
+<p>    arr.pop()       //删除数组末尾的元素（返回的是删除的元素）</p>
+<p>    arr.unshift()   //在数组前面添加元素（返回的是数组元素总数）</p>
+<p>    arr.shift()     //在数组前面删除元素（返回被删除的元素）</p>
+<p>    arr.splice(2,2) //从数组指定位置向后删除元素</p>
+<p>    // splice有三个参数：第一个参数是删除的起始位置</p>
+<p>    //                  第二个参数是删除的数量</p>
+<p>    //                  第三个参数是在原位置添加的元素（可以是多个用逗号隔开）</p>
+<h4 id="Global对象"><a href="#Global对象" class="headerlink" title="Global对象"></a>Global对象</h4><p>   var str=”adsfghj”</p>
+<p>    var num=4415465;</p>
+<p>    escape(str)             //对字符串编码</p>
+<p>   </p>
+<p>    eval(“alert(str)”)      //把字符串解析为JavaScript代码并执行</p>
+<p>   </p>
+<p>    isNaN(str)           //判断一个值是否是数字，是返回false不是返回true</p>
+<p>   </p>
+<p>    parseInt()　　　        //解析一个字符串并返回一个整数</p>
+<p>   </p>
+<p>    parseFloat()　　        //解析一个字符串并返回一个浮点数</p>
+<p>   </p>
+<p>    number() 　　　　       //把对象的值转换为数字</p>
+<p>   </p>
+<p>    string()                //把对象的值转换为字符串</p>
+<h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3><h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><ul>
+<li><p>onload 一个页面或一幅图像加载完成</p>
+</li>
+<li><p>onclick 鼠标点击某个对象</p>
+</li>
+<li><p>onmouseover 鼠标移到某个元素上</p>
+</li>
+<li><p>onmouseout 鼠标下移</p>
+</li>
+<li><p>onkeydown 键盘按键按下</p>
+</li>
+<li><p>onchange 域的内容被改变</p>
+</li>
+</ul>
+<h4 id="window对象"><a href="#window对象" class="headerlink" title="window对象"></a>window对象</h4><p>setInterval(“函数名”，1000) 节拍器</p>
+<p>setTimeout(“函数名”，1000) 定时器</p>
+<p>open(“弹出窗口的URL”,”窗口名称”,”窗口特性”)</p>
+<p>width，height 窗口文档显示区的高度和宽度</p>
+<p>left，top 窗口的x，y轴</p>
+<p>toolbar=yes/no 是否显示浏览器的工具栏默认为yes</p>
+<p>scrollbars=res/no 是否显示滚动条</p>
+<p>close()</p>
+<h4 id="history对象"><a href="#history对象" class="headerlink" title="history对象"></a>history对象</h4><blockquote>
+<p>.length 返回历史列表中的网址数</p>
+<p>.go(-1) 加载某个指定的页面</p>
+<p>.back() 返回上一个页面的URL</p>
+<p>.forword() 返回下一个页面的URL</p>
+</blockquote>
+<h4 id="location对象"><a href="#location对象" class="headerlink" title="location对象"></a>location对象</h4><blockquote>
+<p>host 设置货返回主机名和当前URL的端口号</p>
+<p>hostname 设置或返回当前URL的主机名</p>
+<p>href =url（‘ ’） 设置或返回当前完整的URL</p>
+<p>.reload() 重新加载当前文档</p>
+<p>.replace() 用心的文档替换当前文档</p>
+</blockquote>
+<h4 id="Navigator对象"><a href="#Navigator对象" class="headerlink" title="Navigator对象"></a>Navigator对象</h4><blockquote>
+<p>appCodeName 返回浏览器的代码名</p>
+<p>appName 返回浏览器的名称</p>
+<p>appVersion 返回浏览器的平台和版本信息</p>
+<p>platform 返回运行浏览器的操作系统平台</p>
+</blockquote>
+<h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><h4 id="什么是DOM"><a href="#什么是DOM" class="headerlink" title="什么是DOM"></a>什么是DOM</h4><blockquote>
+<p>操作HTMl文档提供的属性和方法</p>
+</blockquote>
+<h4 id="节点（Node）"><a href="#节点（Node）" class="headerlink" title="节点（Node）"></a>节点（Node）</h4><ul>
+<li><p>  HTML中每个标签或元素都是一个节点</p>
+</li>
+<li><p>  整个文档是一个文档节点</p>
+</li>
+<li><p>  每个HTML标签是一个元素节点</p>
+</li>
+<li><p>  包含在HTML元素中的文本是文本节点</p>
+</li>
+<li><p>  每个HTML属性是一个属性节点</p>
+</li>
+</ul>
+<blockquote>
+<p>注释属于注释节点</p>
+<p><strong>因此一个HTML文件可以看作是所有元素组成的一个节点树，各元素之间有级别的划分</strong></p>
+</blockquote>
+<h4 id="document"><a href="#document" class="headerlink" title="document"></a>document</h4><p>document是window对象的子对象，通过使用document对象可以对文档中的对象内容等进行访问</p>
+<p>document常用属性：</p>
+<blockquote>
+<p>referrer返回载入文档的URL</p>
+<p>URL返回当前文档的URL</p>
+</blockquote>
+<p>    //获取class名为aaa的元素</p>
+<p>    document.getElementById(“#aaa”)</p>
+<p>    // 获取name标签为ming的元素</p>
+<p>    document.getElementsByName(“ming”)</p>
+<p>    // 获取标签为p的所有元素</p>
+<p>    document.getElementsByTagName(“p”)[0]</p>
+<p>   </p>
+<p>    // 获取class名为aaa的所有元素</p>
+<p>document.getElementsByClassName(“.aaa”)[0]</p>
+<p>innerHTML 获取设置标签及内容</p>
+<p>innerText 获取设置内容</p>
+<h4 id="节点获取"><a href="#节点获取" class="headerlink" title="节点获取"></a>节点获取</h4><p>    var sp=document.getElementById(“mylist”)</p>
+<p>    var p=document.getElementById(“demo”)</p>
+<p>    sp.parentNode       //返回节点的父节点</p>
+<p>    sp.childNodes[0]    //返回子节点的集合</p>
+<p>    sp.firstChild       //返回节点的第一个子节点</p>
+<p>    sp.lastChild        //返回节点的最后一个子节点</p>
+<p>    sp.nextSibling      //返回下一个节点</p>
+<p>   sp.previousSibling  //返回上一个节点</p>
+<blockquote>
+<p><strong>以上方法每个标签秋垵后都会有一个text空格的标签原因是html的缩进</strong></p>
+</blockquote>
+<p> </p>
+<p>sp. children      //获取所有的子元素</p>
+<p>    sp.firstElementChild  //返回节点的第一个元素子节点（包含内容）</p>
+<p>    sp.lastElementChild   //返回节点的最后一个元素子节点</p>
+<p>    sp.nextElementSibling //返回下一个元素节点</p>
+<p>    sp.previousElementSibling   //返回上一个元素节点</p>
+<h4 id="节点信息"><a href="#节点信息" class="headerlink" title="节点信息"></a>节点信息</h4><blockquote>
+<p>nodeName：节点名称（文本nodeName名永远是#text，文档名永远是#document）</p>
+<p>nodeValue：节点值（不适用于文档节点和元素节点）</p>
+<p>nodeType：节点类型</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>节点类型</th>
+<th>nodeType值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>元素element</td>
+<td>1</td>
+</tr>
+<tr>
+<td>属性attr</td>
+<td>2</td>
+</tr>
+<tr>
+<td>文本text</td>
+<td>3</td>
+</tr>
+<tr>
+<td>注释comments</td>
+<td>8</td>
+</tr>
+<tr>
+<td>文档document</td>
+<td>9</td>
+</tr>
+</tbody></table>
+<h4 id="设置获取属性"><a href="#设置获取属性" class="headerlink" title="设置获取属性"></a>设置获取属性</h4><blockquote>
+<p>getAttribute(“属性名”) 用来获取属性的值</p>
+<p>setAttribute(“属性名”,“属性值”)用来设置属性的值</p>
+</blockquote>
+<h4 id="节点操作"><a href="#节点操作" class="headerlink" title="节点操作"></a>节点操作</h4><h5 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h5><blockquote>
+<p>document.createElement(“a”);</p>
+</blockquote>
+<h5 id="插入节点"><a href="#插入节点" class="headerlink" title="插入节点"></a>插入节点</h5><blockquote>
+<p>        A.appendChild(B)        //把B节点追加至A节点末尾</p>
+<p>        A.insertBefore(B,C)     //把B节点插入到C节点之前</p>
+<p>    </p>
+<p>        A.cloneNode(boolean)    //复制某个指定的节点元素</p>
+<p>    true：复制该节点以及内部所有节点 false：只复制该节点及其属性</p>
+</blockquote>
+<h5 id="删除和替换节点"><a href="#删除和替换节点" class="headerlink" title="删除和替换节点"></a>删除和替换节点</h5><blockquote>
+<p>ul.removeChild（） 删除节点</p>
+<p>ul.replaceChild(new node,old node) 替换节点</p>
+</blockquote>
+<h4 id="获取元素样式"><a href="#获取元素样式" class="headerlink" title="获取元素样式"></a>获取元素样式</h4><h5 id="style属性，只能获得内联样式表中css样式"><a href="#style属性，只能获得内联样式表中css样式" class="headerlink" title="style属性，只能获得内联样式表中css样式"></a>style属性，只能获得内联样式表中css样式</h5><blockquote>
+<p>l2.style.backgroundColor</p>
+</blockquote>
+<h5 id="document-defaultview-getComputedstyle（节点，null）"><a href="#document-defaultview-getComputedstyle（节点，null）" class="headerlink" title="document.defaultview.getComputedstyle（节点，null）"></a>document.defaultview.getComputedstyle（节点，null）</h5><blockquote>
+<p>document.defaultView.getComputedStyle(l2,null).backgroundColor</p>
+</blockquote>
+<h4 id="获取定位的元素"><a href="#获取定位的元素" class="headerlink" title="获取定位的元素"></a>获取定位的元素</h4><blockquote>
+<p>offsetParent返回一个指向最近，包含该元素的父定位元素</p>
+<p>offsetTop div元素上方偏移量</p>
+<p>offsetLeft div元素左侧偏移量</p>
+<p>clientwidth是一个只读属性返回元素的内部宽度以像素为单位，包括内边界但不包括垂直滚动条、边框和外边距</p>
+<p>offentwidth和offentHeight=边框+padding+滚动条+内容</p>
+<p>clientwidth和clientHeight=padding+内容</p>
+</blockquote>
+<h4 id="获取滚动条数据"><a href="#获取滚动条数据" class="headerlink" title="获取滚动条数据"></a>获取滚动条数据</h4><blockquote>
+<p>滑动滚动条，获取元素滚动条到元素左边或顶部的距离</p>
+</blockquote>
+<p>    var div=document.getElementsByTagName(“div”)[0]</p>
+<p>    div.onscroll=function(){</p>
+<p>        p.innerText=div.scrollTop.toFixed()</p>
+<p>        p.innerText=div.scrollLeft.toFixed</p>
+<p>    }</p>
+<h3 id="RegExp对象（正则表达式）"><a href="#RegExp对象（正则表达式）" class="headerlink" title="RegExp对象（正则表达式）"></a>RegExp对象（正则表达式）</h3><p>var reg=new RegExp（）或 var reg=/^…$/</p>
+<p>1.[]:表示一个字符,该字符可以是[]中指定的内容</p>
+<blockquote>
+<p>[abc]:这个字符可以是a或b或c</p>
+<p>[a-z] :表示任意一个小写字母</p>
+<p>[a-zA-Z] :表示任意一个字母</p>
+<p>[a-zA-Z0-9_] :表示任意一个数字字母下划线</p>
+<p>[^abc] :该字符只要不是a或b或c</p>
+</blockquote>
+<p>2.预定义字符:</p>
+<blockquote>
+<p>. :表示任意一个字符,没有范围限制</p>
+<p>\d :表示任意一个数字,等同于[0-9]</p>
+<p>\D :表示不是数字</p>
+<p>\w :表示任意一个单词字符,等同于[a-zA-Z0-9_]–单词指字母/数字/_</p>
+<p>\W :不是单词字符</p>
+<p>\s :表示任意一个空白字符</p>
+<p>\S :不是空白字符</p>
+</blockquote>
+<p>3.量词:</p>
+<blockquote>
+<p>?:表示前面的内容出现0-1次</p>
+<p>+:表示前面的内容最少出现1次</p>
+<p>*:表示前面的内容出现任意次(0-多次)—匹配内容与+一致，只是可以一次都不写</p>
+<p>{n}:表示前面的内容出现n次</p>
+<p>{n,m}:表示前面的内容出现最少n次最多m次</p>
+<p>{n,}:表示前面的内容出现n次以上(含n次)</p>
+</blockquote>
+<p>4.()用于分组,是将括号内的内容看做是一个整体</p>
+<blockquote>
+<p>(abc){3} 表示abc整体出现3次.</p>
+<p>(abc|def){3} 表示abc或def整体出现3次.</p>
+</blockquote>
+<h4 id="RegExp方法"><a href="#RegExp方法" class="headerlink" title="RegExp方法"></a>RegExp方法</h4><blockquote>
+<p>exec（） 检索字符串中指定的值。返回找到的值，并确定其位置。</p>
+<p>test （） 检索字符串中指定的值。返回 true 或 false。</p>
+</blockquote>
+<h4 id="支持正则表达式的String对象方法"><a href="#支持正则表达式的String对象方法" class="headerlink" title="支持正则表达式的String对象方法"></a>支持正则表达式的String对象方法</h4><blockquote>
+<p>search 检索与正则表达式相匹配的值。</p>
+<p>match 找到一个或多个正则表达式的匹配。</p>
+<p>replace 替换与正则表达式匹配的子串。</p>
+<p>split 把字符串分割为字符串数组。</p>
+</blockquote>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>Post author: </strong>
+        Rogers
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>Post link: </strong>
+        <a id="original-link" href="https://ljs-yym.github.io/2023/06/12/Javascript/" title="js编程指南">https://ljs-yym.github.io/2023/06/12/Javascript/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>Copyright Notice: </strong>
+        All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> unless otherwise stated.
+    </li>
+</ul>
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/06/12/SpringBoot/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/cover/SpringBoot.png">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/java/">
+                    java
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/06/12/SpringBoot/" class="trm-anima-link">
+                    SpringBoot笔记
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/06/12</li>
+                <li>20:17</li>
+                
+                    <li>1.3k</li>
+                
+                
+                    <li>6</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/06/12/CSS%E6%A0%B7%E5%BC%8F%E7%AC%94%E8%AE%B0/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/cover/css.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%89%8D%E7%AB%AF/">
+                    前端
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/06/12/CSS%E6%A0%B7%E5%BC%8F%E7%AC%94%E8%AE%B0/" class="trm-anima-link">
+                    CSS样式表笔记
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/06/12</li>
+                <li>17:13</li>
+                
+                    <li>2.3k</li>
+                
+                
+                    <li>9</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2023- 2023</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">长生风月</span>
+        </div>
+    
+
+      
+
+    
+        <div class="trm-footer-item">
+            The blog has been lovely to run <span id="since" class="trm-accent-color"></span> day
+        </div>
+     
+
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("02/27/2023 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="Read Mode" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="Toggle between single-column and double-column" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="Back To Top">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+<div class="trm-search-popup">
+    <div class="trm-search-header">
+        <span class="trm-search-popup-btn-close">
+            <i class="iconfont fas fa-times"></i>
+        </span>
+    </div>
+    <div class="form trm-search-form">
+        <input class="trm-search-input" type="text" placeholder="Searching...">
+    </div>
+    <div class="trm-search-result-container">
+
+    </div>
+</div>
+
+  <!-- Plugin -->
+
+
+
+
+    
+<script src="https://unpkg.com/swup@2.0.19/dist/swup.min.js"></script>
+
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.2"></script>
+    
+
+    
+        
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=2.0.2"></script>
+    
+
+    <!-- 数学公式 -->
+    
+        
+<script src="https://unpkg.com/katex@latest/dist/katex.min.js" data-swup-reload-script></script>
+
+        
+            
+<script src="https://unpkg.com/katex@latest/dist/contrib/copy-tex.min.js" data-swup-reload-script></script>
+
+        
+        
+<script src="https://unpkg.com/katex@latest/dist/contrib/auto-render.min.js" data-swup-reload-script></script>
+
+        <script data-swup-reload-script>
+              window.renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true },
+                ],
+                ...{},
+            })
+        </script>
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <script>
+        "serviceWorker" in navigator ?
+        navigator.serviceWorker.register('/sw.js').then(function () {
+            navigator.serviceWorker.controller ? 
+             console.log("Assets cached by the controlling service worker.") :
+             console.log("Please reload this page to allow the service worker to handle network operations.")
+        }).catch(function (e) {
+            console.log("ERROR: " + e)
+        }) : console.log("Service workers are not supported in the current browser.")
+    </script>
+
+    <!-- baidu push -->
+    
+    <script data-swup-reload-script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+
+
+<script id="async-script" src="/js/main.js?v=2.0.2"></script>
+
+</body>
+
+</html>

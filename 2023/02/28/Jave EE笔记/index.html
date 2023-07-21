@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="Jave EETomcat配置idea 如何在 IDEA 中创建并部署 JavaWeb 程序 (baidu.com)  服务器组件Servlet快速入门  创建一个java ee项目   在src中创建一个类并且实现Servlet接口   实现接口中的抽象方法   配置Servlet   在web.xml文件中的web-app标签中写入： 12345678910111213141516171819">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java EE笔记">
+<meta property="og:url" content="https://ljs-yym.github.io/2023/02/28/Jave%20EE%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="RogevnBlog">
+<meta property="og:description" content="Jave EETomcat配置idea 如何在 IDEA 中创建并部署 JavaWeb 程序 (baidu.com)  服务器组件Servlet快速入门  创建一个java ee项目   在src中创建一个类并且实现Servlet接口   实现接口中的抽象方法   配置Servlet   在web.xml文件中的web-app标签中写入： 12345678910111213141516171819">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ljs-yym.github.io/img/cover/java.jpg">
+<meta property="article:published_time" content="2023-02-28T10:57:46.080Z">
+<meta property="article:modified_time" content="2023-06-12T14:42:06.080Z">
+<meta property="article:author" content="Rogers">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ljs-yym.github.io/img/cover/java.jpg">
+
+    <meta name="keywords" content="hexo,node,博客">
+
+
+<title >Java EE笔记</title>
+
+<!-- Favicon -->
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+<link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css">
+
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"ljs-yym.github.io","author":"Rogers","root":"/","typed_text":["Web Developer","Backend Programmer","Full Stack Developer！"],"theme_version":"2.0.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo.png","icon16":"/img/logo.png","icon32":"/img/logo.png","dark_logo":"/img/dark_logo.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"creative_commons":{"license":"by-nc-sa","language":"deed.zh"},"search":{"enable":true,"type":"local","path":"search.xml","field":"post","content":true,"format":"html"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-06-12 22:42:06"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.2" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+     
+
+    
+
+    
+ 
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" class=" trm-light-icon" src="/img/logo.png"> <img alt="logo" class=" trm-dark-icon" src="/img/dark_logo.png">
+    
+    
+        <div class="trm-logo-text">
+            Rogevn<span>Blog</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    长生风月的博客
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    日志
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友情链接
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/picture/" target="">
+                    好东西
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/picture/" target="">
+                            图片
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/technology/" target="">
+                            黑科技
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+    
+    <div id="trm-search-btn" class="trm-search-btn">
+        <i class="iconfont fas fa-search"></i>
+    </div>
+     
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            Java EE笔记
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/R-C.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        长生风月
+    </h5>
+    
+        <div class="trm-label">
+            I&#39;m a
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="tencent://message/?uin=3232008148&Site=&Menu=yes" title="QQ" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="/null" title="WeChat" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-weixin"></i>
+        </a>
+    
+        <a href="/null" title="twitter" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-twitter"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                河北省保定市
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                21
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                星座:
+            </div>
+            <div class="trm-label trm-label-light">
+                处女座
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                爱好:
+            </div>
+            <div class="trm-label trm-label-light">
+                足球、音乐、魔方、代码
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:3232008148@qq.com" class="trm-btn">
+            Contact Me
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#Jave-EE"  data-scroll-to="#Jave-EE"><span class="toc-number">1.</span> <span class="toc-text">Jave EE</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Tomcat配置idea"  data-scroll-to="#Tomcat配置idea"><span class="toc-number">1.1.</span> <span class="toc-text">Tomcat配置idea</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#服务器组件Servlet"  data-scroll-to="#服务器组件Servlet"><span class="toc-number">1.2.</span> <span class="toc-text">服务器组件Servlet</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#快速入门"  data-scroll-to="#快速入门"><span class="toc-number">1.2.1.</span> <span class="toc-text">快速入门</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#设置默认打开的页面"  data-scroll-to="#设置默认打开的页面"><span class="toc-number">1.2.2.</span> <span class="toc-text">设置默认打开的页面</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Servlet的生命周期"  data-scroll-to="#Servlet的生命周期"><span class="toc-number">1.2.3.</span> <span class="toc-text">Servlet的生命周期</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Servlet注解配置"  data-scroll-to="#Servlet注解配置"><span class="toc-number">1.2.4.</span> <span class="toc-text">Servlet注解配置</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Servlet体系结构"  data-scroll-to="#Servlet体系结构"><span class="toc-number">1.2.5.</span> <span class="toc-text">Servlet体系结构</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#request和response原理"  data-scroll-to="#request和response原理"><span class="toc-number">1.2.6.</span> <span class="toc-text">request和response原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#会话技术"  data-scroll-to="#会话技术"><span class="toc-number">1.3.</span> <span class="toc-text">会话技术</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#json"  data-scroll-to="#json"><span class="toc-number">1.4.</span> <span class="toc-text">json</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#概念"  data-scroll-to="#概念"><span class="toc-number">1.4.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#json语法"  data-scroll-to="#json语法"><span class="toc-number">1.4.2.</span> <span class="toc-text">json语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#JSP"  data-scroll-to="#JSP"><span class="toc-number">1.5.</span> <span class="toc-text">JSP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#什么是jsp"  data-scroll-to="#什么是jsp"><span class="toc-number">1.5.1.</span> <span class="toc-text">什么是jsp</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#jsp运行机制"  data-scroll-to="#jsp运行机制"><span class="toc-number">1.5.2.</span> <span class="toc-text">jsp运行机制</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#jsp语法"  data-scroll-to="#jsp语法"><span class="toc-number">1.5.3.</span> <span class="toc-text">jsp语法</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#EL表达式（用于简化jsp开发）"  data-scroll-to="#EL表达式（用于简化jsp开发）"><span class="toc-number">1.5.4.</span> <span class="toc-text">EL表达式（用于简化jsp开发）</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#JSTL标签"  data-scroll-to="#JSTL标签"><span class="toc-number">1.5.5.</span> <span class="toc-text">JSTL标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Filter过滤器"  data-scroll-to="#Filter过滤器"><span class="toc-number">1.6.</span> <span class="toc-text">Filter过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#过滤器概念"  data-scroll-to="#过滤器概念"><span class="toc-number">1.6.1.</span> <span class="toc-text">过滤器概念</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#快速入门-1"  data-scroll-to="#快速入门-1"><span class="toc-number">1.6.2.</span> <span class="toc-text">快速入门</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#过滤器执行流程（生命周期）"  data-scroll-to="#过滤器执行流程（生命周期）"><span class="toc-number">1.6.3.</span> <span class="toc-text">过滤器执行流程（生命周期）</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#过滤器配置详解"  data-scroll-to="#过滤器配置详解"><span class="toc-number">1.6.4.</span> <span class="toc-text">过滤器配置详解</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#过滤器链（配置多个过滤器）"  data-scroll-to="#过滤器链（配置多个过滤器）"><span class="toc-number">1.6.5.</span> <span class="toc-text">过滤器链（配置多个过滤器）</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Listener：监听器"  data-scroll-to="#Listener：监听器"><span class="toc-number">1.7.</span> <span class="toc-text">Listener：监听器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#概念：web三大组件之一"  data-scroll-to="#概念：web三大组件之一"><span class="toc-number">1.7.1.</span> <span class="toc-text">概念：web三大组件之一</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#监听器的实质"  data-scroll-to="#监听器的实质"><span class="toc-number">1.7.2.</span> <span class="toc-text">监听器的实质</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#监听器的接口有哪些"  data-scroll-to="#监听器的接口有哪些"><span class="toc-number">1.7.3.</span> <span class="toc-text">监听器的接口有哪些</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#监听ServletContext的创建和销毁"  data-scroll-to="#监听ServletContext的创建和销毁"><span class="toc-number">1.7.4.</span> <span class="toc-text">监听ServletContext的创建和销毁</span></a></li></ol></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            02/28
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            18:57
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Rogers
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="Jave-EE"><a href="#Jave-EE" class="headerlink" title="Jave EE"></a>Jave EE</h1><h2 id="Tomcat配置idea"><a href="#Tomcat配置idea" class="headerlink" title="Tomcat配置idea"></a>Tomcat配置idea</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1725595546321519849&wfr=spider&for=pc">如何在 IDEA 中创建并部署 JavaWeb 程序 (baidu.com)</a></p>
+</blockquote>
+<h2 id="服务器组件Servlet"><a href="#服务器组件Servlet" class="headerlink" title="服务器组件Servlet"></a>服务器组件Servlet</h2><h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3><ol>
+<li><p> 创建一个java ee项目</p>
+</li>
+<li><p> 在src中创建一个类并且实现Servlet接口</p>
+</li>
+<li><p> 实现接口中的抽象方法</p>
+</li>
+<li><p> 配置Servlet</p>
+</li>
+</ol>
+<p>在web.xml文件中的web-app标签中写入：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!--自定义，一般为类名--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!--一定是package + .类名，项目中定位该servlet的完整路径。--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>tom<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span>  </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--给Servlet提供（映射)一个可供客户端访问的URI,浏览器访问该servlet要访问的url定义--&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!--和servlet中的name必须相同--&gt;</span>  </span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!-- servlet的映射路径 客户端访问url --&gt;</span>  </span><br><span class="line">	<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/demo1<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span>  </span><br><span class="line">	</span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>执行原理：</p>
+<blockquote>
+<p>1.当服务器接收到客户端浏览器的请求后，会解析url路径，获取访问的Servlet的路径</p>
+<p>2.查找web.xml中是否有对应的&lt;url-pattern&gt;标签内容</p>
+<p>3.如果有则会找到对应的&lt;servlet-class&gt;全类名</p>
+<p>4.Tomcat会将字节码文件加载进内存，创建类名的实例化对象</p>
+<p>5.调用其方法</p>
+</blockquote>
+<h3 id="设置默认打开的页面"><a href="#设置默认打开的页面" class="headerlink" title="设置默认打开的页面"></a>设置默认打开的页面</h3><p>在web.xml文件中</p>
+<p>&lt;welcome-file-list&gt;<br>&lt;welcome-file&gt;index.html&lt;/welcome-file&gt;<br>&lt;/welcome-file-list&gt;</p>
+<h3 id="Servlet的生命周期"><a href="#Servlet的生命周期" class="headerlink" title="Servlet的生命周期"></a>Servlet的生命周期</h3><p>1.被创建（加载资源）</p>
+<p>public void init() {<br>            /*初始化方法，在Servlet创建时执行只会执行一次*/</p>
+<p>}</p>
+<p>设置什么时候被创建</p>
+<p>指定Servlet的创建时机，在web.xml文件的Servlet下创建<br>            1.第一次被访问时创建：&lt;load-on-startup&gt;的值为负数<br>            2.在服务器启动时创建：&lt;load-on-startup&gt;的值为0或者正整数</p>
+<p>2.提供服务</p>
+<p>public void service() {</p>
+<p>System.<em>out</em>.println(“hello service”);<br>            /*提供服务的方法，每一次Servlet被访问时会执行，可执行多次*/<br>        }</p>
+<p>3.被销毁</p>
+<p>public void destroy() {<br>            /*销毁方法，在Servlet正常关闭时执行*/</p>
+<p>}</p>
+<p>在Servlet被销毁之前执行，一般用于释放资源</p>
+<h3 id="Servlet注解配置"><a href="#Servlet注解配置" class="headerlink" title="Servlet注解配置"></a>Servlet注解配置</h3><p>@WebServlet(urlPatterns = “/demo2”)</p>
+<h3 id="Servlet体系结构"><a href="#Servlet体系结构" class="headerlink" title="Servlet体系结构"></a>Servlet体系结构</h3><blockquote>
+<p>Servlet—接口</p>
+<p>|</p>
+<p>GenericServlet—抽象类</p>
+<p>| 里面只有一个service方法（将其他的方法做了默认空实现）</p>
+<p>HttpServlet—抽象类</p>
+<p>| 定义类继承HttpServlet</p>
+<p>重写doGet/doPost方法，用来获取方法的</p>
+</blockquote>
+<h3 id="request和response原理"><a href="#request和response原理" class="headerlink" title="request和response原理"></a>request和response原理</h3><ol>
+<li><p> tomcat服务器会根据请求url中的资源路径，创建对应的ServletDemo1的对象</p>
+</li>
+<li><p> tomcat服务器会创建request和response两个对象，request</p>
+</li>
+<li><p> tomcat将request和response两个对象传递给service方法，并且调用service</p>
+</li>
+<li><p> 我们就可以通过request对象获取请求消息数据，通过response设置响应消息数据</p>
+</li>
+<li><p> 服务器再给浏览器作出响应之前会从response对象中拿取我们设置的响应消息数据</p>
+</li>
+</ol>
+<p>request功能</p>
+<ol>
+<li> 获取请求行数据</li>
+</ol>
+<blockquote>
+<p>GET/JavaWeb_war_exploded/s3?name=zs&amp;age=19&amp;xuehao=218&amp;class=A2&amp;zhuany=java HTTP/1.1</p>
+<p>方法</p>
+<p>1. 获取请求方式：GET</p>
+<p>request.getMethod()</p>
+<p>2. 获取虚拟目录：/JavaWeb_war_exploded</p>
+<p>request.getContextPath()</p>
+<p>3. 获取Servle路径：/s3</p>
+<p>request.getServletPath()</p>
+<p>4. 获取get方式请求参数：name=zs&amp;age=19&amp;xuehao=218</p>
+<p>request.getQueryString()</p>
+<p>5. 获取请求url：</p>
+<p>request.getRequest URI() : /JavaWeb_war_exploded/s3</p>
+<p>request.getRequestURL(): <a target="_blank" rel="noopener" href="http://localhost/JavaWeb_war_exploded/s3">http://localhost/JavaWeb_war_exploded/s3</a></p>
+<p>6. 获取协议及版本：HTTP/1.1</p>
+<p>request.rotocol()</p>
+<p>7. 获取客户机的IP地址：</p>
+<p>request.getRemoteAddr()</p>
+<p>8. 获取指定键的值</p>
+</blockquote>
+<p>String age=req.getParameter(“age”);</p>
+<ol>
+<li> 获取请求头数据</li>
+</ol>
+<blockquote>
+<p>1. .getHeader() 通过请求头的名称获取请求头的值</p>
+<p>2. Enumeration&lt;String&gt; getHeaderNames() 获取所有的请求头名称</p>
+</blockquote>
+<ol>
+<li> 获取请求体数据</li>
+</ol>
+<blockquote>
+<p>请求体：只有post请求方式，才有请求体，在请求体中封装了post请求的请求参数</p>
+<p>1. 获取流对象</p>
+<p>.getReader():获取字符输入流，只能操作字符数据</p>
+<p>.getInputStream():获取字节输入流，可以操作所有类型数据</p>
+</blockquote>
+<ol>
+<li> 通用方法</li>
+</ol>
+<blockquote>
+<p>1. 获取请求参数通用方法</p>
+<p><img src="/img/JavaEE%E7%AC%94%E8%AE%B0/001.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>2.解决中文乱码问题</p>
+<p>resp.setCharacterEncoding(“utf-8”);</p>
+<p>resp.setHeader(“content-type”,”text/html;charset=utf-8”);</p>
+<p>3. 请求转发：用来跳转页面</p>
+<p>req.getRequestDispatcher(“/s2”).forward(req,resp);</p>
+<p>注：跳转到名为/s2的页面</p>
+<p>特点：浏览器地址栏路径不变</p>
+<p>只能转到当前服务器内部资源</p>
+<p>转发是一次请求</p>
+</blockquote>
+<ol>
+<li> 共享数据</li>
+</ol>
+<blockquote>
+<p>在转发之前存储数据：request.setAttribute(“msg”,”helloworld”)</p>
+<p>在被转发的页面中写上：request.getAttribute(“msg”)即可得到helloworld</p>
+</blockquote>
+<p>response功能</p>
+<p>1. 设置响应行</p>
+<p>1. 格式：HTTP/1.1 200 ok</p>
+<p>2. 设置状态码：setStatus(src)</p>
+<p>2. 设置响应头</p>
+<p>setHeader(name,value)</p>
+<p>3. 设置响应体</p>
+<p>1.获取输出流</p>
+<p>字节输出流：PrintWriter getWriter()</p>
+<p>字节输出流：ServletOutputStream getOutputStream()</p>
+<p>4. 重定向</p>
+<p>resp.sendRedirect(“<a target="_blank" rel="noopener" href="http://www.baidu.com&quot;/">http://www.baidu.com&quot;</a> );</p>
+<h2 id="会话技术"><a href="#会话技术" class="headerlink" title="会话技术"></a>会话技术</h2><p>会话：一次会话中包含多次请求和响应</p>
+<p>一次会话：浏览器第一次给服务器资源发送请求，会话建立，直到一方断开</p>
+<p>功能：在一次会话的范围内的多次请求间共享数据</p>
+<p>方法：</p>
+<h4 id="1-客户端会话技术：Cookie"><a href="#1-客户端会话技术：Cookie" class="headerlink" title="1. 客户端会话技术：Cookie"></a>1. 客户端会话技术：Cookie</h4><p>概念：客户端会话技术，将数据保存到客户端</p>
+<p>快速入门：</p>
+<p>1. 创建Cookie对象，绑定数据</p>
+<p>Cookie c=new Cookie(“msg”,”张三”);</p>
+<p>2. 发送Cookie对象</p>
+<p>resp.addCookie(c);</p>
+<p>3. 获取Cookie拿到数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Cookie [] co= req.getCookies();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(co!=<span class="literal">null</span>)&#123;  </span><br><span class="line">	<span class="keyword">for</span> (Cookie cookie : co) &#123;  </span><br><span class="line">		String name=cookie.getName();  </span><br><span class="line">		String value= cookie.getValue();  </span><br><span class="line">		System.*out*.println(name+<span class="string">&quot;:&quot;</span>+value);  </span><br><span class="line">	&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Cookie的细节：</p>
+<p><img src="/img/JavaEE%E7%AC%94%E8%AE%B0/002.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>1. 发送多个cookie</p>
+<p>只需要创建多个cookie对象，使用response调用多次addCookie方法发送cookie</p>
+<p>2. Cookie存活时间</p>
+<blockquote>
+<p>c.setMaxAge(30);<br>// 正数：永久化存储指定的秒数<br>// 负数：默认值<br>// 零：不存储cookie</p>
+</blockquote>
+<p>3. cookie共享问题</p>
+<p><em><strong>同一个服务器下共享：</strong></em></p>
+<p>假设在一个tomcat服务器中，部署了多个项目，那么这些项目中cookie默认情况下不共享也可以通过setPath(String path)设置获取范围path设置为/</p>
+<p><em><strong>在不同的tomcat服务器中共享：</strong></em></p>
+<p>setDomain(String path)如果设置了一级域名相同，那么多个服务器之间cookie可以共享setDomain(“.baidu.com”)那么tieba.baidu.com和news.baidu.com中cookie可以共享</p>
+<p>4. cookie作用</p>
+<p>1. 存储一些自定义设置如设置了搜索历史关闭第二次打开设置依旧生效</p>
+<p>2. 实现账号密码保存</p>
+<h4 id="服务器端会话技术：Session"><a href="#服务器端会话技术：Session" class="headerlink" title="服务器端会话技术：Session"></a>服务器端会话技术：Session</h4><p>概念：在一次会话中的多次请求间共享数据，将数据保存在服务器端</p>
+<p>快速入门：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HttpSession对象： HttpSession session=req.getSession();</span><br><span class="line"></span><br><span class="line">Object msg=session.getAttribute(String name) 获取session数据</span><br><span class="line"></span><br><span class="line">session.setAttribute(String name,Object value) 设置</span><br><span class="line"></span><br><span class="line">session.removeAttribute(String name) 删除</span><br></pre></td></tr></table></figure>
+
+<p>细节：</p>
+<p>1. 当客户端关闭后，服务器不关闭，两次获取的session是否为同一个？</p>
+<p>默认情况下，不是</p>
+<blockquote>
+<p>如果需要相同，则可以创建Cookie，键为session名字，设置最大存活时间，让cookie持久化保存</p>
+<p>Cookie c=new Cookie(“session”,session.getId())</p>
+<p>c.setMaxAge(60*60)</p>
+<p>resp.addCookie(c)</p>
+</blockquote>
+<p>2. 客户端不关闭，服务器关闭后两次获取的session是否为同一个？</p>
+<p>不是同一个，但是要确保数据不丢失</p>
+<p>1. session的钝化</p>
+<p>在服务器正常关闭之后，将session的对象序列化到硬盘上</p>
+<p>2. session的活化</p>
+<p>在服务器启动后，将session文件转化为内存的session对象即可</p>
+<p>3. session什么时候被销毁</p>
+<p>1. 服务器关闭</p>
+<p>2. 通过方法invalidate()销毁</p>
+<p>3. session默认30分钟自动销毁</p>
+<p>4. session的特点</p>
+<p>1. session用于存储一次对话的多次请求的数据，存在服务器端</p>
+<p>2. session可以存储任意类型，任意大小的数据</p>
+<p>3. Cookie和session的区别</p>
+<p>session存储在服务器端，Cookie在客户端</p>
+<p>session没有数据大小限制Cookie有</p>
+<p>session数据安全，Cookie相对于不安全</p>
+<h2 id="json"><a href="#json" class="headerlink" title="json"></a>json</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><blockquote>
+<p>JavaScript object notation js对象表示法</p>
+<p>json多用于存储和交换文本信息的语法</p>
+</blockquote>
+<h3 id="json语法"><a href="#json语法" class="headerlink" title="json语法"></a>json语法</h3><blockquote>
+<p>1. 基本规则</p>
+</blockquote>
+<ul>
+<li><p>  数据是键值对</p>
+</li>
+<li><p>  数据由逗号分割</p>
+</li>
+<li><p>  花括号保存对象</p>
+</li>
+<li><p>  方括号保存数组</p>
+</li>
+</ul>
+<blockquote>
+<p>2. 数据类型</p>
+</blockquote>
+<ul>
+<li><p>  数字（整数或浮点数）</p>
+</li>
+<li><p>  字符串（用双引号引起来）</p>
+</li>
+<li><p>  boolean值</p>
+</li>
+<li><p>  数组（在方括号中）</p>
+</li>
+<li><p>  对象（在花括号中）{“address”:{“province”:”山西”…}}</p>
+</li>
+<li><p>  null</p>
+</li>
+</ul>
+<blockquote>
+<p>3. 获取数据</p>
+</blockquote>
+<ul>
+<li>  json对象.键名</li>
+</ul>
+<p>4. json数据和java对象相互转换</p>
+<p>java转json</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// java转json对象</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">javaToJson</span><span class="params">(Bread bread)</span>&#123;  </span><br><span class="line">bread.setId(<span class="string">&quot;HUAWEI&quot;</span>);  </span><br><span class="line">bread.setCompany(<span class="number">50</span>);  </span><br><span class="line">bread.setGuanggao(<span class="string">&quot;用技术改变世界&quot;</span>);  </span><br><span class="line">Gson gs=<span class="keyword">new</span> <span class="title class_">Gson</span>();  </span><br><span class="line">String str=gs.toJson(bread);  </span><br><span class="line"><span class="keyword">return</span> str;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 字符串转javabean  </span></span><br><span class="line">Gson gson=<span class="keyword">new</span> <span class="title class_">Gson</span>();  </span><br><span class="line">String json2=<span class="string">&quot;&#123;\&quot;id\&quot;:\&quot;username\&quot;:\&quot;张三\&quot;&#125;&quot;</span>;  </span><br><span class="line">Bread bread1=gson.fromJson(json2, Bread.class);  </span><br><span class="line">System.*out*.println(<span class="string">&quot;id号：&quot;</span>+bread1.getId());  </span><br><span class="line">System.*out*.println(<span class="string">&quot;姓名：&quot;</span>+bread1.getName());  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用javabean输出</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">rowJson</span><span class="params">(Connection con)</span> <span class="keyword">throws</span> SQLException&#123;  </span><br><span class="line">PreparedStatement pr=<span class="literal">null</span>;  </span><br><span class="line">String sql=<span class="string">&quot;select id,name,company,guanggao,qiyong from bread&quot;</span>;  </span><br><span class="line">pr=con.prepareStatement(sql);  </span><br><span class="line">ResultSet rs=pr.executeQuery();  </span><br><span class="line">Bread bread=<span class="keyword">new</span> <span class="title class_">Bread</span>();  </span><br><span class="line"></span><br><span class="line">String rows=<span class="string">&quot;&quot;</span>;  </span><br><span class="line">rs.beforeFirst();  </span><br><span class="line"><span class="type">int</span> i=<span class="number">0</span>;  </span><br><span class="line"><span class="keyword">while</span> (rs.next())&#123;  </span><br><span class="line">	i=i+<span class="number">1</span>;  </span><br><span class="line">&#125;  </span><br><span class="line">rs.beforeFirst();  </span><br><span class="line"><span class="type">int</span> j=<span class="number">1</span>;  </span><br><span class="line"><span class="keyword">while</span> (rs.next())&#123;  </span><br><span class="line">	bread.setId(rs.getString(<span class="string">&quot;id&quot;</span>));  </span><br><span class="line">	bread.setName(rs.getString(<span class="string">&quot;name&quot;</span>));  </span><br><span class="line">	bread.setCompany(rs.getInt(<span class="string">&quot;Company&quot;</span>));  </span><br><span class="line">	bread.setGuanggao(rs.getString(<span class="string">&quot;guanggao&quot;</span>));  </span><br><span class="line"><span class="keyword">if</span> (j!=i)&#123;  </span><br><span class="line">	rows=rows+bread.toString()+<span class="string">&quot;,&quot;</span>;  </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">	rows=rows+bread.toString();  </span><br><span class="line">&#125;  </span><br><span class="line">	j=j+<span class="number">1</span>;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="keyword">return</span> <span class="string">&quot;[&quot;</span>+rows+<span class="string">&quot;]&quot;</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h2><h3 id="什么是jsp"><a href="#什么是jsp" class="headerlink" title="什么是jsp"></a>什么是jsp</h3><blockquote>
+<p>jsp全名java server pages，中文名叫java服务器页面</p>
+<p>jsp技术是在传统的网页html文件中插入java程序和jsp标记从而形成jsp文件</p>
+</blockquote>
+<h3 id="jsp运行机制"><a href="#jsp运行机制" class="headerlink" title="jsp运行机制"></a>jsp运行机制</h3><blockquote>
+<p>jsp也是一种Servlet，其java类型为HttpJSPBase</p>
+<p>jsp不能独立运行，需要jsp引擎</p>
+</blockquote>
+<h3 id="jsp语法"><a href="#jsp语法" class="headerlink" title="jsp语法"></a>jsp语法</h3><blockquote>
+<p>jsp页面由数据模板和元素组成：</p>
+<p>数据模板，jsp容器不进行处理，如jsp中的HTML内容这些内容会直接发送到客户端</p>
+<p>jsp元素：jsp容器必须处理的部分。jsp元素有三种类型：</p>
+</blockquote>
+<h4 id="1-指令元素"><a href="#1-指令元素" class="headerlink" title="1. 指令元素"></a>1. 指令元素</h4><blockquote>
+<p><em>page指令：定义与页面相关的一些属性</em></p>
+</blockquote>
+<p>&lt;%@ <strong>page</strong> contentType=”text/html;charset=UTF-8” language=”java” %&gt;</p>
+<blockquote>
+<p>常见属性：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>属性</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>language=”java”</td>
+<td>指定脚本元素中使用的脚本语言，目前只支持java</td>
+</tr>
+<tr>
+<td>contentType=”ctinfo”</td>
+<td>指定用于响应JSP页面的MIME类型和编码</td>
+</tr>
+<tr>
+<td>pageEncoding=”en”</td>
+<td>指定当前JSP页面使用的字符编码</td>
+</tr>
+<tr>
+<td>import=”importList”</td>
+<td>用来引入使用到的Java类</td>
+</tr>
+<tr>
+<td>errorPage=”url”</td>
+<td>用于当JSP页面发送异常时，转向的错误页面</td>
+</tr>
+<tr>
+<td>isErrorPage=”true”</td>
+<td>指定页面是否是错误处理页面，默认值为false</td>
+</tr>
+<tr>
+<td>session=”true/false”</td>
+<td>用于指定该JSP是否参与到会话中，默认值为true</td>
+</tr>
+<tr>
+<td>buffer=”none/size”</td>
+<td>用于指定out对象使用的缓冲区大小，8kb为默认值</td>
+</tr>
+<tr>
+<td>isELIgnored=”true”</td>
+<td>指定JSP页面是否忽略EL表达式，默认值为false</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><em>include指令：页面包含的。导入页面的资源文件</em></p>
+</blockquote>
+<p>&lt;%@include file=”top.jsp”%&gt;</p>
+<blockquote>
+<p><em>taglib指令：在JSP页面中使用第三方的标签库时，需要使用taglib指令来“导包</em></p>
+<p>&lt;%@ taglib prefix=”c” uri=”<a target="_blank" rel="noopener" href="http://java.sun.com/jsp/jstl/core&quot;">http://java.sun.com/jsp/jstl/core&quot;</a> %&gt;</p>
+</blockquote>
+<h4 id="2-脚本元素：jsp定义java代码的方式"><a href="#2-脚本元素：jsp定义java代码的方式" class="headerlink" title="2. 脚本元素：jsp定义java代码的方式"></a>2. 脚本元素：jsp定义java代码的方式</h4><blockquote>
+<p>&lt;% %&gt;定义的java代码，在service中可以定义什么，这个脚本中就能写什么</p>
+<p>&lt;%! %&gt;定义的java代码，放在全局变量位置</p>
+<p>&lt;%= %&gt;会输出到页面上的语句</p>
+</blockquote>
+<h4 id="3-jsp的内置对象"><a href="#3-jsp的内置对象" class="headerlink" title="3. jsp的内置对象"></a>3. jsp的内置对象</h4><blockquote>
+<p>在jsp页面中不需要获取或创建就可以直接使用的对象</p>
+</blockquote>
+<ul>
+<li>  request</li>
+</ul>
+<blockquote>
+<p>request对象是javax.servlet.http.HttpServletRequest类的实例。每当客户端请求一个JSP页面时，JSP引擎就会制造一个新的request对象来代表这个请求。</p>
+<p>request对象提供了一系列方法来获取HTTP头信息，cookies，HTTP方法等等</p>
+</blockquote>
+<ul>
+<li>  response</li>
+</ul>
+<blockquote>
+<p>response对象是javax.servlet.http.HttpServletResponse类的实例。当服务器创建request对象时会同时创建用于响应这个客户端的response对象。</p>
+<p>response对象也定义了处理HTTP头模块的接口。通过这个对象，开发者们可以添加新的cookies，时间戳，HTTP状态码等等。</p>
+</blockquote>
+<ul>
+<li>  session</li>
+</ul>
+<blockquote>
+<p>session对象是javax.servlet.http.HttpSession类的实例。</p>
+<p>session对象是由服务器自动创建的与用户请求相关的对象。服务器为每个用户都生成一个session对象，用于保存该用户的信息，跟踪用户的操作状态。session对象内部使用Map类来保存数据，因此保存数据的格式为Key/value。session对象的value可以使复杂的对象类型，而不仅仅局限于字符串类型。</p>
+</blockquote>
+<ul>
+<li>  out：字符输出流对象，可以利用数据输出到页面上和response.getWrite类似</li>
+</ul>
+<blockquote>
+<p>在tomcat作出响应之前，总是会先执行response.getWrite再去找out缓冲区</p>
+</blockquote>
+<ul>
+<li>  application</li>
+</ul>
+<blockquote>
+<p>服务器启动后就产生了这个application对象，当客户在所访问的网站的各个页面之间浏览时，这个application对象都是同一个，直到服务器关闭。但是与session不同的是，所有客户的application对象都是同一个，即所有客户共享这个内置的application对象。</p>
+<p>2．application对象常用方法:</p>
+<p>(1)public void setAttribute(String key,Object obj): 将参数Object指定的对象obj添加到application对象中，并为添加的对象指定一个索引关键字。</p>
+<p>(2)public Object getAttribute(String key): 获取application对象中含有关键字的对象。</p>
+</blockquote>
+<ul>
+<li><p>  page 对应this关键字。JSP网页本身</p>
+</li>
+<li><p>  config</p>
+</li>
+</ul>
+<blockquote>
+<p>javax.servlet. ServletConfig 的实例，该实例代表该JSP 的配置信息。常用的方法有getInitPararneter(String paramNarne) 及getInitPararneternarnes() 等方法</p>
+</blockquote>
+<ul>
+<li>  exception</li>
+</ul>
+<blockquote>
+<p>该实例代表其他页面中的异常和错误。只有当页面是错误处理页面，即编译指令page 的isErrorPage 属性为true 时，该对象才可以使用。常用的方法有getMessage()和printStackTrace()。</p>
+</blockquote>
+<ul>
+<li>  pageContext</li>
+</ul>
+<blockquote>
+<p>javax.servlet.jsp.PageContext 的实例，对象直译时可以称作“页面上下文”对象，代表的是当前页面运行的一些属性，通过此对象可以拿到其他8大对象，使用该对象可以访问页面中的共享数据。常用的方法有getServletContextO和getServletConfigO等。</p>
+<p>//使用pageContext 设置属性，该属性默认在page 范围内</p>
+<p>pageContext. setAttribute (“page” , “hello”) ;</p>
+<p>//使用request 设置属性，该属性默认在request 范围内</p>
+<p>request. setAttribute (“request” , “hello”);</p>
+<p>//使用pageContext将属性设置在request 范围中</p>
+<p>pageContext.setAttribute(“request2”,”hello”,pageContext.REQUEST_SCOPE);</p>
+<p>// 使用session将属性设置在session 范围中</p>
+<p>session.setAttribute(“session” , “hello”);</p>
+<p>//使用pageContext将属性设置在session范围中</p>
+<p>pageContext.setAttribute(“session2”,”hello”,pageContext.SESSION_SCOPE);</p>
+<p>//使用application将属性设置在application范围中</p>
+<p>application. setAttribute (“app” , “hello”) ;</p>
+<p>//使用pageContext 将属性设置在application 范围中</p>
+<p>pageContext.setAttribute(“app2”,”hello”,pageContext.APPL CATION_SCOPE) ;</p>
+</blockquote>
+<h4 id="4-四个作用域"><a href="#4-四个作用域" class="headerlink" title="4. 四个作用域"></a>4. 四个作用域</h4><blockquote>
+<p>page，request，session，application四个对象对应作用域</p>
+<p>*page:*表示将javabean对象存储在pageContext对象中。可以被当前jsp页面的当前请求的响应过程中调用的各个组件访问</p>
+<p><em>request：</em>表示将javabean对象存储在request对象中，可以被属于同一个请求的所有Servlet和jsp页面访问，并且保证线程安全</p>
+<p>*session:*表示将javabean对象存储在session对象中，可以被属于同一个对话中的所有Servlet和JSP页面访问</p>
+<p><em>application：</em>表示将javabean对象存储在ServletContext对象中，可以被同一个web应用程序中的所有servlet和jsp页面访问，不同的用户在不同的jsp界面、servlet中都可以使用该javabean对象</p>
+</blockquote>
+<h4 id="5-jsp中的javabean"><a href="#5-jsp中的javabean" class="headerlink" title="5. jsp中的javabean"></a>5. jsp中的javabean</h4><p>在jsp中使用javabean方式</p>
+<p>直接在脚本元素中使用</p>
+<blockquote>
+<p>&lt;%</p>
+<p>User user=new User();<br>user.setId(1001);<br>user.setUsername(“zhangsan”);<br>user.setPassWord(“123456”);<br>user.setRealName(“张三”);<br>%&gt;</p>
+<p>利用动作元素来使用</p>
+</blockquote>
+<p>&lt;%– 用于实例化JavaBean，或者是从指定的范围中访问一个已存在的JavaBean实例–%&gt;</p>
+<p>&lt;<strong>jsp:useBean</strong> id=”user1” class=”hb.rj.bean.User” scope=”page”/&gt;<br>* id：JavaBean的实例名称<br>* class：JavaBean的全限定名(全类名)<br>* type：指定脚本变量的类型，可以是该JavaBean本身、父类或者该JavaBean实现的接口<br>* scope：指定一个范围，在这个范围中JavaBean实例是可用的，取值可以为：page/request/session/application，默认值为page  </p>
+<p>&lt;<strong>jsp:setProperty</strong> name=”user1” property=”id” value=”12345”/&gt;<br>&lt;<strong>jsp:setProperty</strong> name=”user1” property=”passWord” value=”8888888”/&gt;<br>&lt;<strong>jsp:setProperty</strong> name=”user1” property=”username” value=”zhangSan”/&gt;<br>&lt;<strong>jsp:setProperty</strong> name=”user1” property=”realName” value=”张三”/&gt;  </p>
+<p>&lt;<strong>jsp:getProperty</strong> name=”user1” property=”id” /&gt;<br>&lt;<strong>jsp:getProperty</strong> name= “user1” property=”username “ /&gt;<br>&lt;<strong>jsp:getProperty</strong> name= “user1” property=”password” /&gt;<br>&lt;<strong>jsp:getProperty</strong> name=”user1” property=”realName” /&gt;  </p>
+<p>* name：JavaBean实例的名称，必须是在&lt;<strong>jsp:useBean</strong>&gt;中定义的id属性值<br>* property：JavaBean的属性名称<br>* value：属性值<br>* param：指定请求中的参数名。如果请求参数名和JavaBean的属性名不同时，可以使用param指定参数名。注意不能和value同时使用</p>
+<h3 id="EL表达式（用于简化jsp开发）"><a href="#EL表达式（用于简化jsp开发）" class="headerlink" title="EL表达式（用于简化jsp开发）"></a>EL表达式（用于简化jsp开发）</h3><p>例如：获取user中的userName对象</p>
+<p>初始写法：</p>
+<p>&lt;%=user.getUserName()%&gt;</p>
+<p>&lt;jsp:getProperty name=”user” property=”userName”/&gt;</p>
+<p>EL表达式写法：</p>
+<p>${user.userName}</p>
+<h4 id="1-JSP-EL内置对象"><a href="#1-JSP-EL内置对象" class="headerlink" title="1. JSP EL内置对象"></a>1. JSP EL内置对象</h4><blockquote>
+<p>在作用域相关的EL内置对象有pageScope、requestScope、sessionScope和applicationScope。利用他们来对应jsp内置对象中的page、request、session和application</p>
+<p>例如：</p>
+<p>sessiom.getAttribute(“username”)</p>
+<p>在EL中可以使用：</p>
+<p>${sessionScope.username}</p>
+</blockquote>
+<h4 id="2-与输入有关的EL内置对象"><a href="#2-与输入有关的EL内置对象" class="headerlink" title="2. 与输入有关的EL内置对象"></a>2. 与输入有关的EL内置对象</h4><p>param：返回一个请求参数的单个值</p>
+<p>${param.userName} 等价于</p>
+<p>&lt;%=request.getParameter(“userName”)</p>
+<p>paramValues：的返回值是一个字符串数组</p>
+<p>${paramValue.userId[0]} 等价于</p>
+<p>&lt;%=request.getParameter(“userId”)&gt;</p>
+<h4 id="3-代表HTTP请求消息头集合的内置对象"><a href="#3-代表HTTP请求消息头集合的内置对象" class="headerlink" title="3. 代表HTTP请求消息头集合的内置对象"></a>3. 代表HTTP请求消息头集合的内置对象</h4><p>header：用于获取客户端访问JSP页面所传递的请求头字段的值</p>
+<p>${header[“userName”]} 可以获得userName请求头字段的值</p>
+<p>headerValue：用于获取请求头字段的所有值</p>
+<h4 id="4-EL操作javabean"><a href="#4-EL操作javabean" class="headerlink" title="4. EL操作javabean"></a>4. EL操作javabean</h4><p>&lt;%</p>
+<p>Person person = new Person();<br>p.setName(“李四”);<br>p.setAge(27);<br>p.setSalary(3600.0);<br>p.setBirth(new java.util.Date());<br>request.setAttribute(“person”, p);<br>%&gt;<br>EL：&lt;br&gt;<br>姓名：${person.name }&lt;br&gt;<br>年龄：${person.age }&lt;br&gt;<br>薪资：${person.salary }&lt;br&gt;<br>生日：${person.birth }&lt;br&gt;<br>薪资2：${person[“salary”] }&lt;br&gt;</p>
+<h4 id="5-访问数组"><a href="#5-访问数组" class="headerlink" title="5. 访问数组"></a>5. 访问数组</h4><p>&lt;%</p>
+<p>String[] arr = {“hello”,”java”,”html”,”servlet”};<br>request.setAttribute(“arr”, arr);<br>%&gt;<br>EL表达式获取数组&lt;br&gt;<br>数组对象：${arr}&lt;br&gt;<br>数组中的数据：${arr[0]}&lt;br&gt;<br>数组中的数据：${arr[1]}&lt;br&gt;</p>
+<h4 id="6-访问list集合"><a href="#6-访问list集合" class="headerlink" title="6. 访问list集合"></a>6. 访问list集合</h4><p>&lt;%</p>
+<p>List&lt;Person&gt; list = new ArrayList&lt;Person&gt;();<br>Person p = new Person();<br>p.setName(“王五”);<br>list.add(p);<br>Person p2 = new Person();<br>p2.setName(“赵六”);<br>list.add(p2);<br>request.setAttribute(“personList”, list);<br>%&gt;<br>EL表达式获取List集合&lt;br&gt;<br>集合：${personList }&lt;br&gt;<br>集合中的数据：${personList[0].name }&lt;br&gt;<br>集合中的数据：${personList[1].name }&lt;br&gt;</p>
+<h4 id="7-访问Map集合"><a href="#7-访问Map集合" class="headerlink" title="7. 访问Map集合"></a>7. 访问Map集合</h4><p>&lt;%</p>
+<p>Map&lt;String,String&gt; map = new HashMap&lt;String,String&gt;();<br>map.put(“name”, “tom”);<br>map.put(“pwd”, “123456”);<br>request.setAttribute(“mymap”, map);<br>%&gt;<br>EL表达式获取Map集合&lt;br&gt;<br>集合：${mymap }&lt;br&gt;<br>集合中的数据：${mymap.name }&lt;br&gt;<br>集合中的数据：${mymap[‘pwd’] }&lt;br&gt;</p>
+<h3 id="JSTL标签"><a href="#JSTL标签" class="headerlink" title="JSTL标签"></a>JSTL标签</h3><h4 id="1-什么是JSTL"><a href="#1-什么是JSTL" class="headerlink" title="1. 什么是JSTL"></a>1. 什么是JSTL</h4><p>JSP标准标签库</p>
+<p>JSTL的目标是简化JSP页面，虽然EL表达式可以访问JavaBean的属性，但是并不能实现在JSP中进行逻辑判断和流程控制，因而要使用JSTL标签</p>
+<h4 id="2-引入JSTL包"><a href="#2-引入JSTL包" class="headerlink" title="2. 引入JSTL包"></a>2. 引入JSTL包</h4><ul>
+<li><p>  导入相关的包，jstl-1.2.jar，将包拷入到Web目录下的WEB-INF\lib目录中并导入。</p>
+</li>
+<li><p>  taglib指令，JSP页面导入标签</p>
+</li>
+</ul>
+<blockquote>
+<p>&lt;%@ <strong>taglib</strong> prefix=”c” uri=”<a target="_blank" rel="noopener" href="http://java.sun.com/jsp/jstl/core&quot;">http://java.sun.com/jsp/jstl/core&quot;</a> %&gt;</p>
+</blockquote>
+<h4 id="3-JSTL的标准"><a href="#3-JSTL的标准" class="headerlink" title="3. JSTL的标准"></a>3. JSTL的标准</h4><table>
+<thead>
+<tr>
+<th><strong>功能</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>前缀</strong></th>
+<th><strong>uri</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>core</td>
+<td>核心标签库</td>
+<td>c</td>
+<td><a target="_blank" rel="noopener" href="http://java.sun.com/jsp/jstl/core">http://java.sun.com/jsp/jstl/core</a></td>
+</tr>
+<tr>
+<td>i18n</td>
+<td>格式化标签库</td>
+<td>fmt</td>
+<td><a target="_blank" rel="noopener" href="http://java.sun.com/jsp/jstl/fmt">http://java.sun.com/jsp/jstl/fmt</a></td>
+</tr>
+<tr>
+<td>sql</td>
+<td>数据库标签库</td>
+<td>sql</td>
+<td><a target="_blank" rel="noopener" href="http://java.sun.com/jsp/jstl/sql">http://java.sun.com/jsp/jstl/sql</a></td>
+</tr>
+<tr>
+<td>xml</td>
+<td>xml标签库</td>
+<td>x</td>
+<td><a target="_blank" rel="noopener" href="http://java.sun.com/jsp/jstl/xml">http://java.sun.com/jsp/jstl/xml</a></td>
+</tr>
+<tr>
+<td>functions</td>
+<td>函数标签库</td>
+<td>fn</td>
+<td><a target="_blank" rel="noopener" href="http://java.sun.com/jsp/jstl/function">http://java.sun.com/jsp/jstl/function</a></td>
+</tr>
+</tbody></table>
+<h4 id="4-set标签"><a href="#4-set标签" class="headerlink" title="4. set标签"></a>4. set标签</h4><p>用于把某一个对象存放在指定的域范围内，相等于setAttribute()方法</p>
+<p>&lt;<strong>c:set</strong> value=”${pageScope.name}” var=”name” scope=”page”/&gt;</p>
+<table>
+<thead>
+<tr>
+<th><strong>属性名</strong></th>
+<th><strong>是否支持EL</strong></th>
+<th><strong>属性类型</strong></th>
+<th><strong>属性描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>true</td>
+<td>Object</td>
+<td>指定属性值</td>
+</tr>
+<tr>
+<td>var</td>
+<td>false</td>
+<td>String</td>
+<td>指定要设置的属性名称</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>false</td>
+<td>String</td>
+<td>指定属性所在的Web域</td>
+</tr>
+<tr>
+<td>target</td>
+<td>true</td>
+<td>Object</td>
+<td>指定要设置属性的对象，这个对象必须是JavaBean对象或集合对象</td>
+</tr>
+<tr>
+<td>property</td>
+<td>true</td>
+<td>string</td>
+<td>指定当前要为对象设置的属性名称</td>
+</tr>
+</tbody></table>
+<h4 id="5-out标签"><a href="#5-out标签" class="headerlink" title="5. out标签"></a>5. out标签</h4><p>向浏览器写入文本内容</p>
+<p>&lt;<strong>c:out</strong> value=”${pageScope.name}”/&gt;</p>
+<table>
+<thead>
+<tr>
+<th><strong>属性名</strong></th>
+<th><strong>是否支持EL</strong></th>
+<th><strong>属性类型</strong></th>
+<th><strong>属性描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>true</td>
+<td>Object</td>
+<td>指定要输出的内容</td>
+</tr>
+<tr>
+<td>escapeXml</td>
+<td>true</td>
+<td>Boolean</td>
+<td>指定是否将&gt;、&lt;、&amp;、’、” 等特殊字符进行HTML编码转换后再进行输出。默认值为true</td>
+</tr>
+<tr>
+<td>default</td>
+<td>true</td>
+<td>Object</td>
+<td>指定如果value属性的值为null或””时所输出的默认值</td>
+</tr>
+</tbody></table>
+<h4 id="6-remove标签"><a href="#6-remove标签" class="headerlink" title="6. remove标签"></a>6. remove标签</h4><p>删除指定范围内的变量</p>
+<p>&lt;<strong>c:remove</strong> var=”name” scope=”session”/&gt; &lt;%–移除session中的name属性变量–%&gt;</p>
+<h4 id="7-catch标签"><a href="#7-catch标签" class="headerlink" title="7. catch标签"></a>7. catch标签</h4><p>用于捕获异常，进行异常处理</p>
+<p>&lt;<strong>c:catch</strong> var=”ex”&gt;</p>
+<p>&lt;%–ex用来存放发生异常的信息，此标签是双标签，两个标签之间是被保护的语句–%&gt;</p>
+<p>&lt;%<br>String[] ss={“abc”};<br>System.<em>out</em>.println(ss[1]);<br>%&gt;<br>&lt;/<strong>c:catch</strong>&gt;</p>
+<h4 id="8-if标签"><a href="#8-if标签" class="headerlink" title="8. if标签"></a>8. if标签</h4><p>单条件的判断语句，相当于java中的if(true){ …}</p>
+<p>&lt;<strong>c:if</strong> test=”${ex!=null}”&gt;<br>&lt;p&gt;异常为：${ex}&lt;/p&gt;<br>&lt;p&gt;异常的内容为：${ex.message}&lt;/p&gt;</p>
+<p>&lt;/<strong>c:if</strong>&gt;</p>
+<h4 id="9-choose-when-otherwise标签"><a href="#9-choose-when-otherwise标签" class="headerlink" title="9. choose,when,otherwise标签"></a>9. choose,when,otherwise标签</h4><p>多分支判断语句。choose标签用于指定多个条件选择的组合边界，它必须与when标签和otherwise标签一起使用。使用&lt;c:choose&gt;，&lt;c:when&gt;和&lt;c:otherwise&gt;三个标签，可以构造类似 “if-else if-else” 的复杂条件判断结构。</p>
+<p>&lt;<strong>c:choose</strong>&gt;</p>
+<p>&lt;<strong>c:when</strong> test=”${score&gt;=90&amp;&amp;score&lt;=100}”&gt;<br>优秀&lt;br&gt;<br>&lt;/<strong>c:when</strong>&gt;<br>&lt;<strong>c:when</strong> test=”${score&gt;=80&amp;&amp;score&lt;=89}”&gt;<br>良好&lt;br&gt;<br>&lt;/<strong>c:when</strong>&gt;<br>&lt;<strong>c:when</strong> test=”${score&gt;=70&amp;&amp;score&lt;=79}”&gt;<br>中等&lt;br&gt;<br>&lt;/<strong>c:when</strong>&gt;<br>&lt;<strong>c:when</strong> test=”${score&gt;=60&amp;&amp;score&lt;=69}”&gt;<br>及格&lt;br&gt;<br>&lt;/<strong>c:when</strong>&gt;<br>&lt;<strong>c:when</strong> test=”${score&gt;=0&amp;&amp;score&lt;=59}”&gt;<br>不及格&lt;br&gt;<br>&lt;/<strong>c:when</strong>&gt;<br>&lt;<strong>c:otherwise</strong>&gt; &lt;%–当上面when标签的条件不成立，执行otherwise的内容–%&gt;<br>&lt;h1 style=”color:red”&gt;分数有误&lt;/h1&gt;<br>&lt;/<strong>c:otherwise</strong>&gt;<br>&lt;/<strong>c:choose</strong>&gt;</p>
+<h4 id="10-redirect标签"><a href="#10-redirect标签" class="headerlink" title="10. redirect标签"></a>10. redirect标签</h4><p>用于重定向</p>
+<p>&lt;<strong>c:redirect</strong> url=”<a target="_blank" rel="noopener" href="http://www.baidu.com&quot;&gt;&lt;/**c:redirect">http://www.baidu.com&quot;&gt;&lt;/**c:redirect</a>**&gt;</p>
+<h4 id="11-数据库标签库"><a href="#11-数据库标签库" class="headerlink" title="11. 数据库标签库"></a>11. 数据库标签库</h4><ul>
+<li>  setDataSource标签</li>
+</ul>
+<p>设置数据源，与数据库建立连接</p>
+<blockquote>
+<p>&lt;<strong>sql:setDataSource</strong> driver=”com.mysql.cj.jdbc.Driver”</p>
+<p>url=”jdbc:mysql://localhost:3306/biglist?characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai”<br>user=”root” password=”510609” var=”ds”/&gt;<br>数据源：${ds}&lt;br/&gt;</p>
+</blockquote>
+<ul>
+<li>  query标签</li>
+</ul>
+<blockquote>
+<p>数据查询</p>
+<p>&lt;<strong>sql:query</strong> var=”rs” dataSource=”${ds}”</p>
+<p>sql=”selectname,age,club,transfer,Goal,Country from player” /&gt;<br>&lt;%–结果集：${rs}–%&gt;  </p>
+<p>&lt;%–foreach遍历出结果集中的数据，rs.rows意思是以行为单位进行遍历–%&gt;<br>&lt;<strong>c:forEach</strong> items=”${rs.rows}” var=”row”&gt;<br>${row.name}–名字：${row.age}–年龄<br>&lt;/<strong>c:forEach</strong>&gt;</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>返回值</strong></th>
+<th><strong>函数名称</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String</td>
+<td>toUpperCase(String input)</td>
+<td>将字符串转换为大写</td>
+</tr>
+<tr>
+<td>String</td>
+<td>toLowerCase(String input)</td>
+<td>将字符串转换为小写</td>
+</tr>
+<tr>
+<td>int</td>
+<td>indexOf(String input, String substring)</td>
+<td>在一个字符串input种查找指定子串substring，返回最先匹配的第一个字符的位置</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>contains(String input, String substring)</td>
+<td>判断字符串input中是否包含了指定的子串substring</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>contains(String input, String substring)</td>
+<td>判断字符串input中是否包含了指定的子串substring</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>containsIgnoreCase(String input, String substring)</td>
+<td>判断一个字符串input是否包含指定的子串substring，且忽略大小写</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>startsWith(String input, String prefix)</td>
+<td>判断字符串input是否有指定的前缀prefix开始</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>endsWith(String input, String suffix)</td>
+<td>判断字符串input是否由指定的后缀suffix开始</td>
+</tr>
+<tr>
+<td>String</td>
+<td>substring(String input, int beginIndex, int endIndex)</td>
+<td>截取字符串input的某一部分，返回截取后的子串substring</td>
+</tr>
+<tr>
+<td>String</td>
+<td>substringAfter(String input, String substring)</td>
+<td>截取指定的子串，返回子串之后的字符串</td>
+</tr>
+<tr>
+<td>String</td>
+<td>substringBefore(String input, String substring)</td>
+<td>截取指定的子串，返回子串之后的字符串</td>
+</tr>
+<tr>
+<td>String</td>
+<td>escapeXml(String input)</td>
+<td>将字符串的&lt;、&gt;、’ 、”和&amp;转换为对应字符引用或者实体引用</td>
+</tr>
+<tr>
+<td>String</td>
+<td>trim(String input)</td>
+<td>去除字符串前后的空白字符</td>
+</tr>
+<tr>
+<td>String</td>
+<td>replace(String input, String substringBefore, String substringAfter)</td>
+<td>将一个字符串的某一部分替换为另外一部分，返回替换后的结果</td>
+</tr>
+<tr>
+<td>String[]</td>
+<td>split(String input, String delimiters)</td>
+<td>将一个字符串input使用指定的分隔符delimiters分割为数组</td>
+</tr>
+<tr>
+<td>int</td>
+<td>length(Object obj)</td>
+<td>获取字符串、数组、各种集合的长度</td>
+</tr>
+<tr>
+<td>String</td>
+<td>join(String array[], String separator)</td>
+<td>将一个数组array使用分隔符separator连接为一个字符串</td>
+</tr>
+</tbody></table>
+<h4 id="12-函数标签库"><a href="#12-函数标签库" class="headerlink" title="12.函数标签库"></a>12.函数标签库</h4><p>字符串包含&lt;br&gt;</p>
+<p>${fn:contains(“javascript”, “java”) }&lt;br&gt;<br>截取子字符串&lt;br&gt;<br>${fn:substring(“hello”,1,4) }&lt;br&gt;<br>是否以…开始或结束&lt;br&gt;<br>${fn:startsWith(“mysql”, “my”) }&lt;br&gt;<br>${fn:endsWith(“oracle”, “abc”) }&lt;br&gt;<br>位置&lt;br&gt;<br>${fn:indexOf(“html”,”x”) }&lt;br&gt;<br>替换&lt;br&gt;<br>${fn:replace(“how are you”,” “,”-“) }&lt;br&gt;<br>拆分&lt;br&gt;<br>${fn:split(“tom@jerry”,”@”) }&lt;br&gt;<br>${fn:length(fn:split(“tom@jerry”,”@”)) }&lt;br&gt;<br>组合字符串&lt;br&gt;<br>${fn:join(fn:split(“aa#bb#cc#dd”,”#“),”,”) }</p>
+<h2 id="Filter过滤器"><a href="#Filter过滤器" class="headerlink" title="Filter过滤器"></a>Filter过滤器</h2><h3 id="过滤器概念"><a href="#过滤器概念" class="headerlink" title="过滤器概念"></a>过滤器概念</h3><p>web中的过滤器：当访问服务器资源的时候，过滤器可以将请求拦截下来，完成一些特殊的功能</p>
+<p>过滤器的作用：一般用于完成通用的操作。如：登录验证、统一编码处理、敏感字符过滤。</p>
+<h3 id="快速入门-1"><a href="#快速入门-1" class="headerlink" title="快速入门"></a>快速入门</h3><p>步骤：</p>
+<blockquote>
+<p>1. 定义一个类、实现接口Filter</p>
+<p>2. 复写方法</p>
+<p>3. 配置拦截路径</p>
+<p>web.xml配置 注解配置 @WebFilter(“/*“)//访问所有资源都会执行过滤器</p>
+</blockquote>
+<p>| |</p>
+<p>| |</p>
+<p>\/</p>
+<blockquote>
+<p>&lt;filter&gt;</p>
+<p>&lt;filter-name&gt;Filter1&lt;/filter-name&gt;<br>&lt;filter-class&gt;hb.rj.bean.Filter1&lt;/filter-class&gt;<br>&lt;/filter&gt;<br>&lt;filter-mapping&gt;<br>&lt;filter-name&gt;Filter1&lt;/filter-name&gt;<br>&lt;url-pattern&gt;/*&lt;/url-pattern&gt;<br>&lt;/filter-mapping&gt;</p>
+</blockquote>
+<h3 id="过滤器执行流程（生命周期）"><a href="#过滤器执行流程（生命周期）" class="headerlink" title="过滤器执行流程（生命周期）"></a>过滤器执行流程（生命周期）</h3><blockquote>
+<p>init：在服务器启动后，会创建Filter对象，然后调用init方法。只能执行一次，用于加载资源</p>
+<p>doFilter：每一次请求被拦截资源时，会执行。执行多次，</p>
+<p>执行过滤器</p>
+<p>执行放行后的资源</p>
+<p>回来执行过滤器放行代码下边的代码</p>
+<p> 注意:在Filter的doFilter方法内如果没有执行chain.doFilter(request,response)<br>　　　　　　　　那么资源是不会被访问到的。</p>
+<p>destroy：在服务器关闭后，Filter对象被销毁。如果服务器是正常关闭，则会执行，只执行一次。一般用于释放资源</p>
+</blockquote>
+<h3 id="过滤器配置详解"><a href="#过滤器配置详解" class="headerlink" title="过滤器配置详解"></a>过滤器配置详解</h3><blockquote>
+<p>拦截路径配置</p>
+<p>1. 具体资源路径：/index.jsp 只有访问index.jsp资源时，过滤器才会被执行</p>
+<p>2. 拦截目录：/user/* 访问/user下的所有资源时，过滤器都会被执行</p>
+<p>3. 后缀名拦截：*.jsp 访问所有后缀名为jsp的资源是，过滤器都会被执行</p>
+<p>4. 拦截所有资源：/* 访问所有资源时，过滤器都会被执行</p>
+<p>拦截方式配置：资源被访问的方式</p>
+<p>设置dispatcherTypes属性</p>
+<p>1. request：默认值。浏览器直接请求资源</p>
+<p>2. forward：转发访问资源时</p>
+<p>3. include：包含访问资源时</p>
+<p>4. error：错误跳转资源</p>
+<p>5. async：异步访问资源</p>
+</blockquote>
+<p>@WebFilter(value = “/*“,dispatcherTypes = {DispatcherType.<em>REQUEST</em>,DispatcherType.<em>FORWARD</em>})</p>
+<p>//浏览器直接请求或者转发访问资源时进行拦截</p>
+<p>web.xml配置</p>
+<p>&lt;filter&gt;</p>
+<p>&lt;filter-name&gt;Filter1&lt;/filter-name&gt;<br>&lt;filter-class&gt;hb.rj.bean.Filter1&lt;/filter-class&gt;<br>&lt;/filter&gt;<br>&lt;filter-mapping&gt;<br>&lt;filter-name&gt;Filter1&lt;/filter-name&gt;<br>&lt;url-pattern&gt;/*&lt;/url-pattern&gt;<br>&lt;dispatcher&gt;FORWARD&lt;/dispatcher&gt;<br>&lt;/filter-mapping&gt;</p>
+<h3 id="过滤器链（配置多个过滤器）"><a href="#过滤器链（配置多个过滤器）" class="headerlink" title="过滤器链（配置多个过滤器）"></a>过滤器链（配置多个过滤器）</h3><p>执行顺序：如果有两个过滤器：过滤器1和过滤器2</p>
+<blockquote>
+<p>过滤器1 –&gt; 过滤器2 –&gt; 资源执行 –&gt; 过滤器2 –&gt; 过滤器1</p>
+</blockquote>
+<p>过滤器先后顺序问题</p>
+<p>注解配置：按照类名的字符串比较规则比较，值小的先执行</p>
+<p>web.xml配置：谁定义在上边谁先执行</p>
+<h2 id="Listener：监听器"><a href="#Listener：监听器" class="headerlink" title="Listener：监听器"></a>Listener：监听器</h2><h3 id="概念：web三大组件之一"><a href="#概念：web三大组件之一" class="headerlink" title="概念：web三大组件之一"></a>概念：web三大组件之一</h3><blockquote>
+<p>事件监听机制</p>
+<p>事件 –&gt; 事件发生的地方 –&gt; 监听器：监听一个对象 –&gt; 注册监听：将事件事件源监听器绑定在一起。当事件源上发生某一个事件后，执行监听代码</p>
+</blockquote>
+<h3 id="监听器的实质"><a href="#监听器的实质" class="headerlink" title="监听器的实质"></a>监听器的实质</h3><p>一个类实现某个监听器接口，然后实现接口对应的方法，达到监听具体事项的动作</p>
+<h3 id="监听器的接口有哪些"><a href="#监听器的接口有哪些" class="headerlink" title="监听器的接口有哪些"></a>监听器的接口有哪些</h3><p>监听器接口分三类：ServletContext，HttpSession，ServletRequest。</p>
+<p><strong>ServletContext</strong></p>
+<p>—-ServletContextListener监听ServletContext对象</p>
+<p>—-ServletContextAttributeListener监听对ServletContext属性的操作，比如说增加，删除，修改</p>
+<p><strong>HttpSession</strong></p>
+<p>—-HttpSessionListener监听Session对象</p>
+<p>—-HttpSessionAttributeListener监听Session的属性操作</p>
+<p>—-HttpSessionActivationListener监听HTTP会话的active和passivate情况，passivate是指非活动的session被写入持久设备（如硬盘），active相反。</p>
+<p>—-HttpSessionBindingListener监听器感知Session绑定的事件监听器</p>
+<p>Servlet 规范中定义了两个特殊的监听器接口”HttpSessionBindingListener和HttpSessionActivationListener”来帮助JavaBean</p>
+<p>对象了解自己在Session域中的这些状态： ，实现这两个接口的类不需要 web.xml 文件中进行注册。</p>
+<p><strong>ServletRequest</strong></p>
+<p>—-ServletRequestListener监听Requst对象</p>
+<p>—-ServletRequestAttributeListener监听Request中的属性操作。ServletContextListener</p>
+<h3 id="监听ServletContext的创建和销毁"><a href="#监听ServletContext的创建和销毁" class="headerlink" title="监听ServletContext的创建和销毁"></a>监听ServletContext的创建和销毁</h3><p>public class listen implements ServletContextListener {</p>
+<p>// 在服务器ServletContext方法启动时调用<br>@Override<br>public void contextDestroyed(ServletContextEvent sce) {<br>// 1.获取ServletContext对象<br>ServletContext servletcontext= sce.getServletContext();  </p>
+<p>// 2.加载资源文件<br>String cont=servletcontext.getInitParameter(“contextConfig”);<br>}<br>// 在服务器ServletContext方法销毁时执行<br>@Override<br>public void contextInitialized(ServletContextEvent sce) {<br>ServletContextListener.super.contextInitialized(sce);<br>}<br>}</p>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>Post author: </strong>
+        Rogers
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>Post link: </strong>
+        <a id="original-link" href="https://ljs-yym.github.io/2023/02/28/Jave%20EE%E7%AC%94%E8%AE%B0/" title="Java EE笔记">https://ljs-yym.github.io/2023/02/28/Jave%20EE%E7%AC%94%E8%AE%B0/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>Copyright Notice: </strong>
+        All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> unless otherwise stated.
+    </li>
+</ul>
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/03/07/Spring%E6%95%B4%E5%90%88Mybatis/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/cover/integration.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/Java/">
+                    Java
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/03/07/Spring%E6%95%B4%E5%90%88Mybatis/" class="trm-anima-link">
+                    Spring整合Mybatis操作数据库
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/03/07</li>
+                <li>08:24</li>
+                
+                    <li>1k</li>
+                
+                
+                    <li>5</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/02/28/Maven/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/Maven/xz.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/Java/">
+                    Java
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/02/28/Maven/" class="trm-anima-link">
+                    Maven操作指南
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/02/28</li>
+                <li>18:36</li>
+                
+                    <li>2.2k</li>
+                
+                
+                    <li>9</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2023- 2023</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">长生风月</span>
+        </div>
+    
+
+      
+
+    
+        <div class="trm-footer-item">
+            The blog has been lovely to run <span id="since" class="trm-accent-color"></span> day
+        </div>
+     
+
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("02/27/2023 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="Read Mode" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="Toggle between single-column and double-column" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="Back To Top">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+<div class="trm-search-popup">
+    <div class="trm-search-header">
+        <span class="trm-search-popup-btn-close">
+            <i class="iconfont fas fa-times"></i>
+        </span>
+    </div>
+    <div class="form trm-search-form">
+        <input class="trm-search-input" type="text" placeholder="Searching...">
+    </div>
+    <div class="trm-search-result-container">
+
+    </div>
+</div>
+
+  <!-- Plugin -->
+
+
+
+
+    
+<script src="https://unpkg.com/swup@2.0.19/dist/swup.min.js"></script>
+
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.2"></script>
+    
+
+    
+        
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=2.0.2"></script>
+    
+
+    <!-- 数学公式 -->
+    
+        
+<script src="https://unpkg.com/katex@latest/dist/katex.min.js" data-swup-reload-script></script>
+
+        
+            
+<script src="https://unpkg.com/katex@latest/dist/contrib/copy-tex.min.js" data-swup-reload-script></script>
+
+        
+        
+<script src="https://unpkg.com/katex@latest/dist/contrib/auto-render.min.js" data-swup-reload-script></script>
+
+        <script data-swup-reload-script>
+              window.renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true },
+                ],
+                ...{},
+            })
+        </script>
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <script>
+        "serviceWorker" in navigator ?
+        navigator.serviceWorker.register('/sw.js').then(function () {
+            navigator.serviceWorker.controller ? 
+             console.log("Assets cached by the controlling service worker.") :
+             console.log("Please reload this page to allow the service worker to handle network operations.")
+        }).catch(function (e) {
+            console.log("ERROR: " + e)
+        }) : console.log("Service workers are not supported in the current browser.")
+    </script>
+
+    <!-- baidu push -->
+    
+    <script data-swup-reload-script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+
+
+<script id="async-script" src="/js/main.js?v=2.0.2"></script>
+
+</body>
+
+</html>
