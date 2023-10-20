@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="Linux指令目录操作认识linux目录结构&#x2F;:根目录标志   列出文件列表123456789#查看当前目录下的所有文件夹ls#查看当前目录下扥所有文件（包括隐藏文件）ls -a#以点开头的蓝色文件就是隐藏文件#查看所有目录下非隐藏文件及其详细信息ll  进入文件目录1234567891011#进入指定目录cd 文件名#返回上一级目录cd ..#返回用户目录cd ~#返回上一行的目录cd -  创">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux指令">
+<meta property="og:url" content="https://ljs-yym.github.io/2023/09/18/Linux%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="RogevnBlog">
+<meta property="og:description" content="Linux指令目录操作认识linux目录结构&#x2F;:根目录标志   列出文件列表123456789#查看当前目录下的所有文件夹ls#查看当前目录下扥所有文件（包括隐藏文件）ls -a#以点开头的蓝色文件就是隐藏文件#查看所有目录下非隐藏文件及其详细信息ll  进入文件目录1234567891011#进入指定目录cd 文件名#返回上一级目录cd ..#返回用户目录cd ~#返回上一行的目录cd -  创">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ljs-yym.github.io/img/cover/linux.png">
+<meta property="article:published_time" content="2023-09-18T10:15:47.487Z">
+<meta property="article:modified_time" content="2023-10-10T09:58:52.577Z">
+<meta property="article:author" content="Rogers">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ljs-yym.github.io/img/cover/linux.png">
+
+    <meta name="keywords" content="hexo,node,博客">
+
+
+<title >Linux指令</title>
+
+<!-- Favicon -->
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+<link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css">
+
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"ljs-yym.github.io","author":"Rogers","root":"/","typed_text":["Web Developer","Backend Programmer","Full Stack Developer！"],"theme_version":"2.0.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo.png","icon16":"/img/logo.png","icon32":"/img/logo.png","dark_logo":"/img/dark_logo.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"creative_commons":{"license":"by-nc-sa","language":"deed.zh"},"search":{"enable":true,"type":"local","path":"search.xml","field":"post","content":true,"format":"html"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-10-10 17:58:52"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.2" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+     
+
+    
+
+    
+ 
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" class=" trm-light-icon" src="/img/logo.png"> <img alt="logo" class=" trm-dark-icon" src="/img/dark_logo.png">
+    
+    
+        <div class="trm-logo-text">
+            Rogevn<span>Blog</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    长生风月的博客
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    日志
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友情链接
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/picture/" target="">
+                    好东西
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/picture/" target="">
+                            图片
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/technology/" target="">
+                            黑科技
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+    
+    <div id="trm-search-btn" class="trm-search-btn">
+        <i class="iconfont fas fa-search"></i>
+    </div>
+     
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            Linux指令
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/R-C.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        长生风月
+    </h5>
+    
+        <div class="trm-label">
+            I&#39;m a
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="tencent://message/?uin=3232008148&Site=&Menu=yes" title="QQ" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="/null" title="WeChat" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-weixin"></i>
+        </a>
+    
+        <a href="/null" title="twitter" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-twitter"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                河北省保定市
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                21
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                星座:
+            </div>
+            <div class="trm-label trm-label-light">
+                处女座
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                爱好:
+            </div>
+            <div class="trm-label trm-label-light">
+                足球、音乐、魔方、代码
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:3232008148@qq.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#Linux指令"  data-scroll-to="#Linux指令"><span class="toc-number">1.</span> <span class="toc-text">Linux指令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#目录操作"  data-scroll-to="#目录操作"><span class="toc-number">1.1.</span> <span class="toc-text">目录操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#认识linux目录结构"  data-scroll-to="#认识linux目录结构"><span class="toc-number">1.1.1.</span> <span class="toc-text">认识linux目录结构</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#列出文件列表"  data-scroll-to="#列出文件列表"><span class="toc-number">1.1.2.</span> <span class="toc-text">列出文件列表</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#进入文件目录"  data-scroll-to="#进入文件目录"><span class="toc-number">1.1.3.</span> <span class="toc-text">进入文件目录</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#创建和删除目录"  data-scroll-to="#创建和删除目录"><span class="toc-number">1.1.4.</span> <span class="toc-text">创建和删除目录</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#文件操作"  data-scroll-to="#文件操作"><span class="toc-number">1.2.</span> <span class="toc-text">文件操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#查看文件内容"  data-scroll-to="#查看文件内容"><span class="toc-number">1.2.1.</span> <span class="toc-text">查看文件内容</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#删除、复制和剪切"  data-scroll-to="#删除、复制和剪切"><span class="toc-number">1.2.2.</span> <span class="toc-text">删除、复制和剪切</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#打包或解压"  data-scroll-to="#打包或解压"><span class="toc-number">1.2.3.</span> <span class="toc-text">打包或解压</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#查找文件、查找内容"  data-scroll-to="#查找文件、查找内容"><span class="toc-number">1.2.4.</span> <span class="toc-text">查找文件、查找内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Vi和Vim编辑器"  data-scroll-to="#Vi和Vim编辑器"><span class="toc-number">1.3.</span> <span class="toc-text">Vi和Vim编辑器</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#重定向输出"  data-scroll-to="#重定向输出"><span class="toc-number">1.4.</span> <span class="toc-text">重定向输出</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#管道"  data-scroll-to="#管道"><span class="toc-number">1.5.</span> <span class="toc-text">管道</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Linux权限命令"  data-scroll-to="#Linux权限命令"><span class="toc-number">1.6.</span> <span class="toc-text">Linux权限命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#文件权限"  data-scroll-to="#文件权限"><span class="toc-number">1.6.1.</span> <span class="toc-text">文件权限</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#文件权限管理"  data-scroll-to="#文件权限管理"><span class="toc-number">1.6.2.</span> <span class="toc-text">文件权限管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#linux上常见的网络操作"  data-scroll-to="#linux上常见的网络操作"><span class="toc-number">1.7.</span> <span class="toc-text">linux上常见的网络操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#主机名配置"  data-scroll-to="#主机名配置"><span class="toc-number">1.7.1.</span> <span class="toc-text">主机名配置</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#网卡设置"  data-scroll-to="#网卡设置"><span class="toc-number">1.7.2.</span> <span class="toc-text">网卡设置</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#IP地址配置"  data-scroll-to="#IP地址配置"><span class="toc-number">1.7.3.</span> <span class="toc-text">IP地址配置</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#linux域名映射"  data-scroll-to="#linux域名映射"><span class="toc-number">1.7.4.</span> <span class="toc-text">linux域名映射</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#网络服务管理"  data-scroll-to="#网络服务管理"><span class="toc-number">1.7.5.</span> <span class="toc-text">网络服务管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#linux上的软件安装"  data-scroll-to="#linux上的软件安装"><span class="toc-number">1.8.</span> <span class="toc-text">linux上的软件安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#linux上安装jdk"  data-scroll-to="#linux上安装jdk"><span class="toc-number">1.8.1.</span> <span class="toc-text">linux上安装jdk</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#linux上安装tomcat"  data-scroll-to="#linux上安装tomcat"><span class="toc-number">1.8.2.</span> <span class="toc-text">linux上安装tomcat</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#linux安装mysql"  data-scroll-to="#linux安装mysql"><span class="toc-number">1.8.3.</span> <span class="toc-text">linux安装mysql</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#linux安装lrzsz"  data-scroll-to="#linux安装lrzsz"><span class="toc-number">1.8.4.</span> <span class="toc-text">linux安装lrzsz</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#部署项目"  data-scroll-to="#部署项目"><span class="toc-number">1.9.</span> <span class="toc-text">部署项目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#手动部署"  data-scroll-to="#手动部署"><span class="toc-number">1.9.1.</span> <span class="toc-text">手动部署</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#使用shell脚本自动部署"  data-scroll-to="#使用shell脚本自动部署"><span class="toc-number">1.9.2.</span> <span class="toc-text">使用shell脚本自动部署</span></a></li></ol></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            09/18
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            18:15
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Rogers
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="Linux指令"><a href="#Linux指令" class="headerlink" title="Linux指令"></a>Linux指令</h1><h2 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h2><h3 id="认识linux目录结构"><a href="#认识linux目录结构" class="headerlink" title="认识linux目录结构"></a>认识linux目录结构</h3><p>/:根目录标志</p>
+<p><img src="/img/Linux%E6%8C%87%E4%BB%A4/image-20221230163149165.png" alt="image-20221230163149165" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="/img/Linux%E6%8C%87%E4%BB%A4/image-20221230163757788.png" alt="image-20221230163757788" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="列出文件列表"><a href="#列出文件列表" class="headerlink" title="列出文件列表"></a>列出文件列表</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看当前目录下的所有文件夹</span></span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看当前目录下扥所有文件（包括隐藏文件）</span></span><br><span class="line"><span class="built_in">ls</span> <span class="literal">-a</span></span><br><span class="line"><span class="comment">#以点开头的蓝色文件就是隐藏文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看所有目录下非隐藏文件及其详细信息</span></span><br><span class="line">ll</span><br></pre></td></tr></table></figure>
+
+<h3 id="进入文件目录"><a href="#进入文件目录" class="headerlink" title="进入文件目录"></a>进入文件目录</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#进入指定目录</span></span><br><span class="line"><span class="built_in">cd</span> 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment">#返回上一级目录</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line"><span class="comment">#返回用户目录</span></span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"></span><br><span class="line"><span class="comment">#返回上一行的目录</span></span><br><span class="line"><span class="built_in">cd</span> -</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建和删除目录"><a href="#创建和删除目录" class="headerlink" title="创建和删除目录"></a>创建和删除目录</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建一个文件夹</span></span><br><span class="line">mkdir 文件夹名称</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建一个空文件</span></span><br><span class="line">touch a.txt</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除一个空文件夹</span></span><br><span class="line">redir 文件夹名称</span><br><span class="line"></span><br><span class="line"><span class="comment">#直接创建多级文件夹</span></span><br><span class="line">mkdir <span class="literal">-p</span> 父文件夹名/子文件夹</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看文件所有内容</span></span><br><span class="line"><span class="built_in">cat</span> 文件名</span><br><span class="line">more 文件名	<span class="comment">#只显示一屏按回车显示一行 按空格显示一屏 按q退出</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看文件最后10行的内容</span></span><br><span class="line">tail <span class="literal">-10</span> 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment">#动态查看</span></span><br><span class="line">tail <span class="operator">-f</span> 文件名</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除、复制和剪切"><a href="#删除、复制和剪切" class="headerlink" title="删除、复制和剪切"></a>删除、复制和剪切</h3><h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在指定文件夹下将file1复制为file2</span></span><br><span class="line"><span class="built_in">cp</span> file1 aaa/file2</span><br><span class="line"></span><br><span class="line"><span class="comment">#将file1复制到上一级文件夹</span></span><br><span class="line"><span class="built_in">cp</span> file1 ../</span><br></pre></td></tr></table></figure>
+
+<h4 id="剪切"><a href="#剪切" class="headerlink" title="剪切"></a>剪切</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将file1剪切到指定文件夹</span></span><br><span class="line"><span class="built_in">mv</span> file1 aaa/</span><br><span class="line"></span><br><span class="line"><span class="comment">#将file1剪切到上一级文件夹</span></span><br><span class="line"><span class="built_in">cp</span> file1 ../</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在询问后删除文件</span></span><br><span class="line"><span class="built_in">rm</span> bb</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除目录</span></span><br><span class="line"><span class="built_in">rm</span> <span class="literal">-r</span> bb</span><br><span class="line"></span><br><span class="line"><span class="comment">#不询问删除</span></span><br><span class="line"><span class="built_in">rm</span> <span class="literal">-rf</span> bb</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除所有东西</span></span><br><span class="line"><span class="built_in">rm</span> <span class="literal">-rf</span> /*		<span class="comment">#慎用</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="打包或解压"><a href="#打包或解压" class="headerlink" title="打包或解压"></a>打包或解压</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">压缩成a.tar</span><br><span class="line">tar -cvf a.tar 文件夹名/</span><br><span class="line">	-c:创建一个新的tar文件</span><br><span class="line">	-v:显示运行的过程信息</span><br><span class="line">	-f:指定文件名</span><br><span class="line">	-z:调用gzip压缩命令进行压缩</span><br><span class="line">	-t:查看压缩文件的内容</span><br><span class="line">	-x:解开tar文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="查找文件、查找内容"><a href="#查找文件、查找内容" class="headerlink" title="查找文件、查找内容"></a>查找文件、查找内容</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#按文件名称查找</span></span><br><span class="line">find / <span class="literal">-name</span> 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment">#不太清楚名字的查找方法</span></span><br><span class="line">find / <span class="literal">-name</span> cont*.log</span><br><span class="line"></span><br><span class="line"><span class="comment">#在aaa文件中查找字符串Address</span></span><br><span class="line">grep Address 文件路径 <span class="literal">--color</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Vi和Vim编辑器"><a href="#Vi和Vim编辑器" class="headerlink" title="Vi和Vim编辑器"></a>Vi和Vim编辑器</h2><p>在linux下一般使用vi编辑器来编辑文件。vi即可以查看文件也可以编辑文件。</p>
+<p>三种模式：命令行、插入、底行模式。</p>
+<p>切换到命令行模式：按Esc键</p>
+<p>切换到插入模式：按i、o、a键</p>
+<p>​    i 在当前位置前插入</p>
+<p>​    I 在当前行首插入</p>
+<p>​    a 在当前位置后插入</p>
+<p>​    A 在当前行尾插入</p>
+<p>​    o 在当前行之后插入一行</p>
+<p>​    O 在当前行之前插入一行</p>
+<p>切换到底行模式：按冒号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">打开文件： vim file</span><br><span class="line"></span><br><span class="line">退出：esc-&gt;:q</span><br><span class="line"></span><br><span class="line">修改文件：输入i进入插入模式</span><br><span class="line"></span><br><span class="line">保存并退出：esc-&gt;:wq</span><br><span class="line"></span><br><span class="line">不保存退出</span><br></pre></td></tr></table></figure>
+
+<h2 id="重定向输出"><a href="#重定向输出" class="headerlink" title="重定向输出"></a>重定向输出</h2><p>重定向就是将本文件中的内容复制到别的文件中</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将aaa.txt中的文字复制到bbb.txt中</span></span><br><span class="line"><span class="built_in">cat</span> aaa.txt &gt; bbb.txt</span><br><span class="line"></span><br><span class="line"><span class="comment">#将aaa.txt中的文字追加到bbb.txt中</span></span><br><span class="line"><span class="built_in">cat</span> aaa.txt &gt;&gt; bbb.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>管道是linux命令中重要的一个概念，其作用是<strong>将一个命令的输出用作另一个命令的输入</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> <span class="literal">--help</span> | more 	<span class="comment">#分页查询帮助信息</span></span><br><span class="line"><span class="built_in">ps</span> <span class="literal">-ef</span> | grep java 	<span class="comment">#查询名称中包含java的进程</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux权限命令"><a href="#Linux权限命令" class="headerlink" title="Linux权限命令"></a>Linux权限命令</h2><h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><p>—    ———    ———    ———</p>
+<p><strong>第一个“—”表示文件的类型</strong></p>
+<p>​    -：表示文件</p>
+<p>​    d：表示文件夹</p>
+<p>​    l：表示快捷方式</p>
+<p><strong>第二个表示当前文件或文件夹的权限</strong></p>
+<p>​    r：可读</p>
+<p>​    w：可写</p>
+<p>​    x：可运行</p>
+<p><strong>第三个表示当前组内其他用户具有该文件的权限</strong></p>
+<p><strong>第四个表示其他组的用户具有该文件的权限</strong></p>
+<h3 id="文件权限管理"><a href="#文件权限管理" class="headerlink" title="文件权限管理"></a>文件权限管理</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">chmod u=rwx,g=rx,o=rx a.txt</span><br><span class="line"><span class="comment">#u代表当前用户 g代表当前组的其他用户 o代表其他组的用户</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#也可以用数字的形式</span></span><br><span class="line"><span class="comment">#可读是4 可写是2 可运行是1</span></span><br><span class="line"><span class="comment">#最高权限就变成了chmod 777</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="linux上常见的网络操作"><a href="#linux上常见的网络操作" class="headerlink" title="linux上常见的网络操作"></a>linux上常见的网络操作</h2><h3 id="主机名配置"><a href="#主机名配置" class="headerlink" title="主机名配置"></a>主机名配置</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hostname 		<span class="comment">#查看主机名</span></span><br><span class="line">hostname XXX	<span class="comment">#修改主机名 重启后失效</span></span><br><span class="line"><span class="comment">#如果要是永久生效，可以修改/erc/sysconfig/netword文件</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="网卡设置"><a href="#网卡设置" class="headerlink" title="网卡设置"></a>网卡设置</h3><p>修改网络初始化配置，设定网卡在系统启动时初始化</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /		<span class="comment">#进入根目录</span></span><br><span class="line"><span class="built_in">cd</span> etc </span><br><span class="line"><span class="built_in">cd</span> sysconfig</span><br><span class="line"><span class="built_in">cd</span> network<span class="literal">-scripts</span></span><br><span class="line">vi ifcfg<span class="literal">-ens33</span>	<span class="comment">#编辑ifcfg-ens33文件</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="IP地址配置"><a href="#IP地址配置" class="headerlink" title="IP地址配置"></a>IP地址配置</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ifconfig <span class="comment">#查看（修改）ip地址重启后无效</span></span><br><span class="line">ifconfig etho <span class="number">192.168</span>.<span class="number">12.22</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#如果想要永久生效修改/etc/sysconfig/network-scripts/ifcfg-eth0文件</span></span><br><span class="line"></span><br><span class="line">DEVICE=eth0 			<span class="comment">#网卡名称</span></span><br><span class="line">BOOTPROTO=<span class="keyword">static</span> 		<span class="comment">#获取ip的方式(static/dhcp/bootp/none)</span></span><br><span class="line">HWADDR<span class="literal">-00</span>:<span class="number">0</span>c:<span class="number">29</span>:B5:B2:<span class="number">69</span> .MAC地址</span><br><span class="line">IPADDR=<span class="number">192.168</span>.<span class="number">177.129</span> 	<span class="comment">#IP地址</span></span><br><span class="line">NETMASK=<span class="number">255.255</span>.<span class="number">255.0</span> 	<span class="comment">#子网掩码</span></span><br><span class="line">NETWORK=<span class="number">192.168</span>.<span class="number">177.0</span> 	<span class="comment">#网络地址</span></span><br><span class="line">BROADCAST=<span class="number">192.168</span>.<span class="number">0.255</span> <span class="comment">#广播地址</span></span><br><span class="line">NBOOT=yes				<span class="comment">#系统启动时是否设置此网络接口</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="linux域名映射"><a href="#linux域名映射" class="headerlink" title="linux域名映射"></a>linux域名映射</h3><p>可以通过更改linux下的/etc/hosts</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改域名映射</span></span><br><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<h3 id="网络服务管理"><a href="#网络服务管理" class="headerlink" title="网络服务管理"></a>网络服务管理</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">service network status	<span class="comment">#查看指定服务的状态</span></span><br><span class="line">service network stop	<span class="comment">#停止指定服务</span></span><br><span class="line">service network <span class="built_in">start</span>	<span class="comment">#启动指定服务</span></span><br><span class="line">service network restart <span class="comment">#重启指定服务</span></span><br><span class="line">service <span class="literal">--status-al1</span>	<span class="comment">#查看系统中所有后台服务</span></span><br><span class="line">netstat <span class="literal">-nltp</span>			<span class="comment">#查看系统中网络进程的端口监听情况</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#防火墙设置</span></span><br><span class="line"><span class="comment">#防火墙根据配置文件/etc/sysconfig/iptables来控制本机的“出”、“入网络访问行为</span></span><br><span class="line">systemctl status firewalld serviceiptablesstatus <span class="comment">#查看防火墙状态</span></span><br><span class="line">systemctl disable firewalld	 <span class="comment">#关闭防火墙</span></span><br><span class="line">systemctl <span class="built_in">start</span> firewalld	<span class="comment">#启动防火墙</span></span><br><span class="line">chkconfig iptables off	<span class="comment">#禁止防火墙自启</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="linux上的软件安装"><a href="#linux上的软件安装" class="headerlink" title="linux上的软件安装"></a>linux上的软件安装</h2><ul>
+<li><p>linux上软件安装有以下几种常用的方式介绍</p>
+<ol>
+<li><p>二进制发布包</p>
+<p>软件已经针对具体平台编译打包发布只要解压修改配置即可</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="linux上安装jdk"><a href="#linux上安装jdk" class="headerlink" title="linux上安装jdk"></a>linux上安装jdk</h3><ol>
+<li><p>首先下载jdk：<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/#java8">Java Downloads | Oracle</a></p>
+</li>
+<li><p>下载完之后可以通过finalshell自带的文件上传工具将jdk-8u361-linux-x64.tar.gz上传</p>
+</li>
+<li><p>上传之后使用命令，将文件解压到usr下的local文件夹：</p>
+</li>
+</ol>
+<p>​        tar -zxvf jdk-8u361-linux-x64.tar.gz -C /usr/local</p>
+<ol start="4">
+<li><p>配置环境变量</p>
+<ol>
+<li><p>编辑配置文件：</p>
+<p>​    vim /etc/profile</p>
+</li>
+<li><p><img src="/img/Linux%E6%8C%87%E4%BB%A4/image-20230417161524550.png" alt="image-20230417161524550" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/usr/local/jdk1.<span class="number">8.0</span>_361</span><br><span class="line">PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+
+<p>：wq保存</p>
+</li>
+<li><p>使修改生效：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></li>
+<li><p>验证JDK是否正确安装：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java <span class="literal">-version</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="linux上安装tomcat"><a href="#linux上安装tomcat" class="headerlink" title="linux上安装tomcat"></a>linux上安装tomcat</h3><ol>
+<li><p>下载Apache Tomcat：<a target="_blank" rel="noopener" href="https://tomcat.apache.org/download-90.cgi">https://tomcat.apache.org/download-90.cgi</a></p>
+</li>
+<li><p>将文件上传至linux</p>
+</li>
+<li><p>解压</p>
+<p>tar -zxvf apache-tomcat-7.0.x.tar.gz -C /usr/local</p>
+</li>
+<li><p>进入tomcat的bin目录启动服务，命令为sh startup.sh</p>
+</li>
+<li><p>查看启动日志<br>more /usr/local/ apache-tomcat-7.0.57/logs/catalina.outtail -50 /usr/local/apache-tomcat-7.0.57/logs/catalina.out</p>
+</li>
+<li><p>查看进程ps -ef | grep tomcat</p>
+</li>
+<li><p>windows上运行192.168.136.131:8080</p>
+<p>注意：如果运行不了，尝试关掉防火墙</p>
+</li>
+<li><p>停止服务的脚本文件</p>
+<p>sh shutdown.sh</p>
+</li>
+</ol>
+<h3 id="linux安装mysql"><a href="#linux安装mysql" class="headerlink" title="linux安装mysql"></a>linux安装mysql</h3><p><strong>注意：如果当前系统中已经安装有mysql数据库，安装将失败。centos7自带mariadb，与mysql数据库冲突必须卸载</strong></p>
+<p>检查当前系统中是否安装mysql数据库</p>
+<p>rpm -qa                                    查询当前系统中安装的所有软件</p>
+<p>rpm -qa | grep mysql               查询当前系统中安装的名称带mysql的软件</p>
+<p>rpm -qa | grep mariadb            查询当前系统中安装的名称带mariadb的软件</p>
+<p>rpm -e –nodeps 软件名            卸载软件</p>
+<ol>
+<li><p>创建文件夹</p>
+<p>mkdir /usr/local/mysql</p>
+</li>
+<li><p>将安装包上传解压</p>
+<p>tar -xvf mysql-5.7.25-1.el7.x86_64.rpm-bundle.tar -C /usr/local/mysql</p>
+</li>
+<li><p>按照顺序安装rpm软件包</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rpm <span class="literal">-ivh</span> mysql<span class="literal">-community-common-5</span>.<span class="number">7.25</span><span class="literal">-1</span>.el7.x86_64.rpm</span><br><span class="line">rpm <span class="literal">-ivh</span> mysql<span class="literal">-community-libs-5</span>.<span class="number">7.25</span><span class="literal">-1</span>.el7.x86_64.rpm</span><br><span class="line">rpm <span class="literal">-ivh</span> mysql<span class="literal">-community-devel-5</span>.<span class="number">7.25</span><span class="literal">-1</span>.el7.x86_64.rpm</span><br><span class="line">rpm <span class="literal">-ivh</span> mysql<span class="literal">-community-libs-compat-5</span>.<span class="number">7.25</span><span class="literal">-1</span>.el7.x86_64.rpm</span><br><span class="line">rpm <span class="literal">-ivh</span> mysql<span class="literal">-community-client-5</span>.<span class="number">7.25</span><span class="literal">-1</span>.el7.x86_64.rpm</span><br><span class="line">yum install net<span class="literal">-tools</span></span><br><span class="line">rpm <span class="literal">-ivh</span> mysql<span class="literal">-community-server-5</span>.<span class="number">7.25</span><span class="literal">-1</span>.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<p>可以通过指令升级现有软件及系统内核</p>
+<p>yum update</p>
+</li>
+<li><p>启动mysql</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl status mysqld			<span class="comment">#查看mysql服务状态</span></span><br><span class="line">systemctl <span class="built_in">start</span> mysqld			<span class="comment">#启动mysql服务</span></span><br></pre></td></tr></table></figure>
+
+<p>可以设置开机时启动mysql服务</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable mysqld			<span class="comment">#开机启动mysql服务</span></span><br><span class="line">netstart <span class="literal">-tunlp</span> | grep mysql	<span class="comment">#查看已经启动的服务</span></span><br><span class="line"><span class="built_in">ps</span> <span class="literal">-ef</span> | grep mysql				<span class="comment">#查看mysql进程</span></span><br></pre></td></tr></table></figure></li>
+<li><p>登录mysql数据库，查阅临时密码</p>
+<p>cat /var/log/mysqld.log | grep password</p>
+</li>
+<li><p>登录mysql，修改密码，开放访问权限</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#登录mysql（使用临时密码登录)</span></span><br><span class="line">mysql <span class="literal">-uroot</span> <span class="literal">-p</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置密码长度最低位数</span></span><br><span class="line"><span class="built_in">set</span> global validate_password_length=<span class="number">6</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置密码安全等级低,便于密码可以修改</span></span><br><span class="line"><span class="built_in">set</span> global validate_password_policy=LOW;</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置密码为root</span></span><br><span class="line"><span class="built_in">set</span> password = password(<span class="string">&#x27;510609&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看mysql全局策略</span></span><br><span class="line">SHOW VARIABLES LIKE <span class="string">&#x27;validate_password%&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#开启访问权限</span></span><br><span class="line">GRANT ALL PRIVILEGES ON *.* TO <span class="string">&#x27;root&#x27;</span><span class="string">@&#x27;%&#x27; IDENTIFIED BY &#x27;510609&#x27;;</span></span><br><span class="line"><span class="string">flush privileges;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>区别于windows，在linux中对mysql数据库的大小写有严格区分因此为了避免此类情况发生应该在etc/my.cnf中添加lower_case_table_names=1</p>
+</blockquote>
+<h3 id="linux安装lrzsz"><a href="#linux安装lrzsz" class="headerlink" title="linux安装lrzsz"></a>linux安装lrzsz</h3><ol>
+<li><p>搜索lrzsz安装包，命名为yum list lrzsz</p>
+</li>
+<li><p>使用yum命令在线安装，命名为yum install lrzsz.x86_64</p>
+<blockquote>
+<p>Yum(全称为Yellow dog Updater, Modified)是一个在Fedora和RedHat以及CentOS中的Shell前端软件包管理器。基于RPM包管理，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖关系，并且一次安装所有依赖的软件包，无须繁琐地一次次下载、安装。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="部署项目"><a href="#部署项目" class="headerlink" title="部署项目"></a>部署项目</h2><h3 id="手动部署"><a href="#手动部署" class="headerlink" title="手动部署"></a>手动部署</h3><ol>
+<li>将java项目打包成jar包</li>
+<li>将jar包放在/usr/local/app</li>
+<li>通过java -jar jar包名称运行项目即可通过windows浏览器访问</li>
+<li>目前程序运行存在的问题：<ul>
+<li>线上程序霸屏不能退出也不能关闭</li>
+<li>线上程序的输出日志显示在屏幕上</li>
+</ul>
+</li>
+</ol>
+<p>​    解决方法：</p>
+<p>nohup命令：用于不挂断的运行指定命令，退出终端不会影响</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#后台运行且输出日志到reggie.log</span></span><br><span class="line">nohup java <span class="literal">-jar</span> reggie_take_<span class="built_in">out-1</span>.<span class="number">0</span><span class="literal">-SNAPSHOT</span>.jar &amp;&gt; reggie.log</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用shell脚本自动部署"><a href="#使用shell脚本自动部署" class="headerlink" title="使用shell脚本自动部署"></a>使用shell脚本自动部署</h3><ol>
+<li><p>在linux中安装Git</p>
+<p>yum list git         列出git安装包</p>
+<p>yum install git    在线安装git</p>
+</li>
+<li><p>使用Git克隆代码</p>
+<p>cd /usr/local/</p>
+<p>git clone gitee地址</p>
+</li>
+<li><p>上传安装maven软件包</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">tar <span class="literal">-zxvf</span> apache<span class="literal">-maven-3</span>.<span class="number">5.4</span><span class="literal">-bin</span>.tar.gz <span class="literal">-C</span> /usr/local</span><br><span class="line">vim /etc/profile</span><br><span class="line"><span class="comment">#修改配置文件，加入如下内容</span></span><br><span class="line">export MAVEN_HOME=/usr/local/apache<span class="literal">-maven-3</span>.<span class="number">5.4</span></span><br><span class="line">export PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$MAVEN_HOME</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line">source /etc/profile</span><br><span class="line">mvn <span class="literal">-version</span></span><br><span class="line">vim /usr/local/apache<span class="literal">-maven-3</span>.<span class="number">5.4</span>/conf/settings.xml</span><br><span class="line"><span class="comment">#修改配置文件内容如下</span></span><br><span class="line">&lt;localRepository&gt;/usr/local/repo&lt;/localRepository&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        Rogers
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="https://ljs-yym.github.io/2023/09/18/Linux%E6%8C%87%E4%BB%A4/" title="Linux指令">https://ljs-yym.github.io/2023/09/18/Linux%E6%8C%87%E4%BB%A4/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/09/18/MySQL%E7%AC%94%E8%AE%B0/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/cover/data.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                    数据库
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/09/18/MySQL%E7%AC%94%E8%AE%B0/" class="trm-anima-link">
+                    MySql从入门到删库跑路
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/09/18</li>
+                <li>18:15</li>
+                
+                    <li>2.4k</li>
+                
+                
+                    <li>9</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/09/18/Java%20SE/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/cover/java.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/Java/">
+                    Java
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/09/18/Java%20SE/" class="trm-anima-link">
+                    Java SE笔记
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/09/18</li>
+                <li>18:15</li>
+                
+                    <li>16.5k</li>
+                
+                
+                    <li>65</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2023- 2023</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">长生风月</span>
+        </div>
+    
+
+      
+
+    
+        <div class="trm-footer-item">
+            博客已萌萌哒运行 <span id="since" class="trm-accent-color"></span> 天
+        </div>
+     
+
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("02/27/2023 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+<div class="trm-search-popup">
+    <div class="trm-search-header">
+        <span class="trm-search-popup-btn-close">
+            <i class="iconfont fas fa-times"></i>
+        </span>
+    </div>
+    <div class="form trm-search-form">
+        <input class="trm-search-input" type="text" placeholder="搜索...">
+    </div>
+    <div class="trm-search-result-container">
+
+    </div>
+</div>
+
+  <!-- Plugin -->
+
+
+
+
+    
+<script src="https://unpkg.com/swup@2.0.19/dist/swup.min.js"></script>
+
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.2"></script>
+    
+
+    
+        
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=2.0.2"></script>
+    
+
+    <!-- 数学公式 -->
+    
+        
+<script src="https://unpkg.com/katex@latest/dist/katex.min.js" data-swup-reload-script></script>
+
+        
+            
+<script src="https://unpkg.com/katex@latest/dist/contrib/copy-tex.min.js" data-swup-reload-script></script>
+
+        
+        
+<script src="https://unpkg.com/katex@latest/dist/contrib/auto-render.min.js" data-swup-reload-script></script>
+
+        <script data-swup-reload-script>
+              window.renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true },
+                ],
+                ...{},
+            })
+        </script>
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <script>
+        "serviceWorker" in navigator ?
+        navigator.serviceWorker.register('/sw.js').then(function () {
+            navigator.serviceWorker.controller ? 
+             console.log("Assets cached by the controlling service worker.") :
+             console.log("Please reload this page to allow the service worker to handle network operations.")
+        }).catch(function (e) {
+            console.log("ERROR: " + e)
+        }) : console.log("Service workers are not supported in the current browser.")
+    </script>
+
+    <!-- baidu push -->
+    
+    <script data-swup-reload-script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+
+
+<script id="async-script" src="/js/main.js?v=2.0.2"></script>
+
+</body>
+
+</html>

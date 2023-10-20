@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="微服务认识微服务微服务是一种软件设计模式，它将应用程序拆分成小型、相互独立的服务，每个服务都可以通过标准化的接口进行通信和交互。 这些服务通常部署在容器中，每个服务都可以独立地进行扩展、升级和维护，从而提高了系统的灵活性、可伸缩性和可靠性。 与传统的单体式架构不同，微服务的架构可以更轻松地适应快速变化的业务需求，并且可以更容易地实现持续集成和持续部署（CI&#x2F;CD）的流程。 微服务的特点：  单一职">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务">
+<meta property="og:url" content="https://ljs-yym.github.io/2023/09/24/%E5%BE%AE%E6%9C%8D%E5%8A%A1/index.html">
+<meta property="og:site_name" content="RogevnBlog">
+<meta property="og:description" content="微服务认识微服务微服务是一种软件设计模式，它将应用程序拆分成小型、相互独立的服务，每个服务都可以通过标准化的接口进行通信和交互。 这些服务通常部署在容器中，每个服务都可以独立地进行扩展、升级和维护，从而提高了系统的灵活性、可伸缩性和可靠性。 与传统的单体式架构不同，微服务的架构可以更轻松地适应快速变化的业务需求，并且可以更容易地实现持续集成和持续部署（CI&#x2F;CD）的流程。 微服务的特点：  单一职">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ljs-yym.github.io/img/cover/SpringCloud.jpg">
+<meta property="article:published_time" content="2023-09-24T07:54:18.997Z">
+<meta property="article:modified_time" content="2023-09-26T15:44:03.755Z">
+<meta property="article:author" content="Rogers">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ljs-yym.github.io/img/cover/SpringCloud.jpg">
+
+    <meta name="keywords" content="hexo,node,博客">
+
+
+<title >微服务</title>
+
+<!-- Favicon -->
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+<link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css">
+
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"ljs-yym.github.io","author":"Rogers","root":"/","typed_text":["Web Developer","Backend Programmer","Full Stack Developer！"],"theme_version":"2.0.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo.png","icon16":"/img/logo.png","icon32":"/img/logo.png","dark_logo":"/img/dark_logo.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"creative_commons":{"license":"by-nc-sa","language":"deed.zh"},"search":{"enable":true,"type":"local","path":"search.xml","field":"post","content":true,"format":"html"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-09-26 23:44:03"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.2" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+     
+
+    
+
+    
+ 
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" class=" trm-light-icon" src="/img/logo.png"> <img alt="logo" class=" trm-dark-icon" src="/img/dark_logo.png">
+    
+    
+        <div class="trm-logo-text">
+            Rogevn<span>Blog</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    长生风月的博客
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    日志
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友情链接
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/picture/" target="">
+                    好东西
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/picture/" target="">
+                            图片
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/technology/" target="">
+                            黑科技
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+    
+    <div id="trm-search-btn" class="trm-search-btn">
+        <i class="iconfont fas fa-search"></i>
+    </div>
+     
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            微服务
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/R-C.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        长生风月
+    </h5>
+    
+        <div class="trm-label">
+            I&#39;m a
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="tencent://message/?uin=3232008148&Site=&Menu=yes" title="QQ" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="/null" title="WeChat" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-weixin"></i>
+        </a>
+    
+        <a href="/null" title="twitter" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-twitter"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                河北省保定市
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                21
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                星座:
+            </div>
+            <div class="trm-label trm-label-light">
+                处女座
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                爱好:
+            </div>
+            <div class="trm-label trm-label-light">
+                足球、音乐、魔方、代码
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:3232008148@qq.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#微服务"  data-scroll-to="#微服务"><span class="toc-number">1.</span> <span class="toc-text">微服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#认识微服务"  data-scroll-to="#认识微服务"><span class="toc-number">1.1.</span> <span class="toc-text">认识微服务</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#SpringCloud与SpringBoot的版本兼容关系"  data-scroll-to="#SpringCloud与SpringBoot的版本兼容关系"><span class="toc-number">1.2.</span> <span class="toc-text">SpringCloud与SpringBoot的版本兼容关系</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#远程调用"  data-scroll-to="#远程调用"><span class="toc-number">1.3.</span> <span class="toc-text">远程调用</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Eureka注册中心"  data-scroll-to="#Eureka注册中心"><span class="toc-number">1.4.</span> <span class="toc-text">Eureka注册中心</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Eureka概念"  data-scroll-to="#Eureka概念"><span class="toc-number">1.4.1.</span> <span class="toc-text">Eureka概念</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#搭建eureka服务"  data-scroll-to="#搭建eureka服务"><span class="toc-number">1.4.2.</span> <span class="toc-text">搭建eureka服务</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#服务注册"  data-scroll-to="#服务注册"><span class="toc-number">1.4.3.</span> <span class="toc-text">服务注册</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#服务发现"  data-scroll-to="#服务发现"><span class="toc-number">1.4.4.</span> <span class="toc-text">服务发现</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Ribbon负载均衡"  data-scroll-to="#Ribbon负载均衡"><span class="toc-number">1.5.</span> <span class="toc-text">Ribbon负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#懒加载和饥饿加载"  data-scroll-to="#懒加载和饥饿加载"><span class="toc-number">1.5.1.</span> <span class="toc-text">懒加载和饥饿加载</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Nacos"  data-scroll-to="#Nacos"><span class="toc-number">1.6.</span> <span class="toc-text">Nacos</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#下载安装运行"  data-scroll-to="#下载安装运行"><span class="toc-number">1.6.1.</span> <span class="toc-text">下载安装运行</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#使用necos注册中心"  data-scroll-to="#使用necos注册中心"><span class="toc-number">1.6.2.</span> <span class="toc-text">使用necos注册中心</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Nacos服务分级存储模型"  data-scroll-to="#Nacos服务分级存储模型"><span class="toc-number">1.6.3.</span> <span class="toc-text">Nacos服务分级存储模型</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#加权负载均衡"  data-scroll-to="#加权负载均衡"><span class="toc-number">1.6.4.</span> <span class="toc-text">加权负载均衡</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#环境隔离"  data-scroll-to="#环境隔离"><span class="toc-number">1.6.5.</span> <span class="toc-text">环境隔离</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#临时实例和非临时实例"  data-scroll-to="#临时实例和非临时实例"><span class="toc-number">1.6.6.</span> <span class="toc-text">临时实例和非临时实例</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Nacos与Eureka的区别"  data-scroll-to="#Nacos与Eureka的区别"><span class="toc-number">1.6.7.</span> <span class="toc-text">Nacos与Eureka的区别</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Nacos统一配置管理"  data-scroll-to="#Nacos统一配置管理"><span class="toc-number">1.6.8.</span> <span class="toc-text">Nacos统一配置管理</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Nacos集群搭建步骤"  data-scroll-to="#Nacos集群搭建步骤"><span class="toc-number">1.6.9.</span> <span class="toc-text">Nacos集群搭建步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Feign"  data-scroll-to="#Feign"><span class="toc-number">1.7.</span> <span class="toc-text">Feign</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#基于Feign的远程调用"  data-scroll-to="#基于Feign的远程调用"><span class="toc-number">1.7.1.</span> <span class="toc-text">基于Feign的远程调用</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Feign的性能优化"  data-scroll-to="#Feign的性能优化"><span class="toc-number">1.7.2.</span> <span class="toc-text">Feign的性能优化</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Feign最佳实践"  data-scroll-to="#Feign最佳实践"><span class="toc-number">1.7.3.</span> <span class="toc-text">Feign最佳实践</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#统一网关Gateway"  data-scroll-to="#统一网关Gateway"><span class="toc-number">1.8.</span> <span class="toc-text">统一网关Gateway</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#为什么需要网关"  data-scroll-to="#为什么需要网关"><span class="toc-number">1.8.1.</span> <span class="toc-text">为什么需要网关</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#快速入门"  data-scroll-to="#快速入门"><span class="toc-number">1.8.2.</span> <span class="toc-text">快速入门</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#断言工厂"  data-scroll-to="#断言工厂"><span class="toc-number">1.8.3.</span> <span class="toc-text">断言工厂</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#过滤器工厂"  data-scroll-to="#过滤器工厂"><span class="toc-number">1.8.4.</span> <span class="toc-text">过滤器工厂</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Docker分布式部署"  data-scroll-to="#Docker分布式部署"><span class="toc-number">1.9.</span> <span class="toc-text">Docker分布式部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#项目部署的问题"  data-scroll-to="#项目部署的问题"><span class="toc-number">1.9.1.</span> <span class="toc-text">项目部署的问题</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Docker如何解决依赖的兼容问题"  data-scroll-to="#Docker如何解决依赖的兼容问题"><span class="toc-number">1.9.2.</span> <span class="toc-text">Docker如何解决依赖的兼容问题</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#安装、卸载Docker"  data-scroll-to="#安装、卸载Docker"><span class="toc-number">1.9.3.</span> <span class="toc-text">安装、卸载Docker</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#配置镜像加速"  data-scroll-to="#配置镜像加速"><span class="toc-number">1.9.4.</span> <span class="toc-text">配置镜像加速</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#docker获取镜像"  data-scroll-to="#docker获取镜像"><span class="toc-number">1.9.5.</span> <span class="toc-text">docker获取镜像</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#docker其他命令"  data-scroll-to="#docker其他命令"><span class="toc-number">1.9.6.</span> <span class="toc-text">docker其他命令</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#docker容器命令"  data-scroll-to="#docker容器命令"><span class="toc-number">1.9.7.</span> <span class="toc-text">docker容器命令</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#进入Nginx容器，修改HTML文件内容，添加“传智教育欢迎您”"  data-scroll-to="#进入Nginx容器，修改HTML文件内容，添加“传智教育欢迎您”"><span class="toc-number">1.9.8.</span> <span class="toc-text">进入Nginx容器，修改HTML文件内容，添加“传智教育欢迎您”</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#数据卷"  data-scroll-to="#数据卷"><span class="toc-number">1.9.9.</span> <span class="toc-text">数据卷</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#自定义镜像"  data-scroll-to="#自定义镜像"><span class="toc-number">1.9.10.</span> <span class="toc-text">自定义镜像</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#DockerCompose"  data-scroll-to="#DockerCompose"><span class="toc-number">1.9.11.</span> <span class="toc-text">DockerCompose</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#同步通信和异步通信"  data-scroll-to="#同步通信和异步通信"><span class="toc-number">1.10.</span> <span class="toc-text">同步通信和异步通信</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#RabbitMQ消息队列"  data-scroll-to="#RabbitMQ消息队列"><span class="toc-number">1.11.</span> <span class="toc-text">RabbitMQ消息队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#单机部署和集群部署"  data-scroll-to="#单机部署和集群部署"><span class="toc-number">1.11.1.</span> <span class="toc-text">单机部署和集群部署</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#SpringAMQP"  data-scroll-to="#SpringAMQP"><span class="toc-number">1.12.</span> <span class="toc-text">SpringAMQP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#什么是AMQP"  data-scroll-to="#什么是AMQP"><span class="toc-number">1.12.1.</span> <span class="toc-text">什么是AMQP</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#消息的发送和接收（入门）"  data-scroll-to="#消息的发送和接收（入门）"><span class="toc-number">1.12.2.</span> <span class="toc-text">消息的发送和接收（入门）</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#work-Queue工作队列"  data-scroll-to="#work-Queue工作队列"><span class="toc-number">1.12.3.</span> <span class="toc-text">work Queue工作队列</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#发布和订阅"  data-scroll-to="#发布和订阅"><span class="toc-number">1.12.4.</span> <span class="toc-text">发布和订阅</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#FanoutExchange"  data-scroll-to="#FanoutExchange"><span class="toc-number">1.12.5.</span> <span class="toc-text">FanoutExchange</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#DirectExchange"  data-scroll-to="#DirectExchange"><span class="toc-number">1.12.6.</span> <span class="toc-text">DirectExchange</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#TopicExchange"  data-scroll-to="#TopicExchange"><span class="toc-number">1.12.7.</span> <span class="toc-text">TopicExchange</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#消息转换器"  data-scroll-to="#消息转换器"><span class="toc-number">1.12.8.</span> <span class="toc-text">消息转换器</span></a></li></ol></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            09/24
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            15:54
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Rogers
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h1><h2 id="认识微服务"><a href="#认识微服务" class="headerlink" title="认识微服务"></a>认识微服务</h2><p>微服务是一种软件设计模式，它将<strong>应用程序</strong>拆分成小型、相互独立的服务，每个服务都可以通过标准化的接口进行通信和交互。</p>
+<p>这些服务通常部署在容器中，每个服务都可以<strong>独立地进行扩展、升级和维护</strong>，从而提高了系统的灵活性、可伸缩性和可靠性。</p>
+<p>与传统的单体式架构不同，微服务的架构可以更轻松地适应快速变化的业务需求，并且可以更容易地实现持续集成和持续部署（CI/CD）的流程。</p>
+<p>微服务的特点：</p>
+<ul>
+<li>单一职责：微服务拆分颗粒度更小，每一个服务都对应唯一的业务能力，做到单一职责，避免重复业务开发</li>
+<li>面向服务：微服务对外暴露业务接口</li>
+<li>自治：团队独立、技术独立、数据独立、部署独立</li>
+<li>隔离性强：服务调用做好隔离、容错、降级，避免出现级联问题】</li>
+</ul>
+<h2 id="SpringCloud与SpringBoot的版本兼容关系"><a href="#SpringCloud与SpringBoot的版本兼容关系" class="headerlink" title="SpringCloud与SpringBoot的版本兼容关系"></a>SpringCloud与SpringBoot的版本兼容关系</h2><p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230421171911074.png" alt="image-20230421171911074" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h2 id="远程调用"><a href="#远程调用" class="headerlink" title="远程调用"></a>远程调用</h2><p>微服务的远程连接实例通常采用 RESTful API 或 RPC（Remote Procedure Call）来实现。</p>
+<p>RESTful API 是一种基于 HTTP 协议的轻量级的、可扩展的架构风格，它使用明确的 URL 和 HTTP 方法（例如 GET、POST、PUT、DELETE）来表示对资源的操作。每个微服务都提供一组 RESTful API，其他微服务可以通过调用这些 API 来访问和使用该服务提供的功能。</p>
+<p>使用步骤：</p>
+<ol>
+<li><p>注册RestTemplate</p>
+<p>在order-service的OrderApplication中注册RestTemplate</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MapperScan(&quot;cn.itcast.order.mapper&quot;)</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(OrderApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RestTemplate <span class="title function_">restTemplate</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RestTemplate</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>服务远程调用RestTemplate</p>
+<p>修改order-service中的OrderService的queryOrderById方法</p>
+<p><em><strong>也就是通过http连接获取到user获取到的数据</strong></em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderMapper orderMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Order <span class="title function_">queryOrderById</span><span class="params">(Long orderId)</span> &#123;</span><br><span class="line">        <span class="comment">// 1.查询订单</span></span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> orderMapper.findById(orderId);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2.利用RestTemplate发送http请求，查询用户</span></span><br><span class="line">        <span class="comment">// 2.1设置url路径</span></span><br><span class="line">        String url=<span class="string">&quot;http://localhost:8081/user/&quot;</span>+order.getUserId();</span><br><span class="line">        <span class="comment">// 2.2发送http请求，远程调用</span></span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> restTemplate.getForObject(url, User.class);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3.封装user到order</span></span><br><span class="line">        order.setUser(user);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4.返回</span></span><br><span class="line">        <span class="keyword">return</span> order;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Eureka注册中心"><a href="#Eureka注册中心" class="headerlink" title="Eureka注册中心"></a>Eureka注册中心</h2><blockquote>
+<p>在一个大型的分布式系统中，服务往往会有多个实例运行在不同的机器上，而这些服务之间又需要相互通信，这时就需要一个中心化的服务注册和发现机制，来管理服务的实例和状态。</p>
+</blockquote>
+<h3 id="Eureka概念"><a href="#Eureka概念" class="headerlink" title="Eureka概念"></a>Eureka概念</h3><p><b>通过 Eureka，我们可以很方便地将一个服务注册到 Eureka 服务器，并让其他服务消费该服务</b></p>
+<p>服务提供者和服务消费者统称为eureka客户端</p>
+<p>Eureka注册中心执行步骤：</p>
+<ol>
+<li><p>在服务提供者启动时会自动将注册服务信息发送给eureka</p>
+</li>
+<li><p>eureka接收到注册信息例如：</p>
+<p>user-service:</p>
+<p>​    localhost:8081</p>
+<p>​    localhost:8082</p>
+<p>​    localhost:8083</p>
+<p>order-service:</p>
+<p>​    localhost:8080</p>
+</li>
+<li><p>消费者使用时会找rureka拿取注册信息</p>
+<p>例如想要请求user-service的信息，eureka就会将注册信息通过负载均衡向服务提供者发送请求</p>
+</li>
+</ol>
+<p><em><strong>注：服务消费者不会拿到死掉的地址，因为服务提供者会每隔30s发送一次心跳确认状态</strong></em></p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230508113756050.png" alt="image-20230508113756050" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="搭建eureka服务"><a href="#搭建eureka服务" class="headerlink" title="搭建eureka服务"></a>搭建eureka服务</h3><ol>
+<li><p>创建项目，引入spring-cloud-starter-netflix-eureka-server</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">  artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;<span class="number">2.2</span><span class="number">.7</span>.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>注意：springboot、springcloud和eureka版本要对应</p>
+</li>
+<li><p>编写启动类，添加@EnableEurekaServer注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableEurekaServer</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EurekaServerApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(EurekaServerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>添加application.yml文件，编写下面的配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">10086</span>   <span class="comment">#服务端口</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">eurekaserver</span>  <span class="comment">#eureka的服务名称</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">service-url:</span>  <span class="comment">#eureka的地址信息</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://127.0.0.1:10086/eureka</span></span><br></pre></td></tr></table></figure>
+
+<p>文件结构：eureka以子文件形式出现</p>
+<p>​    <img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230508182704703.png" alt="image-20230508182704703" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+</ol>
+<h3 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h3><blockquote>
+<p>服务注册，就是将提供某个服务的模块信息(通常是这个服务的ip和端口)注册到1个公共的组件上去</p>
+</blockquote>
+<ol>
+<li><p>在order-service项目引入spring-cloud-starter-netflix-eureka-client的依赖</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">  artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;<span class="number">2.2</span><span class="number">.7</span>.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>在application.yml文件，编写下面的配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span>   <span class="comment">#服务端口</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">eurekaserver</span>  <span class="comment">#eureka的服务名称</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">service-url:</span>  <span class="comment">#eureka的地址信息</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://127.0.0.1:10086/eureka</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="服务发现"><a href="#服务发现" class="headerlink" title="服务发现"></a>服务发现</h3><blockquote>
+<p>服务发现，就是新注册的这个服务模块能够及时的被其他调用者发现。不管是服务新增和服务删减都能实现自动发现。</p>
+</blockquote>
+<ol>
+<li><p>修改OrderService的代码，修改访问的url路径，用服务名代替ip、端口:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String url=<span class="string">&quot;http://userservice/user/&quot;</span>+order.getUserId();</span><br></pre></td></tr></table></figure></li>
+<li><p>在order-service项目的启动类OrderApplication中的RestTemplate添加负载均衡注解:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MapperScan(&quot;cn.itcast.order.mapper&quot;)</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(OrderApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@LoadBalanced</span>	<span class="comment">//实现负载均衡</span></span><br><span class="line">    <span class="keyword">public</span> RestTemplate <span class="title function_">restTemplate</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RestTemplate</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Ribbon负载均衡"><a href="#Ribbon负载均衡" class="headerlink" title="Ribbon负载均衡"></a>Ribbon负载均衡</h2><p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230806140023892.png" alt="image-20230806140023892" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>通过IRule实现可以修改负载均衡规则，有两种方式：</p>
+<ol>
+<li><p>添加依赖：您需要将Spring Cloud Ribbon依赖添加到您的项目中。 您可以在pom.xml文件中添加以下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-ribbon&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>代码方式：在order-service中的OrderApplication类中，定义一个新的IRule:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> IRule <span class="title function_">randomRule</span><span class="params">(&#123;</span></span><br><span class="line"><span class="params">    //实行随机分配负载</span></span><br><span class="line"><span class="params">	return new RandomRule()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>配置文件方式:在order-service的application.yml文件中，添加新的配置也可以修改规则</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">userservice:</span></span><br><span class="line"> <span class="attr">ribbon:</span></span><br><span class="line">  <span class="comment">#负载均衡规则</span></span><br><span class="line">  <span class="attr">NFLoadBalancerRuleClassName:</span> <span class="string">com.netflix.loadbalancer.RandomRule</span></span><br></pre></td></tr></table></figure></li>
+<li><p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230621085421470.png" alt="image-20230621085421470" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+</ol>
+<h3 id="懒加载和饥饿加载"><a href="#懒加载和饥饿加载" class="headerlink" title="懒加载和饥饿加载"></a>懒加载和饥饿加载</h3><p>懒加载：在第一次发起请求的时候才会创建LoadBalancerClient对象，就会导致第一次访问时长比较久</p>
+<p>饥饿加载：饥饿加载是指在启动项目时就创建LoadBalancerClient对象，并在后续请求中只使用一个LoadBalanceClient对象，从而减少了一开始就请求大量资源所带来的延迟和耗电量。</p>
+<p>程序默认为懒加载：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ribbon:</span></span><br><span class="line"> <span class="attr">eager-load:</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span> <span class="comment">#开启饥饿加载</span></span><br><span class="line">  <span class="attr">clients:</span> <span class="string">userservice</span> <span class="comment">#指定对userservice这个服务饥饿加载</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h2><h3 id="下载安装运行"><a href="#下载安装运行" class="headerlink" title="下载安装运行"></a>下载安装运行</h3><p>下载1.4.1版本</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/alibaba/nacos/releases/tag/1.4.1">Release 1.4.1 (Jan 15, 2021) · alibaba/nacos · GitHub</a></p>
+<p>![image-20230509181757525](/img/微服务/Java SE.md)</p>
+<p>解压安装</p>
+<p>运行bin/startup.cmd</p>
+<h3 id="使用necos注册中心"><a href="#使用necos注册中心" class="headerlink" title="使用necos注册中心"></a>使用necos注册中心</h3><ol>
+<li><p>在父组件的pom文件中</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--nacos组件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-alibaba-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在子组件中去掉eureka依赖，并加上</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>配置yaml文件，去掉eureka的并添加：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">server-addr:</span> <span class="string">localhost:8848</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>注：在运行程序时，记得启动nacos</p>
+<h3 id="Nacos服务分级存储模型"><a href="#Nacos服务分级存储模型" class="headerlink" title="Nacos服务分级存储模型"></a>Nacos服务分级存储模型</h3><blockquote>
+<p>在企业中，一般我们会把<strong>服务的多个实例分放在多个机房</strong>以达到容灾</p>
+</blockquote>
+<p>服务调用尽可能选择本地集群的服务，跨集群调用延迟较高</p>
+<p>本地集群不可访问时，再去访问其它集群</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230510103222771.png" alt="image-20230510103222771" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><b>Nacos服务分级存储模型</b></p>
+<ol>
+<li>一级是服务，例如userservice</li>
+<li>二级是集群，例如杭州或上海</li>
+<li>三级是实例，例如杭州机房的某台部署了userservice的服务器</li>
+</ol>
+<p><b>服务集群属性设置：</b></p>
+<ol>
+<li><p>修改application.yml，添加如下内容</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"> <span class="attr">cloud :</span></span><br><span class="line">  <span class="attr">nacos:</span></span><br><span class="line">   <span class="attr">server-addr:</span> <span class="string">localhost:8848</span> <span class="comment"># nacos服务端地址</span></span><br><span class="line">   <span class="attr">discovery:</span></span><br><span class="line">    <span class="attr">cluster-name:</span> <span class="string">HZ</span> <span class="comment">#配置集群名称，也就是机房位置，例如:HZ，杭州</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="加权负载均衡"><a href="#加权负载均衡" class="headerlink" title="加权负载均衡"></a>加权负载均衡</h3><ul>
+<li><p>Nacos控制台可以设置实例的权重值，0~1之间同集群内的多个实例，</p>
+</li>
+<li><p>权重越高被访问的频率越高权重</p>
+</li>
+<li><p>设置为0则完全不会被访问</p>
+</li>
+</ul>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230510121556683.png" alt="image-20230510121556683" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="环境隔离"><a href="#环境隔离" class="headerlink" title="环境隔离"></a>环境隔离</h3><blockquote>
+<p>Nacos中服务存储和数据存储的最外层都是一个名为namespace的东西，用来做最外层隔离</p>
+</blockquote>
+<p>Nacos环境隔离</p>
+<ul>
+<li><p>namespace用来做环境隔离</p>
+</li>
+<li><p>每个namespace都有唯一的id</p>
+</li>
+<li><p>不同namespace下的服务不可见</p>
+<hr></li>
+</ul>
+<ol>
+<li><p>在Nacos控制台可以创建namespace，用来隔离不同环境</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230510163803464.png" alt="image-20230510163803464" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+<li><p>设置新命名空间</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230510163840077.png" alt="image-20230510163840077" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+<li><p>保存后会在控制台看到一个命名空间id</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230510163949690.png" alt="image-20230510163949690" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+<li><p>修改order-service的application.yml，添加namespace:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"> <span class="attr">cloud:</span></span><br><span class="line">  <span class="attr">nacos:</span></span><br><span class="line">   <span class="attr">server-addr:</span> <span class="string">localhost:8848</span></span><br><span class="line">   <span class="attr">discovery:</span></span><br><span class="line">    <span class="attr">cluster-name:</span> <span class="string">SH</span> <span class="comment">#上海</span></span><br><span class="line">    <span class="attr">namespace:</span> <span class="string">492a7d5d-237b-46a1-a99a-fa8e98e4b0f9</span>		<span class="comment">#命名空间，填ID</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="临时实例和非临时实例"><a href="#临时实例和非临时实例" class="headerlink" title="临时实例和非临时实例"></a>临时实例和非临时实例</h3><p>临时实例和非临时实例区别：</p>
+<p>​    临时实例：每隔三十秒向注册中心发送心跳</p>
+<p>​    非临时实例：不自动发送心跳，由注册中心询问，更新速度更快</p>
+<p>​    <img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230510171337216.png" alt="image-20230510171337216" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>服务注册到Nacos时，可以选择注册为临时或非临时实例，通过配置的配置来设置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"> <span class="attr">cloud:</span></span><br><span class="line">  <span class="attr">ntcos:</span></span><br><span class="line">   <span class="attr">discovery:</span></span><br><span class="line">    <span class="attr">ephemeral:</span> <span class="literal">false</span> <span class="comment">#设置为非临时实例</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Nacos与Eureka的区别"><a href="#Nacos与Eureka的区别" class="headerlink" title="Nacos与Eureka的区别"></a>Nacos与Eureka的区别</h3><ol>
+<li>Nacos支持服务端主动检测提供者状态:临时实例采用心跳模式，非临时实例采用主动检测模式</li>
+<li>临时实例心跳不正常会被剔除，非临时实例则不会被剔除</li>
+<li>Nacos支持服务列表变更的消息推送模式，服务列表更新更及时</li>
+<li>Nacos集群默认采用AP方式，当集群中存在非临时实例时，采用CP模式;Eureka采用AP方式</li>
+</ol>
+<h3 id="Nacos统一配置管理"><a href="#Nacos统一配置管理" class="headerlink" title="Nacos统一配置管理"></a>Nacos统一配置管理</h3><p>Nacos不只是有强大的注册中心功能，他同时还兼备配置管理功能。所谓统一配置就是将这一个微服务中都能用到的配置放在一个文件中，并且能实现热更新</p>
+<ol>
+<li><p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230510173601186.png" alt="image-20230510173601186" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+<li><p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230510173619767.png" alt="image-20230510173619767" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+<li><p>服务获取配置</p>
+</li>
+</ol>
+<p>配置获取的步骤如下：</p>
+<p>项目启动时会优先读取一个叫bootstarp.yml的文件，然后再将这个文件和本地的application.yml相结合，在通过这俩配置文件的结合体来创建spring容器最后加载bean</p>
+<p>具体步骤：</p>
+<ol>
+<li><p>引入Nacos的配置管理客户端依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;! --nacos配置管理依赖--&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-config<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在userservice中的resource目录添加一个bootstarp.yaml文件，这个文件是引导文件，优先级高于application.yaml：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"> <span class="attr">application:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">userservice</span> <span class="comment">#服务名称，和nacos注册中心名称一致</span></span><br><span class="line"> <span class="attr">profiles:</span></span><br><span class="line">  <span class="attr">active:</span> <span class="string">dev</span> <span class="comment">#开发环境，这里是dev</span></span><br><span class="line"> <span class="attr">cloud:</span></span><br><span class="line">  <span class="attr">nacos:</span></span><br><span class="line">   <span class="attr">server-addr:</span> <span class="string">localhost:8848</span> <span class="comment">#Nacos地址</span></span><br><span class="line">   <span class="attr">config:</span></span><br><span class="line">	<span class="attr">file-extension:</span> <span class="string">yaml#文件后缀名</span></span><br></pre></td></tr></table></figure>
+
+<p>可以在user-servie中将pattern.dateformat这个属性注入到UserController中做测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/user&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserController</span> &#123;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">//注入nacos中的配置属性</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;pattern.dateformat&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String dateformat;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//编写controller，通过日期格式化器来格式化当前时间并返回</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;now&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">now</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> LocalDateTime.now().format(DateTimeFormatter.ofPattern(dateformat));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另外，Nacos配置更改后，微服务可以实现热更新，有两种方法：</p>
+<ol>
+<li>通过@value注解注入，结合@RefreshScope来刷新</li>
+<li>通过@ConfigurationProperties注入，自动刷新</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>优先级：</p>
+<p>服务名-环境.yaml&gt;服务名.yaml&gt;本地配置</p>
+</blockquote>
+<h3 id="Nacos集群搭建步骤"><a href="#Nacos集群搭建步骤" class="headerlink" title="Nacos集群搭建步骤"></a>Nacos集群搭建步骤</h3><ol>
+<li><p>搭建MySQL集群并初始化数据库表</p>
+</li>
+<li><p>下载解压nacos</p>
+</li>
+<li><p>修改集群配置（节点信息）、数据库配置</p>
+<ol>
+<li><p>进入nacos的conf目录，修改配置文件cluster.conf.example重命名为cluster.conf</p>
+</li>
+<li><p>添加内容,集群中每一个节点的信息</p>
+<p>127.0.0.1:8845</p>
+<p>127.0.0.1:8846</p>
+<p>127.0.0.1:8847</p>
+</li>
+<li><p>修改application.properties文件，添加数据库配置</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#数据源，告诉nacos用的什么集群</span></span><br><span class="line"><span class="attr">spring.datasource.platform</span>=<span class="string">mysq1</span></span><br><span class="line"><span class="comment">#有几台机器</span></span><br><span class="line"><span class="attr">db.num</span>=<span class="string">1</span></span><br><span class="line"><span class="attr">db.ur1.O</span>=<span class="string">jdbc:mysq7://127.0.0.1:3306/nacos?</span></span><br><span class="line"><span class="attr">characterEncoding</span>=<span class="string">utf8&amp;connectTimeout=1000&amp;socketTimeout=3000&amp;autoReconnect=true&amp;useunicode=true&amp;usessL=fa1se&amp;serverTimezone=UTC</span></span><br><span class="line"><span class="attr">db.user.0</span>=<span class="string">root I</span></span><br><span class="line"><span class="attr">db.password.0</span>=<span class="string">123</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>分别启动多个nacos节点</p>
+</li>
+<li><p>nginx反向代理</p>
+<p>修改conf/nginx.conf文件，配置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//放置集群地址，方便nginx设置反向代理</span><br><span class="line">upstream nacos-cluster &#123;</span><br><span class="line">	server 127.0.0.1:8845;</span><br><span class="line">	server 127.0.0.1:8846;</span><br><span class="line">	server 127.0.0.1:8847;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">	listen	80;</span><br><span class="line">	server_name	localhost;</span><br><span class="line">	location /nacos &#123;</span><br><span class="line">		proxy_pass http://nacos-cluster;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h2><h3 id="基于Feign的远程调用"><a href="#基于Feign的远程调用" class="headerlink" title="基于Feign的远程调用"></a>基于Feign的远程调用</h3><p>步骤：</p>
+<ol>
+<li><p>引入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>创建UserClient</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient(&quot;userservice&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserClient</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;/user/&#123;id&#125;&quot;)</span></span><br><span class="line">    User <span class="title function_">findById</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在springboot启动类中添加注解</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EnableFeignClients</span><br></pre></td></tr></table></figure></li>
+<li><p>修改之前的orderService.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderMapper orderMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserClient userClient;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Order <span class="title function_">queryOrderById</span><span class="params">(Long orderId)</span> &#123;</span><br><span class="line">        <span class="comment">// 1.查询订单</span></span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> orderMapper.findById(orderId);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2.用Feign远程调用</span></span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> userClient.findById(order.getUserId());</span><br><span class="line">        <span class="comment">// 3.封装user到order</span></span><br><span class="line">        order.setUser(user);</span><br><span class="line">        <span class="comment">// 4.返回</span></span><br><span class="line">        <span class="keyword">return</span> order;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Feign的性能优化"><a href="#Feign的性能优化" class="headerlink" title="Feign的性能优化"></a>Feign的性能优化</h3><blockquote>
+<p>在Fegin的默认中是不支持连接池的URLConnection，因此每次请求都会进行三次握手和四次挥手大大提高了响应速度，因此我们对Fegin的性能优化首先就要解决让Fegin支持连接池</p>
+</blockquote>
+<p>Fegin中底层的客户端实现：</p>
+<ul>
+<li><p>URLcontroller：默认实现，不支持连接池</p>
+</li>
+<li><p>Apache HttpClient：支持连接池</p>
+</li>
+<li><p>OKHttp：支持连接池</p>
+</li>
+</ul>
+<p>这里主要介绍使用Apache HttpClient的使用方法</p>
+<ol>
+<li><p>引入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.github.openfeign<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>feign-httpclient<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>配置连接池</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">feign:</span></span><br><span class="line"> <span class="attr">client:</span></span><br><span class="line">  <span class="attr">config:</span></span><br><span class="line">   <span class="attr">default:</span>	<span class="comment">#default全局的配置</span></span><br><span class="line">    <span class="attr">loggeiLevel:</span> <span class="string">BASIC</span> <span class="comment">#日志级别，BASIC就是基本的请求和晌应信息</span></span><br><span class="line"> <span class="attr">httpclient:</span></span><br><span class="line">  <span class="attr">enabled :</span> <span class="literal">true</span>	<span class="comment">#开启feign对HttpClient的支持</span></span><br><span class="line">  <span class="attr">max-connections:</span> <span class="number">200</span>	<span class="comment">#最大的连接数</span></span><br><span class="line">  <span class="attr">max-connections-per-route:</span> <span class="number">50</span> <span class="comment">#每个路径的最大连接数</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Feign最佳实践"><a href="#Feign最佳实践" class="headerlink" title="Feign最佳实践"></a>Feign最佳实践</h3><ol>
+<li>将clients和pojo的user单独分离出来成为fegin-api</li>
+<li>将fegin-api当做包引用</li>
+<li>可能会遇到的问题：自动注入不成功</li>
+</ol>
+<p>​    解决方法：</p>
+<ol>
+<li><p>在@EnableFeignClients注释中添加basePackages，指定FeignClient所在的包</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableFeignClients(basePackages = &quot;cn.itcast.feign.clients&quot;)</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在@EnableFeignClients注解中添加clients，指定具体Feignclient的字节码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EnableFeignclients(clients = &#123;Userclient.class&#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="统一网关Gateway"><a href="#统一网关Gateway" class="headerlink" title="统一网关Gateway"></a>统一网关Gateway</h2><h3 id="为什么需要网关"><a href="#为什么需要网关" class="headerlink" title="为什么需要网关"></a>为什么需要网关</h3><p>网关的功能：</p>
+<ol>
+<li>身份验证和权限检测</li>
+<li>服务路由、负载均衡</li>
+<li>请求限流</li>
+</ol>
+<h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3><p>搭建网关服务的步骤：</p>
+<ol>
+<li><p>创建新的module，引入SpringCloudGetway的依赖和nacos的服务发现依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;! --网关依赖--&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-gateway<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">&lt;! --nacos服务发现依赖--&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>编写路由配置及nacos地址</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">10010</span> <span class="comment">#网关端口</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">gateway</span> <span class="comment">#服务名称</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">server-addr:</span> <span class="string">localhost:8848</span> <span class="comment"># nacos地址</span></span><br><span class="line">    <span class="attr">gateway:</span></span><br><span class="line">      <span class="attr">routes:</span> <span class="comment">#网关路由配置</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">user-service</span> <span class="comment">#路由id，自定义，只要唯一即可</span></span><br><span class="line">          <span class="comment"># uri: http://127.0.0.1:8081 # 路由的目标地址 http就是固定地址</span></span><br><span class="line">          <span class="attr">uri:</span> <span class="string">lb://userservice</span> <span class="comment"># 路由的目标地址lb就是负载均衡，后面跟服务名称</span></span><br><span class="line">          <span class="attr">predicates:</span> <span class="comment"># 路由断言，也就是判断请求是否符合路由规则的条件</span></span><br><span class="line">           <span class="bullet">-</span> <span class="string">Path=/user/**</span>	<span class="comment"># 这个是按照路径匹配，只要以/user/开头就符合要求</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">id :</span> <span class="string">order-service</span></span><br><span class="line">          <span class="attr">uri:</span> <span class="string">lb://orderservice</span></span><br><span class="line">          <span class="attr">predicates:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">Path=/order/**</span></span><br></pre></td></tr></table></figure>
+
+<p>网关执行流程：</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/d00h.gif" alt="image-20230517165753824" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+</ol>
+<h3 id="断言工厂"><a href="#断言工厂" class="headerlink" title="断言工厂"></a>断言工厂</h3><p>网关需要符合所有的断言工厂才能正常分配</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230517175034135.png" alt="image-20230517175034135" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230517174934209.png" alt="image-20230517174934209" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="过滤器工厂"><a href="#过滤器工厂" class="headerlink" title="过滤器工厂"></a>过滤器工厂</h3><p>过滤器的作用：</p>
+<ul>
+<li>对路由的请求或响应做加工处理，比如添加请求头</li>
+<li>配置在路由下的过滤器只对当前路由的请求生效</li>
+</ul>
+<p>例如：给所有进入userservice的请求添加一个请求头: Truth=itcast is freaking awesome!</p>
+<p>实现方式：</p>
+<ol>
+<li>在gateway中修改application.yml文件，给userservice的路由添加过滤器：</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"> <span class="attr">cloud:</span></span><br><span class="line">  <span class="attr">gateway:</span></span><br><span class="line">   <span class="string">routes:#网关路由配置</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">user-service</span></span><br><span class="line">     <span class="attr">uri:</span> <span class="string">lb://userservice</span></span><br><span class="line">     <span class="attr">predicates:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">Path=/user/**</span></span><br><span class="line">     <span class="string">filters:#过滤器</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">AddRequestHeader=Truth，Itcast</span> <span class="string">is</span> <span class="string">freaking</span> <span class="string">awesome!</span> <span class="comment">#添加请求头</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>在方法中接收</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> User <span class="title function_">queryById</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id ,</span></span><br><span class="line"><span class="params">  <span class="meta">@RequestHeader(value = &quot;Truth&quot;,required = false)</span> String truth)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> userService.queryById(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="默认过滤器"><a href="#默认过滤器" class="headerlink" title="默认过滤器"></a>默认过滤器</h4><p>如果要对所有的路由都生效，则可以将过滤器工厂写到default下，格式如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">gateway</span> <span class="comment">#服务名称</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">server-addr:</span> <span class="string">localhost:8848</span> <span class="comment"># nacos地址</span></span><br><span class="line">    <span class="attr">gateway:</span></span><br><span class="line">      <span class="attr">routes:</span> <span class="comment">#网关路由配置</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">user-service</span> <span class="comment">#路由id，自定义，只要唯一即可</span></span><br><span class="line">          <span class="comment"># uri: http://127.0.0.1:8081 # 路由的目标地址 http就是固定地址</span></span><br><span class="line">          <span class="attr">uri:</span> <span class="string">lb://userservice</span> <span class="comment"># 路由的目标地址lb就是负载均衡，后面跟服务名称</span></span><br><span class="line">          <span class="attr">predicates:</span> <span class="comment"># 路由断言，也就是判断请求是否符合路由规则的条件</span></span><br><span class="line">           <span class="bullet">-</span> <span class="string">Path=/user/**</span>	<span class="comment"># 这个是按照路径匹配，只要以/user/开头就符合要求</span></span><br><span class="line">          <span class="attr">filters:</span> <span class="comment">#过滤器</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">AddRequestHeader=Truth，Itcast</span> <span class="string">is</span> <span class="string">freaking</span> <span class="string">awesome!</span> <span class="comment">#添加请求头</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">id :</span> <span class="string">order-service</span></span><br><span class="line">          <span class="attr">uri:</span> <span class="string">lb://orderservice</span></span><br><span class="line">          <span class="attr">predicates:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">Path=/order/**</span></span><br><span class="line">      <span class="attr">default-filters:</span>  <span class="comment">#默认过滤器，会对所有的路由请求生效</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">AddRequestHeader=Truth,Itcast</span> <span class="string">is</span> <span class="string">freaking</span> <span class="string">awesome!</span>  <span class="comment">#在这里写添加请求头</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="全局过滤器"><a href="#全局过滤器" class="headerlink" title="全局过滤器"></a>全局过滤器</h4><p>全局过滤器的作用也是处理一切进入网关的请求和微服务响应，与GatewayFilter的作用一样。</p>
+<p>区别在于GatewayFilter通过配置定义，处理逻辑是固定的。而GlobalFilter的逻辑需要自己写代码实现。定义方式是实现GlobalFilter接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*order设置优先级，数字越低优先级越高*/</span></span><br><span class="line"><span class="meta">@Order(-1)</span></span><br><span class="line"><span class="comment">/*注册成spring的bean*/</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AuthorizeFilter</span> <span class="keyword">implements</span> <span class="title class_">GlobalFilter</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Mono&lt;Void&gt; <span class="title function_">filter</span><span class="params">(ServerWebExchange exchange, GatewayFilterChain chain)</span> &#123;</span><br><span class="line"><span class="comment">//        1.获取请求参数</span></span><br><span class="line">        <span class="type">ServerHttpRequest</span> <span class="variable">request</span> <span class="operator">=</span> exchange.getRequest();</span><br><span class="line">        MultiValueMap&lt;String, String&gt; params = request.getQueryParams();</span><br><span class="line"><span class="comment">//        2.获取参数中authorization参数</span></span><br><span class="line">        String auth=params.getFirst(<span class="string">&quot;authorization&quot;</span>);</span><br><span class="line"><span class="comment">//        3.判断参数值是否等于admin</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;admin&quot;</span>.equals(auth)) &#123;</span><br><span class="line"><span class="comment">//        4.是，放行</span></span><br><span class="line">            <span class="keyword">return</span> chain.filter(exchange);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line"><span class="comment">//        5.否，拦截并设置状态码</span></span><br><span class="line">            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);</span><br><span class="line">            <span class="keyword">return</span> exchange.getResponse().setComplete();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="跨域问题处理"><a href="#跨域问题处理" class="headerlink" title="跨域问题处理"></a>跨域问题处理</h4><p>跨域：域名不一致就是跨域，主要包括：</p>
+<ul>
+<li>域名不同：<a target="_blank" rel="noopener" href="http://www.taobao.com和www.taobao.org/">www.taobao.com和www.taobao.org</a></li>
+<li>域名相同，端口不同：localhost:8080和localhost:8081</li>
+</ul>
+<p>跨域问题：浏览器禁止请求的发起者与服务端发生跨域ajax请求，请求被浏览器拦截的问题</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">gateway</span> <span class="comment">#服务名称</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">gateway:</span></span><br><span class="line">      <span class="attr">globalcors:</span> <span class="comment">#全局的跨域处理</span></span><br><span class="line">      <span class="attr">add-to-simple-url-handler-mapping:</span> <span class="literal">true</span> <span class="comment">#解决options请求被拦截问题	</span></span><br><span class="line">      <span class="attr">corsConfigurations:</span></span><br><span class="line">      <span class="string">&#x27;[/**]&#x27;</span><span class="string">:</span>	<span class="comment">#所有请求进行跨域处理</span></span><br><span class="line">        <span class="attr">allowed0rigins:</span> <span class="comment">#允许哪些网站的跨域请求</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">&quot;http://localhost:8090&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">&quot;http://www.leyou.com&quot;</span></span><br><span class="line">        <span class="attr">allowedMethods:</span> <span class="comment">#允许的跨域ajax的请求方式</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">&quot;GET&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">&quot;POST&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">&quot;DELETE&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">&quot;PUT&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">&quot;OPTIONS&quot;</span></span><br><span class="line">      <span class="attr">allowedHeaders:</span> <span class="string">&quot;*&quot;</span>  <span class="comment">#允许在请求中携带的头信息</span></span><br><span class="line">      <span class="attr">allowCredentials:</span> <span class="literal">true</span> <span class="comment">#是否允许携带cookie</span></span><br><span class="line">      <span class="attr">maxAge:</span> <span class="number">360000</span>  <span class="comment">#这次跨域检测的有效期，在这个范围内浏览器将不再询问跨域</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Docker分布式部署"><a href="#Docker分布式部署" class="headerlink" title="Docker分布式部署"></a>Docker分布式部署</h2><h3 id="项目部署的问题"><a href="#项目部署的问题" class="headerlink" title="项目部署的问题"></a>项目部署的问题</h3><p>大型项目组件较多，运行环境也较为复杂，部署时会碰到一些问题:</p>
+<ul>
+<li>依赖关系复杂，容易出现兼容性问题</li>
+<li>开发、测试、生产环境有差异</li>
+</ul>
+<h3 id="Docker如何解决依赖的兼容问题"><a href="#Docker如何解决依赖的兼容问题" class="headerlink" title="Docker如何解决依赖的兼容问题"></a>Docker如何解决依赖的兼容问题</h3><p>首先我们要知道，linux系统分为很多种，例如：Ubuntu、centos等，他们都是基于linux内核，而linux内核通过固定的指令就能操作硬件。而每个系统的差异就是因为打包linux指令的函数式不同，函数式不同就会造成不同的系统无法执行同一个命令。</p>
+<p>Docker如何解决：</p>
+<ul>
+<li><p>Docker将用户程序与所需要调用的系统（例如centos）函数库一起打包成可移植的镜像 </p>
+</li>
+<li><p>Docker运行到不同的操作系统时，直接基于打包的库函数，借助操作系统的linux内核来运行</p>
+</li>
+</ul>
+<h3 id="安装、卸载Docker"><a href="#安装、卸载Docker" class="headerlink" title="安装、卸载Docker"></a>安装、卸载Docker</h3><p>centos安装Docker</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2 --skip-broken</span><br></pre></td></tr></table></figure>
+
+<p>设置Docker下载源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置docker镜像源</span></span><br><span class="line">yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line">    </span><br><span class="line">sed -i &#x27;s/download.docker.com/mirrors.aliyun.com\/docker-ce/g&#x27; /etc/yum.repos.d/docker-ce.repo</span><br><span class="line"></span><br><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
+
+<p>卸载Docker</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker \</span><br><span class="line">                  docker-client \</span><br><span class="line">                  docker-client-latest \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-latest \</span><br><span class="line">                  docker-latest-logrotate \</span><br><span class="line">                  docker-logrotate \</span><br><span class="line">                  docker-selinux \</span><br><span class="line">                  docker-engine-selinux \</span><br><span class="line">                  docker-engine \</span><br><span class="line">                  docker-ce</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置镜像加速"><a href="#配置镜像加速" class="headerlink" title="配置镜像加速"></a>配置镜像加速</h3><p>docker官方镜像仓库网速较差，我们需要设置国内镜像服务：</p>
+<p>参考阿里云的镜像加速文档：<a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors</a></p>
+<h3 id="docker获取镜像"><a href="#docker获取镜像" class="headerlink" title="docker获取镜像"></a>docker获取镜像</h3><p><a target="_blank" rel="noopener" href="https://hub-stage.docker.com/">Docker Hub Container Image Library | App Containerization</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx</span><br></pre></td></tr></table></figure>
+
+<h3 id="docker其他命令"><a href="#docker其他命令" class="headerlink" title="docker其他命令"></a>docker其他命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#启动 Docker 服务</span><br><span class="line">sudo systemctl start docker</span><br><span class="line"></span><br><span class="line">#设置为自动启动：</span><br><span class="line">sudo systemctl enable docker</span><br><span class="line"></span><br><span class="line">#查看帮助</span><br><span class="line">docker save --help</span><br><span class="line"></span><br><span class="line">#查看镜像</span><br><span class="line">docker images</span><br><span class="line"></span><br><span class="line">#将镜像打包</span><br><span class="line">docker save -o nginx.tar nginx: latest</span><br><span class="line"></span><br><span class="line">#删除指定镜像</span><br><span class="line">docker rmi nginx : latest</span><br><span class="line"></span><br><span class="line">#读取镜像打包文件</span><br><span class="line">docker load -i nginx.tar</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="docker容器命令"><a href="#docker容器命令" class="headerlink" title="docker容器命令"></a>docker容器命令</h3><ol>
+<li>docker run：创建并启动一个新容器。</li>
+</ol>
+<p>例如，使用下面的命令可以启动一个基于nginx镜像的名为 mycontainer 的容器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mycontainer -p 80:80 -d nginx</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>docker run :创建并运行一个容器</p>
+</li>
+<li><p>–name:给容器起一个名字，比如叫做mn</p>
+</li>
+<li><p>-p∶将宿主机端口与容器端口映射，冒号左侧是宿主机端口，右侧是容器端口-d:后台运行容器</p>
+</li>
+<li><p>nginx:镜像名称，例如nginx</p>
+</li>
+</ul>
+<ol start="2">
+<li>docker start：启动已经存在的一个容器。</li>
+</ol>
+<p>例如，使用下面的命令可以启动名为 mycontainer 的容器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start mycontainer</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li>docker stop：停止正在运行的容器。</li>
+</ol>
+<p>例如，使用下面的命令可以停止名为 mycontainer 的容器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop mycontainer</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="4">
+<li>docker rm：删除指定的容器。</li>
+</ol>
+<p>例如，使用下面的命令可以删除名为 mycontainer 的容器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm mycontainer</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="5">
+<li>docker ps：列出所有正在运行的容器。</li>
+</ol>
+<p>例如，使用下面的命令可以列出所有正在运行的容器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="6">
+<li>docker exec：在正在运行的容器中执行命令。</li>
+</ol>
+<p>例如，使用下面的命令可以在名为 mycontainer 的容器中运行一个 ls 命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec mycontainer bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="进入Nginx容器，修改HTML文件内容，添加“传智教育欢迎您”"><a href="#进入Nginx容器，修改HTML文件内容，添加“传智教育欢迎您”" class="headerlink" title="进入Nginx容器，修改HTML文件内容，添加“传智教育欢迎您”"></a>进入Nginx容器，修改HTML文件内容，添加“传智教育欢迎您”</h3><h4 id="步骤一︰进入容器。"><a href="#步骤一︰进入容器。" class="headerlink" title="步骤一︰进入容器。"></a>步骤一︰进入容器。</h4><p>进入我们刚刚创建的nginx容器的命令为:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mn bash</span><br></pre></td></tr></table></figure>
+
+<p>命令解读:</p>
+<ul>
+<li>docker exec :进入容器内部，执行一个命令</li>
+<li>-it :给当前进入的容器创建一个标准输入、输出终端，允许我们与容器交互mn:要进入的容器的名称</li>
+<li>bash:进入容器后执行的命令，bash是一个linux终端交互命令</li>
+</ul>
+<h4 id="步骤二︰进入nginx的HTML所在目录"><a href="#步骤二︰进入nginx的HTML所在目录" class="headerlink" title="步骤二︰进入nginx的HTML所在目录"></a>步骤二︰进入nginx的HTML所在目录</h4><p>/usrlshare/nginx/ htmlcd /usr/share/nginx/html</p>
+<h4 id="步骤三-修改index-html的内容"><a href="#步骤三-修改index-html的内容" class="headerlink" title="步骤三:修改index.html的内容"></a>步骤三:修改index.html的内容</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27; s#Welcome to nginx#传智教育欢迎您#g&#x27;index.html</span><br><span class="line">sed -i &#x27;s#&lt;head&gt;#&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;#g&#x27; index.html</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h3><h4 id="数据卷基本操作"><a href="#数据卷基本操作" class="headerlink" title="数据卷基本操作"></a>数据卷基本操作</h4><p>创建数据卷并查看数据卷在本机的位置：</p>
+<ol>
+<li><p>创建数据卷<br>docker volume create html</p>
+</li>
+<li><p>查看所有数据<br>docker volume ls</p>
+</li>
+<li><p>查看数据卷详细信息卷</p>
+<p>docker volume inspect html</p>
+</li>
+</ol>
+<h4 id="数据卷挂载到容器"><a href="#数据卷挂载到容器" class="headerlink" title="数据卷挂载到容器"></a>数据卷挂载到容器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mn -v html:/root/html -p 8080:80 nginx</span><br></pre></td></tr></table></figure>
+
+<p>docker run :就是创建并运行容器</p>
+<p>–name mn:给容器起个名字叫mn</p>
+<p>-v html:/root/htm : 把html数据卷挂载到容器内的/root/html这个目录中</p>
+<p>-p 8080:80:把宿主机的8080端口映射到容器内的80端口</p>
+<p>nginx:镜像名称</p>
+<h3 id="自定义镜像"><a href="#自定义镜像" class="headerlink" title="自定义镜像"></a>自定义镜像</h3><h4 id="了解镜像结构"><a href="#了解镜像结构" class="headerlink" title="了解镜像结构"></a>了解镜像结构</h4><p>镜像是分层结构，每一层称为一个Layer</p>
+<ul>
+<li>Baselmage层:包含基本的系统函数库、环境变量、文件系统（最底层）</li>
+<li>Entrypoint:入口，是镜像中应用启动的命令</li>
+<li>其它:在Baselmage基础上添加依赖、安装程序、完成整个应用的安装和配置</li>
+</ul>
+<h4 id="自定义镜像-1"><a href="#自定义镜像-1" class="headerlink" title="自定义镜像"></a>自定义镜像</h4><ol>
+<li><p>配置文件如下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 指定基础镜像</span><br><span class="line">FROM ubuntu:16.04</span><br><span class="line"># 配置环境变量，JDK的安装目录</span><br><span class="line">ENV JAVA_DIR=/usr/local</span><br><span class="line"></span><br><span class="line"># 拷贝jdk和java项目的包</span><br><span class="line">COPY ./jdk8.tar.gz $JAVA_DIR/</span><br><span class="line">COPY ./docker-demo.jar /tmp/app.jar</span><br><span class="line"></span><br><span class="line"># 安装JDK</span><br><span class="line">RUN cd $JAVA_DIR \</span><br><span class="line"> &amp;&amp; tar -xf ./jdk8.tar.gz \</span><br><span class="line"> &amp;&amp; mv ./jdk1.8.0_144 ./java8</span><br><span class="line"></span><br><span class="line"># 配置环境变量</span><br><span class="line">ENV JAVA_HOME=$JAVA_DIR/java8</span><br><span class="line">ENV PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line"></span><br><span class="line"># 暴露端口</span><br><span class="line">EXPOSE 8090</span><br><span class="line"># 入口，java项目的启动命令</span><br><span class="line">ENTRYPOINT java -jar /tmp/app.jar</span><br></pre></td></tr></table></figure></li>
+<li><p>构建镜像</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t javaweb:1.0 .</span><br></pre></td></tr></table></figure>
+
+<p>javaweb指的是镜像名称、1.0表示版本，后面的.表示构建镜像的步骤文件在本文件夹内</p>
+<ol start="3">
+<li>在镜像的基础上创建容器并运行</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name web -p 8090:8090 -d javaweb:1.0</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>鉴于每次部署java太麻烦，docker提供了一个名为java:8-alpine镜像，将一个java项目构建为镜像</p>
+</blockquote>
+<p>实现思路如下:</p>
+<ol>
+<li>新建一个空的目录，然后在目录中新建一个文件，命名为Dockerfile</li>
+<li>拷贝课前资料提供的docker-demo.jar到这个目录中</li>
+<li>编写Dockerfile文件:<ol>
+<li>基于java:8-alpine作为基础镜像b)将app.jar拷贝到镜像中</li>
+<li>暴露端口</li>
+<li>编写入口ENTRYPOINT使用docker build命令构建镜像</li>
+<li>使用docker run创建容器并运行</li>
+</ol>
+</li>
+</ol>
+<h3 id="DockerCompose"><a href="#DockerCompose" class="headerlink" title="DockerCompose"></a>DockerCompose</h3><h4 id="什么是DockerCompose"><a href="#什么是DockerCompose" class="headerlink" title="什么是DockerCompose"></a>什么是DockerCompose</h4><ul>
+<li>Docker Compose可以基于Compose文件帮我们快速的部署分布式应用，而无需手动一个个创建和运行容器!</li>
+<li>Compose文件是一个文本文件，通过指令定义集群中的每个容器如何运行。</li>
+</ul>
+<h4 id="DockerCompose有什么作用"><a href="#DockerCompose有什么作用" class="headerlink" title="DockerCompose有什么作用"></a>DockerCompose有什么作用</h4><blockquote>
+<p>可以帮助我们快速部署分布式应用，无需一个个微服务去构建镜像和部署</p>
+</blockquote>
+<p>案例：将之前写好的cloud-dome使用docker部署成微服务项目</p>
+<p>使用步骤：</p>
+<ol>
+<li><p>将需要的包放入其中包括gateway、mysql、order-service、user-service、nacos镜像</p>
+</li>
+<li><p>编辑配置文件docker-compose</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3.2&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">nacos:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nacos/nacos-server</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MODE:</span> <span class="string">standalone</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8848:8848&quot;</span></span><br><span class="line">  <span class="attr">mysql:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mysql:5.7.25</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="number">123</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;$PWD/mysql/data:/var/lib/mysql&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;$PWD/mysql/conf:/etc/mysql/conf.d/&quot;</span></span><br><span class="line">  <span class="attr">userservice:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">./user-service</span></span><br><span class="line">  <span class="attr">orderservice:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">./order-service</span></span><br><span class="line">  <span class="attr">gateway:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">./gateway</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;10010:10010&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>修改项目，将数据库、nacos地址都命名为docker-compose中的服务名</p>
+</li>
+</ol>
+<p>例如nacos:server-addr:local:80更改成nacos：server-addr:nacos:8848</p>
+<p>mysql同理</p>
+<ol start="4">
+<li><p>使用maven打包工具，将项目中的每一个微服务都打包成app.jar</p>
+</li>
+<li><p>将打包好的app.jar拷贝到cloud-demo中的每一个对应的子目录中</p>
+</li>
+<li><p>将cloud-dome上传到虚拟机，利用dock-compose up -d来部署</p>
+</li>
+</ol>
+<h2 id="同步通信和异步通信"><a href="#同步通信和异步通信" class="headerlink" title="同步通信和异步通信"></a>同步通信和异步通信</h2><p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230531112842838.png" alt="image-20230531112842838" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>同步通信就像打电话一样，需要立即的响应和回应，而且在两个通信方之间只能进行单向或双向通信。如果有其他消息发送，就必须等待当前的通信完成后才能处理下一个请求。因此，同步通信会占用较多的资源，并且不太适合大量数据传输或高并发处理。</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230531113346100.png" alt="image-20230531113346100" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>而异步通信更像是发短信一样，我把消息发送出去，就会立即显示发送成功。但是具体啥时候接收到响应就不管了。就像上面的例子用户支付完之后通知支付服务，支付服务会直接把支付成功发送给用户而不是等所有流程走完在发送。大大减少了传输时间。</p>
+<h2 id="RabbitMQ消息队列"><a href="#RabbitMQ消息队列" class="headerlink" title="RabbitMQ消息队列"></a>RabbitMQ消息队列</h2><h3 id="单机部署和集群部署"><a href="#单机部署和集群部署" class="headerlink" title="单机部署和集群部署"></a>单机部署和集群部署</h3><p>单机部署：</p>
+<ol>
+<li><p>在线拉取</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull rabbitmq:3-management</span><br></pre></td></tr></table></figure></li>
+<li><p>拉取后运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i mq.tar</span><br></pre></td></tr></table></figure></li>
+<li><p>运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">  -e RABBITMQ_DEFAULT_USER=root \</span><br><span class="line">  -e RABBITMQ_DEFAULT_PASS=510609 \</span><br><span class="line">  --name mq \</span><br><span class="line">  --hostname mq1 \</span><br><span class="line">  -p 15672:15672 \</span><br><span class="line">  -p 5672:5672 \</span><br><span class="line">  -d \</span><br><span class="line">  rabbitmq:3-management</span><br></pre></td></tr></table></figure></li>
+<li><p>打开浏览器，地址栏搜索</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.136.131:15672/</span><br></pre></td></tr></table></figure></li>
+<li><p>输入自己设置的用户名和密码</p>
+</li>
+<li><p>RabbitMQ中的几个概念:.</p>
+<p>channel:操作MQ的工具.</p>
+<p>exchange:路由消息到队列中· </p>
+<p>queue:缓存消息</p>
+<p>virtual host:虚拟主机，是对queue、exchange等<br>资源的逻辑分组</p>
+</li>
+<li><p>快速入门</p>
+<p>基本消息队列的消息发送流程:<br>1．建立connection<br>2．创建channel<br>3．利用channel声明队列<br>4．利用channel向队列发送消息</p>
+<p>基本消息队列的消息接收流程:<br>1．建立connection<br>2．创建channel<br>3．利用channel声明队列<br>4．定义consumer的消费行为handleDelivery()5．利用channel将消费者与队列绑定</p>
+</li>
+</ol>
+<h2 id="SpringAMQP"><a href="#SpringAMQP" class="headerlink" title="SpringAMQP"></a>SpringAMQP</h2><h3 id="什么是AMQP"><a href="#什么是AMQP" class="headerlink" title="什么是AMQP"></a>什么是AMQP</h3><p>AMQP是用于在应用程序或之间传递业务消息的开放标准该协议与语言和平台无关，更符合微服务中独立性的要求</p>
+<p>Spring AMQP是基于AMQP协议定义的一套API规范，提供了模板来发送和接收消息。包含两部分，其中spring-amqp是基础抽象，spring-rabbit是底层的默认实现。</p>
+<h3 id="消息的发送和接收（入门）"><a href="#消息的发送和接收（入门）" class="headerlink" title="消息的发送和接收（入门）"></a>消息的发送和接收（入门）</h3><p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/webp" alt="img" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230531143841728.png" alt="image-20230531143841728" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>消息发送：</p>
+<ol>
+<li><p>配置rabbitAMOP</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  rabbitmq:</span><br><span class="line">    host: 192.168.136.131</span><br><span class="line">    port: 5672</span><br><span class="line">    username: root</span><br><span class="line">    password: 510609</span><br><span class="line">    virtual-host: /</span><br></pre></td></tr></table></figure></li>
+<li><p>新建测试类</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230531144907807.png" alt="image-20230531144907807" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+<li><p>编写发送</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringAmqpTest</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RabbitTemplate rabbitTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSendMessage2SimpleQueue</span><span class="params">()</span>&#123;</span><br><span class="line">        String queueName=<span class="string">&quot;simple.queue&quot;</span>;</span><br><span class="line">        String message=<span class="string">&quot;hello,spring amqp!&quot;</span>;</span><br><span class="line">        rabbitTemplate.convertAndSend(queueName,message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>消息接收：</p>
+<ol>
+<li><p>配置rabbitAMOP</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  rabbitmq:</span><br><span class="line">    host: 192.168.136.131</span><br><span class="line">    port: 5672</span><br><span class="line">    username: root</span><br><span class="line">    password: 510609</span><br><span class="line">    virtual-host: /</span><br></pre></td></tr></table></figure></li>
+<li><p>新建类</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230531150742841.png" alt="image-20230531150742841" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+<li><p>类中编写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class SpringRabbitListener &#123;</span><br><span class="line">    @RabbitListener(queues = &quot;simple.queue&quot;)</span><br><span class="line">    public void listenSimpleQueue(String msg)&#123;</span><br><span class="line">        System.out.println(&quot;消费者接收到的simple.queue:【&quot;+msg+&quot;】&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>控制台返回：<em>消费者接收到的simple.queue:【hello,spring amqp!】</em></p>
+<h3 id="work-Queue工作队列"><a href="#work-Queue工作队列" class="headerlink" title="work Queue工作队列"></a>work Queue工作队列</h3><p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/webp2" alt="img" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>Work Queue，工作队列，可以提高消息处理速度，避免队列消息堆积</p>
+<blockquote>
+<p>publisher在发送消息之后会将消息存放在queue中等待connection处理</p>
+<p>默认轮询模式下，Work Queue会将生产者生产的消息一次性平均分配给consumer1和consumer2，当分配完消息后，它的自动确认机制会一次性全部确认。而不在乎自己能不能处理，届时就会出现消息堆积问题</p>
+<p>而最好的方法就是在配置文件中添加消费策略</p>
+</blockquote>
+<p>例子：</p>
+<ol>
+<li><p>测试：发送消息50次</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSendMessage2WorkQueue</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">    String queueName=<span class="string">&quot;simple.queue&quot;</span>;</span><br><span class="line">    String message=<span class="string">&quot;hello,message_ _&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;=<span class="number">50</span> ; i++) &#123;</span><br><span class="line">        rabbitTemplate.convertAndSend(queueName,message+i);</span><br><span class="line">        Thread.sleep(<span class="number">20</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>添加两个消费者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringRabbitListener</span> &#123;</span><br><span class="line">    <span class="meta">@RabbitListener(queues = &quot;simple.queue&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">listenSimpleQueue</span><span class="params">(String msg)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;消费者1 接收到的simple.queue:【&quot;</span>+msg+<span class="string">&quot;】&quot;</span>+ LocalTime.now());</span><br><span class="line">        Thread.sleep(<span class="number">20</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitListener(queues = &quot;simple.queue&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">listenSimpleQueue2</span><span class="params">(String msg)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;消费者2.....接收到的simple.queue:【&quot;</span>+msg+<span class="string">&quot;】&quot;</span>+LocalTime.now());</span><br><span class="line">        Thread.sleep(<span class="number">200</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>解决消费策略问题</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">rabbitmq:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.136</span><span class="number">.131</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">5672</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">510609</span></span><br><span class="line">    <span class="attr">virtual-host:</span> <span class="string">/</span></span><br><span class="line"><span class="comment">#表示每次只处理一条消息</span></span><br><span class="line">    <span class="attr">listener:</span></span><br><span class="line">      <span class="attr">simple:</span></span><br><span class="line">        <span class="attr">prefetch:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="发布和订阅"><a href="#发布和订阅" class="headerlink" title="发布和订阅"></a>发布和订阅</h3><p>发布订阅模式与之前案例的区别就是允许将同一消息发送给多个消费者。实现方式是加入了exchange(交换机)</p>
+<p>常见exchange类型包括:</p>
+<ul>
+<li>Fanout:广播</li>
+<li>Direct:路由</li>
+<li>Topic:话题</li>
+</ul>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/webp3" alt="img" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>注意:exchange负责消息路由，而不是存储，路由失败则消息丢失</p>
+<h3 id="FanoutExchange"><a href="#FanoutExchange" class="headerlink" title="FanoutExchange"></a>FanoutExchange</h3><p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230531165438796.png" alt="image-20230531165438796" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><strong>所谓FanoutExchange就是把消息传递给交换机，而交换机会将消息分别发送给消息队列1和消息队列2</strong></p>
+<p>实现思路如下:</p>
+<ol>
+<li><p>在consumer服务中，利用代码声明队列、交换机，并将两者绑定</p>
+</li>
+<li><p>在consumer服务中，编写两个消费者方法，分别监听fanout.queue1和fanout.queue2</p>
+</li>
+<li><p>在publisher中编写测试方法，向itcast.fanout发送消息</p>
+</li>
+<li><p>编写FanoutConfig：</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FanoutConfig</span> &#123;</span><br><span class="line">    <span class="comment">//itcast.fanout交换机</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> FanoutExchange <span class="title function_">fanoutExchange</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">FanoutExchange</span>(<span class="string">&quot;itcast.fanout&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//fanout.queue1队列</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">fanoutQueue1</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(<span class="string">&quot;fanout.queue1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//fanout.queue2队列</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">fanoutQueue2</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(<span class="string">&quot;fanout.queue2&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//绑定队列交换机</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">fanoutBinding1</span><span class="params">(Queue fanoutQueue1,FanoutExchange fanoutExchange)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder</span><br><span class="line">                .bind(fanoutQueue1)</span><br><span class="line">                .to(fanoutExchange);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li>编写两个消费者方法，分别监听fanout.queue1和fanout.queue2</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringRabbitListener</span> &#123;</span><br><span class="line">    <span class="meta">@RabbitListener(queues = &quot;fanout.queue1&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">listenFanoutQueue1</span><span class="params">(String msg)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;消费者接收到fanout.queue1的消息是:【&quot;</span>+msg+<span class="string">&quot;】&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitListener(queues = &quot;fanout.queue2&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">listenFanoutQueue2</span><span class="params">(String msg)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;消费者接收到fanout.queue2的消息是:【&quot;</span>+msg+<span class="string">&quot;】&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li>在publisher中编写测试方法，向itcast.fanout交换机发送消息</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSendFanoutExchange</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">    String exchangeName=<span class="string">&quot;itcast.fanout&quot;</span>;</span><br><span class="line">    String message=<span class="string">&quot;hello,every one！&quot;</span>;</span><br><span class="line">    rabbitTemplate.convertAndSend(exchangeName,<span class="string">&quot;&quot;</span>,message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到输出：</p>
+<p>消费者接收到fanout.queue2的消息是:【hello,every one！】</p>
+<p>消费者接收到fanout.queue1的消息是:【hello,every one！】</p>
+<h3 id="DirectExchange"><a href="#DirectExchange" class="headerlink" title="DirectExchange"></a>DirectExchange</h3><p>DirectExchange交换机是指提供者在发送消息时携带着一个key，就像暗号一样。而队列中会定义一个key，当发送的消息经过交换机时，交换机会核对到底是哪个消息队列和key匹配。如果几个消息队列中都存在这个key就都可以得到消息。</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230531173600033.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>实现思路如下:</p>
+<ol>
+<li><p>在consumer服务中，编写两个消费者方法，利用@RabbitListener声明Exchange、Queue、RoutingKey</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringRabbitListener</span> &#123;</span><br><span class="line">    <span class="meta">@RabbitListener(bindings = @QueueBinding(</span></span><br><span class="line"><span class="meta">            value = @Queue(name=&quot;direct.queue1&quot;) ,</span></span><br><span class="line"><span class="meta">            exchange = @Exchange(name = &quot;itcast.direct&quot;,type = ExchangeTypes.DIRECT),</span></span><br><span class="line"><span class="meta">            key = &#123; &quot;red&quot;,&quot;blue&quot;&#125;</span></span><br><span class="line"><span class="meta">    ))</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">listenDirectQueue1</span><span class="params">(String msg)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;消费者接收到direct.queue1的消息:【&quot;</span> + msg + <span class="string">&quot;】&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="meta">@RabbitListener(bindings = @QueueBinding(</span></span><br><span class="line"><span class="meta">            value = @Queue(name=&quot;direct.queue2&quot;) ,</span></span><br><span class="line"><span class="meta">            exchange = @Exchange(name = &quot;itcast.direct&quot;,type = ExchangeTypes.DIRECT),</span></span><br><span class="line"><span class="meta">            key = &#123; &quot;red&quot;,&quot;yellow&quot;&#125;</span></span><br><span class="line"><span class="meta">    ))</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">listenDirectQueue2</span><span class="params">(String msg)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;消费者接收到direct.queue2的消息:【&quot;</span> + msg + <span class="string">&quot;】&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ol start="2">
+<li><p>在publisher中编写测试方法，向itcast. direct发送消息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSendDirectExchange</span><span class="params">( )</span>&#123;</span><br><span class="line">    <span class="comment">//交换机名称</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">exchangeName</span> <span class="operator">=</span> <span class="string">&quot;itcast.direct&quot;</span>;</span><br><span class="line">    <span class="comment">//消息</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> <span class="string">&quot;hello, blue ! &quot;</span>;</span><br><span class="line">    <span class="comment">//发送消息</span></span><br><span class="line">    rabbitTemplate.convertAndSend(exchangeName, <span class="string">&quot;blue&quot;</span>, message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="TopicExchange"><a href="#TopicExchange" class="headerlink" title="TopicExchange"></a>TopicExchange</h3><p>TopicExchange与DirectExchange类似，区别在于routingKey必须是多个单词的列表，并且以.分割。</p>
+<p>Queue与Exchange指定BindingKey时可以使用通配符:</p>
+<ul>
+<li>#:代指0个或多个单词</li>
+<li>*:代指一个单词</li>
+</ul>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20230531180547012.png" alt="image-20230531180547012" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>实现思路如下:</p>
+<ol>
+<li><p>在consumer服务中，编写两个消费者方法，分别监听topic.queue1和topic.queue2并利用@RabbitListener声明Exchange、Queue、RoutingKey</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringRabbitListener</span> &#123;</span><br><span class="line">    <span class="meta">@RabbitListener(bindings = @QueueBinding (</span></span><br><span class="line"><span class="meta">            value = @Queue(name = &quot;topic.queue1&quot;),</span></span><br><span class="line"><span class="meta">            exchange = @Exchange(name = &quot;itcast.topic&quot;,</span></span><br><span class="line"><span class="meta">            type = ExchangeTypes.TOPIC),</span></span><br><span class="line"><span class="meta">            key = &quot;china.#&quot;</span></span><br><span class="line"><span class="meta">    ))</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">listenTopicqueue1</span><span class="params">(String msg)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;消费者接收到topic.queue1的消息:【&quot;</span> + msg + <span class="string">&quot;]&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitListener(bindings = @QueueBinding (</span></span><br><span class="line"><span class="meta">            value = @Queue(name = &quot;topic.queue2&quot;),</span></span><br><span class="line"><span class="meta">            exchange = @Exchange(name = &quot;itcast.topic&quot;, type = ExchangeTypes.TOPIC),</span></span><br><span class="line"><span class="meta">            key = &quot;#.news&quot;</span></span><br><span class="line"><span class="meta">    ))</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">listenTopicqueue2</span><span class="params">(String msg)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;消费者接收到topic.queue1的消息:【&quot;</span> + msg + <span class="string">&quot;]&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在publisher中编写测试方法，向itcast.topic发送消息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSendTopicExchange</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="comment">//交换机名称</span></span><br><span class="line">	<span class="type">String</span> <span class="variable">exchangeName</span> <span class="operator">=</span> <span class="string">&quot;itcast.topic&quot;</span>;</span><br><span class="line">	<span class="comment">//消息</span></span><br><span class="line">	<span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span><span class="string">&quot;传智教育在深交所上市了!是教育行业IPO第一股!&quot;</span>;</span><br><span class="line">	<span class="comment">//发送消息</span></span><br><span class="line">	rabbitTemplate.convertAndSend(exchangeName,<span class="string">&quot;china.news&quot;</span>,message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="消息转换器"><a href="#消息转换器" class="headerlink" title="消息转换器"></a>消息转换器</h3><p>Spring对消息对象的处理是由org.springframework.amqp.support.converter.MessageConverter来处理的。而默认实现是SimpleMessageConverter，基于JDK的ObjectOutputStream完成序列化。</p>
+<ul>
+<li><p>如果要修改只需要定义一个MessageConverter 类型的Bean即可。推荐用JSON方式序列化，步骤如下：</p>
+</li>
+<li><p>发送消息：</p>
+</li>
+</ul>
+<ol>
+<li>我们在父工程引入依赖</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>我们在publisher启动类中声明MessageConverter：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> MessageConverter <span class="title function_">jsonMessageConverter</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Jackson2JsonMessageConverter</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>接收消息：</li>
+</ul>
+<ol>
+<li>我们在consumer启动类中定义MessageConverter：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> MessageConverter <span class="title function_">jsonMessageConverter</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Jackson2JsonMessageConverter</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>然后定义一个消费者，监听object.queue队列并消费消息：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RabbitListener(queues = &quot;object.queue&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">listenObjectQueue</span><span class="params">(Map&lt;String, Object&gt; msg)</span>&#123;</span><br><span class="line"> System.out.println(<span class="string">&quot;消费者接收到了object.queue：&quot;</span> + msg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        Rogers
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="https://ljs-yym.github.io/2023/09/24/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" title="微服务">https://ljs-yym.github.io/2023/09/24/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/10/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%AB%98%E7%BA%A7%E7%AF%87/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/cover/microservice.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/Java/">
+                    Java
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/10/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%AB%98%E7%BA%A7%E7%AF%87/" class="trm-anima-link">
+                    微服务高级篇
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/10/10</li>
+                <li>17:10</li>
+                
+                    <li>3.1k</li>
+                
+                
+                    <li>11</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/09/18/Nginx/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/cover/nginx.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/Java/">
+                    Java
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/09/18/Nginx/" class="trm-anima-link">
+                    Nginx服务器
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/09/18</li>
+                <li>18:15</li>
+                
+                    <li>1k</li>
+                
+                
+                    <li>4</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2023- 2023</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">长生风月</span>
+        </div>
+    
+
+      
+
+    
+        <div class="trm-footer-item">
+            博客已萌萌哒运行 <span id="since" class="trm-accent-color"></span> 天
+        </div>
+     
+
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("02/27/2023 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+<div class="trm-search-popup">
+    <div class="trm-search-header">
+        <span class="trm-search-popup-btn-close">
+            <i class="iconfont fas fa-times"></i>
+        </span>
+    </div>
+    <div class="form trm-search-form">
+        <input class="trm-search-input" type="text" placeholder="搜索...">
+    </div>
+    <div class="trm-search-result-container">
+
+    </div>
+</div>
+
+  <!-- Plugin -->
+
+
+
+
+    
+<script src="https://unpkg.com/swup@2.0.19/dist/swup.min.js"></script>
+
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.2"></script>
+    
+
+    
+        
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=2.0.2"></script>
+    
+
+    <!-- 数学公式 -->
+    
+        
+<script src="https://unpkg.com/katex@latest/dist/katex.min.js" data-swup-reload-script></script>
+
+        
+            
+<script src="https://unpkg.com/katex@latest/dist/contrib/copy-tex.min.js" data-swup-reload-script></script>
+
+        
+        
+<script src="https://unpkg.com/katex@latest/dist/contrib/auto-render.min.js" data-swup-reload-script></script>
+
+        <script data-swup-reload-script>
+              window.renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true },
+                ],
+                ...{},
+            })
+        </script>
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <script>
+        "serviceWorker" in navigator ?
+        navigator.serviceWorker.register('/sw.js').then(function () {
+            navigator.serviceWorker.controller ? 
+             console.log("Assets cached by the controlling service worker.") :
+             console.log("Please reload this page to allow the service worker to handle network operations.")
+        }).catch(function (e) {
+            console.log("ERROR: " + e)
+        }) : console.log("Service workers are not supported in the current browser.")
+    </script>
+
+    <!-- baidu push -->
+    
+    <script data-swup-reload-script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+
+
+<script id="async-script" src="/js/main.js?v=2.0.2"></script>
+
+</body>
+
+</html>

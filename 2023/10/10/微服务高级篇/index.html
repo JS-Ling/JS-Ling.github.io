@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="微服务高级篇微服务保护初识Sentinel雪崩问题微服务调用链路中的某个服务出现故障，导致前一个服务请求越积越多，从而引起整个链路中的所有微服务都不可用，这就是雪崩  解决方法：  超时处理：设定超时时间，当请求超过一定时间没有响应就是返回错误信息，不会无休止等待  如图，当请求时间超过一秒钟没有响应时就会直接返回错误信息，但是当数据量上去之后我们哪怕给1秒等待时间，但是进来的请求越来越多却还是1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务高级篇">
+<meta property="og:url" content="https://ljs-yym.github.io/2023/10/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%AB%98%E7%BA%A7%E7%AF%87/index.html">
+<meta property="og:site_name" content="RogevnBlog">
+<meta property="og:description" content="微服务高级篇微服务保护初识Sentinel雪崩问题微服务调用链路中的某个服务出现故障，导致前一个服务请求越积越多，从而引起整个链路中的所有微服务都不可用，这就是雪崩  解决方法：  超时处理：设定超时时间，当请求超过一定时间没有响应就是返回错误信息，不会无休止等待  如图，当请求时间超过一秒钟没有响应时就会直接返回错误信息，但是当数据量上去之后我们哪怕给1秒等待时间，但是进来的请求越来越多却还是1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ljs-yym.github.io/img/cover/microservice.jpg">
+<meta property="article:published_time" content="2023-10-10T09:10:06.116Z">
+<meta property="article:modified_time" content="2023-10-10T09:29:07.171Z">
+<meta property="article:author" content="Rogers">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ljs-yym.github.io/img/cover/microservice.jpg">
+
+    <meta name="keywords" content="hexo,node,博客">
+
+
+<title >微服务高级篇</title>
+
+<!-- Favicon -->
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+<link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css">
+
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"ljs-yym.github.io","author":"Rogers","root":"/","typed_text":["Web Developer","Backend Programmer","Full Stack Developer！"],"theme_version":"2.0.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo.png","icon16":"/img/logo.png","icon32":"/img/logo.png","dark_logo":"/img/dark_logo.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"creative_commons":{"license":"by-nc-sa","language":"deed.zh"},"search":{"enable":true,"type":"local","path":"search.xml","field":"post","content":true,"format":"html"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-10-10 17:29:07"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.2" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+     
+
+    
+
+    
+ 
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" class=" trm-light-icon" src="/img/logo.png"> <img alt="logo" class=" trm-dark-icon" src="/img/dark_logo.png">
+    
+    
+        <div class="trm-logo-text">
+            Rogevn<span>Blog</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    长生风月的博客
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    日志
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友情链接
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/picture/" target="">
+                    好东西
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/picture/" target="">
+                            图片
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/technology/" target="">
+                            黑科技
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+    
+    <div id="trm-search-btn" class="trm-search-btn">
+        <i class="iconfont fas fa-search"></i>
+    </div>
+     
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            微服务高级篇
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/R-C.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        长生风月
+    </h5>
+    
+        <div class="trm-label">
+            I&#39;m a
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="tencent://message/?uin=3232008148&Site=&Menu=yes" title="QQ" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="/null" title="WeChat" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-weixin"></i>
+        </a>
+    
+        <a href="/null" title="twitter" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-twitter"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                河北省保定市
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                21
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                星座:
+            </div>
+            <div class="trm-label trm-label-light">
+                处女座
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                爱好:
+            </div>
+            <div class="trm-label trm-label-light">
+                足球、音乐、魔方、代码
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:3232008148@qq.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#微服务高级篇"  data-scroll-to="#微服务高级篇"><span class="toc-number">1.</span> <span class="toc-text">微服务高级篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#微服务保护"  data-scroll-to="#微服务保护"><span class="toc-number">1.1.</span> <span class="toc-text">微服务保护</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#初识Sentinel"  data-scroll-to="#初识Sentinel"><span class="toc-number">1.1.1.</span> <span class="toc-text">初识Sentinel</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#微服务整合Sentinel"  data-scroll-to="#微服务整合Sentinel"><span class="toc-number">1.1.2.</span> <span class="toc-text">微服务整合Sentinel</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#分布式事务"  data-scroll-to="#分布式事务"><span class="toc-number">1.2.</span> <span class="toc-text">分布式事务</span></a></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            10/10
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            17:10
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Rogers
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="微服务高级篇"><a href="#微服务高级篇" class="headerlink" title="微服务高级篇"></a>微服务高级篇</h1><h2 id="微服务保护"><a href="#微服务保护" class="headerlink" title="微服务保护"></a>微服务保护</h2><h3 id="初识Sentinel"><a href="#初识Sentinel" class="headerlink" title="初识Sentinel"></a>初识Sentinel</h3><h4 id="雪崩问题"><a href="#雪崩问题" class="headerlink" title="雪崩问题"></a>雪崩问题</h4><p>微服务调用链路中的某个服务出现故障，导致前一个服务请求越积越多，从而引起整个链路中的所有微服务都不可用，这就是雪崩</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%AB%98%E7%BA%A7%E7%AF%87/image-20230614095256216.png" alt="image-20230614095256216" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>解决方法：</p>
+<ol>
+<li><p>超时处理：设定超时时间，当请求超过一定时间没有响应就是返回错误信息，不会无休止等待</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%AB%98%E7%BA%A7%E7%AF%87/image-20230614120944069.png" alt="image-20230614120944069" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>如图，当请求时间超过一秒钟没有响应时就会直接返回错误信息，但是当数据量上去之后我们哪怕给1秒等待时间，但是进来的请求越来越多却还是1秒释放一个线程，久而久之就会导致瘫痪</p>
+</li>
+<li><p>舱壁模式：限定每一个业务能使用的线程数，避免耗尽整个tomcat的资源，因此也叫线程隔离。每个服务所使用的线程都是固定的，所以一个业务消耗只能消耗这几个线程，不会出现线程饱满的状况</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%AB%98%E7%BA%A7%E7%AF%87/image-20230614122251824.png" alt="image-20230614122251824" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+<li><p>熔断降级：由断路器统计业务执行的异常比例，如果超出阈值则会熔断该业务，拦截访问该业务的一切请求。</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%AB%98%E7%BA%A7%E7%AF%87/image-20230614122453491.png" alt="image-20230614122453491" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>当从服务A访问服务D的业务中，传输错误的比例大于我们设定的比例，服务A就会马上熔断通往服务D的业务。完美解决了资源浪费的情况</p>
+</li>
+<li><p>限流控制：限制业务访问的QPS，避免服务因流量的突增而故障。</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%AB%98%E7%BA%A7%E7%AF%87/image-20230614122853374.png" alt="image-20230614122853374" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>通过使用Sentinel将大量涌入的请求缩减到受保护的服务可以承受的范围内，就可以避免因为流量突增而导致的故障</p>
+</li>
+</ol>
+<h3 id="微服务整合Sentinel"><a href="#微服务整合Sentinel" class="headerlink" title="微服务整合Sentinel"></a>微服务整合Sentinel</h3><p>在order-service中整合Sentinel,并且连接Sentinel的控制台，步骤如下</p>
+<ol>
+<li><p>引入sentinel依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-sentinel<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>配置控制台地址</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">sentinel:</span></span><br><span class="line">      <span class="attr">transport:</span></span><br><span class="line">        <span class="attr">dashboard:</span> <span class="string">localhost:8080</span></span><br></pre></td></tr></table></figure></li>
+<li><p>访问微服务的任意端点，触发sentinel的监控</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%AB%98%E7%BA%A7%E7%AF%87/image-20230614142630512.png" alt="image-20230614142630512" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+</ol>
+<h4 id="限流规则"><a href="#限流规则" class="headerlink" title="限流规则"></a>限流规则</h4><p>簇点链路:就是项目内的调用链路，链路中被监控的每个接口就是一个资源。默认情况下sentinel会监控SpringMVC的每一个端点（Endpoint)，因此SpringMVC的每一个端点（Endpoint)就是调用链路中的一个资源。<br>流控、熔断等都是针对簇点链路中的资源来设置的，因此我们可以点击对应资源后面的按钮来设置规则:</p>
+<ul>
+<li><p>直接：统计当前资源的请求，触发阈值时对当前资源直接限流，也是默认的模式</p>
+</li>
+<li><p>关联：统计与当前资源相关的另一个资源，触发阈值时，对当前资源限流</p>
+<p>使用场景︰比如用户支付时需要修改订单状态，同时用户要查询订单。查询和修改操作会争抢数据库锁，产生竞争。业务需求是有限支付和更新订单的业务，因此当修改订单业务触发阈值时，需要对查询订单业务限流。</p>
+<p>满足下面条件可以使用关联模式:</p>
+<ul>
+<li>两个有竞争关系的资源</li>
+<li>一个优先级较高，一个优先级较低</li>
+</ul>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%AB%98%E7%BA%A7%E7%AF%87/image-20230614160303312.png" alt="image-20230614160303312" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>当/white资源访问量触发阙值时，就会对/read资源限流，避免影响/white资源</p>
+</li>
+<li><p>链路：统计从指定链路访问到本资源的请求，触发阈值时，对指定链路限流</p>
+</li>
+</ul>
+<img src="/img/微服务高级篇/image-20230614155150402.png" alt="image-20230614155150402" style="zoom:80%;"  loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'/>
+
+<h4 id="流控效果"><a href="#流控效果" class="headerlink" title="流控效果"></a>流控效果</h4><ol>
+<li><p>Warm Up慢热</p>
+<p>warm up也叫预热模式，是应对服务冷启动的一种方案。请求阈值初始值是threshold / coldFactor，持续指定时长后，逐渐提高到threshold值。而caldFactor的默认值是3<br>例如，我设置QPs的threshold为10，预热时间为5秒，那么初始阈值就是10/3，也就是3，然后在5秒后逐渐增长到10.</p>
+</li>
+<li><p>排队等待</p>
+<p>当请求超过QPs阈值时，快速失败和warm up会拒绝新的请求并抛出异常。而排队等待则是让所有请求进入一个队列中,然后按照阈值允许的时间间隔依次执行。后来的请求必须等待前面执行完成，如果请求预期的等待时间超出最大时长，则会被拒绝。<br>例如:QPS=5，意味着每200ms处理一个队列中的请求;timeout =2000，意味着预期等待超过2000ms的请求会被拒绝并抛出异常</p>
+</li>
+</ol>
+<h4 id="Feign整合Sentinel"><a href="#Feign整合Sentinel" class="headerlink" title="Feign整合Sentinel"></a>Feign整合Sentinel</h4><p>SpringCloud中微服务调用都是通过Fegin来实现的，因此做客户端保护必须整合Feign和Sentinel。</p>
+<ol>
+<li><p>修改OrderService的application.yml文件，开启Feign的Sentinel功能</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">fegin:</span></span><br><span class="line">	<span class="attr">sentinel:</span></span><br><span class="line">		<span class="attr">enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></li>
+<li><p>给FeginClient编写失败后的降级逻辑</p>
+<ul>
+<li><p>方法一：FallbackClass，无法对远程调用的异常做处理</p>
+</li>
+<li><p>方法二：FallbackFactory，可以对远程调用的异常做处理</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%AB%98%E7%BA%A7%E7%AF%87/image-20230614174448901.png" alt="image-20230614174448901" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserClientFallbackFactory</span> <span class="keyword">implements</span> <span class="title class_">FallbackFactory</span>&lt;UserClient&gt; &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> UserClient <span class="title function_">create</span><span class="params">(Throwable throwable)</span> &#123;</span><br><span class="line">        <span class="comment">//创建UserClient接口实现类，实现其中的方法，编写失败降级的处理逻辑</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">UserClient</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> User <span class="title function_">findById</span><span class="params">(Long id)</span> &#123;</span><br><span class="line">                <span class="comment">//记录异常信息</span></span><br><span class="line">                log.error(<span class="string">&quot;查询用户异常&quot;</span>,throwable);</span><br><span class="line">                <span class="comment">//根据业务需求返回默认的数据，这里是空用户</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在feing-api项目中的DefaultFeignConfiguration类中将userClientFallbackFactory注册为一个Bean:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> UserClientFallbackFactory <span class="title function_">userClientFallbackFactory</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">UserClientFallbackFactory</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在feing-api项目中的Userclient接口中使用UserClientFallbackFactory:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient(value = &quot;userservice&quot;,fallbackFactory = UserClientFallbackFactory.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserClient</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/user/&#123;id&#125;&quot;)</span></span><br><span class="line">    User <span class="title function_">findById</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="线程隔离"><a href="#线程隔离" class="headerlink" title="线程隔离"></a>线程隔离</h4><p>线程隔离有两种方式实现:</p>
+<ul>
+<li><p>线程池隔离</p>
+<p>规定好线程，每一次只能涌进固定数量的业务从而达到线程隔离</p>
+</li>
+<li><p>信号量隔离( Sentinel默认采用)</p>
+<p>在请求和服务中间添加一层计数器，设置好固定的数量，每一个请求进来计数器就-1。当计数器归零时则不会再进请求。当然当请求完成后便会归还给计数器。从而达到线程隔离作用</p>
+<img src="/img/微服务高级篇/image-20230614181731342.png" alt="image-20230614181731342" style="zoom: 50%;"  loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'/></li>
+</ul>
+<img src="/img/微服务高级篇/image-20230614182412357.png" alt="image-20230614182412357" style="zoom:50%;"  loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'/>
+
+<h4 id="熔断降级"><a href="#熔断降级" class="headerlink" title="熔断降级"></a>熔断降级</h4><p>熔断降级是解决雪崩问题的重要手段。其思路是由断路器统计服务调用的异常比例、慢请求比例，如果超出阈值则会熔断该服务。即拦截访问该服务的一切请求;而当服务恢复时，断路器会放行访问该服务的请求。</p>
+<p><img src="/img/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%AB%98%E7%BA%A7%E7%AF%87/image-20230614182836660.png" alt="image-20230614182836660" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>断路器熔断策略有三种：慢调用、异常比例、异常数</p>
+<ol>
+<li><p>慢调用:业务的响应时长（RT)大于指定时长的请求认定为慢调用请求。在指定时间内，如果请求数量超过设定的最小数量，慢调用比例大于设定的阈值，则触发熔断。例如:</p>
+<img src="/img/微服务高级篇/image-20230614183635010.png" alt="image-20230614183635010" style="zoom:80%;"  loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'/></li>
+</ol>
+<p>解读:RT超过500ms的调用是慢调用，统计最近10000ms内的请求，如果请求量超过10次并且慢调用比例不低于0.5，则触发熔断，熔断时长为5秒。然后进入half-open状态，放行一次请求做测试。</p>
+<hr>
+
+<ol start="2">
+<li><p>异常比例或异常数∶统计指定时间内的调用，如果调用次数超过指定请求数，并且出现异常的比例达到设定的比例阈值（或超过指定异常数），则触发熔断。例如:</p>
+<p><img src="/img/微服务高级篇/image-20230614184330031.png" alt="image-20230614184330031" style="zoom: 50%;"  loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'/><img src="/img/微服务高级篇/image-20230614184437025.png" alt="image-20230614184437025" style="zoom: 50%;"  loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'/></p>
+</li>
+</ol>
+<p>解读：统计最近1000ms内的请求，如果请求量超过10次，并且异常比例不低于0.5，则触发熔断，熔断时长为5秒。然后进入half-open状态，放行一次请求做测试。</p>
+<h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><p>在分布式系统下，一个业务跨越多个服务或数据源，每个服务都是一个分支事务，要保证所有分支事务最终状态一致，这样的事务就是分布式事务。</p>
+<h4 id="CAP定理"><a href="#CAP定理" class="headerlink" title="CAP定理"></a>CAP定理</h4><ul>
+<li>Consistency（一致性）：用户访问分布式系统中的任意节点，得到的数据必须一致</li>
+<li>Availability(可用性)∶用户访问集群中的任意健康节点，必须能得到响应，而不是超时或拒绝</li>
+<li>Partition(分区)∶因为网络故障或其它原因导致分布式系统中的部分节点与其它节点失去连接，形成独立分区。</li>
+</ul>
+<h4 id="BASE理论"><a href="#BASE理论" class="headerlink" title="BASE理论"></a>BASE理论</h4><p>BASE理论是对CAP的一种解决思路，包含三个思想：</p>
+<ul>
+<li>Basically Available(基本可用)︰分布式系统在出现故障时，允许损失部分可用性，即保证核心可用。</li>
+<li>Soft State(软状态)∶在一定时间内，允许出现中间状态，比如临时的不、致状态。</li>
+<li>Eventually Consistent(最终一致性)∶虽然无法保证强一致性，但是在软状态结束后，最终达到数据一致</li>
+</ul>
+<h4 id="Seata架构"><a href="#Seata架构" class="headerlink" title="Seata架构"></a>Seata架构</h4><p>Seata事务管理中有三个重要的角色:</p>
+<ul>
+<li>TC(Transaction Coordinator)-事务协调者︰维护全局和分支事务的状态，协调全局事务提交或回滚。</li>
+<li>TM(Transaction Manager)-事务管理器：定义全局事务的范围、开始全局事务、提交或回滚全局事务。</li>
+<li>RM(Resource Manager)-资源管理器：管理分支事务处理的资源，与TC交谈以注册分支事务和报告分支事务的状态，并驱动分支事务提交或回滚。</li>
+</ul>
+<h4 id="微服务集成Seata"><a href="#微服务集成Seata" class="headerlink" title="微服务集成Seata"></a>微服务集成Seata</h4><ol>
+<li><p>修改conf目录下的registry.conf文件：</p>
+<p>内容如下：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">registry</span> <span class="string">&#123;</span></span><br><span class="line"><span class="comment">  # tc服务的注册中心类，这里选择nacos，也可以是eureka、zookeeper等</span></span><br><span class="line">  <span class="attr">type</span> = <span class="string">&quot;nacos&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">nacos</span> <span class="string">&#123;</span></span><br><span class="line"><span class="comment">    # seata tc 服务注册到 nacos的服务名称，可以自定义</span></span><br><span class="line">    <span class="attr">application</span> = <span class="string">&quot;seata-tc-server&quot;</span></span><br><span class="line">    <span class="attr">serverAddr</span> = <span class="string">&quot;127.0.0.1:8848&quot;</span></span><br><span class="line">    <span class="attr">group</span> = <span class="string">&quot;DEFAULT_GROUP&quot;</span></span><br><span class="line">    <span class="attr">namespace</span> = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="attr">cluster</span> = <span class="string">&quot;SH&quot;</span></span><br><span class="line">    <span class="attr">username</span> = <span class="string">&quot;nacos&quot;</span></span><br><span class="line">    <span class="attr">password</span> = <span class="string">&quot;nacos&quot;</span></span><br><span class="line">  <span class="attr">&#125;</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">config</span> <span class="string">&#123;</span></span><br><span class="line"><span class="comment">  # 读取tc服务端的配置文件的方式，这里是从nacos配置中心读取，这样如果tc是集群，可以共享配置</span></span><br><span class="line">  <span class="attr">type</span> = <span class="string">&quot;nacos&quot;</span></span><br><span class="line"><span class="comment">  # 配置nacos地址等信息</span></span><br><span class="line">  <span class="attr">nacos</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">serverAddr</span> = <span class="string">&quot;127.0.0.1:8848&quot;</span></span><br><span class="line">    <span class="attr">namespace</span> = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="attr">group</span> = <span class="string">&quot;SEATA_GROUP&quot;</span></span><br><span class="line">    <span class="attr">username</span> = <span class="string">&quot;nacos&quot;</span></span><br><span class="line">    <span class="attr">password</span> = <span class="string">&quot;nacos&quot;</span></span><br><span class="line">    <span class="attr">dataId</span> = <span class="string">&quot;seataServer.properties&quot;</span></span><br><span class="line">  <span class="attr">&#125;</span></span><br><span class="line"><span class="attr">&#125;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在nacos添加配置</p>
+<p>特别注意，为了让tc服务的集群可以共享配置，我们选择了nacos作为统一配置中心。因此服务端配置文件seataServer.properties文件需要在nacos中配好。</p>
+<p>配置内容如下：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据存储方式，db代表数据库</span></span><br><span class="line"><span class="attr">store.mode</span>=<span class="string">db</span></span><br><span class="line"><span class="attr">store.db.datasource</span>=<span class="string">druid</span></span><br><span class="line"><span class="attr">store.db.dbType</span>=<span class="string">mysql</span></span><br><span class="line"><span class="attr">store.db.driverClassName</span>=<span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line"><span class="attr">store.db.url</span>=<span class="string">jdbc:mysql://127.0.0.1:3306/seata?useUnicode=true&amp;rewriteBatchedStatements=true</span></span><br><span class="line"><span class="attr">store.db.user</span>=<span class="string">root</span></span><br><span class="line"><span class="attr">store.db.password</span>=<span class="string">123</span></span><br><span class="line"><span class="attr">store.db.minConn</span>=<span class="string">5</span></span><br><span class="line"><span class="attr">store.db.maxConn</span>=<span class="string">30</span></span><br><span class="line"><span class="attr">store.db.globalTable</span>=<span class="string">global_table</span></span><br><span class="line"><span class="attr">store.db.branchTable</span>=<span class="string">branch_table</span></span><br><span class="line"><span class="attr">store.db.queryLimit</span>=<span class="string">100</span></span><br><span class="line"><span class="attr">store.db.lockTable</span>=<span class="string">lock_table</span></span><br><span class="line"><span class="attr">store.db.maxWait</span>=<span class="string">5000</span></span><br><span class="line"><span class="comment"># 事务、日志等配置</span></span><br><span class="line"><span class="attr">server.recovery.committingRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="attr">server.recovery.asynCommittingRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="attr">server.recovery.rollbackingRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="attr">server.recovery.timeoutRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="attr">server.maxCommitRetryTimeout</span>=<span class="string">-1</span></span><br><span class="line"><span class="attr">server.maxRollbackRetryTimeout</span>=<span class="string">-1</span></span><br><span class="line"><span class="attr">server.rollbackRetryTimeoutUnlockEnable</span>=<span class="string">false</span></span><br><span class="line"><span class="attr">server.undo.logSaveDays</span>=<span class="string">7</span></span><br><span class="line"><span class="attr">server.undo.logDeletePeriod</span>=<span class="string">86400000</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 客户端与服务端传输方式</span></span><br><span class="line"><span class="attr">transport.serialization</span>=<span class="string">seata</span></span><br><span class="line"><span class="attr">transport.compressor</span>=<span class="string">none</span></span><br><span class="line"><span class="comment"># 关闭metrics功能，提高性能</span></span><br><span class="line"><span class="attr">metrics.enabled</span>=<span class="string">false</span></span><br><span class="line"><span class="attr">metrics.registryType</span>=<span class="string">compact</span></span><br><span class="line"><span class="attr">metrics.exporterList</span>=<span class="string">prometheus</span></span><br><span class="line"><span class="attr">metrics.exporterPrometheusPort</span>=<span class="string">9898</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>其中的数据库地址、用户名、密码都需要修改成你自己的数据库信息。</p>
+</li>
+<li><p>启动TC服务</p>
+<p>进入bin目录，运行其中的seata-server.bat即可：</p>
+<p>启动成功后，seata-server应该已经注册到nacos注册中心了。</p>
+<p>打开浏览器，访问nacos地址：<a href="http://localhost:8848，然后进入服务列表页面，可以看到seata-tc-server的信息：">http://localhost:8848，然后进入服务列表页面，可以看到seata-tc-server的信息：</a></p>
+</li>
+<li><p>微服务集成seata</p>
+<p>引入依赖</p>
+<p>首先，我们需要在微服务中引入seata依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-seata<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--版本较低，1.3.0，因此排除--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>seata-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.seata<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--seata starter 采用1.4.2版本--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.seata<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>seata-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;seata.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>修改配置文件</p>
+<p>需要修改application.yml文件，添加一些配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">seata:</span></span><br><span class="line">  <span class="attr">registry:</span> <span class="comment"># TC服务注册中心的配置，微服务根据这些信息去注册中心获取tc服务地址</span></span><br><span class="line">    <span class="comment"># 参考tc服务自己的registry.conf中的配置</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">nacos</span></span><br><span class="line">    <span class="attr">nacos:</span> <span class="comment"># tc</span></span><br><span class="line">      <span class="attr">server-addr:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:8848</span></span><br><span class="line">      <span class="attr">namespace:</span> <span class="string">&quot;&quot;</span></span><br><span class="line">      <span class="attr">group:</span> <span class="string">DEFAULT_GROUP</span></span><br><span class="line">      <span class="attr">application:</span> <span class="string">seata-tc-server</span> <span class="comment"># tc服务在nacos中的服务名称</span></span><br><span class="line">      <span class="attr">cluster:</span> <span class="string">SH</span></span><br><span class="line">  <span class="attr">tx-service-group:</span> <span class="string">seata-demo</span> <span class="comment"># 事务组，根据这个获取tc服务的cluster名称</span></span><br><span class="line">  <span class="attr">service:</span></span><br><span class="line">    <span class="attr">vgroup-mapping:</span> <span class="comment"># 事务组与TC服务cluster的映射关系</span></span><br><span class="line">      <span class="attr">seata-demo:</span> <span class="string">SH</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        Rogers
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="https://ljs-yym.github.io/2023/10/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%AB%98%E7%BA%A7%E7%AF%87/" title="微服务高级篇">https://ljs-yym.github.io/2023/10/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%AB%98%E7%BA%A7%E7%AF%87/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/09/24/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/cover/SpringCloud.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/Java/">
+                    Java
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/09/24/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" class="trm-anima-link">
+                    微服务
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/09/24</li>
+                <li>15:54</li>
+                
+                    <li>8.7k</li>
+                
+                
+                    <li>37</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2023- 2023</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">长生风月</span>
+        </div>
+    
+
+      
+
+    
+        <div class="trm-footer-item">
+            博客已萌萌哒运行 <span id="since" class="trm-accent-color"></span> 天
+        </div>
+     
+
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("02/27/2023 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+<div class="trm-search-popup">
+    <div class="trm-search-header">
+        <span class="trm-search-popup-btn-close">
+            <i class="iconfont fas fa-times"></i>
+        </span>
+    </div>
+    <div class="form trm-search-form">
+        <input class="trm-search-input" type="text" placeholder="搜索...">
+    </div>
+    <div class="trm-search-result-container">
+
+    </div>
+</div>
+
+  <!-- Plugin -->
+
+
+
+
+    
+<script src="https://unpkg.com/swup@2.0.19/dist/swup.min.js"></script>
+
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.2"></script>
+    
+
+    
+        
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=2.0.2"></script>
+    
+
+    <!-- 数学公式 -->
+    
+        
+<script src="https://unpkg.com/katex@latest/dist/katex.min.js" data-swup-reload-script></script>
+
+        
+            
+<script src="https://unpkg.com/katex@latest/dist/contrib/copy-tex.min.js" data-swup-reload-script></script>
+
+        
+        
+<script src="https://unpkg.com/katex@latest/dist/contrib/auto-render.min.js" data-swup-reload-script></script>
+
+        <script data-swup-reload-script>
+              window.renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true },
+                ],
+                ...{},
+            })
+        </script>
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <script>
+        "serviceWorker" in navigator ?
+        navigator.serviceWorker.register('/sw.js').then(function () {
+            navigator.serviceWorker.controller ? 
+             console.log("Assets cached by the controlling service worker.") :
+             console.log("Please reload this page to allow the service worker to handle network operations.")
+        }).catch(function (e) {
+            console.log("ERROR: " + e)
+        }) : console.log("Service workers are not supported in the current browser.")
+    </script>
+
+    <!-- baidu push -->
+    
+    <script data-swup-reload-script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+
+
+<script id="async-script" src="/js/main.js?v=2.0.2"></script>
+
+</body>
+
+</html>

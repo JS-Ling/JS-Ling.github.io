@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="MySQL笔记Mysql概述 数据库：存储数据的仓库，简称DataBase  数据库管理系统：操纵和管理数据库的大型软件，简称DBMS  SQL：操作关系型数据库的编程语言，定义了一套操作关系型数据库统一的标准 ​    主流的关系型数据库管理系统：Oracle、Mysql、SQLserver等  关系型数据库：建立在关系模型基础上，有多张相互连接的二维表组成的数据库   Mysql操作DDL定义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySql从入门到删库跑路">
+<meta property="og:url" content="https://ljs-yym.github.io/2023/09/18/MySQL%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="RogevnBlog">
+<meta property="og:description" content="MySQL笔记Mysql概述 数据库：存储数据的仓库，简称DataBase  数据库管理系统：操纵和管理数据库的大型软件，简称DBMS  SQL：操作关系型数据库的编程语言，定义了一套操作关系型数据库统一的标准 ​    主流的关系型数据库管理系统：Oracle、Mysql、SQLserver等  关系型数据库：建立在关系模型基础上，有多张相互连接的二维表组成的数据库   Mysql操作DDL定义">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ljs-yym.github.io/img/cover/data.jpg">
+<meta property="article:published_time" content="2023-09-18T10:15:47.491Z">
+<meta property="article:modified_time" content="2023-10-10T09:56:58.622Z">
+<meta property="article:author" content="Rogers">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ljs-yym.github.io/img/cover/data.jpg">
+
+    <meta name="keywords" content="hexo,node,博客">
+
+
+<title >MySql从入门到删库跑路</title>
+
+<!-- Favicon -->
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/logo.png?v=2.0.2' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+<link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css">
+
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"ljs-yym.github.io","author":"Rogers","root":"/","typed_text":["Web Developer","Backend Programmer","Full Stack Developer！"],"theme_version":"2.0.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo.png","icon16":"/img/logo.png","icon32":"/img/logo.png","dark_logo":"/img/dark_logo.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"creative_commons":{"license":"by-nc-sa","language":"deed.zh"},"search":{"enable":true,"type":"local","path":"search.xml","field":"post","content":true,"format":"html"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-10-10 17:56:58"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.2" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+     
+
+    
+
+    
+ 
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" class=" trm-light-icon" src="/img/logo.png"> <img alt="logo" class=" trm-dark-icon" src="/img/dark_logo.png">
+    
+    
+        <div class="trm-logo-text">
+            Rogevn<span>Blog</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    长生风月的博客
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    日志
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友情链接
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/picture/" target="">
+                    好东西
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/picture/" target="">
+                            图片
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="/technology/" target="">
+                            黑科技
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+    
+    <div id="trm-search-btn" class="trm-search-btn">
+        <i class="iconfont fas fa-search"></i>
+    </div>
+     
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            MySql从入门到删库跑路
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/R-C.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        长生风月
+    </h5>
+    
+        <div class="trm-label">
+            I&#39;m a
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="tencent://message/?uin=3232008148&Site=&Menu=yes" title="QQ" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="/null" title="WeChat" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-weixin"></i>
+        </a>
+    
+        <a href="/null" title="twitter" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-twitter"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                河北省保定市
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                21
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                星座:
+            </div>
+            <div class="trm-label trm-label-light">
+                处女座
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                爱好:
+            </div>
+            <div class="trm-label trm-label-light">
+                足球、音乐、魔方、代码
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:3232008148@qq.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#MySQL笔记"  data-scroll-to="#MySQL笔记"><span class="toc-number">1.</span> <span class="toc-text">MySQL笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Mysql概述"  data-scroll-to="#Mysql概述"><span class="toc-number">1.1.</span> <span class="toc-text">Mysql概述</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Mysql操作"  data-scroll-to="#Mysql操作"><span class="toc-number">1.2.</span> <span class="toc-text">Mysql操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#DDL定义数据库、表和字段"  data-scroll-to="#DDL定义数据库、表和字段"><span class="toc-number">1.2.1.</span> <span class="toc-text">DDL定义数据库、表和字段</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#DML数据增删改"  data-scroll-to="#DML数据增删改"><span class="toc-number">1.2.2.</span> <span class="toc-text">DML数据增删改</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#DQL查询"  data-scroll-to="#DQL查询"><span class="toc-number">1.2.3.</span> <span class="toc-text">DQL查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#约束"  data-scroll-to="#约束"><span class="toc-number">1.3.</span> <span class="toc-text">约束</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#多表查询"  data-scroll-to="#多表查询"><span class="toc-number">1.4.</span> <span class="toc-text">多表查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#表间的对应关系"  data-scroll-to="#表间的对应关系"><span class="toc-number">1.4.1.</span> <span class="toc-text">表间的对应关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Mysql主从复制"  data-scroll-to="#Mysql主从复制"><span class="toc-number">1.5.</span> <span class="toc-text">Mysql主从复制</span></a></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            09/18
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            18:15
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Rogers
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="MySQL笔记"><a href="#MySQL笔记" class="headerlink" title="MySQL笔记"></a>MySQL笔记</h1><h2 id="Mysql概述"><a href="#Mysql概述" class="headerlink" title="Mysql概述"></a>Mysql概述</h2><ul>
+<li><p>数据库：存储数据的仓库，简称DataBase</p>
+</li>
+<li><p>数据库管理系统：操纵和管理数据库的大型软件，简称DBMS</p>
+</li>
+<li><p>SQL：操作关系型数据库的编程语言，定义了一套操作关系型数据库统一的标准</p>
+<p>​    主流的关系型数据库管理系统：Oracle、Mysql、SQLserver等</p>
+</li>
+<li><p>关系型数据库：建立在关系模型基础上，有多张相互连接的二维表组成的数据库</p>
+</li>
+</ul>
+<h2 id="Mysql操作"><a href="#Mysql操作" class="headerlink" title="Mysql操作"></a>Mysql操作</h2><h3 id="DDL定义数据库、表和字段"><a href="#DDL定义数据库、表和字段" class="headerlink" title="DDL定义数据库、表和字段"></a>DDL定义数据库、表和字段</h3><h4 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h4><ol>
+<li><p>创建数据库：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create database database_name;</span><br></pre></td></tr></table></figure></li>
+<li><p>删除数据库：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop database database_name;</span><br></pre></td></tr></table></figure></li>
+<li><p>选择数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use database_name;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h4><ol>
+<li><p>创建表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table table_name (</span><br><span class="line">   column1 datatype,</span><br><span class="line">   column2 datatype,</span><br><span class="line">   column3 datatype,</span><br><span class="line">   ...</span><br><span class="line">);</span><br></pre></td></tr></table></figure></li>
+<li><p>删除表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop table table_name;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="字段操作"><a href="#字段操作" class="headerlink" title="字段操作"></a>字段操作</h4><ol>
+<li><p>添加新列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table customers add age int;</span><br></pre></td></tr></table></figure></li>
+<li><p>修改列：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table customers modify age date;</span><br></pre></td></tr></table></figure></li>
+<li><p>删除列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table customers drop column age;</span><br></pre></td></tr></table></figure></li>
+<li><p>重命名列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table customers rename column age to dob;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="DML数据增删改"><a href="#DML数据增删改" class="headerlink" title="DML数据增删改"></a>DML数据增删改</h3><h4 id="mysql数据类型"><a href="#mysql数据类型" class="headerlink" title="mysql数据类型"></a>mysql数据类型</h4><ol>
+<li>数值型：</li>
+</ol>
+<p>　　　　　　tinyint  超小整数</p>
+<p>　　　　　　smallint  小整数</p>
+<p>　　　　　　mediumint  中整数</p>
+<p>　　　　　　int　　整数</p>
+<p>　　　　　　bigint　　大整数</p>
+<p>　　　　　　float  单精度浮点型</p>
+<p>　　　　　　double 双精度浮点型</p>
+<ol start="2">
+<li>字符型：</li>
+</ol>
+<p>　　　　　　char　　定长字符串</p>
+<p>　　　　　　varchar　　变长字符串</p>
+<p>　　　　　　blob　　二进制长文本</p>
+<p>　　　　　　text　　长文本</p>
+<p>　　　　　　longblob　　二进制超长文本</p>
+<p>　　　　　　longtext　　超长文本</p>
+<ol start="3">
+<li>日期类型：</li>
+</ol>
+<p>　　　　　　date　　日期</p>
+<p>　　　　　　time　　时间</p>
+<p>　　　　　　year　　年份</p>
+<p>　　　　　　datetime　　时期加时间</p>
+<p>　　　　　　timestamp　　时间戳</p>
+<h4 id="数据增删改"><a href="#数据增删改" class="headerlink" title="数据增删改"></a>数据增删改</h4><ol>
+<li><p>插入数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into 表名 (字段1, 字段2, ...) values (值1, 值2, ...);</span><br></pre></td></tr></table></figure></li>
+<li><p>更新数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update 表名 set 字段1=值1, 字段2=值2, ... where 条件;</span><br></pre></td></tr></table></figure></li>
+<li><p>删除数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from 表名 where 条件;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="DQL查询"><a href="#DQL查询" class="headerlink" title="DQL查询"></a>DQL查询</h3><h4 id="基础查询"><a href="#基础查询" class="headerlink" title="基础查询"></a>基础查询</h4><ol>
+<li><p>检索所有列的数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table_name;</span><br></pre></td></tr></table></figure></li>
+<li><p>指定要检索的列：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select column1, column2, ... from table_name;</span><br></pre></td></tr></table></figure></li>
+<li><p>在检索结果中使用计算表达式：</p>
+<p>这些查询将返回一个新的列，名为<code>new_column_name</code>，其中包含<code>column1</code>和<code>column2</code>的和</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select column1 + column2 as new_column_name from table_name;</span><br></pre></td></tr></table></figure></li>
+<li><p>去除重复记录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select distinct column1, column2, ... from table_name;</span><br></pre></td></tr></table></figure></li>
+<li><p>对检索结果进行排序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select column1, column2, ... from table_name order by column1 asc/desc;</span><br></pre></td></tr></table></figure></li>
+<li><p>限制检索结果集的数量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select column1, column2, ... from table_name limit x offset y;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h4><ol>
+<li><p>查询所有名称以“a”开头的用户： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM users WHERE name LIKE &#x27;a%&#x27;;</span><br></pre></td></tr></table></figure></li>
+<li><p>查询所有年龄大于等于18岁的用户： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM users WHERE age &gt;= 18;</span><br></pre></td></tr></table></figure></li>
+<li><p>查询所有拥有电子邮件地址的用户： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM users WHERE email IS NOT NULL;</span><br></pre></td></tr></table></figure></li>
+<li><p>查询所有在2022年5月1日之前注册的用户： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM users WHERE registration_date &lt; &#x27;2022-05-01&#x27;;</span><br></pre></td></tr></table></figure></li>
+<li><p>查询所有来自中国的用户： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM users WHERE country = &#x27;china&#x27;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h4><ol>
+<li><p>count：计算给定列中非空行的数量。 例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT COUNT(*) FROM table_name;</span><br></pre></td></tr></table></figure></li>
+<li><p>sum：计算给定列中所有值的总和。 例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT SUM(column_name) FROM table_name;</span><br></pre></td></tr></table></figure></li>
+<li><p>avg：计算给定列中所有值的平均值。 例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT AVG(column_name) FROM table_name;</span><br></pre></td></tr></table></figure></li>
+<li><p>min：找出给定列中的最小值。 例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT MIN(column_name) FROM table_name;</span><br></pre></td></tr></table></figure></li>
+<li><p>max：找出给定列中的最大值。 例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT MAX(column_name) FROM table_name;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h4><p>SELECT 字段列表 FROM表名 [WHERE条件 ] GROUP BY 分组字段名[HAVING 分组后过滤条件];</p>
+<ol>
+<li><p>对学生表按照性别进行分组查询各组的平均年龄：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select gender, avg(age) from student group by gender;</span><br></pre></td></tr></table></figure></li>
+<li><p>对订单表按照客户ID和订单状态进行分组统计各组的订单数量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select customer_id, status, count(*) from orders group by customer_id, status;</span><br></pre></td></tr></table></figure></li>
+<li><p>对销售表按照日期和产品类型进行分组查询各组的销售总额：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select date, product_type, sum(sales_amount) from sales group by date, product_type;</span><br></pre></td></tr></table></figure></li>
+<li><p>对员工表按照职位进行分组查询各组的平均工资：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select job_title, avg(salary) from employees group by job_title;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="排序查询"><a href="#排序查询" class="headerlink" title="排序查询"></a>排序查询</h4><p>SELECT 字段列表 FROM 表名 ORDER BY 字段1 排序方式1,字段2 排序方式2;</p>
+<ol>
+<li><p>从表格中选择所有行，按升序排列名为“age”的列：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table order by age asc;</span><br></pre></td></tr></table></figure></li>
+<li><p>从表格中选择前10行，按降序排列名为“salary”的列：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table order by salary desc limit 10;</span><br></pre></td></tr></table></figure></li>
+<li><p>从表格中选择所有行，首先按名为“category”的列进行升序排列，然后再按名为“price”的列进行降序排列：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table order by category asc, price desc;</span><br></pre></td></tr></table></figure></li>
+<li><p>从表格中选择前5行，按名为“date”的列进行升序排列，如果值相同，则按名为“time”的列进行降序排列：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table order by date asc, time desc limit 5;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h4><p>SELECT 字段列表 FROM 表名 LIMIT 起始索引,查询记录数;</p>
+<p>从11页开始向后查20条数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM table LIMIT 10 OFFSET 20;</span><br></pre></td></tr></table></figure>
+
+<h2 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h2><p>MySQL中的约束用于限制表中列的取值范围，可以提高数据完整性和一致性。下面是MySQL中常见的约束类型及其示例：</p>
+<ol>
+<li>PRIMARY KEY（主键）约束</li>
+</ol>
+<p>主键约束用于将一个或多个列标识为唯一标识该表中每一行的关键字。主键必须包含唯一的值，并且不能为NULL。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE students (</span><br><span class="line">  id INT PRIMARY KEY,</span><br><span class="line">  name VARCHAR(50),</span><br><span class="line">  age INT</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>NOT NULL（非空）约束</li>
+</ol>
+<p>非空约束用于确保列中不包含NULL值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE employees (</span><br><span class="line">  id INT PRIMARY KEY,</span><br><span class="line">  name VARCHAR(50) NOT NULL,</span><br><span class="line">  salary DECIMAL(10,2) NOT NULL</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>UNIQUE（唯一性）约束</li>
+</ol>
+<p>唯一性约束用于确保列中的所有值都是唯一的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE books (</span><br><span class="line">  id INT PRIMARY KEY,</span><br><span class="line">  title VARCHAR(50),</span><br><span class="line">  author VARCHAR(50),</span><br><span class="line">  isbn VARCHAR(20) UNIQUE</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>FOREIGN KEY（外键）约束</li>
+</ol>
+<p>外键约束用于确保在一个表中的列中的值必须与另一个表中的列中的值匹配。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE orders (</span><br><span class="line">  id INT PRIMARY KEY,</span><br><span class="line">  customer_id INT,</span><br><span class="line">  FOREIGN KEY (customer_id) REFERENCES customers(id)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">CREATE TABLE customers (</span><br><span class="line">  id INT PRIMARY KEY,</span><br><span class="line">  name VARCHAR(50)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>CHECK（检查）约束</li>
+</ol>
+<p>检查约束用于确保列中的值满足特定的条件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE employees (</span><br><span class="line">  id INT PRIMARY KEY,</span><br><span class="line">  name VARCHAR(50) NOT NULL,</span><br><span class="line">  salary DECIMAL(10,2) CHECK (salary &gt;= 0)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><h3 id="表间的对应关系"><a href="#表间的对应关系" class="headerlink" title="表间的对应关系"></a>表间的对应关系</h3><ol>
+<li><p>一对多&amp;多对一</p>
+<p>案例：部门与员工的关系</p>
+<p>关系：一个部门对应多个员工，一个员工对应一个部门</p>
+<p>实现：在多的一方建立外键，指向一的一方的主键</p>
+<p><img src="/img/mysql/image-20230627200500679.png" alt="image-20230627200500679" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+<li><p>多对多</p>
+<p>案例：学生与课程的关系</p>
+<p>关系：一个学生可以选秀多门课程，一门课程也可以供多个学生选择</p>
+<p>实现：建立第三张中间表，中间表至少包含两个外键，分别关联两方主键</p>
+<p><img src="/img/mysql/image-20230627200643389.png" alt="image-20230627200643389" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+<li><p>一对一</p>
+<p>案例：用户与用户详情的关系<br>关系：一对一关系，多用于单表拆分，将一张表的基础字段放在一张表中，其他详情字段放在另一张表中<br>以提升操作效率</p>
+<p>实现：在任意一方加入外键，关联另外一方的主键，并且设置外键为唯一的(UNIQUE)</p>
+<p><img src="/img/mysql/image-20230627200918644.png" alt="image-20230627200918644" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="/img/mysql/image-20230627201006782.png" alt="image-20230627201006782" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+</ol>
+<blockquote>
+<p>多表联查是指在数据库中同时查询多个表，并根据它们之间的关联条件返回结果集。常见的多表联查操作包括内连接、外连接和自连接。</p>
+</blockquote>
+<p>内连接（INNER JOIN）：内连接通过匹配两个或多个表之间的共同值来返回满足条件的记录。只有在所有参与连接的表中存在匹配的行才会出现在结果集中。内连接使用关键字”INNER JOIN”来表示。</p>
+<p>示例SQL语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM table1</span><br><span class="line">INNER JOIN table2 ON table1.column = table2.column;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>外连接（OUTER JOIN）：外连接用于返回不仅匹配的记录，还包括未匹配的记录。外连接分为左外连接（LEFT JOIN）、右外连接（RIGHT JOIN）和全外连接（FULL JOIN）。</p>
+<ul>
+<li>左外连接（LEFT JOIN）：返回左表中的所有记录和右表中与之匹配的记录。 示例SQL语句：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM table1</span><br><span class="line">LEFT JOIN table2 ON table1.column = table2.column;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>右外连接（RIGHT JOIN）：返回右表中的所有记录和左表中与之匹配的记录。 示例SQL语句：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM table1</span><br><span class="line">RIGHT JOIN table2 ON table1.column = table2.column;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>全外连接（FULL JOIN）：返回左表和右表中的所有记录。 示例SQL语句：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM table1</span><br><span class="line">FULL JOIN table2 ON table1.column = table2.column;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>自连接（SELF JOIN）：自连接是指将单个表视为两个不同的实例进行连接操作。它通常用于在表中建立父子关系或层次结构。</p>
+<p>示例SQL语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM table1 t1</span><br><span class="line">INNER JOIN table1 t2 ON t1.column = t2.column;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Mysql主从复制"><a href="#Mysql主从复制" class="headerlink" title="Mysql主从复制"></a>Mysql主从复制</h2><blockquote>
+<p>主从复制是一种常见的数据库架构方法，它允许在多个服务器之间同步数据。在主从复制架构中，有一个主服务器和一个或多个从服务器。主服务器负责处理所有写操作，而从服务器则对主服务器进行复制，并处理所有读操作。</p>
+</blockquote>
+<p> 具体实现步骤：</p>
+<ol>
+<li><p>设置一个mysql为主库</p>
+<p>windows中：在C盘的ProgramData文件夹中找到mysql——my.ini</p>
+<p>在my.ini中的[mysqld]中添加：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">log-bin</span>=mysql-bin	<span class="comment">#启用二进制日志</span></span><br><span class="line"><span class="attr">binlog-format</span>=ROW</span><br><span class="line"><span class="attr">server-id</span>=<span class="number">100</span>	<span class="comment">#设置专属id名</span></span><br></pre></td></tr></table></figure></li>
+<li><p>重启服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure></li>
+<li><p>登录mysql数据库，执行下面mysql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT REPLICATION SLAVE ON *.* to &#x27;xiaoming&#x27;@&#x27;%&#x27; identified by &#x27;Root@123456&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>注:上面SQL的作用是创建一个用户xiaoming，密码为Root@123456，并且给xiaoming用户授予</p>
+<p>REPLICATION SLAVE权限</p>
+</li>
+<li><p>执行代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show master status;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/mysql/image-20230523153034661.png" alt="image-20230523153034661" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+<li><p>设置一个或多个从库</p>
+<p>linux中：var/log/my.cnf添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server-id=102</span><br></pre></td></tr></table></figure>
+
+<p>进入mysql运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">change master to master_host=&#x27;主机ip&#x27; ,master_user=&#x27;xiaoming&#x27; ,master_password=&#x27;Root@123456&#x27;,master_log_file=&#x27;mysql-bin.000005&#x27; ,master_log_pos=441;</span><br></pre></td></tr></table></figure>
+
+<p>master_log_file对应上面的File    master_log_pos对应上面的Position</p>
+</li>
+<li><p>开启io线程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">starts slave;</span><br></pre></td></tr></table></figure></li>
+<li><p>查看连接情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show slave status\G;</span><br></pre></td></tr></table></figure>
+
+<p>出现这个即为成功：</p>
+<p><img src="/img/mysql/image-20230523153614911.png" alt="image-20230523153614911" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+</li>
+</ol>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        Rogers
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="https://ljs-yym.github.io/2023/09/18/MySQL%E7%AC%94%E8%AE%B0/" title="MySql从入门到删库跑路">https://ljs-yym.github.io/2023/09/18/MySQL%E7%AC%94%E8%AE%B0/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/09/18/Nginx/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/cover/nginx.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/Java/">
+                    Java
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/09/18/Nginx/" class="trm-anima-link">
+                    Nginx服务器
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/09/18</li>
+                <li>18:15</li>
+                
+                    <li>1k</li>
+                
+                
+                    <li>4</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/09/18/Linux%E6%8C%87%E4%BB%A4/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/cover/linux.png">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E7%B3%BB%E7%BB%9F/">
+                    系统
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/09/18/Linux%E6%8C%87%E4%BB%A4/" class="trm-anima-link">
+                    Linux指令
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/09/18</li>
+                <li>18:15</li>
+                
+                    <li>2.5k</li>
+                
+                
+                    <li>10</li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2023- 2023</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">长生风月</span>
+        </div>
+    
+
+      
+
+    
+        <div class="trm-footer-item">
+            博客已萌萌哒运行 <span id="since" class="trm-accent-color"></span> 天
+        </div>
+     
+
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("02/27/2023 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+<div class="trm-search-popup">
+    <div class="trm-search-header">
+        <span class="trm-search-popup-btn-close">
+            <i class="iconfont fas fa-times"></i>
+        </span>
+    </div>
+    <div class="form trm-search-form">
+        <input class="trm-search-input" type="text" placeholder="搜索...">
+    </div>
+    <div class="trm-search-result-container">
+
+    </div>
+</div>
+
+  <!-- Plugin -->
+
+
+
+
+    
+<script src="https://unpkg.com/swup@2.0.19/dist/swup.min.js"></script>
+
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.2"></script>
+    
+
+    
+        
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=2.0.2"></script>
+    
+
+    <!-- 数学公式 -->
+    
+        
+<script src="https://unpkg.com/katex@latest/dist/katex.min.js" data-swup-reload-script></script>
+
+        
+            
+<script src="https://unpkg.com/katex@latest/dist/contrib/copy-tex.min.js" data-swup-reload-script></script>
+
+        
+        
+<script src="https://unpkg.com/katex@latest/dist/contrib/auto-render.min.js" data-swup-reload-script></script>
+
+        <script data-swup-reload-script>
+              window.renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true },
+                ],
+                ...{},
+            })
+        </script>
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <script>
+        "serviceWorker" in navigator ?
+        navigator.serviceWorker.register('/sw.js').then(function () {
+            navigator.serviceWorker.controller ? 
+             console.log("Assets cached by the controlling service worker.") :
+             console.log("Please reload this page to allow the service worker to handle network operations.")
+        }).catch(function (e) {
+            console.log("ERROR: " + e)
+        }) : console.log("Service workers are not supported in the current browser.")
+    </script>
+
+    <!-- baidu push -->
+    
+    <script data-swup-reload-script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+
+
+<script id="async-script" src="/js/main.js?v=2.0.2"></script>
+
+</body>
+
+</html>
